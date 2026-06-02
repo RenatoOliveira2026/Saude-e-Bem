@@ -1,17 +1,33 @@
 # Saúde & Bem — Status do Projeto
 
-> **Checkpoint de referência:** [Fase 3.2](https://github.com/RenatoOliveira2026/Saude-e-Bem)  
-> **Commit:** `e1c43b4` — *Checkpoint Fase 3.2 - CMS completo, SEO, uploads, afiliados premium e portal público*  
-> **Data:** 2026-06-01  
-> **Branch:** `master`  
+> **Checkpoint de referência:** [Fase 3.3](https://github.com/RenatoOliveira2026/Saude-e-Bem)  
+> **Tag:** `v0.3.3` — *Fase 3.3 concluída*  
+> **Repositório:** [github.com/RenatoOliveira2026/Saude-e-Bem](https://github.com/RenatoOliveira2026/Saude-e-Bem)  
+> **Branch:** `master` (sincronizada com `origin/master`)  
 > **Produção alvo:** [saudeebem.com.br](https://saudeebem.com.br)  
 > **Dev local:** [http://localhost:3001](http://localhost:3001) (`PORT=3001` em `.env.local`)
 
 ---
 
+## Fase 3.3 — Concluída
+
+| Entrega | Status |
+|---------|--------|
+| Newsletter funcionando | ✓ Formulários Home, Blog e Biblioteca → `/obrigado` |
+| Captura de Leads funcionando | ✓ Tabela `newsletter_subscribers`, admin `/admin/leads`, export CSV |
+| Afiliados Premium funcionando | ✓ Portal `/recomendados`, tracking de cliques, CMS admin |
+| GitHub configurado | ✓ Remote `origin` → RenatoOliveira2026/Saude-e-Bem |
+| Projeto sincronizado | ✓ Commits e tag `v0.3.3` publicados |
+
+**Documentação de validação:** `docs/PHASE_3.3_CHECKLIST.md`
+
+**Correção pós-deploy (newsletter):** insert público sem `.select()` — RLS permite INSERT para `anon`, mas SELECT na linha retornada exige admin (`src/lib/newsletter/errors.ts`).
+
+---
+
 ## Visão geral
 
-Plataforma premium de saúde, bem-estar e longevidade com portal público, autenticação de usuários, painel administrativo e integração Supabase. O checkpoint atual consolida CMS profissional, SEO, uploads de mídia, portal de afiliados premium com tracking de cliques e home dinâmica alimentada pelo banco.
+Plataforma premium de saúde, bem-estar e longevidade com portal público, autenticação de usuários, painel administrativo e integração Supabase. O checkpoint atual consolida CMS profissional, SEO, uploads de mídia, **afiliados premium**, **newsletter com captura de leads** e home dinâmica alimentada pelo banco.
 
 ### Stack
 
@@ -39,6 +55,7 @@ src/
 │   ├── auth/         # Login, cadastro, sessão, rotas protegidas
 │   ├── content/      # Agregadores de conteúdo (ex.: home)
 │   ├── data/         # Tipos, mocks e repositórios
+│   ├── newsletter/   # Captura, validação, providers (Brevo/MailerLite)
 │   ├── seo/          # Helpers de metadata
 │   └── supabase/     # Clientes, middleware, services e mappers
 └── middleware.ts     # Sessão Supabase + guards de rota
@@ -70,6 +87,8 @@ src/
 - **CMS e admin:** Server Actions em `src/lib/admin/actions/` (CRUD de artigos, protocolos, ebooks, afiliados, uploads).
 - **Auth:** Server Actions em `src/lib/auth/actions.ts`.
 - **Afiliados (tracking):** `GET /api/affiliates/[slug]/go` — registra clique e redireciona para URL de afiliado.
+- **Newsletter:** `subscribeNewsletterAction` — insert em `newsletter_subscribers`, redirect `/obrigado`.
+- **Leads (admin):** `GET /api/admin/newsletter/export` — exportação CSV (requer admin autenticado).
 
 ### Configuração relevante
 
@@ -96,6 +115,7 @@ Migrations em `supabase/migrations/` — executar em ordem no Supabase SQL Edito
 | 009 | `home_public.sql` | `newsletter_leads`, leitura pública de afiliados ativos |
 | 010 | `affiliate_featured.sql` | Coluna `featured` em afiliados |
 | 011 | `affiliates_premium.sql` | Campos premium, `slug`, `affiliate_clicks`, tracking RLS |
+| 012 | `newsletter_subscribers.sql` | Inscritos newsletter, sync Brevo/MailerLite, RLS insert público |
 
 ### Tabelas principais
 
@@ -110,7 +130,8 @@ Migrations em `supabase/migrations/` — executar em ordem no Supabase SQL Edito
 | `admin_users` | Equipe administrativa + role |
 | `affiliate_links` | Produtos afiliados (campos premium + comercial) |
 | `affiliate_clicks` | Tracking de cliques nos CTAs |
-| `newsletter_leads` | Captura de email na home |
+| `newsletter_subscribers` | Inscritos newsletter (nome, email, source, sync externo) |
+| `newsletter_leads` | Legado (migration 009); dados migrados para `newsletter_subscribers` |
 
 ### Status de conteúdo
 
@@ -292,6 +313,34 @@ Definidas em `src/lib/affiliates/categories.ts` (sono, energia, intestinal, deto
 
 ---
 
+## Newsletter e captura de leads (Fase 3.3)
+
+### Funcionalidades
+
+- Formulários com **nome** e **e-mail** em Home, Blog e Biblioteca
+- Validação de formato e **e-mail duplicado** (unique constraint → `/obrigado?existing=1`)
+- Página de agradecimento `/obrigado` com mensagens por origem
+- Admin **`/admin/leads`**: listagem, filtros por source, estatísticas, export CSV
+- Estrutura para **Brevo** / **MailerLite** (`NEWSLETTER_PROVIDER`, `BREVO_API_KEY`, `MAILERLITE_API_KEY`)
+
+### Rotas e componentes
+
+| Item | Path |
+|------|------|
+| Action | `src/lib/actions/newsletter.actions.ts` |
+| Formulário | `src/components/newsletter/NewsletterCaptureForm.tsx` |
+| Seção | `src/components/newsletter/NewsletterCaptureSection.tsx` |
+| Obrigado | `src/app/obrigado/page.tsx` |
+| Admin leads | `src/app/admin/leads/page.tsx` |
+| Export CSV | `src/app/api/admin/newsletter/export/route.ts` |
+
+### RLS (`newsletter_subscribers`)
+
+- **INSERT:** `anon` + `authenticated` (captura pública)
+- **SELECT / UPDATE:** apenas `is_admin()`
+
+---
+
 ## Rotas públicas
 
 Definidas em `src/lib/routes.ts`.
@@ -312,6 +361,7 @@ Definidas em `src/lib/routes.ts`.
 | `/recomendados` | Afiliados recomendados | — |
 | `/recomendados/[slug]` | Página premium do afiliado | — |
 | `/clube` | Landing do Clube (conteúdo estático / em breve) | — |
+| `/obrigado` | Confirmação de inscrição na newsletter | — |
 
 ### Conta do usuário
 
@@ -329,6 +379,7 @@ Definidas em `src/lib/routes.ts`.
 | Rota | Método | Descrição |
 |------|--------|-----------|
 | `/api/affiliates/[slug]/go` | GET | Tracking + redirect afiliado |
+| `/api/admin/newsletter/export` | GET | Export CSV de leads (admin) |
 | `/auth/callback` | GET | Callback OAuth Supabase |
 
 ### Dev only
@@ -366,6 +417,7 @@ Definidas em `adminRoutes` (`src/lib/routes.ts`). Menu filtrado por role em `src
 | `/admin/afiliados` | Lista de afiliados | super_admin, admin |
 | `/admin/afiliados/novo` | Criar afiliado premium | super_admin, admin |
 | `/admin/afiliados/[id]/editar` | Editar afiliado | super_admin, admin |
+| `/admin/leads` | Leads / newsletter (lista + export CSV) | super_admin, admin |
 | `/admin/usuarios` | Usuários da plataforma | super_admin, admin |
 | `/admin/administradores` | Gestão de admins | **super_admin** |
 | `/admin/configuracoes` | Configurações globais | **super_admin** |
@@ -387,11 +439,21 @@ Definidas em `adminRoutes` (`src/lib/routes.ts`). Menu filtrado por role em `src
 
 ---
 
+## Histórico de fases
+
+| Fase | Escopo | Tag |
+|------|--------|-----|
+| 3.0–3.1 | Afiliados home e `/recomendados` | — |
+| 3.2 | Afiliados premium, CMS, SEO, portal público | — |
+| **3.3** | **Newsletter, captura de leads, correções RLS** | **`v0.3.3`** |
+
+---
+
 ## Próximas fases
 
 Itens já preparados no código ou no dashboard admin, ainda não entregues como produto completo.
 
-### Fase 3.3 — Jornada do usuário
+### Fase 4.0 — Jornada do usuário
 
 - UI em `/minha-jornada` (dashboard básico)
 - Tabela `favorites` pronta; integração completa na UI pendente
@@ -400,36 +462,37 @@ Itens já preparados no código ou no dashboard admin, ainda não entregues como
   - Protocolos em andamento (`user_protocols`)
   - Biblioteca pessoal (`user_library`)
 
-### Fase 4.0 — Clube Saúde & Bem
+### Fase 4.1 — Clube Saúde & Bem
 
 - Landing `/clube` (conteúdo estático, lista de espera)
 - Admin: placeholder "Clube Saúde & Bem" no dashboard
 - Pendente: planos, assinaturas, conteúdo premium gated, gestão de membros
 
-### Fase 4.1 — IA Saúde & Bem
+### Fase 4.2 — IA Saúde & Bem
 
 - Placeholder no dashboard admin
 - Pendente: assistente conversacional, recomendações personalizadas (`ai_conversations`)
 
-### Fase 4.2 — Ferramentas interativas
+### Fase 4.3 — Ferramentas interativas
 
 - Rotas `/ferramentas` existem com dados mock
 - Pendente: calculadoras/checklists persistidas, integração Supabase
 
-### Fase 4.3 — Newsletter e CRM
+### Fase 4.4 — Integração e-mail (Brevo / MailerLite)
 
-- Tabela `newsletter_leads` + action na home
-- Pendente: painel admin de leads, integração email (Resend, Mailchimp, etc.)
+- Stubs em `src/lib/newsletter/providers.ts`
+- Pendente: sync automático de contatos ao inscrever
 
-### Fase 4.4 — Analytics e monetização
+### Fase 4.5 — Analytics e monetização
 
 - Tracking básico de afiliados (`affiliate_clicks`) ✓
-- Pendente: relatórios avançados, funil, A/B, export CSV, metas de conversão
+- Export CSV de leads ✓
+- Pendente: relatórios avançados, funil, A/B, metas de conversão
 
 ### Fase 5.0 — Produção e operação
 
 - Deploy Vercel/hosting com env de produção
-- Aplicar migrations 001–011 no Supabase de produção
+- Aplicar migrations 001–012 no Supabase de produção
 - Domínio `saudeebem.com.br` + `NEXT_PUBLIC_SITE_URL`
 - Monitoramento, backups, CI/CD
 
@@ -439,11 +502,12 @@ Itens já preparados no código ou no dashboard admin, ainda não entregues como
 
 Garantir no Supabase de produção:
 
-- [ ] Migrations 001–011 aplicadas em ordem
+- [ ] Migrations 001–012 aplicadas em ordem
 - [ ] Buckets `cms-images` e `cms-pdfs` criados
 - [ ] Primeiro super_admin bootstrapado (`005` / `006`)
 - [ ] Variáveis `NEXT_PUBLIC_SUPABASE_*` e `NEXT_PUBLIC_SITE_URL` configuradas
 - [ ] Smoke test: criar afiliado → `/recomendados/[slug]` → clique registrado
+- [ ] Smoke test: inscrição newsletter na Home → `/obrigado` → lead em `/admin/leads`
 
 ---
 
@@ -458,3 +522,4 @@ Garantir no Supabase de produção:
 | Supabase | `src/lib/supabase/`, `supabase/migrations/` |
 | SEO | `src/lib/seo/metadata.ts` |
 | Home | `src/lib/content/home.ts`, `src/app/page.tsx` |
+| Newsletter | `src/lib/newsletter/`, `src/components/newsletter/`, `docs/PHASE_3.3_CHECKLIST.md` |

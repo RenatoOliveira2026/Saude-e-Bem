@@ -1,36 +1,49 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Saúde & Bem
+
+Plataforma premium de saúde, bem-estar e longevidade.
+
+## URLs
+
+| Ambiente | URL |
+|----------|-----|
+| **Desenvolvimento** | [http://localhost:3001](http://localhost:3001) |
+| **Produção** | [https://saudeebem.com.br](https://saudeebem.com.br) |
+
+> A porta de desenvolvimento é definida em `.env.local` (`PORT=3001`). Os scripts `dev` e `start` carregam esse arquivo antes de iniciar o Next.js.
 
 ## Getting Started
 
-First, run the development server:
+Copie as variáveis de ambiente e instale as dependências:
 
 ```bash
+# .env.local já inclui PORT=3001
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Abra [http://localhost:3001](http://localhost:3001) no navegador.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Scripts
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+| Comando | Descrição |
+|---------|-----------|
+| `npm run dev` | Servidor de desenvolvimento (porta via `PORT` em `.env.local`) |
+| `npm run build` | Build de produção |
+| `npm run start` | Servidor de produção (porta via `PORT` em `.env.local`) |
+| `npm run lint` | Verificação ESLint |
 
-## Learn More
+## Stack
 
-To learn more about Next.js, take a look at the following resources:
+- Next.js 16 (App Router)
+- TypeScript
+- Tailwind CSS v4
+- Montserrat + Open Sans
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Estrutura
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```
+src/
+├── app/           # Páginas e rotas
+├── components/    # UI, layout, brand, pages
+└── lib/           # Utilitários e dados mockados
+```

@@ -3,12 +3,18 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "node scripts/with-env.mjs dev",
     "build": "next build",
-    "start": "next start",
-    "lint": "eslint"
+    "start": "node scripts/with-env.mjs start",
+    "lint": "eslint",
+    "validate:supabase": "node scripts/validate-supabase.mjs",
+    "check:auth-user": "node scripts/check-auth-user.mjs",
+    "test:signup": "node scripts/test-signup.mjs",
+    "generate:content-seed": "node scripts/generate-content-seed.mjs"
   },
   "dependencies": {
+    "@supabase/ssr": "^0.10.3",
+    "@supabase/supabase-js": "^2.106.2",
     "next": "16.2.6",
     "react": "19.2.4",
     "react-dom": "19.2.4"

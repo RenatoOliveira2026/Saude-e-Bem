@@ -1,5 +1,6 @@
 "use server";
 
+import { trackEvent } from "@/lib/analytics/track-event";
 import { parseNewsletterSource } from "@/lib/newsletter/sources";
 import { syncToExternalProvider } from "@/lib/newsletter/providers";
 import type { NewsletterSource } from "@/lib/newsletter/types";
@@ -121,6 +122,21 @@ export async function subscribeNewsletterAction(
   }
 
   void tryExternalSync(name.trim(), normalizedEmail, source);
+
+  const leadSourcePages: Record<typeof source, string> = {
+    home: routes.home,
+    blog: routes.blog,
+    biblioteca: routes.biblioteca,
+    clube: routes.clube,
+    other: routes.home,
+  };
+
+  void trackEvent({
+    eventType: "lead_submitted",
+    sourcePage: leadSourcePages[source],
+    sourceType: source,
+    metadata: { source },
+  });
 
   redirect(thankYouUrl(source, false));
 }

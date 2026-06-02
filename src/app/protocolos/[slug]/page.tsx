@@ -14,6 +14,7 @@ import {
   getProtocolSlugs,
   getProtocols,
 } from "@/lib/data/repositories/protocols.repository";
+import { trackEvent } from "@/lib/analytics/track-event";
 import { routes } from "@/lib/routes";
 import { buildContentMetadata } from "@/lib/seo/metadata";
 import { fetchAffiliatesForContentCategory } from "@/lib/supabase/services/affiliates.public";
@@ -47,6 +48,15 @@ export default async function ProtocoloDetailPage({ params }: PageProps) {
   const { slug } = await params;
   const protocol = await getProtocolBySlug(slug);
   if (!protocol) notFound();
+
+  void trackEvent({
+    eventType: "protocol_view",
+    sourcePage: routes.protocolo(slug),
+    sourceType: "content",
+    contentId: protocol.id ?? slug,
+    contentTitle: protocol.title,
+    metadata: { slug, category: protocol.category },
+  });
 
   const [all, relatedAffiliates] = await Promise.all([
     getProtocols(),

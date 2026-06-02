@@ -119,7 +119,11 @@ export default async function BibliotecaDetailPage({ params }: PageProps) {
               </li>
             ))}
           </ul>
-          <LibraryDownloadPanel pdfUrl={resource.pdfUrl} title={resource.title} />
+          <LibraryDownloadPanel
+            pdfUrl={resource.pdfUrl}
+            title={resource.title}
+            slug={slug}
+          />
         </Container>
       </Section>
 

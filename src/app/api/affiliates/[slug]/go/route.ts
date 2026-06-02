@@ -1,3 +1,4 @@
+import { trackEvent } from "@/lib/analytics/track-event";
 import { resolveAffiliateUrl } from "@/lib/affiliates/mappers";
 import { recordAffiliateClick } from "@/lib/supabase/services/affiliates.clicks";
 import { createClient } from "@/lib/supabase/server";
@@ -16,7 +17,7 @@ export async function GET(request: Request, context: RouteContext) {
   const supabase = await createClient();
   const { data, error } = await supabase
     .from("affiliate_links")
-    .select("id, affiliate_url, url")
+    .select("id, title, slug, affiliate_url, url")
     .eq("slug", slug)
     .eq("active", true)
     .maybeSingle();
@@ -31,6 +32,15 @@ export async function GET(request: Request, context: RouteContext) {
   }
 
   await recordAffiliateClick(data.id, sourcePage, sourceType);
+
+  void trackEvent({
+    eventType: "affiliate_click",
+    sourcePage,
+    sourceType,
+    contentId: data.id,
+    contentTitle: data.title ?? slug,
+    metadata: { slug: data.slug ?? slug },
+  });
 
   return NextResponse.redirect(destination);
 }

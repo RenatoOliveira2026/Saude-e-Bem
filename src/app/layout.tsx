@@ -1,3 +1,4 @@
+import { PageViewTracker } from "@/components/analytics";
 import { brandIcons } from "@/components/brand/logo-config";
 import { AppShell } from "@/components/layout/AppShell";
 import type { Metadata } from "next";
@@ -39,6 +40,7 @@ export default function RootLayout({
       className={`${montserrat.variable} ${openSans.variable} h-full scroll-smooth antialiased`}
     >
       <body className="flex min-h-full flex-col bg-off-white font-body text-graphite">
+        <PageViewTracker />
         <AppShell>{children}</AppShell>
       </body>
     </html>

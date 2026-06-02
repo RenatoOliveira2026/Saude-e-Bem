@@ -10,6 +10,7 @@ import {
   getBlogArticles,
   getBlogSlugs,
 } from "@/lib/data/repositories/blog.repository";
+import { trackEvent } from "@/lib/analytics/track-event";
 import { routes } from "@/lib/routes";
 import { buildContentMetadata } from "@/lib/seo/metadata";
 import { fetchAffiliatesForContentCategory } from "@/lib/supabase/services/affiliates.public";
@@ -44,6 +45,15 @@ export default async function ArtigoDetailPage({ params }: PageProps) {
   const { slug } = await params;
   const article = await getBlogArticleBySlug(slug);
   if (!article) notFound();
+
+  void trackEvent({
+    eventType: "article_view",
+    sourcePage: routes.artigo(slug),
+    sourceType: "content",
+    contentId: article.id ?? slug,
+    contentTitle: article.title,
+    metadata: { slug, category: article.category },
+  });
 
   const [all, relatedAffiliates] = await Promise.all([
     getBlogArticles(),

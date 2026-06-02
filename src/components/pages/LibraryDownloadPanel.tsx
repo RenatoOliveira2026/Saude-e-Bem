@@ -1,28 +1,35 @@
+import { TrackedDownloadLink } from "@/components/analytics";
 import { Button } from "@/components/ui/Button";
 import { routes } from "@/lib/routes";
 
 interface LibraryDownloadPanelProps {
   pdfUrl?: string;
   title: string;
+  slug: string;
 }
 
-export function LibraryDownloadPanel({ pdfUrl, title }: LibraryDownloadPanelProps) {
+export function LibraryDownloadPanel({
+  pdfUrl,
+  title,
+  slug,
+}: LibraryDownloadPanelProps) {
   if (pdfUrl) {
     return (
       <div className="mt-8 rounded-xl border border-border bg-surface p-6 text-center">
         <p className="text-sm text-muted">
           Seu material está pronto. O download abre em uma nova aba.
         </p>
-        <Button
+        <TrackedDownloadLink
           href={pdfUrl}
-          variant="primary"
-          size="md"
-          className="mt-4"
+          contentId={slug}
+          contentTitle={title}
+          sourcePage={routes.bibliotecaItem(slug)}
           target="_blank"
           rel="noopener noreferrer"
+          className="mt-4 inline-flex h-11 items-center justify-center rounded-full bg-forest px-6 text-sm font-medium text-off-white shadow-soft transition hover:bg-forest-light"
         >
           Baixar {title}
-        </Button>
+        </TrackedDownloadLink>
       </div>
     );
   }

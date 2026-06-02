@@ -40,6 +40,7 @@ export const adminRoutes = {
   afiliadoEditar: (id: string) => `/admin/afiliados/${id}/editar`,
   leads: "/admin/leads",
   leadsExport: "/api/admin/newsletter/export",
+  analytics: "/admin/analytics",
 } as const;
 
 /** @deprecated Use getAdminNavForRole de @/lib/admin/nav */

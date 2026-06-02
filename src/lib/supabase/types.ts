@@ -173,6 +173,18 @@ type NewsletterSubscriberRow = {
   updated_at: string;
 };
 
+type AnalyticsEventRow = {
+  id: string;
+  event_type: string;
+  source_page: string;
+  source_type: string;
+  content_id: string | null;
+  content_title: string | null;
+  user_id: string | null;
+  metadata: Record<string, unknown>;
+  created_at: string;
+};
+
 type FavoriteRow = {
   id: string;
   user_id: string;
@@ -386,6 +398,22 @@ export interface Database {
           updated_at?: string;
         };
         Update: Partial<NewsletterSubscriberRow>;
+        Relationships: [];
+      };
+      analytics_events: {
+        Row: AnalyticsEventRow;
+        Insert: {
+          id?: string;
+          event_type: string;
+          source_page?: string;
+          source_type?: string;
+          content_id?: string | null;
+          content_title?: string | null;
+          user_id?: string | null;
+          metadata?: Record<string, unknown>;
+          created_at?: string;
+        };
+        Update: Partial<AnalyticsEventRow>;
         Relationships: [];
       };
     };

@@ -1,5 +1,5 @@
 import { hasAdminPermission, type AdminPermission, type AdminRole } from "@/lib/admin/roles";
-import { requireUser } from "@/lib/auth/session";
+import { getCurrentUser, requireUser } from "@/lib/auth/session";
 import { createClient } from "@/lib/supabase/server";
 import { isSupabaseConfigured } from "@/lib/supabase/config";
 import { adminRoutes, routes } from "@/lib/routes";
@@ -80,6 +80,13 @@ async function loadAdminSession(user: User): Promise<AdminSession | null> {
     email: data.email,
     role,
   };
+}
+
+/** Para API routes — não redireciona */
+export async function getAdminSession(): Promise<AdminSession | null> {
+  const user = await getCurrentUser();
+  if (!user || !isSupabaseConfigured()) return null;
+  return loadAdminSession(user);
 }
 
 export async function requireAdmin(): Promise<AdminSession> {

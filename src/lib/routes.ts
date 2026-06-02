@@ -5,6 +5,7 @@ export const routes = {
   ferramentas: "/ferramentas",
   biblioteca: "/biblioteca",
   recomendados: "/recomendados",
+  obrigado: "/obrigado",
   clube: "/clube",
   entrar: "/entrar",
   cadastro: "/cadastro",
@@ -37,6 +38,8 @@ export const adminRoutes = {
   afiliados: "/admin/afiliados",
   afiliadoNovo: "/admin/afiliados/novo",
   afiliadoEditar: (id: string) => `/admin/afiliados/${id}/editar`,
+  leads: "/admin/leads",
+  leadsExport: "/api/admin/newsletter/export",
 } as const;
 
 /** @deprecated Use getAdminNavForRole de @/lib/admin/nav */

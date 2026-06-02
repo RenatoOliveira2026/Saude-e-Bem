@@ -1,3 +1,4 @@
+import { NewsletterCaptureSection } from "@/components/newsletter";
 import {
   ContentEmptyState,
   CrossLinks,
@@ -46,6 +47,7 @@ export default async function BibliotecaPage() {
       ) : (
         <LibraryListing resources={resources} featured={featured} />
       )}
+      <NewsletterCaptureSection source="biblioteca" />
       <PageCta
         title="Biblioteca premium no Clube"
         description="Membros têm acesso a guias avançados, planos de 90 dias e estudos exclusivos atualizados mensalmente."

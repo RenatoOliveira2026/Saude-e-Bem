@@ -1,3 +1,4 @@
+import { NewsletterCaptureSection } from "@/components/newsletter";
 import { BlogListing, ContentEmptyState, CrossLinks, PageCta } from "@/components/pages";
 import { PageHero } from "@/components/layout/PageHero";
 import {
@@ -41,6 +42,7 @@ export default async function BlogPage() {
       ) : (
         <BlogListing articles={articles} featured={featured} />
       )}
+      <NewsletterCaptureSection source="blog" />
       <PageCta
         title="Coloque em prática"
         description="Transforme conhecimento em ação com protocolos estruturados e ferramentas gratuitas."

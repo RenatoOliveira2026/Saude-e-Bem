@@ -1,4 +1,5 @@
 import { getAffiliateAdminCounts } from "@/lib/admin/services/affiliates.service";
+import { getNewsletterLeadStats } from "@/lib/admin/services/newsletter.service";
 import { createClient } from "@/lib/supabase/server";
 import { getAffiliateClickStats } from "@/lib/supabase/services/affiliates.clicks";
 import type { ContentPublishStatus } from "@/lib/admin/cms/form-utils";
@@ -46,9 +47,17 @@ export async function getDashboardStats(): Promise<DashboardStats> {
     countByStatus("ebooks", "archived"),
   ]);
 
-  const [affiliateCounts, clickStats] = await Promise.all([
+  const [affiliateCounts, clickStats, newsletterStats] = await Promise.all([
     getAffiliateAdminCounts(),
     getAffiliateClickStats(),
+    getNewsletterLeadStats().catch(() => ({
+      total: 0,
+      active: 0,
+      last7Days: 0,
+      last30Days: 0,
+      bySource: { home: 0, blog: 0, biblioteca: 0, clube: 0, other: 0 },
+      pendingSync: 0,
+    })),
   ]);
 
   return {
@@ -65,5 +74,7 @@ export async function getDashboardStats(): Promise<DashboardStats> {
     affiliatesFeatured: affiliateCounts.featured,
     affiliateClicksTotal: clickStats.total,
     affiliateClicksLast30Days: clickStats.last30Days,
+    newsletterSubscribersTotal: newsletterStats.total,
+    newsletterSubscribersLast30Days: newsletterStats.last30Days,
   };
 }

@@ -61,6 +61,21 @@ export default async function AdminDashboardPage() {
           />
         </div>
 
+        <div className="grid gap-4 sm:grid-cols-2">
+          <AdminStatCard
+            label="Leads newsletter"
+            value={stats.newsletterSubscribersTotal}
+            icon="activity"
+            accent="forest"
+          />
+          <AdminStatCard
+            label="Leads (30 dias)"
+            value={stats.newsletterSubscribersLast30Days}
+            icon="users"
+            accent="sage"
+          />
+        </div>
+
         <div className="grid gap-4 sm:grid-cols-3">
           <AdminStatCard
             label="Publicados"
@@ -98,6 +113,9 @@ export default async function AdminDashboardPage() {
             </Button>
             <Button href={adminRoutes.afiliadoNovo} variant="outline" size="sm">
               Novo afiliado
+            </Button>
+            <Button href={adminRoutes.leads} variant="ghost" size="sm">
+              Ver leads
             </Button>
             {hasAdminPermission(role, "manage_platform_users") && (
               <Button href={adminRoutes.usuarios} variant="ghost" size="sm">

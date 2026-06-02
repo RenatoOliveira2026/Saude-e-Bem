@@ -41,6 +41,12 @@ export const adminNavItems: AdminNavItem[] = [
     roles: ["super_admin", "admin"],
   },
   {
+    label: "Leads",
+    href: adminRoutes.leads,
+    icon: "activity",
+    roles: ["super_admin", "admin"],
+  },
+  {
     label: "Usuários",
     href: adminRoutes.usuarios,
     icon: "users",

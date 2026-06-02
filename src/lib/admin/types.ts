@@ -12,6 +12,8 @@ export interface DashboardStats {
   affiliatesFeatured: number;
   affiliateClicksTotal: number;
   affiliateClicksLast30Days: number;
+  newsletterSubscribersTotal: number;
+  newsletterSubscribersLast30Days: number;
 }
 
 export type { AffiliateLinkRecord as AffiliateLink, AffiliateLinkInput } from "@/lib/affiliates/types";

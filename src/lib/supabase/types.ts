@@ -158,6 +158,21 @@ type NewsletterLeadRow = {
   created_at: string;
 };
 
+type NewsletterSubscriberRow = {
+  id: string;
+  name: string;
+  email: string;
+  source: string;
+  status: string;
+  provider: string | null;
+  external_id: string | null;
+  synced_at: string | null;
+  sync_error: string | null;
+  metadata: Record<string, unknown>;
+  created_at: string;
+  updated_at: string;
+};
+
 type FavoriteRow = {
   id: string;
   user_id: string;
@@ -352,6 +367,25 @@ export interface Database {
           created_at?: string;
         };
         Update: Partial<NewsletterLeadRow>;
+        Relationships: [];
+      };
+      newsletter_subscribers: {
+        Row: NewsletterSubscriberRow;
+        Insert: {
+          id?: string;
+          name: string;
+          email: string;
+          source?: string;
+          status?: string;
+          provider?: string | null;
+          external_id?: string | null;
+          synced_at?: string | null;
+          sync_error?: string | null;
+          metadata?: Record<string, unknown>;
+          created_at?: string;
+          updated_at?: string;
+        };
+        Update: Partial<NewsletterSubscriberRow>;
         Relationships: [];
       };
     };

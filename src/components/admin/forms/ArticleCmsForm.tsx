@@ -135,6 +135,18 @@ export function ArticleCmsForm({ article }: ArticleCmsFormProps) {
 
         <CmsFeaturedSwitch defaultChecked={article?.featured} />
 
+        <label className="flex items-center gap-3 rounded-lg border border-border bg-surface px-4 py-3">
+          <input
+            type="checkbox"
+            name="is_premium"
+            defaultChecked={article?.isPremium}
+            className="h-4 w-4 rounded"
+          />
+          <span className="text-sm text-forest">
+            Conteúdo premium (Clube Saúde &amp; Bem)
+          </span>
+        </label>
+
         <CmsSeoSection
           ogFolder="artigos"
           values={{

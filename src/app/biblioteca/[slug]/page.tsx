@@ -1,10 +1,7 @@
 import { CrossLinks, LibraryDownloadPanel, PageCta } from "@/components/pages";
+import { PremiumContentGuard } from "@/components/club/PremiumContentGuard";
 import { Breadcrumbs } from "@/components/layout/Breadcrumbs";
-import {
-  DetailHero,
-  PremiumGate,
-  RelatedNav,
-} from "@/components/layout/DetailPage";
+import { DetailHero, RelatedNav } from "@/components/layout/DetailPage";
 import { Container } from "@/components/ui/Container";
 import { Section } from "@/components/ui/Section";
 import { Icon } from "@/components/icons";
@@ -51,31 +48,6 @@ export default async function BibliotecaDetailPage({ params }: PageProps) {
     .filter((r) => r.slug !== slug && r.category === resource.category)
     .slice(0, 3);
 
-  if (resource.isPremium) {
-    return (
-      <>
-        <Breadcrumbs
-          items={[
-            { label: "Início", href: routes.home },
-            { label: "Biblioteca", href: routes.biblioteca },
-            { label: resource.title },
-          ]}
-        />
-        <DetailHero
-          badge={resource.categoryLabel}
-          title={resource.title}
-          description={resource.description}
-          premium
-        />
-        <PremiumGate
-          title="Recurso premium"
-          description="Este material faz parte da biblioteca ampliada do Clube Saúde & Bem."
-        />
-        <CrossLinks />
-      </>
-    );
-  }
-
   const downloadHref = resource.pdfUrl ?? "#download";
 
   return (
@@ -90,21 +62,40 @@ export default async function BibliotecaDetailPage({ params }: PageProps) {
       <DetailHero
         badge={resource.categoryLabel}
         title={resource.title}
-        description={resource.longDescription}
-        meta={[
-          { icon: "book", label: `${resource.format} · ${resource.pages} páginas` },
-          {
-            icon: "download",
-            label: `${resource.downloads.toLocaleString("pt-BR")} downloads`,
-          },
-        ]}
-        cta={{
-          label: resource.pdfUrl ? "Baixar PDF" : "Solicitar material",
-          href: downloadHref,
-          variant: "primary",
-        }}
+        description={
+          resource.isPremium ? resource.description : resource.longDescription
+        }
+        premium={resource.isPremium}
+        meta={
+          resource.isPremium
+            ? undefined
+            : [
+                {
+                  icon: "book",
+                  label: `${resource.format} · ${resource.pages} páginas`,
+                },
+                {
+                  icon: "download",
+                  label: `${resource.downloads.toLocaleString("pt-BR")} downloads`,
+                },
+              ]
+        }
+        cta={
+          resource.isPremium
+            ? undefined
+            : {
+                label: resource.pdfUrl ? "Baixar PDF" : "Solicitar material",
+                href: downloadHref,
+                variant: "primary",
+              }
+        }
       />
 
+      <PremiumContentGuard
+        isPremiumContent={resource.isPremium}
+        gateTitle="Recurso premium"
+        gateDescription="Este material faz parte da biblioteca ampliada do Clube Saúde & Bem."
+      >
       <Section background="white" id="download">
         <Container size="md">
           <h2 className="font-heading text-2xl text-forest">Conteúdo incluído</h2>
@@ -147,6 +138,7 @@ export default async function BibliotecaDetailPage({ params }: PageProps) {
         secondaryHref={routes.blog}
         background="gold"
       />
+      </PremiumContentGuard>
       <CrossLinks />
     </>
   );

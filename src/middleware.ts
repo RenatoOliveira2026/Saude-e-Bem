@@ -1,7 +1,14 @@
-import { authRoutes, adminProtectedRoutes, privateRoutes } from "@/lib/auth/routes";
+import { authRoutes, adminProtectedRoutes, privateRoutes, clubPublicRoutes } from "@/lib/auth/routes";
 import { routes } from "@/lib/routes";
 import { updateSession } from "@/lib/supabase/middleware";
 import { NextResponse, type NextRequest } from "next/server";
+
+function isClubMemberRoute(pathname: string): boolean {
+  if (!pathname.startsWith("/clube/")) return false;
+  return !clubPublicRoutes.some(
+    (route) => pathname === route || pathname.startsWith(`${route}/`),
+  );
+}
 
 export async function middleware(request: NextRequest) {
   const { supabaseResponse, user } = await updateSession(request);
@@ -43,7 +50,9 @@ export async function middleware(request: NextRequest) {
     pathname.startsWith(route),
   );
   const isPrivate =
-    privateRoutes.some((route) => pathname.startsWith(route)) || isAdminPanel;
+    privateRoutes.some((route) => pathname.startsWith(route)) ||
+    isClubMemberRoute(pathname) ||
+    isAdminPanel;
   const isAuthRoute = authRoutes.some((route) => pathname.startsWith(route));
 
   if (isPrivate && !user) {

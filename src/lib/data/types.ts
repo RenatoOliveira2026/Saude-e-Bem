@@ -99,6 +99,7 @@ export interface BlogArticle extends BaseEntity, ContentSeoFields {
   readTime: string;
   publishedAt: string;
   featured?: boolean;
+  isPremium: boolean;
 }
 
 export interface ClubPlan {

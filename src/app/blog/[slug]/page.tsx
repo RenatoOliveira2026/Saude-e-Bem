@@ -1,4 +1,5 @@
 import { RelatedAffiliatesSection } from "@/components/affiliates";
+import { PremiumContentGuard } from "@/components/club/PremiumContentGuard";
 import { CrossLinks, PageCta } from "@/components/pages";
 import { PublicArticleBody } from "@/components/content/PublicArticleBody";
 import { Breadcrumbs } from "@/components/layout/Breadcrumbs";
@@ -81,12 +82,18 @@ export default async function ArtigoDetailPage({ params }: PageProps) {
         badge={article.categoryLabel}
         title={article.title}
         description={article.excerpt}
+        premium={article.isPremium}
         meta={[
           { icon: "profile", label: article.author },
           { icon: "clock", label: `${article.readTime} de leitura` },
         ]}
       />
 
+      <PremiumContentGuard
+        isPremiumContent={article.isPremium}
+        gateTitle="Artigo exclusivo do Clube"
+        gateDescription="Este artigo faz parte do conteúdo premium do Clube Saúde & Bem."
+      >
       <Section background="white">
         <Container size="sm">
           <p className="text-sm text-muted">
@@ -128,6 +135,7 @@ export default async function ArtigoDetailPage({ params }: PageProps) {
         secondaryHref={routes.ferramentas}
         background="forest"
       />
+      </PremiumContentGuard>
       <CrossLinks />
     </>
   );

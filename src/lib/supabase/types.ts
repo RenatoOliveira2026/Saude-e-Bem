@@ -13,6 +13,8 @@ type ProfileRow = {
   id: string;
   email: string;
   name: string | null;
+  membership_tier: "free" | "premium";
+  club_joined_at: string | null;
   created_at: string;
   updated_at: string;
 };
@@ -39,6 +41,7 @@ type ArticleRow = {
   read_time: string;
   published_at: string;
   featured: boolean;
+  is_premium: boolean;
   cover_image_url?: string | null;
   seo_title?: string | null;
   seo_description?: string | null;
@@ -193,6 +196,38 @@ type FavoriteRow = {
   created_at: string;
 };
 
+type SubscriptionRow = {
+  id: string;
+  user_id: string;
+  plan: "free" | "premium";
+  status:
+    | "active"
+    | "trialing"
+    | "past_due"
+    | "canceled"
+    | "expired"
+    | "pending";
+  provider: "manual" | "stripe" | "internal";
+  current_period_start: string | null;
+  current_period_end: string | null;
+  canceled_at: string | null;
+  stripe_customer_id: string | null;
+  stripe_subscription_id: string | null;
+  metadata: Record<string, unknown>;
+  created_at: string;
+  updated_at: string;
+};
+
+type UserDownloadRow = {
+  id: string;
+  user_id: string;
+  content_type: "article" | "protocol" | "ebook";
+  content_id: string;
+  content_title: string;
+  content_slug: string | null;
+  created_at: string;
+};
+
 type AdminUserRow = {
   id: string;
   user_id: string;
@@ -210,12 +245,16 @@ export interface Database {
           id: string;
           email: string;
           name?: string | null;
+          membership_tier?: "free" | "premium";
+          club_joined_at?: string | null;
           created_at?: string;
           updated_at?: string;
         };
         Update: {
           email?: string;
           name?: string | null;
+          membership_tier?: "free" | "premium";
+          club_joined_at?: string | null;
           updated_at?: string;
         };
         Relationships: [];
@@ -248,6 +287,7 @@ export interface Database {
           read_time: string;
           published_at: string;
           featured?: boolean;
+          is_premium?: boolean;
           cover_image_url?: string | null;
           seo_title?: string | null;
           seo_description?: string | null;
@@ -416,12 +456,48 @@ export interface Database {
         Update: Partial<AnalyticsEventRow>;
         Relationships: [];
       };
+      subscriptions: {
+        Row: SubscriptionRow;
+        Insert: {
+          id?: string;
+          user_id: string;
+          plan?: "free" | "premium";
+          status?: SubscriptionRow["status"];
+          provider?: SubscriptionRow["provider"];
+          current_period_start?: string | null;
+          current_period_end?: string | null;
+          canceled_at?: string | null;
+          stripe_customer_id?: string | null;
+          stripe_subscription_id?: string | null;
+          metadata?: Record<string, unknown>;
+          created_at?: string;
+          updated_at?: string;
+        };
+        Update: Partial<SubscriptionRow>;
+        Relationships: [];
+      };
+      user_downloads: {
+        Row: UserDownloadRow;
+        Insert: {
+          id?: string;
+          user_id: string;
+          content_type: UserDownloadRow["content_type"];
+          content_id: string;
+          content_title: string;
+          content_slug?: string | null;
+          created_at?: string;
+        };
+        Update: Partial<UserDownloadRow>;
+        Relationships: [];
+      };
     };
     Views: Record<string, never>;
     Functions: {
       is_admin: { Args: Record<string, never>; Returns: boolean };
       is_super_admin: { Args: Record<string, never>; Returns: boolean };
       get_admin_role: { Args: Record<string, never>; Returns: "super_admin" | "admin" };
+      user_has_active_premium: { Args: { p_user_id?: string }; Returns: boolean };
+      touch_club_joined: { Args: { p_user_id: string }; Returns: undefined };
     };
     Enums: Record<string, never>;
     CompositeTypes: Record<string, never>;
@@ -437,6 +513,8 @@ export type {
   FavoriteRow,
   AdminUserRow,
   AffiliateLinkRow,
+  SubscriptionRow,
+  UserDownloadRow,
 };
 
 export interface UserProfileData {

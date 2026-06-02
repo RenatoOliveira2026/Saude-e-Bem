@@ -4,7 +4,7 @@ import type { BlogArticle } from "@/lib/data/types";
 import type { ArticleRow } from "@/lib/supabase/types";
 
 const COLUMNS =
-  "id, slug, title, excerpt, content, category, category_label, author, author_role, read_time, published_at, featured, cover_image_url, seo_title, seo_description, seo_keywords, og_image_url, status, created_at, updated_at";
+  "id, slug, title, excerpt, content, category, category_label, author, author_role, read_time, published_at, featured, is_premium, cover_image_url, seo_title, seo_description, seo_keywords, og_image_url, status, created_at, updated_at";
 
 export async function adminListArticles(): Promise<BlogArticle[]> {
   const supabase = await createClient();

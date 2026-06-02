@@ -58,6 +58,7 @@ function parseArticleForm(formData: FormData) {
     read_time: getString(formData, "read_time"),
     published_at: getString(formData, "published_at"),
     featured: getCheckbox(formData, "featured"),
+    is_premium: getCheckbox(formData, "is_premium"),
     cover_image_url: optionalUrl(formData, "cover_image_url"),
     status: resolvePublishStatus(formData),
     ...parseSeoFields(formData),

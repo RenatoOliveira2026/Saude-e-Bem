@@ -78,6 +78,7 @@ export function mapArticleRow(row: ArticleRow): BlogArticle {
     readTime: row.read_time,
     publishedAt: row.published_at,
     featured: row.featured,
+    isPremium: row.is_premium ?? false,
     coverImageUrl: row.cover_image_url ?? undefined,
     ...mapSeoFields(row),
   };

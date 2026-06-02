@@ -3,7 +3,7 @@ import { mapArticleRow } from "@/lib/supabase/mappers/content";
 import type { BlogArticle } from "@/lib/data/types";
 
 const ARTICLE_COLUMNS =
-  "id, slug, title, excerpt, content, cover_image_url, category, category_label, author, author_role, read_time, published_at, featured, status, created_at, updated_at";
+  "id, slug, title, excerpt, content, cover_image_url, category, category_label, author, author_role, read_time, published_at, featured, is_premium, status, created_at, updated_at";
 
 export async function fetchArticlesFromSupabase(): Promise<BlogArticle[]> {
   const supabase = await createClient();

@@ -108,10 +108,16 @@ export function RelatedNav({
 export function PremiumGate({
   title,
   description,
+  upgradeHref,
+  ctaLabel = "Acessar via Clube Saúde & Bem",
 }: {
   title: string;
   description: string;
+  upgradeHref?: string;
+  ctaLabel?: string;
 }) {
+  const href = upgradeHref ?? routes.clubePremium;
+
   return (
     <Section background="gold" spacing="compact">
       <Container size="sm">
@@ -119,8 +125,8 @@ export function PremiumGate({
           <Icon name="lock" size={32} className="text-gold" />
           <h2 className="mt-4 font-heading text-xl text-forest">{title}</h2>
           <p className="mt-3 text-muted text-pretty">{description}</p>
-          <Button href={routes.clube} variant="gold" size="lg" className="mt-6">
-            Acessar via Clube Saúde & Bem
+          <Button href={href} variant="gold" size="lg" className="mt-6">
+            {ctaLabel}
           </Button>
         </div>
       </Container>

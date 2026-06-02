@@ -7,6 +7,11 @@ export const routes = {
   recomendados: "/recomendados",
   obrigado: "/obrigado",
   clube: "/clube",
+  clubeDashboard: "/clube/dashboard",
+  clubeFavoritos: "/clube/favoritos",
+  clubeDownloads: "/clube/downloads",
+  clubePerfil: "/clube/perfil",
+  clubePremium: "/clube/premium",
   entrar: "/entrar",
   cadastro: "/cadastro",
   recuperarSenha: "/recuperar-senha",
@@ -70,6 +75,7 @@ export const authNavLoggedOut = [
 
 export const authNavLoggedIn = [
   { label: "Minha Jornada", href: routes.minhaJornada },
+  { label: "Clube", href: routes.clubeDashboard },
   { label: "Perfil", href: routes.perfil },
 ] as const;
 

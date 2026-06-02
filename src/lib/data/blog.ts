@@ -14,7 +14,7 @@ export const blogCategories = [
 
 const rawArticles: Omit<
   BlogArticle,
-  "status" | "createdAt" | "updatedAt" | "contentBlocks"
+  "status" | "createdAt" | "updatedAt" | "contentBlocks" | "isPremium"
 >[] = [
   {
     id: "1",
@@ -157,6 +157,7 @@ const rawArticles: Omit<
 
 export const blogArticles: BlogArticle[] = rawArticles.map((a) => ({
   ...withBase(a),
+  isPremium: false,
   contentBlocks: parseContentBlocks(a.content),
 }));
 export const featuredArticle = blogArticles.find((a) => a.featured)!;

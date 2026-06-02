@@ -1,11 +1,8 @@
 import { RelatedAffiliatesSection } from "@/components/affiliates";
+import { PremiumContentGuard } from "@/components/club/PremiumContentGuard";
 import { CrossLinks, PageCta } from "@/components/pages";
 import { Breadcrumbs } from "@/components/layout/Breadcrumbs";
-import {
-  DetailHero,
-  PremiumGate,
-  RelatedNav,
-} from "@/components/layout/DetailPage";
+import { DetailHero, RelatedNav } from "@/components/layout/DetailPage";
 import { Container } from "@/components/ui/Container";
 import { Section } from "@/components/ui/Section";
 import { Icon } from "@/components/icons";
@@ -71,31 +68,6 @@ export default async function ProtocoloDetailPage({ params }: PageProps) {
     .filter((p) => p.slug !== slug && p.category === protocol.category)
     .slice(0, 3);
 
-  if (protocol.isPremium) {
-    return (
-      <>
-        <Breadcrumbs
-          items={[
-            { label: "Início", href: routes.home },
-            { label: "Protocolos", href: routes.protocolos },
-            { label: protocol.title },
-          ]}
-        />
-        <DetailHero
-          badge={protocol.categoryLabel}
-          title={protocol.title}
-          description={protocol.description}
-          premium
-        />
-        <PremiumGate
-          title="Protocolo exclusivo do Clube"
-          description="Este protocolo faz parte do conteúdo premium do Clube Saúde & Bem. Entre na lista de espera para acesso antecipado."
-        />
-        <CrossLinks />
-      </>
-    );
-  }
-
   return (
     <>
       <Breadcrumbs
@@ -108,18 +80,34 @@ export default async function ProtocoloDetailPage({ params }: PageProps) {
       <DetailHero
         badge={protocol.categoryLabel}
         title={protocol.title}
-        description={protocol.longDescription}
-        meta={[
-          { icon: "clock", label: protocol.duration },
-          { icon: "activity", label: protocol.level },
-          {
-            icon: "users",
-            label: `${protocol.participants.toLocaleString("pt-BR")} participantes`,
-          },
-        ]}
-        cta={{ label: "Iniciar protocolo", href: routes.protocolo(slug) }}
+        description={
+          protocol.isPremium ? protocol.description : protocol.longDescription
+        }
+        premium={protocol.isPremium}
+        meta={
+          protocol.isPremium
+            ? undefined
+            : [
+                { icon: "clock", label: protocol.duration },
+                { icon: "activity", label: protocol.level },
+                {
+                  icon: "users",
+                  label: `${protocol.participants.toLocaleString("pt-BR")} participantes`,
+                },
+              ]
+        }
+        cta={
+          protocol.isPremium
+            ? undefined
+            : { label: "Iniciar protocolo", href: routes.protocolo(slug) }
+        }
       />
 
+      <PremiumContentGuard
+        isPremiumContent={protocol.isPremium}
+        gateTitle="Protocolo exclusivo do Clube"
+        gateDescription="Este protocolo faz parte do conteúdo premium do Clube Saúde & Bem. Assine o Premium para acesso completo."
+      >
       <Section background="white">
         <Container size="md">
           <h2 className="font-heading text-2xl text-forest">Objetivo</h2>
@@ -197,6 +185,7 @@ export default async function ProtocoloDetailPage({ params }: PageProps) {
         secondaryHref={routes.biblioteca}
         background="sage"
       />
+      </PremiumContentGuard>
       <CrossLinks />
     </>
   );

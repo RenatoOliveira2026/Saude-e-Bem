@@ -6,21 +6,36 @@ import type { MercadoPagoWebhookPayload } from "@/lib/payments/types";
 import { NextResponse } from "next/server";
 
 export async function POST(request: Request) {
+  const url = new URL(request.url);
+  const queryType = url.searchParams.get("type");
+  const queryDataId = url.searchParams.get("data.id");
   const rawBody = await request.text();
 
-  if (!verifyMercadoPagoWebhookSignature(request.headers, rawBody)) {
+  if (
+    !verifyMercadoPagoWebhookSignature({
+      headers: request.headers,
+      queryDataId,
+      rawBody,
+    })
+  ) {
     return NextResponse.json({ error: "Assinatura inválida." }, { status: 401 });
   }
 
   let payload: MercadoPagoWebhookPayload;
   try {
-    payload = JSON.parse(rawBody) as MercadoPagoWebhookPayload;
+    payload = rawBody
+      ? (JSON.parse(rawBody) as MercadoPagoWebhookPayload)
+      : {};
   } catch {
     return NextResponse.json({ error: "Payload inválido." }, { status: 400 });
   }
 
   try {
-    const result = await processMercadoPagoWebhook(payload);
+    const result = await processMercadoPagoWebhook({
+      payload,
+      queryType,
+      queryDataId,
+    });
     return NextResponse.json(result);
   } catch (error) {
     const message =

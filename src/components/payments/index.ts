@@ -1,3 +1,5 @@
+export { CancelSubscriptionButton } from "./CancelSubscriptionButton";
+export { CheckoutReturnSync } from "./CheckoutReturnSync";
 export { PaymentHistoryList } from "./PaymentHistoryList";
 export { StubCheckoutPanel } from "./StubCheckoutPanel";
 export { SubscribeCheckoutForm } from "./SubscribeCheckoutForm";

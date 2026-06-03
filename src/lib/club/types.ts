@@ -23,6 +23,9 @@ export interface Subscription {
   currentPeriodStart: string | null;
   currentPeriodEnd: string | null;
   canceledAt: string | null;
+  billingPlanId: string | null;
+  autoRenew: boolean;
+  cancelAtPeriodEnd: boolean;
   createdAt: string;
   updatedAt: string;
 }

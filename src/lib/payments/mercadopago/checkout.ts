@@ -1,8 +1,14 @@
 import { randomUUID } from "crypto";
 import { createPaymentsAdminClient } from "../admin-client";
 import { getCheckoutPlan } from "../plans";
-import { getSiteUrl, isMercadoPagoConfigured } from "../config";
+import {
+  getSiteUrl,
+  isMercadoPagoConfigured,
+  isStubModeEnabled,
+  shouldUseSandboxCheckout,
+} from "../config";
 import { createMercadoPagoPreference } from "./client";
+import { createMercadoPagoPreapproval } from "./preapproval";
 import type { CheckoutRequest, CheckoutResult } from "../types";
 
 function buildExternalReference(userId: string): string {
@@ -28,9 +34,19 @@ export async function createPremiumCheckout(input: {
     };
   }
 
+  if (!isMercadoPagoConfigured() && !isStubModeEnabled()) {
+    throw new Error(
+      "Configure MERCADOPAGO_ACCESS_TOKEN para checkout real ou MERCADOPAGO_STUB_MODE=1 em dev.",
+    );
+  }
+
   const externalReference = buildExternalReference(input.userId);
   const paymentMethod = input.request.paymentMethod;
   const plan = getCheckoutPlan(input.request.plan);
+  const usePreapproval =
+    isMercadoPagoConfigured() &&
+    plan.billingInterval === "month" &&
+    paymentMethod === "credit_card";
 
   const { data: paymentRow, error: insertError } = await admin
     .from("payments")
@@ -47,6 +63,7 @@ export async function createPremiumCheckout(input: {
         plan: plan.id,
         payment_method: paymentMethod,
         period_days: plan.periodDays,
+        checkout_mode: usePreapproval ? "preapproval" : "checkout_pro",
       },
     })
     .select("id")
@@ -56,40 +73,101 @@ export async function createPremiumCheckout(input: {
     throw new Error(insertError?.message ?? "Falha ao registrar pagamento.");
   }
 
-  const preference = await createMercadoPagoPreference({
-    externalReference,
-    paymentMethod,
-    payerEmail: input.email,
-    payerName: input.name,
-    plan,
-  });
+  const paymentId = paymentRow.id;
 
-  await admin
-    .from("payments")
-    .update({
-      preference_id: preference.id,
-      metadata: {
-        plan: plan.id,
-        payment_method: paymentMethod,
-        period_days: plan.periodDays,
-        stub: preference.stub,
-      },
-    })
-    .eq("id", paymentRow.id);
+  let checkoutUrl: string;
+  let preferenceId: string | null = null;
+  let stub = false;
+  let message: string | undefined;
 
-  const checkoutUrl =
-    process.env.NODE_ENV !== "production" && preference.sandboxInitPoint
-      ? preference.sandboxInitPoint
-      : preference.initPoint;
+  if (usePreapproval) {
+    const preapproval = await createMercadoPagoPreapproval({
+      externalReference,
+      payerEmail: input.email,
+      plan,
+      userId: input.userId,
+    });
+
+    if (preapproval) {
+      checkoutUrl = preapproval.initPoint;
+      preferenceId = preapproval.id;
+
+      await admin
+        .from("payments")
+        .update({
+          preference_id: preapproval.id,
+          metadata: {
+            plan: plan.id,
+            payment_method: paymentMethod,
+            period_days: plan.periodDays,
+            checkout_mode: "preapproval",
+            preapproval_id: preapproval.id,
+          },
+        })
+        .eq("id", paymentId);
+
+      message =
+        "Renovação automática ativada via assinatura Mercado Pago (cartão).";
+    } else {
+      const preference = await createCheckoutProPreference();
+      checkoutUrl = preference.checkoutUrl;
+      preferenceId = preference.preferenceId;
+      stub = preference.stub;
+      message = preference.message;
+    }
+  } else {
+    const preference = await createCheckoutProPreference();
+    checkoutUrl = preference.checkoutUrl;
+    preferenceId = preference.preferenceId;
+    stub = preference.stub;
+    message = preference.message;
+  }
+
+  async function createCheckoutProPreference() {
+    const preference = await createMercadoPagoPreference({
+      externalReference,
+      paymentMethod,
+      payerEmail: input.email,
+      payerName: input.name,
+      plan,
+      userId: input.userId,
+    });
+
+    await admin!
+      .from("payments")
+      .update({
+        preference_id: preference.id,
+        metadata: {
+          plan: plan.id,
+          payment_method: paymentMethod,
+          period_days: plan.periodDays,
+          checkout_mode: "checkout_pro",
+          stub: preference.stub,
+        },
+      })
+      .eq("id", paymentId);
+
+    const url =
+      shouldUseSandboxCheckout() && preference.sandboxInitPoint
+        ? preference.sandboxInitPoint
+        : preference.initPoint;
+
+    return {
+      checkoutUrl: url,
+      preferenceId: preference.id,
+      stub: preference.stub,
+      message: preference.stub
+        ? "Modo stub — configure MERCADOPAGO_ACCESS_TOKEN para checkout real."
+        : undefined,
+    };
+  }
 
   return {
-    paymentId: paymentRow.id,
+    paymentId,
     externalReference,
-    preferenceId: preference.id,
+    preferenceId,
     checkoutUrl,
-    stub: preference.stub || !isMercadoPagoConfigured(),
-    message: preference.stub
-      ? "Modo stub — configure MERCADOPAGO_ACCESS_TOKEN para checkout real."
-      : undefined,
+    stub: stub || !isMercadoPagoConfigured(),
+    message,
   };
 }

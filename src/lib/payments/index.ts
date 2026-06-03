@@ -22,6 +22,10 @@ export {
   processMercadoPagoWebhook,
   verifyMercadoPagoWebhookSignature,
   simulatePaymentApproval,
+  syncPaymentByReference,
 } from "./mercadopago/webhook";
+export { expireDueSubscriptions } from "./services/subscription-lifecycle.service";
+export { cancelUserSubscription } from "./services/subscriptions.service";
 export { fetchUserPayments } from "./services/payments.service";
 export { activateSubscriptionFromPayment } from "./services/subscriptions.service";
+export { getPaymentsConfigSummary } from "./config";

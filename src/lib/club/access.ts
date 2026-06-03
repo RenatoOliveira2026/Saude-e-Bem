@@ -20,6 +20,9 @@ type SubscriptionSelectRow = Pick<
   | "current_period_start"
   | "current_period_end"
   | "canceled_at"
+  | "billing_plan_id"
+  | "auto_renew"
+  | "cancel_at_period_end"
   | "created_at"
   | "updated_at"
 >;
@@ -34,6 +37,9 @@ function mapSubscriptionRow(row: SubscriptionSelectRow): Subscription {
     currentPeriodStart: row.current_period_start,
     currentPeriodEnd: row.current_period_end,
     canceledAt: row.canceled_at,
+    billingPlanId: row.billing_plan_id,
+    autoRenew: row.auto_renew,
+    cancelAtPeriodEnd: row.cancel_at_period_end,
     createdAt: row.created_at,
     updatedAt: row.updated_at,
   };
@@ -72,7 +78,7 @@ export async function fetchUserSubscription(
   const { data, error } = await supabase
     .from("subscriptions")
     .select(
-      "id, user_id, plan, status, provider, current_period_start, current_period_end, canceled_at, created_at, updated_at",
+      "id, user_id, plan, status, provider, current_period_start, current_period_end, canceled_at, billing_plan_id, auto_renew, cancel_at_period_end, created_at, updated_at",
     )
     .eq("user_id", userId)
     .order("created_at", { ascending: false })
@@ -101,7 +107,7 @@ export async function getClubMembership(userId: string): Promise<ClubMembership>
     supabase
       .from("subscriptions")
       .select(
-        "id, user_id, plan, status, provider, current_period_start, current_period_end, canceled_at, created_at, updated_at",
+        "id, user_id, plan, status, provider, current_period_start, current_period_end, canceled_at, billing_plan_id, auto_renew, cancel_at_period_end, created_at, updated_at",
       )
       .eq("user_id", userId)
       .order("created_at", { ascending: false })

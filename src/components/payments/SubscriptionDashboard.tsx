@@ -16,6 +16,7 @@ import {
 import type { SubscriptionBillingData } from "@/lib/payments/types";
 import { routes } from "@/lib/routes";
 import { PaymentHistoryList } from "./PaymentHistoryList";
+import { CancelSubscriptionButton } from "./CancelSubscriptionButton";
 
 interface SubscriptionDashboardProps {
   data: SubscriptionBillingData;
@@ -30,12 +31,17 @@ function providerLabel(provider: string | null): string {
 
 export function SubscriptionDashboard({ data }: SubscriptionDashboardProps) {
   const { membership } = data;
+  const subscription = membership.subscription;
 
-  const lastPaymentPlanId = data.payments[0]?.metadata?.plan;
+  const billingPlanId =
+    subscription?.billingPlanId ??
+    (typeof data.payments[0]?.metadata?.plan === "string"
+      ? data.payments[0].metadata.plan
+      : null);
+
   const activeBillingPlan =
-    getPlanById(
-      typeof lastPaymentPlanId === "string" ? lastPaymentPlanId : null,
-    ) ?? (membership.isPremium ? PREMIUM_MONTHLY_PLAN : null);
+    getPlanById(billingPlanId) ??
+    (membership.isPremium ? PREMIUM_MONTHLY_PLAN : null);
 
   const planSummary = membership.isPremium
     ? activeBillingPlan
@@ -104,6 +110,11 @@ export function SubscriptionDashboard({ data }: SubscriptionDashboardProps) {
                 Válido até {formatSubscriptionDate(membership.expiresAt)}
               </p>
             )}
+            {membership.isPremium && subscription?.autoRenew && (
+              <p className="mt-1 text-sm text-muted">
+                Renovação automática ativa
+              </p>
+            )}
           </div>
           {!membership.isPremium && (
             <Button href={routes.assinar} variant="gold" size="sm">
@@ -112,6 +123,17 @@ export function SubscriptionDashboard({ data }: SubscriptionDashboardProps) {
           )}
         </div>
       </Card>
+
+      {membership.isPremium &&
+        subscription &&
+        (subscription.status === "active" ||
+          subscription.status === "trialing") && (
+          <CancelSubscriptionButton
+            cancelAtPeriodEnd={subscription.cancelAtPeriodEnd}
+            expiresAt={membership.expiresAt}
+            autoRenew={subscription.autoRenew}
+          />
+        )}
 
       <section>
         <h2 className="font-heading text-xl text-forest">

@@ -214,9 +214,24 @@ type SubscriptionRow = {
   stripe_customer_id: string | null;
   stripe_subscription_id: string | null;
   mercadopago_preapproval_id: string | null;
+  billing_plan_id: string | null;
+  auto_renew: boolean;
+  cancel_at_period_end: boolean;
+  mercadopago_payer_id: string | null;
   metadata: Record<string, unknown>;
   created_at: string;
   updated_at: string;
+};
+
+type PaymentWebhookEventRow = {
+  id: string;
+  provider: "mercadopago";
+  event_key: string;
+  topic: string;
+  resource_id: string | null;
+  payload: Record<string, unknown>;
+  processed_at: string;
+  result_message: string | null;
 };
 
 type UserDownloadRow = {
@@ -506,11 +521,30 @@ export interface Database {
           stripe_customer_id?: string | null;
           stripe_subscription_id?: string | null;
           mercadopago_preapproval_id?: string | null;
+          billing_plan_id?: string | null;
+          auto_renew?: boolean;
+          cancel_at_period_end?: boolean;
+          mercadopago_payer_id?: string | null;
           metadata?: Record<string, unknown>;
           created_at?: string;
           updated_at?: string;
         };
         Update: Partial<SubscriptionRow>;
+        Relationships: [];
+      };
+      payment_webhook_events: {
+        Row: PaymentWebhookEventRow;
+        Insert: {
+          id?: string;
+          provider?: PaymentWebhookEventRow["provider"];
+          event_key: string;
+          topic: string;
+          resource_id?: string | null;
+          payload?: Record<string, unknown>;
+          processed_at?: string;
+          result_message?: string | null;
+        };
+        Update: Partial<PaymentWebhookEventRow>;
         Relationships: [];
       };
       user_downloads: {
@@ -558,6 +592,7 @@ export interface Database {
       get_admin_role: { Args: Record<string, never>; Returns: "super_admin" | "admin" };
       user_has_active_premium: { Args: { p_user_id?: string }; Returns: boolean };
       touch_club_joined: { Args: { p_user_id: string }; Returns: undefined };
+      expire_due_subscriptions: { Args: Record<string, never>; Returns: number };
     };
     Enums: Record<string, never>;
     CompositeTypes: Record<string, never>;
@@ -576,6 +611,7 @@ export type {
   SubscriptionRow,
   UserDownloadRow,
   PaymentRow,
+  PaymentWebhookEventRow,
 };
 
 export interface UserProfileData {

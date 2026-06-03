@@ -103,6 +103,31 @@ npm run build
 
 - [ ] Build sem erros TypeScript
 
+## Vercel — corrigir 404 (só `public/` servido)
+
+Sintoma em produção: `/manifest.json` e `/sw.js` retornam **200**, mas `/`, `/offline` e `/_next/*` retornam **404 NOT_FOUND** da plataforma Vercel.
+
+**Causa:** Framework Preset **Other** ou **Output Directory** = `public` (deploy estático, sem o servidor Next.js).
+
+**Correção no dashboard** (Settings → Build and Deployment):
+
+1. **Framework Preset:** `Next.js`
+2. **Root Directory:** vazio (raiz do repositório `Saude-e-Bem`)
+3. **Output Directory:** vazio (não usar `public` nem `.next`)
+4. **Build Command:** `npm run build` (ou deixar padrão)
+5. **Install Command:** `npm install`
+6. Redeploy com **Clear Build Cache**
+
+O repositório inclui `vercel.json` com `"framework": "nextjs"` para reforçar o preset no deploy.
+
+**Proxy Next.js 16:** `src/proxy.ts` (substitui `middleware.ts` deprecado).
+
+Após redeploy, validar:
+
+- `https://saude-e-bem.vercel.app/` → **200** (HTML da home)
+- `https://saude-e-bem.vercel.app/offline` → **200**
+- Domínio de deployment no GitHub (Deployments) pode exigir login (401) se **Deployment Protection** estiver ativo — isso é diferente de 404.
+
 ## Checkpoint v4.0
 
 ```bash

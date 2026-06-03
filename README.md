@@ -32,6 +32,13 @@ Abra [http://localhost:3001](http://localhost:3001) no navegador.
 | `npm run start` | Servidor de produção (porta via `PORT` em `.env.local`) |
 | `npm run lint` | Verificação ESLint |
 
+## Deploy (Vercel)
+
+- **Framework Preset:** Next.js (não usar *Other*)
+- **Output Directory:** deixar vazio — nunca `public` (isso publica só arquivos estáticos e causa 404 nas rotas)
+- **Root Directory:** raiz do repositório
+- `vercel.json` na raiz força `framework: nextjs`
+
 ## Stack
 
 - Next.js 16 (App Router)

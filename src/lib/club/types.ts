@@ -97,6 +97,12 @@ export interface ContentAccessEntry {
   href: string;
 }
 
+export type RecommendationKind =
+  | "continue_reading"
+  | "personalized"
+  | "trending"
+  | "related";
+
 export interface ClubRecommendation {
   id: string;
   contentType: "protocol" | "ebook" | "article";
@@ -106,6 +112,35 @@ export interface ClubRecommendation {
   categoryLabel: string | null;
   isPremium: boolean;
   reason: string;
+  kind?: RecommendationKind;
+  score?: number;
+  source?: "ai" | "analytics" | "goal";
+}
+
+export interface ContentRankingItem {
+  id: string;
+  contentType: "protocol" | "ebook" | "article";
+  contentKey: string;
+  title: string;
+  slug: string | null;
+  href: string;
+  viewCount: number;
+  downloadCount: number;
+  score: number;
+  rankPosition: number;
+  period: "all_time" | "30d" | "7d";
+}
+
+export interface ContinueReadingItem {
+  id: string;
+  contentType: FavoriteContentType;
+  contentId: string;
+  title: string;
+  slug: string | null;
+  href: string;
+  accessCount: number;
+  lastAccessedAt: string;
+  completed: boolean;
 }
 
 export interface ClubUserStats {
@@ -130,6 +165,9 @@ export interface ClubDashboardData {
   savedProtocols: ResolvedSavedProtocol[];
   accessHistory: ContentAccessEntry[];
   recommendations: ClubRecommendation[];
+  intelligentRecommendations: ClubRecommendation[];
+  continueReading: ContinueReadingItem[];
+  contentRankings: ContentRankingItem[];
   stats: ClubUserStats;
   favoritesCount: number;
   downloadsCount: number;

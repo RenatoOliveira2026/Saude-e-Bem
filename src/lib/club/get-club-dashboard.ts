@@ -17,6 +17,11 @@ import {
 } from "./services/access-history.service";
 import { fetchUserDownloads } from "./services/downloads.service";
 import {
+  fetchContentRankings,
+  fetchContinueReading,
+  fetchIntelligentRecommendations,
+} from "./services/intelligent-recommendations.service";
+import {
   countSavedProtocolsByStatus,
   fetchUserSavedProtocols,
 } from "./services/saved-protocols.service";
@@ -55,15 +60,34 @@ export async function getClubDashboardData(): Promise<ClubDashboardData> {
     countUserAccessHistory(user.id),
   ]);
 
-  const [favorites, savedProtocols, recommendations] = await Promise.all([
+  const [
+    favorites,
+    savedProtocols,
+    intelligentRecommendations,
+    continueReading,
+    contentRankings,
+    fallbackRecommendations,
+  ] = await Promise.all([
     resolveFavorites(favoritesRaw),
     resolveSavedProtocols(savedRaw),
+    fetchIntelligentRecommendations({
+      userId: user.id,
+      isPremium: membership.isPremium,
+      limit: 12,
+    }),
+    fetchContinueReading(user.id, 5),
+    fetchContentRankings("30d", 8),
     getClubRecommendations({
       userId: user.id,
       isPremium: membership.isPremium,
       limit: 6,
     }),
   ]);
+
+  const recommendations =
+    intelligentRecommendations.length > 0
+      ? intelligentRecommendations
+      : fallbackRecommendations;
 
   return {
     displayName,
@@ -76,6 +100,9 @@ export async function getClubDashboardData(): Promise<ClubDashboardData> {
     savedProtocols,
     accessHistory,
     recommendations,
+    intelligentRecommendations: recommendations,
+    continueReading,
+    contentRankings,
     stats: {
       daysAsMember: getDaysOnJourney(memberSinceRaw),
       favoritesCount: favorites.length,

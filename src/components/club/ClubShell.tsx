@@ -11,7 +11,7 @@ const navItems: Array<{ label: string; href: string; icon: IconName }> = [
   { label: "Downloads", href: routes.clubeDownloads, icon: "download" },
   { label: "Protocolos salvos", href: routes.clubeProtocolosSalvos, icon: "plan" },
   { label: "Histórico", href: routes.clubeHistorico, icon: "activity" },
-  { label: "Recomendações", href: routes.clubeRecomendacoes, icon: "sparkle" },
+  { label: "Recomendações IA", href: routes.clubeRecomendacoesIa, icon: "sparkle" },
   { label: "Perfil", href: routes.clubePerfil, icon: "profile" },
 ];
 

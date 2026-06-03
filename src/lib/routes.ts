@@ -13,6 +13,7 @@ export const routes = {
   clubeProtocolosSalvos: "/clube/protocolos-salvos",
   clubeHistorico: "/clube/historico",
   clubeRecomendacoes: "/clube/recomendacoes",
+  clubeRecomendacoesIa: "/clube/recomendacoes-ia",
   clubePerfil: "/clube/perfil",
   clubePremium: "/clube/premium",
   assinar: "/assinar",

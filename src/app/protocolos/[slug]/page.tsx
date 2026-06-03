@@ -1,6 +1,7 @@
 import { RelatedAffiliatesSection } from "@/components/affiliates";
 import { ContentMemberActions } from "@/components/club/ContentMemberActions";
 import { PremiumContentGuard } from "@/components/club/PremiumContentGuard";
+import { RelatedContentSection } from "@/components/club/RelatedContentSection";
 import { recordContentViewForUser } from "@/lib/club/record-content-view";
 import { CrossLinks, PageCta } from "@/components/pages";
 import { Breadcrumbs } from "@/components/layout/Breadcrumbs";
@@ -175,6 +176,15 @@ export default async function ProtocoloDetailPage({ params }: PageProps) {
               </div>
             ))}
           </div>
+        </Container>
+      </Section>
+
+      <Section background="default">
+        <Container size="md">
+          <RelatedContentSection
+            contentType="protocol"
+            contentId={protocol.id}
+          />
         </Container>
       </Section>
 

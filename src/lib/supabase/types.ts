@@ -265,6 +265,34 @@ type UserContentAccessRow = {
   created_at: string;
 };
 
+type UserContentHistoryRow = {
+  id: string;
+  user_id: string;
+  content_type: "article" | "protocol" | "ebook";
+  content_id: string;
+  content_title: string;
+  content_slug: string | null;
+  source_path: string | null;
+  access_count: number;
+  completed: boolean;
+  first_accessed_at: string;
+  last_accessed_at: string;
+};
+
+type ContentRankingRow = {
+  id: string;
+  content_type: "article" | "protocol" | "ebook";
+  content_key: string;
+  content_title: string;
+  content_slug: string | null;
+  view_count: number;
+  download_count: number;
+  score: number;
+  ranking_period: "all_time" | "30d" | "7d";
+  rank_position: number;
+  updated_at: string;
+};
+
 type PaymentRow = {
   id: string;
   user_id: string;
@@ -611,6 +639,42 @@ export interface Database {
         Update: Partial<UserContentAccessRow>;
         Relationships: [];
       };
+      user_content_history: {
+        Row: UserContentHistoryRow;
+        Insert: {
+          id?: string;
+          user_id: string;
+          content_type: UserContentHistoryRow["content_type"];
+          content_id: string;
+          content_title: string;
+          content_slug?: string | null;
+          source_path?: string | null;
+          access_count?: number;
+          completed?: boolean;
+          first_accessed_at?: string;
+          last_accessed_at?: string;
+        };
+        Update: Partial<UserContentHistoryRow>;
+        Relationships: [];
+      };
+      content_rankings: {
+        Row: ContentRankingRow;
+        Insert: {
+          id?: string;
+          content_type: ContentRankingRow["content_type"];
+          content_key: string;
+          content_title: string;
+          content_slug?: string | null;
+          view_count?: number;
+          download_count?: number;
+          score?: number;
+          ranking_period?: ContentRankingRow["ranking_period"];
+          rank_position?: number;
+          updated_at?: string;
+        };
+        Update: Partial<ContentRankingRow>;
+        Relationships: [];
+      };
       payments: {
         Row: PaymentRow;
         Insert: {
@@ -643,6 +707,25 @@ export interface Database {
       user_has_active_premium: { Args: { p_user_id?: string }; Returns: boolean };
       touch_club_joined: { Args: { p_user_id: string }; Returns: undefined };
       expire_due_subscriptions: { Args: Record<string, never>; Returns: number };
+      refresh_content_rankings: { Args: Record<string, never>; Returns: number };
+      get_user_recommendations: {
+        Args: {
+          p_user_id: string;
+          p_limit?: number;
+          p_include_premium?: boolean;
+        };
+        Returns: Array<{
+          kind: string;
+          content_type: string;
+          content_id: string;
+          content_title: string;
+          content_slug: string;
+          category_label: string | null;
+          is_premium: boolean;
+          reason: string;
+          score: number;
+        }>;
+      };
     };
     Enums: Record<string, never>;
     CompositeTypes: Record<string, never>;
@@ -662,6 +745,8 @@ export type {
   UserDownloadRow,
   UserSavedProtocolRow,
   UserContentAccessRow,
+  UserContentHistoryRow,
+  ContentRankingRow,
   PaymentRow,
   PaymentWebhookEventRow,
 };

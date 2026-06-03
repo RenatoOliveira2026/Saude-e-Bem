@@ -11,7 +11,9 @@ import {
 import type { ClubDashboardData } from "@/lib/club/types";
 import { routes } from "@/lib/routes";
 import Link from "next/link";
-import { ClubRecommendationsList } from "./ClubRecommendationsList";
+import { AiRecommendationsPanel } from "./AiRecommendationsPanel";
+import { ContinueReadingSection } from "./ContinueReadingSection";
+import { ContentRankingsList } from "./ContentRankingsList";
 
 interface ClubDashboardProps {
   data: ClubDashboardData;
@@ -28,11 +30,11 @@ export function ClubDashboard({ data }: ClubDashboardProps) {
           {membership.isPremium ? "Assinante Premium" : "Área de membros"}
         </Badge>
         <h1 className="font-heading text-3xl text-forest md:text-4xl">
-          Dashboard Premium
+          Dashboard Premium Inteligente
         </h1>
         <p className="mt-3 max-w-2xl text-muted leading-relaxed">
-          Olá, {firstName} — acompanhe favoritos, downloads, protocolos salvos e
-          recomendações personalizadas.
+          Olá, {firstName} — continue lendo, explore recomendações IA e acompanhe
+          seu progresso na plataforma.
         </p>
         <p className="mt-2 text-sm text-muted-light">
           Membro desde {data.memberSince}
@@ -125,23 +127,31 @@ export function ClubDashboard({ data }: ClubDashboardProps) {
         </div>
       </Card>
 
+      <ContinueReadingSection items={data.continueReading} />
+
       <section>
         <div className="mb-4 flex items-center justify-between gap-3">
           <h2 className="font-heading text-xl text-forest">
-            Recomendações personalizadas
+            Recomendações IA
           </h2>
           <Link
-            href={routes.clubeRecomendacoes}
+            href={routes.clubeRecomendacoesIa}
             className="text-sm text-sage hover:underline"
           >
-            Ver todas
+            Ver página completa
           </Link>
         </div>
-        <ClubRecommendationsList
-          recommendations={data.recommendations.slice(0, 4)}
-          compact
+        <AiRecommendationsPanel
+          recommendations={data.intelligentRecommendations.slice(0, 4)}
+          title=""
+          showKind
         />
       </section>
+
+      <ContentRankingsList
+        rankings={data.contentRankings.slice(0, 5)}
+        title="Conteúdos em alta (30 dias)"
+      />
 
       <section className="grid gap-6 lg:grid-cols-2">
         <PreviewList

@@ -178,7 +178,9 @@ export async function resolvePremiumAccess(
 }
 
 export function getPremiumUpgradeHref(isLoggedIn: boolean): string {
-  return isLoggedIn ? routes.clubePremium : `${routes.entrar}?redirect=${encodeURIComponent(routes.clubePremium)}`;
+  return isLoggedIn
+    ? routes.assinar
+    : `${routes.entrar}?redirect=${encodeURIComponent(routes.assinar)}`;
 }
 
 /** Marca entrada na área de membros (idempotente). */

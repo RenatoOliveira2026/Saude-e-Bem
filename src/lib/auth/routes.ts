@@ -1,6 +1,8 @@
 export const privateRoutes = [
   "/minha-jornada",
   "/perfil",
+  "/assinar",
+  "/minha-assinatura",
   "/clube/dashboard",
   "/clube/favoritos",
   "/clube/downloads",

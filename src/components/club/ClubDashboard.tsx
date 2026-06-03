@@ -1,3 +1,4 @@
+import { PaymentHistoryList } from "@/components/payments";
 import { Badge } from "@/components/ui/Badge";
 import { Button } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
@@ -48,7 +49,7 @@ export function ClubDashboard({ data }: ClubDashboardProps) {
           label="Validade"
           value={
             membership.isPremium
-              ? formatSubscriptionDate(membership.expiresAt)
+              ? formatSubscriptionDate(data.nextRenewal)
               : "—"
           }
           icon="clock"
@@ -80,19 +81,27 @@ export function ClubDashboard({ data }: ClubDashboardProps) {
                 <>
                   {" "}
                   · Provedor:{" "}
-                  {membership.provider === "stripe" ? "Stripe" : "Manual"}
+                  {membership.provider === "mercadopago"
+                    ? "Mercado Pago"
+                    : membership.provider === "stripe"
+                      ? "Stripe"
+                      : "Manual"}
                 </>
               )}
             </p>
-            {membership.isPremium && membership.expiresAt && (
+            {membership.isPremium && data.nextRenewal && (
               <p className="mt-1 text-sm text-muted">
-                Válida até {formatSubscriptionDate(membership.expiresAt)}
+                Próxima renovação: {formatSubscriptionDate(data.nextRenewal)}
               </p>
             )}
           </div>
-          {!membership.isPremium && (
-            <Button href={routes.clubePremium} variant="gold" size="sm">
-              Conhecer Premium
+          {!membership.isPremium ? (
+            <Button href={routes.assinar} variant="gold" size="sm">
+              Assinar Premium
+            </Button>
+          ) : (
+            <Button href={routes.minhaAssinatura} variant="outline" size="sm">
+              Minha assinatura
             </Button>
           )}
         </div>
@@ -132,6 +141,21 @@ export function ClubDashboard({ data }: ClubDashboardProps) {
           }))}
           viewAllHref={routes.clubeDownloads}
         />
+      </section>
+
+      <section>
+        <div className="mb-4 flex items-center justify-between gap-3">
+          <h2 className="font-heading text-xl text-forest">
+            Histórico de pagamentos
+          </h2>
+          <Link
+            href={routes.minhaAssinatura}
+            className="text-sm text-sage hover:underline"
+          >
+            Ver assinatura
+          </Link>
+        </div>
+        <PaymentHistoryList payments={data.payments.slice(0, 5)} />
       </section>
     </div>
   );

@@ -1,5 +1,7 @@
 import type { FavoriteContentType } from "@/lib/favorites/types";
 
+import type { Payment } from "@/lib/payments/types";
+
 export type MembershipPlan = "free" | "premium";
 
 export type SubscriptionStatus =
@@ -10,7 +12,7 @@ export type SubscriptionStatus =
   | "expired"
   | "pending";
 
-export type SubscriptionProvider = "manual" | "stripe" | "internal";
+export type SubscriptionProvider = "manual" | "stripe" | "internal" | "mercadopago";
 
 export interface Subscription {
   id: string;
@@ -63,8 +65,10 @@ export interface ClubDashboardData {
   membership: ClubMembership;
   favorites: ResolvedFavorite[];
   downloads: UserDownload[];
+  payments: Payment[];
   favoritesCount: number;
   downloadsCount: number;
+  nextRenewal: string | null;
 }
 
 export interface PremiumAccessContext {

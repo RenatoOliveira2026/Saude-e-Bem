@@ -1,6 +1,7 @@
 import { getSessionProfile } from "@/lib/auth/session";
 import { formatMemberSince } from "@/lib/journey/constants";
 import { fetchUserFavorites } from "@/lib/supabase/services/favorites.service";
+import { fetchUserPayments } from "@/lib/payments/services/payments.service";
 import { getClubMembership, touchClubJoined } from "./access";
 import { resolveFavorites } from "./resolve-favorites";
 import { fetchUserDownloads } from "./services/downloads.service";
@@ -14,10 +15,11 @@ export async function getClubDashboardData(): Promise<ClubDashboardData> {
 
   void touchClubJoined(user.id);
 
-  const [membership, favoritesRaw, downloads] = await Promise.all([
+  const [membership, favoritesRaw, downloads, payments] = await Promise.all([
     getClubMembership(user.id),
     fetchUserFavorites(user.id),
     fetchUserDownloads(user.id),
+    fetchUserPayments(user.id),
   ]);
 
   const favorites = await resolveFavorites(favoritesRaw);
@@ -30,7 +32,9 @@ export async function getClubDashboardData(): Promise<ClubDashboardData> {
     membership,
     favorites,
     downloads,
+    payments,
     favoritesCount: favorites.length,
     downloadsCount: downloads.length,
+    nextRenewal: membership.isPremium ? membership.expiresAt : null,
   };
 }

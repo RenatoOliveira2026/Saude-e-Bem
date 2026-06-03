@@ -23,16 +23,16 @@ export function ClubPremiumPage() {
         </h1>
         <p className="mx-auto mt-4 max-w-2xl text-muted leading-relaxed">
           Acesso completo a conteúdos premium, protocolos avançados e materiais
-          exclusivos. Pagamento online via Stripe será habilitado em breve.
+          exclusivos. Pagamento seguro via Mercado Pago — PIX, cartão ou boleto.
         </p>
       </section>
 
       <Card className="mx-auto max-w-xl border-gold/30 bg-gold-muted/15 p-8 text-center">
         <Icon name="star" size={32} className="mx-auto text-gold" />
-        <p className="mt-4 font-heading text-4xl text-forest">Em breve</p>
+        <p className="mt-4 font-heading text-4xl text-forest">Premium</p>
         <p className="mt-2 text-muted">
-          A integração com Stripe está preparada na base de dados. Enquanto isso,
-          assinaturas podem ser concedidas manualmente pela equipe.
+          Assine o Clube Saúde &amp; Bem e desbloqueie protocolos, biblioteca e
+          artigos exclusivos.
         </p>
         <ul className="mt-6 space-y-2 text-left text-sm text-forest">
           {premiumFeatures.map((feature) => (
@@ -43,11 +43,11 @@ export function ClubPremiumPage() {
           ))}
         </ul>
         <div className="mt-8 flex flex-wrap justify-center gap-3">
-          <Button href={routes.cadastro} variant="gold" size="lg">
-            Criar conta gratuita
+          <Button href={routes.assinar} variant="gold" size="lg">
+            Assinar agora
           </Button>
-          <Button href={routes.clubeDashboard} variant="outline" size="lg">
-            Ir ao dashboard
+          <Button href={routes.minhaAssinatura} variant="outline" size="lg">
+            Minha assinatura
           </Button>
         </div>
       </Card>

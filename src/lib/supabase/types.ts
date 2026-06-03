@@ -207,12 +207,13 @@ type SubscriptionRow = {
     | "canceled"
     | "expired"
     | "pending";
-  provider: "manual" | "stripe" | "internal";
+  provider: "manual" | "stripe" | "internal" | "mercadopago";
   current_period_start: string | null;
   current_period_end: string | null;
   canceled_at: string | null;
   stripe_customer_id: string | null;
   stripe_subscription_id: string | null;
+  mercadopago_preapproval_id: string | null;
   metadata: Record<string, unknown>;
   created_at: string;
   updated_at: string;
@@ -226,6 +227,41 @@ type UserDownloadRow = {
   content_title: string;
   content_slug: string | null;
   created_at: string;
+};
+
+type PaymentRow = {
+  id: string;
+  user_id: string;
+  subscription_id: string | null;
+  provider: "mercadopago" | "manual" | "stripe" | "internal";
+  external_id: string | null;
+  preference_id: string | null;
+  external_reference: string;
+  status:
+    | "pending"
+    | "approved"
+    | "authorized"
+    | "in_process"
+    | "in_mediation"
+    | "rejected"
+    | "cancelled"
+    | "refunded"
+    | "charged_back";
+  payment_method:
+    | "pix"
+    | "credit_card"
+    | "debit_card"
+    | "ticket"
+    | "account_money"
+    | "unknown"
+    | null;
+  amount_cents: number;
+  currency: string;
+  description: string | null;
+  metadata: Record<string, unknown>;
+  paid_at: string | null;
+  created_at: string;
+  updated_at: string;
 };
 
 type AdminUserRow = {
@@ -469,6 +505,7 @@ export interface Database {
           canceled_at?: string | null;
           stripe_customer_id?: string | null;
           stripe_subscription_id?: string | null;
+          mercadopago_preapproval_id?: string | null;
           metadata?: Record<string, unknown>;
           created_at?: string;
           updated_at?: string;
@@ -488,6 +525,29 @@ export interface Database {
           created_at?: string;
         };
         Update: Partial<UserDownloadRow>;
+        Relationships: [];
+      };
+      payments: {
+        Row: PaymentRow;
+        Insert: {
+          id?: string;
+          user_id: string;
+          subscription_id?: string | null;
+          provider?: PaymentRow["provider"];
+          external_id?: string | null;
+          preference_id?: string | null;
+          external_reference: string;
+          status?: PaymentRow["status"];
+          payment_method?: PaymentRow["payment_method"];
+          amount_cents: number;
+          currency?: string;
+          description?: string | null;
+          metadata?: Record<string, unknown>;
+          paid_at?: string | null;
+          created_at?: string;
+          updated_at?: string;
+        };
+        Update: Partial<PaymentRow>;
         Relationships: [];
       };
     };
@@ -515,6 +575,7 @@ export type {
   AffiliateLinkRow,
   SubscriptionRow,
   UserDownloadRow,
+  PaymentRow,
 };
 
 export interface UserProfileData {

@@ -12,6 +12,8 @@ export const routes = {
   clubeDownloads: "/clube/downloads",
   clubePerfil: "/clube/perfil",
   clubePremium: "/clube/premium",
+  assinar: "/assinar",
+  minhaAssinatura: "/minha-assinatura",
   entrar: "/entrar",
   cadastro: "/cadastro",
   recuperarSenha: "/recuperar-senha",

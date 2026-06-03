@@ -67,10 +67,13 @@ export const logoContextClasses: Record<LogoContext, string> = {
   auth: "h-12 w-auto max-w-[240px] sm:h-14 sm:max-w-[280px]",
 };
 
-/** Favicon e Apple Touch Icon — temporário via PNG oficial */
+/** Favicon e ícones PWA — temporários (substituir por pack 192/512 dedicado) */
 export const brandIcons: Metadata["icons"] = {
-  icon: [{ url: OFFICIAL_LOGO_PNG, type: "image/png" }],
-  apple: [{ url: OFFICIAL_LOGO_PNG, type: "image/png", sizes: "180x180" }],
+  icon: [
+    { url: "/icons/icon-192.png", sizes: "192x192", type: "image/png" },
+    { url: "/brand/app-icon.svg", type: "image/svg+xml" },
+  ],
+  apple: [{ url: "/icons/icon-192.png", sizes: "180x180", type: "image/png" }],
 };
 
 /** @deprecated Use LogoContext */

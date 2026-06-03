@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#2E4A3D" />
+    <title>Sem conexão | Saúde &amp; Bem</title>
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        min-height: 100dvh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 1.5rem;
+        font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+        background: #f8f6f2;
+        color: #333;
+      }
+      main {
+        max-width: 22rem;
+        text-align: center;
+      }
+      h1 {
+        font-size: 1.25rem;
+        color: #2e4a3d;
+        margin: 0 0 0.75rem;
+      }
+      p {
+        margin: 0 0 1.25rem;
+        line-height: 1.5;
+        color: #555;
+      }
+      a,
+      button {
+        display: inline-block;
+        padding: 0.65rem 1.25rem;
+        border-radius: 0.5rem;
+        background: #2e4a3d;
+        color: #f8f6f2;
+        text-decoration: none;
+        border: none;
+        font-size: 0.95rem;
+        cursor: pointer;
+      }
+      button {
+        margin-left: 0.5rem;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1>Você está offline</h1>
+      <p>
+        Não foi possível carregar esta página. Verifique sua conexão e tente
+        novamente.
+      </p>
+      <a href="/">Ir para o início</a>
+      <button type="button" onclick="location.reload()">Tentar de novo</button>
+    </main>
+  </body>
+</html>

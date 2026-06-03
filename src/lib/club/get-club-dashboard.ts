@@ -1,10 +1,25 @@
 import { getSessionProfile } from "@/lib/auth/session";
-import { formatMemberSince } from "@/lib/journey/constants";
-import { fetchUserFavorites } from "@/lib/supabase/services/favorites.service";
+import {
+  formatMemberSince,
+  getDaysOnJourney,
+  getProfileComplete,
+  goalLabels,
+} from "@/lib/journey/constants";
 import { fetchUserPayments } from "@/lib/payments/services/payments.service";
+import { fetchUserFavorites } from "@/lib/supabase/services/favorites.service";
 import { getClubMembership, touchClubJoined } from "./access";
+import { getClubRecommendations } from "./get-recommendations";
 import { resolveFavorites } from "./resolve-favorites";
+import { resolveSavedProtocols } from "./resolve-saved-protocols";
+import {
+  countUserAccessHistory,
+  fetchUserAccessHistory,
+} from "./services/access-history.service";
 import { fetchUserDownloads } from "./services/downloads.service";
+import {
+  countSavedProtocolsByStatus,
+  fetchUserSavedProtocols,
+} from "./services/saved-protocols.service";
 import type { ClubDashboardData } from "./types";
 
 export async function getClubDashboardData(): Promise<ClubDashboardData> {
@@ -15,15 +30,40 @@ export async function getClubDashboardData(): Promise<ClubDashboardData> {
 
   void touchClubJoined(user.id);
 
-  const [membership, favoritesRaw, downloads, payments] = await Promise.all([
+  const memberSinceRaw = profile.profile?.created_at ?? user.created_at;
+  const goalKey = profile.preferences?.goal ?? null;
+  const hasName = Boolean(profile.profile?.name?.trim());
+  const hasGoal = Boolean(goalKey);
+
+  const [
+    membership,
+    favoritesRaw,
+    downloads,
+    payments,
+    savedRaw,
+    accessHistory,
+    protocolCounts,
+    accessCount,
+  ] = await Promise.all([
     getClubMembership(user.id),
     fetchUserFavorites(user.id),
     fetchUserDownloads(user.id),
     fetchUserPayments(user.id),
+    fetchUserSavedProtocols(user.id),
+    fetchUserAccessHistory(user.id, 30),
+    countSavedProtocolsByStatus(user.id),
+    countUserAccessHistory(user.id),
   ]);
 
-  const favorites = await resolveFavorites(favoritesRaw);
-  const memberSinceRaw = profile.profile?.created_at ?? user.created_at;
+  const [favorites, savedProtocols, recommendations] = await Promise.all([
+    resolveFavorites(favoritesRaw),
+    resolveSavedProtocols(savedRaw),
+    getClubRecommendations({
+      userId: user.id,
+      isPremium: membership.isPremium,
+      limit: 6,
+    }),
+  ]);
 
   return {
     displayName,
@@ -33,6 +73,19 @@ export async function getClubDashboardData(): Promise<ClubDashboardData> {
     favorites,
     downloads,
     payments,
+    savedProtocols,
+    accessHistory,
+    recommendations,
+    stats: {
+      daysAsMember: getDaysOnJourney(memberSinceRaw),
+      favoritesCount: favorites.length,
+      downloadsCount: downloads.length,
+      protocolsSavedCount: protocolCounts.total,
+      protocolsCompletedCount: protocolCounts.completed,
+      accessCount,
+      profileComplete: getProfileComplete(hasName, hasGoal),
+      goalLabel: goalKey ? (goalLabels[goalKey] ?? null) : null,
+    },
     favoritesCount: favorites.length,
     downloadsCount: downloads.length,
     nextRenewal: membership.isPremium ? membership.expiresAt : null,

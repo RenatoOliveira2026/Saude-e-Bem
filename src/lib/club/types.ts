@@ -61,6 +61,64 @@ export interface ResolvedFavorite {
   createdAt: string;
 }
 
+export type SavedProtocolStatus = "saved" | "in_progress" | "completed";
+
+export interface SavedProtocol {
+  id: string;
+  userId: string;
+  protocolId: string;
+  status: SavedProtocolStatus;
+  notes: string | null;
+  savedAt: string;
+  updatedAt: string;
+}
+
+export interface ResolvedSavedProtocol {
+  id: string;
+  protocolId: string;
+  title: string;
+  slug: string;
+  href: string;
+  categoryLabel: string | null;
+  isPremium: boolean;
+  status: SavedProtocolStatus;
+  savedAt: string;
+  updatedAt: string;
+}
+
+export interface ContentAccessEntry {
+  id: string;
+  contentType: FavoriteContentType;
+  contentId: string;
+  contentTitle: string;
+  contentSlug: string | null;
+  sourcePath: string | null;
+  createdAt: string;
+  href: string;
+}
+
+export interface ClubRecommendation {
+  id: string;
+  contentType: "protocol" | "ebook" | "article";
+  title: string;
+  description: string;
+  href: string;
+  categoryLabel: string | null;
+  isPremium: boolean;
+  reason: string;
+}
+
+export interface ClubUserStats {
+  daysAsMember: number;
+  favoritesCount: number;
+  downloadsCount: number;
+  protocolsSavedCount: number;
+  protocolsCompletedCount: number;
+  accessCount: number;
+  profileComplete: boolean;
+  goalLabel: string | null;
+}
+
 export interface ClubDashboardData {
   displayName: string;
   email: string;
@@ -69,6 +127,10 @@ export interface ClubDashboardData {
   favorites: ResolvedFavorite[];
   downloads: UserDownload[];
   payments: Payment[];
+  savedProtocols: ResolvedSavedProtocol[];
+  accessHistory: ContentAccessEntry[];
+  recommendations: ClubRecommendation[];
+  stats: ClubUserStats;
   favoritesCount: number;
   downloadsCount: number;
   nextRenewal: string | null;

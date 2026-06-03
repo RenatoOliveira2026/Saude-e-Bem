@@ -1,5 +1,7 @@
 import { RelatedAffiliatesSection } from "@/components/affiliates";
+import { ContentMemberActions } from "@/components/club/ContentMemberActions";
 import { PremiumContentGuard } from "@/components/club/PremiumContentGuard";
+import { recordContentViewForUser } from "@/lib/club/record-content-view";
 import { CrossLinks, PageCta } from "@/components/pages";
 import { PublicArticleBody } from "@/components/content/PublicArticleBody";
 import { Breadcrumbs } from "@/components/layout/Breadcrumbs";
@@ -56,6 +58,14 @@ export default async function ArtigoDetailPage({ params }: PageProps) {
     metadata: { slug, category: article.category },
   });
 
+  void recordContentViewForUser({
+    contentType: "article",
+    contentId: article.id,
+    contentTitle: article.title,
+    contentSlug: slug,
+    sourcePath: routes.artigo(slug),
+  });
+
   const [all, relatedAffiliates] = await Promise.all([
     getBlogArticles(),
     fetchAffiliatesForContentCategory(
@@ -88,6 +98,12 @@ export default async function ArtigoDetailPage({ params }: PageProps) {
           { icon: "clock", label: `${article.readTime} de leitura` },
         ]}
       />
+
+      <Section background="sage" spacing="compact">
+        <Container size="md">
+          <ContentMemberActions contentType="article" contentId={article.id} />
+        </Container>
+      </Section>
 
       <PremiumContentGuard
         isPremiumContent={article.isPremium}

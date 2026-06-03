@@ -244,6 +244,27 @@ type UserDownloadRow = {
   created_at: string;
 };
 
+type UserSavedProtocolRow = {
+  id: string;
+  user_id: string;
+  protocol_id: string;
+  status: "saved" | "in_progress" | "completed";
+  notes: string | null;
+  saved_at: string;
+  updated_at: string;
+};
+
+type UserContentAccessRow = {
+  id: string;
+  user_id: string;
+  content_type: "article" | "protocol" | "ebook";
+  content_id: string;
+  content_title: string;
+  content_slug: string | null;
+  source_path: string | null;
+  created_at: string;
+};
+
 type PaymentRow = {
   id: string;
   user_id: string;
@@ -561,6 +582,35 @@ export interface Database {
         Update: Partial<UserDownloadRow>;
         Relationships: [];
       };
+      user_saved_protocols: {
+        Row: UserSavedProtocolRow;
+        Insert: {
+          id?: string;
+          user_id: string;
+          protocol_id: string;
+          status?: UserSavedProtocolRow["status"];
+          notes?: string | null;
+          saved_at?: string;
+          updated_at?: string;
+        };
+        Update: Partial<UserSavedProtocolRow>;
+        Relationships: [];
+      };
+      user_content_access: {
+        Row: UserContentAccessRow;
+        Insert: {
+          id?: string;
+          user_id: string;
+          content_type: UserContentAccessRow["content_type"];
+          content_id: string;
+          content_title: string;
+          content_slug?: string | null;
+          source_path?: string | null;
+          created_at?: string;
+        };
+        Update: Partial<UserContentAccessRow>;
+        Relationships: [];
+      };
       payments: {
         Row: PaymentRow;
         Insert: {
@@ -610,6 +660,8 @@ export type {
   AffiliateLinkRow,
   SubscriptionRow,
   UserDownloadRow,
+  UserSavedProtocolRow,
+  UserContentAccessRow,
   PaymentRow,
   PaymentWebhookEventRow,
 };

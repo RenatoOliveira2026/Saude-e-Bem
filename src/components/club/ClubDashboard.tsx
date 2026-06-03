@@ -11,6 +11,7 @@ import {
 import type { ClubDashboardData } from "@/lib/club/types";
 import { routes } from "@/lib/routes";
 import Link from "next/link";
+import { ClubRecommendationsList } from "./ClubRecommendationsList";
 
 interface ClubDashboardProps {
   data: ClubDashboardData;
@@ -18,53 +19,81 @@ interface ClubDashboardProps {
 
 export function ClubDashboard({ data }: ClubDashboardProps) {
   const firstName = data.displayName.split(" ")[0];
-  const { membership } = data;
+  const { membership, stats } = data;
 
   return (
     <div className="space-y-8">
       <section>
         <Badge variant="gold" className="mb-3">
-          Área de membros
+          {membership.isPremium ? "Assinante Premium" : "Área de membros"}
         </Badge>
         <h1 className="font-heading text-3xl text-forest md:text-4xl">
-          Olá, {firstName}
+          Dashboard Premium
         </h1>
         <p className="mt-3 max-w-2xl text-muted leading-relaxed">
-          Bem-vindo ao Clube Saúde &amp; Bem. Acompanhe seu plano, favoritos e
-          downloads em um só lugar.
+          Olá, {firstName} — acompanhe favoritos, downloads, protocolos salvos e
+          recomendações personalizadas.
         </p>
         <p className="mt-2 text-sm text-muted-light">
           Membro desde {data.memberSince}
+          {stats.goalLabel && (
+            <>
+              {" "}
+              · Objetivo: <strong className="text-forest">{stats.goalLabel}</strong>
+            </>
+          )}
         </p>
       </section>
 
       <section className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
         <StatCard
-          label="Plano atual"
-          value={membershipPlanLabels[membership.plan]}
-          icon="star"
-          highlight={membership.isPremium}
-        />
-        <StatCard
-          label="Validade"
-          value={
-            membership.isPremium
-              ? formatSubscriptionDate(data.nextRenewal)
-              : "—"
-          }
+          label="Dias como membro"
+          value={String(stats.daysAsMember)}
           icon="clock"
         />
         <StatCard
           label="Favoritos"
-          value={String(data.favoritesCount)}
+          value={String(stats.favoritesCount)}
           icon="star"
           href={routes.clubeFavoritos}
         />
         <StatCard
           label="Downloads"
-          value={String(data.downloadsCount)}
+          value={String(stats.downloadsCount)}
           icon="download"
           href={routes.clubeDownloads}
+        />
+        <StatCard
+          label="Protocolos salvos"
+          value={String(stats.protocolsSavedCount)}
+          icon="plan"
+          href={routes.clubeProtocolosSalvos}
+        />
+      </section>
+
+      <section className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        <StatCard
+          label="Plano"
+          value={membershipPlanLabels[membership.plan]}
+          icon="star"
+          highlight={membership.isPremium}
+        />
+        <StatCard
+          label="Concluídos"
+          value={String(stats.protocolsCompletedCount)}
+          icon="checklist"
+        />
+        <StatCard
+          label="Acessos registrados"
+          value={String(stats.accessCount)}
+          icon="activity"
+          href={routes.clubeHistorico}
+        />
+        <StatCard
+          label="Perfil"
+          value={stats.profileComplete ? "Completo" : "Incompleto"}
+          icon="profile"
+          href={stats.profileComplete ? routes.clubePerfil : routes.minhaJornada}
         />
       </section>
 
@@ -77,17 +106,6 @@ export function ClubDashboard({ data }: ClubDashboardProps) {
               <strong className="text-forest">
                 {subscriptionStatusLabels[membership.status]}
               </strong>
-              {membership.provider && (
-                <>
-                  {" "}
-                  · Provedor:{" "}
-                  {membership.provider === "mercadopago"
-                    ? "Mercado Pago"
-                    : membership.provider === "stripe"
-                      ? "Stripe"
-                      : "Manual"}
-                </>
-              )}
             </p>
             {membership.isPremium && data.nextRenewal && (
               <p className="mt-1 text-sm text-muted">
@@ -107,12 +125,30 @@ export function ClubDashboard({ data }: ClubDashboardProps) {
         </div>
       </Card>
 
+      <section>
+        <div className="mb-4 flex items-center justify-between gap-3">
+          <h2 className="font-heading text-xl text-forest">
+            Recomendações personalizadas
+          </h2>
+          <Link
+            href={routes.clubeRecomendacoes}
+            className="text-sm text-sage hover:underline"
+          >
+            Ver todas
+          </Link>
+        </div>
+        <ClubRecommendationsList
+          recommendations={data.recommendations.slice(0, 4)}
+          compact
+        />
+      </section>
+
       <section className="grid gap-6 lg:grid-cols-2">
         <PreviewList
           title="Favoritos recentes"
           emptyMessage="Você ainda não favoritou conteúdos."
-          emptyHref={routes.protocolos}
-          emptyLabel="Explorar protocolos"
+          emptyHref={routes.blog}
+          emptyLabel="Explorar blog"
           items={data.favorites.slice(0, 5).map((item) => ({
             id: item.id,
             title: item.title,
@@ -121,6 +157,20 @@ export function ClubDashboard({ data }: ClubDashboardProps) {
             premium: item.isPremium,
           }))}
           viewAllHref={routes.clubeFavoritos}
+        />
+        <PreviewList
+          title="Protocolos salvos"
+          emptyMessage="Salve protocolos para acompanhar seu progresso."
+          emptyHref={routes.protocolos}
+          emptyLabel="Ver protocolos"
+          items={data.savedProtocols.slice(0, 5).map((item) => ({
+            id: item.id,
+            title: item.title,
+            meta: item.status,
+            href: item.href,
+            premium: item.isPremium,
+          }))}
+          viewAllHref={routes.clubeProtocolosSalvos}
         />
         <PreviewList
           title="Downloads recentes"
@@ -140,6 +190,19 @@ export function ClubDashboard({ data }: ClubDashboardProps) {
               : routes.clubeDownloads,
           }))}
           viewAllHref={routes.clubeDownloads}
+        />
+        <PreviewList
+          title="Histórico de acessos"
+          emptyMessage="Nenhum acesso registrado ainda."
+          emptyHref={routes.protocolos}
+          emptyLabel="Explorar conteúdo"
+          items={data.accessHistory.slice(0, 5).map((item) => ({
+            id: item.id,
+            title: item.contentTitle,
+            meta: item.contentType,
+            href: item.href,
+          }))}
+          viewAllHref={routes.clubeHistorico}
         />
       </section>
 
@@ -170,7 +233,7 @@ function StatCard({
 }: {
   label: string;
   value: string;
-  icon: "star" | "clock" | "download";
+  icon: "star" | "clock" | "download" | "plan" | "checklist" | "activity" | "profile";
   highlight?: boolean;
   href?: string;
 }) {

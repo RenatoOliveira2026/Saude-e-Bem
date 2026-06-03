@@ -6,6 +6,9 @@ export const privateRoutes = [
   "/clube/dashboard",
   "/clube/favoritos",
   "/clube/downloads",
+  "/clube/protocolos-salvos",
+  "/clube/historico",
+  "/clube/recomendacoes",
   "/clube/perfil",
 ] as const;
 

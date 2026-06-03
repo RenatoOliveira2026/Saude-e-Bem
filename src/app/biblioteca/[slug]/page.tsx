@@ -1,5 +1,7 @@
 import { CrossLinks, LibraryDownloadPanel, PageCta } from "@/components/pages";
+import { ContentMemberActions } from "@/components/club/ContentMemberActions";
 import { PremiumContentGuard } from "@/components/club/PremiumContentGuard";
+import { recordContentViewForUser } from "@/lib/club/record-content-view";
 import { Breadcrumbs } from "@/components/layout/Breadcrumbs";
 import { DetailHero, RelatedNav } from "@/components/layout/DetailPage";
 import { Container } from "@/components/ui/Container";
@@ -50,6 +52,14 @@ export default async function BibliotecaDetailPage({ params }: PageProps) {
 
   const downloadHref = resource.pdfUrl ?? "#download";
 
+  void recordContentViewForUser({
+    contentType: "ebook",
+    contentId: resource.id,
+    contentTitle: resource.title,
+    contentSlug: slug,
+    sourcePath: routes.bibliotecaItem(slug),
+  });
+
   return (
     <>
       <Breadcrumbs
@@ -91,6 +101,12 @@ export default async function BibliotecaDetailPage({ params }: PageProps) {
         }
       />
 
+      <Section background="sage" spacing="compact">
+        <Container size="md">
+          <ContentMemberActions contentType="ebook" contentId={resource.id} />
+        </Container>
+      </Section>
+
       <PremiumContentGuard
         isPremiumContent={resource.isPremium}
         gateTitle="Recurso premium"
@@ -114,6 +130,7 @@ export default async function BibliotecaDetailPage({ params }: PageProps) {
             pdfUrl={resource.pdfUrl}
             title={resource.title}
             slug={slug}
+            contentId={resource.id}
           />
         </Container>
       </Section>

@@ -1,5 +1,12 @@
+export { ClubAccessHistoryList } from "./ClubAccessHistoryList";
 export { ClubDashboard } from "./ClubDashboard";
 export { ClubDownloadsList } from "./ClubDownloadsList";
 export { ClubFavoritesList } from "./ClubFavoritesList";
 export { ClubPremiumPage } from "./ClubPremiumPage";
+export { ClubRecommendationsList } from "./ClubRecommendationsList";
+export { ClubSavedProtocolsList } from "./ClubSavedProtocolsList";
 export { ClubShell } from "./ClubShell";
+export { ContentMemberActions } from "./ContentMemberActions";
+export { FavoriteButton } from "./FavoriteButton";
+export { PremiumContentGuard } from "./PremiumContentGuard";
+export { SaveProtocolButton } from "./SaveProtocolButton";

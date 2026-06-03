@@ -1,5 +1,7 @@
 import { RelatedAffiliatesSection } from "@/components/affiliates";
+import { ContentMemberActions } from "@/components/club/ContentMemberActions";
 import { PremiumContentGuard } from "@/components/club/PremiumContentGuard";
+import { recordContentViewForUser } from "@/lib/club/record-content-view";
 import { CrossLinks, PageCta } from "@/components/pages";
 import { Breadcrumbs } from "@/components/layout/Breadcrumbs";
 import { DetailHero, RelatedNav } from "@/components/layout/DetailPage";
@@ -55,6 +57,14 @@ export default async function ProtocoloDetailPage({ params }: PageProps) {
     metadata: { slug, category: protocol.category },
   });
 
+  void recordContentViewForUser({
+    contentType: "protocol",
+    contentId: protocol.id,
+    contentTitle: protocol.title,
+    contentSlug: slug,
+    sourcePath: routes.protocolo(slug),
+  });
+
   const [all, relatedAffiliates] = await Promise.all([
     getProtocols(),
     fetchAffiliatesForContentCategory(
@@ -102,6 +112,16 @@ export default async function ProtocoloDetailPage({ params }: PageProps) {
             : { label: "Iniciar protocolo", href: routes.protocolo(slug) }
         }
       />
+
+      <Section background="sage" spacing="compact">
+        <Container size="md">
+          <ContentMemberActions
+            contentType="protocol"
+            contentId={protocol.id}
+            showSaveProtocol
+          />
+        </Container>
+      </Section>
 
       <PremiumContentGuard
         isPremiumContent={protocol.isPremium}

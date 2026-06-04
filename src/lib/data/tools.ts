@@ -70,6 +70,25 @@ const rawTools: Omit<Tool, "status" | "createdAt" | "updatedAt">[] = [
     isPremium: false,
   },
   {
+    id: "6",
+    slug: "risco-cardiometabolico",
+    title: "Risco cardiometabólico",
+    description:
+      "Triagem educativa de risco cardiometabólico com base em medidas, hábitos e histórico de saúde.",
+    longDescription:
+      "Avalie de forma orientativa fatores como IMC, circunferência abdominal, tabagismo, atividade física e histórico familiar. Receba um nível de risco e recomendações práticas — sem substituir avaliação médica.",
+    category: "avaliacao",
+    categoryLabel: "Avaliação",
+    icon: "heart-leaf",
+    duration: "3 min",
+    features: [
+      "IMC e cintura",
+      "Fatores de estilo de vida",
+      "Recomendações personalizadas",
+    ],
+    isPremium: false,
+  },
+  {
     id: "5",
     slug: "quiz-saude-bem",
     title: "Quiz Saúde & Bem",

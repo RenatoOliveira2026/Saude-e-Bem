@@ -1,4 +1,5 @@
 import { CrossLinks, PageCta } from "@/components/pages";
+import { getToolComponent } from "@/components/tools";
 import { Breadcrumbs } from "@/components/layout/Breadcrumbs";
 import {
   DetailHero,
@@ -40,6 +41,7 @@ export default async function FerramentaDetailPage({ params }: PageProps) {
 
   const all = await getTools();
   const related = all.filter((t) => t.slug !== slug).slice(0, 3);
+  const ToolInteractive = getToolComponent(slug);
 
   if (tool.isPremium) {
     return (
@@ -87,17 +89,21 @@ export default async function FerramentaDetailPage({ params }: PageProps) {
       />
 
       <Section background="white" id="inicio">
-        <Container size="sm">
-          <div className="rounded-xl border border-dashed border-border-strong bg-sage-muted/40 px-8 py-12 text-center">
-            <IconBox name={tool.icon} size={32} className="mx-auto bg-surface" />
-            <h2 className="mt-6 font-heading text-xl text-forest">
-              Ferramenta interativa em breve
-            </h2>
-            <p className="mt-3 text-muted text-pretty">
-              A versão interativa de {tool.title} será lançada em breve.
-              Enquanto isso, explore nossos protocolos e biblioteca.
-            </p>
-          </div>
+        <Container size={ToolInteractive ? "md" : "sm"}>
+          {ToolInteractive ? (
+            <ToolInteractive />
+          ) : (
+            <div className="rounded-xl border border-dashed border-border-strong bg-sage-muted/40 px-8 py-12 text-center">
+              <IconBox name={tool.icon} size={32} className="mx-auto bg-surface" />
+              <h2 className="mt-6 font-heading text-xl text-forest">
+                Ferramenta interativa em breve
+              </h2>
+              <p className="mt-3 text-muted text-pretty">
+                A versão interativa de {tool.title} será lançada em breve.
+                Enquanto isso, explore nossos protocolos e biblioteca.
+              </p>
+            </div>
+          )}
         </Container>
       </Section>
 

@@ -1,3 +1,4 @@
+import { riskLevelLabels } from "@/lib/tools/cardiometabolic-risk";
 import type { SavableToolSlug } from "./constants";
 import type { ToolResultSummary } from "./types";
 
@@ -71,6 +72,24 @@ export function summarizeToolResult(
         recordedAt,
         resultId,
       };
+    case "risco-cardiometabolico": {
+      const level = typeof r.level === "string" ? r.level : "";
+      const levelLabel =
+        level in riskLevelLabels
+          ? riskLevelLabels[level as keyof typeof riskLevelLabels]
+          : "—";
+      return {
+        toolSlug,
+        toolTitle,
+        summary: `Risco ${levelLabel.toLowerCase()}`,
+        detail:
+          typeof r.score === "number" && typeof r.maxScore === "number"
+            ? `Pontuação ${r.score} / ${r.maxScore}`
+            : undefined,
+        recordedAt,
+        resultId,
+      };
+    }
     default:
       return {
         toolSlug: toolSlug as SavableToolSlug,

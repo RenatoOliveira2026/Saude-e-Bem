@@ -12,9 +12,14 @@ import {
   type CardiometabolicResult,
   type RiskLevel,
 } from "@/lib/tools/cardiometabolic-risk";
+import {
+  usePersistToolResult,
+  type PersistSaveStatus,
+} from "@/lib/health-profile/use-persist-tool-result";
 import { cn } from "@/lib/cn";
 import Link from "next/link";
 import { useState } from "react";
+import { ToolResultActions } from "./tool-ui";
 
 const levelBadgeVariant: Record<
   RiskLevel,
@@ -33,7 +38,17 @@ const levelBarColor: Record<RiskLevel, string> = {
   high: "bg-forest",
 };
 
-function ResultPanel({ result }: { result: CardiometabolicResult }) {
+function ResultPanel({
+  result,
+  saved = false,
+  saveStatus = "idle",
+  saveMessage,
+}: {
+  result: CardiometabolicResult;
+  saved?: boolean;
+  saveStatus?: PersistSaveStatus;
+  saveMessage?: string | null;
+}) {
   const pct = Math.min(100, Math.round((result.score / result.maxScore) * 100));
 
   return (
@@ -52,7 +67,37 @@ function ResultPanel({ result }: { result: CardiometabolicResult }) {
         <span className="text-sm text-muted">
           Pontuação {result.score} / {result.maxScore}
         </span>
+        {saveStatus === "saving" && (
+          <Badge variant="outline" className="text-xs normal-case tracking-normal">
+            Salvando…
+          </Badge>
+        )}
+        {saved && (
+          <Badge variant="outline" className="text-xs normal-case tracking-normal">
+            Salvo em Minha Saúde
+          </Badge>
+        )}
       </div>
+      {saveMessage && !saved && saveStatus !== "saving" && (
+        <p
+          className={`mt-3 text-sm text-pretty ${
+            saveStatus === "error" ? "text-red-700" : "text-muted"
+          }`}
+        >
+          {saveMessage}
+          {saveStatus === "skipped" && (
+            <>
+              {" "}
+              <Link
+                href={routes.entrar}
+                className="font-medium text-forest underline-offset-2 hover:underline"
+              >
+                Entrar
+              </Link>
+            </>
+          )}
+        </p>
+      )}
 
       <div className="mt-6 h-2 overflow-hidden rounded-full bg-sage-muted">
         <div
@@ -115,14 +160,7 @@ function ResultPanel({ result }: { result: CardiometabolicResult }) {
         </ul>
       </div>
 
-      <div className="mt-8 flex flex-wrap gap-3">
-        <Button href={routes.protocolos} variant="primary" size="md">
-          Ver protocolos
-        </Button>
-        <Button href={routes.ferramentas} variant="outline" size="md">
-          Outras ferramentas
-        </Button>
-      </div>
+      <ToolResultActions showHealthLink={saved} />
     </div>
   );
 }
@@ -130,6 +168,9 @@ function ResultPanel({ result }: { result: CardiometabolicResult }) {
 export function CardiometabolicRiskTool() {
   const [result, setResult] = useState<CardiometabolicResult | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const { persist, saved, status, message } = usePersistToolResult(
+    "risco-cardiometabolico",
+  );
 
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -140,7 +181,9 @@ export function CardiometabolicRiskTool() {
       setResult(null);
       return;
     }
-    setResult(evaluateCardiometabolicRisk(parsed));
+    const evaluated = evaluateCardiometabolicRisk(parsed);
+    setResult(evaluated);
+    void persist(evaluated as unknown as Record<string, unknown>);
     document.getElementById("resultado-risco")?.scrollIntoView({ behavior: "smooth" });
   }
 
@@ -262,7 +305,12 @@ export function CardiometabolicRiskTool() {
 
       {result && (
         <div id="resultado-risco">
-          <ResultPanel result={result} />
+          <ResultPanel
+            result={result}
+            saved={saved}
+            saveStatus={status}
+            saveMessage={message}
+          />
         </div>
       )}
     </div>

@@ -1,10 +1,11 @@
-/** Ferramentas com persistência automática (Fase 4.3) — exclui risco-cardiometabolico */
+/** Ferramentas com persistência automática (Fase 4.3) */
 export const SAVABLE_TOOL_SLUGS = [
   "calculadora-imc",
   "consumo-agua",
   "proteina-diaria",
   "metabolismo-basal",
   "quiz-saude-bem",
+  "risco-cardiometabolico",
 ] as const;
 
 export type SavableToolSlug = (typeof SAVABLE_TOOL_SLUGS)[number];
@@ -19,4 +20,5 @@ export const TOOL_SLUG_LABELS: Record<SavableToolSlug, string> = {
   "proteina-diaria": "Proteína diária",
   "metabolismo-basal": "Metabolismo basal",
   "quiz-saude-bem": "Quiz Saúde & Bem",
+  "risco-cardiometabolico": "Risco cardiometabólico",
 };

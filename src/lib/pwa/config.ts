@@ -14,4 +14,4 @@ export const SW_URL = "/sw.js";
 export const MANIFEST_URL = "/manifest.json";
 export const OFFLINE_URL = "/offline";
 
-export const PWA_CACHE_VERSION = "saude-bem-pwa-v1";
+export const PWA_CACHE_VERSION = "saude-bem-pwa-v2";

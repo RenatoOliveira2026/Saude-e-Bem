@@ -20,15 +20,27 @@ export function AuthLayout({
   className,
 }: AuthLayoutProps) {
   return (
-    <section className={cn("py-12 md:py-20", className)}>
+    <section
+      className={cn(
+        "relative border-b border-border bg-gradient-to-b from-sage-muted/70 via-off-white to-off-white py-12 md:py-20",
+        className,
+      )}
+    >
+      <div className="brand-accent-bar absolute inset-x-0 top-0" aria-hidden />
       <Container size="sm">
-        <div className="mx-auto max-w-md text-center">
-          <LogoAuth />
+        <div className="mx-auto flex w-full max-w-md flex-col items-center text-center">
+          <div className="flex w-full justify-center">
+            <LogoAuth />
+          </div>
           <h1 className="mt-8 font-heading text-3xl text-forest">{title}</h1>
           <p className="mt-3 text-sm leading-relaxed text-muted">{description}</p>
         </div>
 
-        <Card variant="default" padding="lg" className="mx-auto mt-10 max-w-md">
+        <Card
+          variant="default"
+          padding="lg"
+          className="mx-auto mt-10 max-w-md border-forest/10 shadow-card ring-1 ring-forest/5"
+        >
           {children}
         </Card>
 

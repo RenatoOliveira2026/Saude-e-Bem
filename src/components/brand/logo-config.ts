@@ -5,14 +5,21 @@ export type LogoVariant = "dark" | "light" | "mono";
 /** Contextos oficiais de exibição do lockup PNG */
 export type LogoContext = "header" | "footer" | "auth";
 
+/** Paleta oficial Fase 4.1 */
 export const brandColors = {
-  sage: "#6F8F72",
-  forest: "#2E4A3D",
-  gold: "#C9A86A",
-  offWhite: "#F8F6F2",
-  graphite: "#333333",
-  sageMuted: "#E8EFE9",
-  sageLight: "#8AA88D",
+  primary: "#2E6B1F",
+  secondary: "#4F8F3A",
+  accent: "#E97D4B",
+  background: "#F8FAF7",
+  text: "#1F2937",
+  /** Aliases semânticos (Tailwind: forest, sage, gold, off-white, graphite) */
+  forest: "#2E6B1F",
+  sage: "#4F8F3A",
+  gold: "#E97D4B",
+  offWhite: "#F8FAF7",
+  graphite: "#1F2937",
+  sageMuted: "#E8F3E4",
+  sageLight: "#6BA85A",
 } as const;
 
 export interface LogoPalette {
@@ -34,7 +41,7 @@ export const logoPalettes: Record<LogoVariant, LogoPalette> = {
     showBg: true,
   },
   light: {
-    bg: "rgba(248, 246, 242, 0.12)",
+    bg: "rgba(248, 250, 247, 0.15)",
     heart: brandColors.offWhite,
     leafPrimary: brandColors.sageLight,
     leafSecondary: brandColors.sage,
@@ -51,7 +58,7 @@ export const logoPalettes: Record<LogoVariant, LogoPalette> = {
   },
 };
 
-/** Asset oficial — public/logo-saude-bem.png */
+/** Logo oficial — lockup PNG */
 export const OFFICIAL_LOGO_PNG = "/logo-saude-bem.png";
 
 export const LOGO_ALT = "Saúde & Bem — Longevidade & Vitalidade";
@@ -60,20 +67,41 @@ export const LOGO_ALT = "Saúde & Bem — Longevidade & Vitalidade";
 export const OFFICIAL_LOGO_INTRINSIC_WIDTH = 560;
 export const OFFICIAL_LOGO_INTRINSIC_HEIGHT = 140;
 
-/** Alturas responsivas por contexto */
+/**
+ * Alturas visuais do lockup (Fase 4.1.1) — apenas CSS, arquivos PNG inalterados.
+ * Proporção lockup ~4:1 → max-width acompanha a altura.
+ */
+export const logoDisplayHeights = {
+  headerMobileMin: 50,
+  headerMobileMax: 60,
+  headerDesktop: 64,
+  auth: 160,
+} as const;
+
+/** Classes Tailwind por contexto */
 export const logoContextClasses: Record<LogoContext, string> = {
-  header: "h-8 w-auto max-w-[168px] sm:max-w-[200px] md:h-9 md:max-w-[220px]",
+  /** Mobile 50px → sm 56px → md+ 64px */
+  header:
+    "h-[50px] w-auto max-w-[220px] sm:h-14 sm:max-w-[248px] md:h-16 md:max-w-[280px]",
   footer: "h-10 w-auto max-w-[200px] md:h-11 md:max-w-[240px]",
-  auth: "h-12 w-auto max-w-[240px] sm:h-14 sm:max-w-[280px]",
+  /** Login / cadastro — 160px, centralizado */
+  auth: "mx-auto h-[160px] w-auto max-w-[min(100%,40rem)] object-contain object-center",
 };
 
-/** Favicon e ícones PWA — temporários (substituir por pack 192/512 dedicado) */
+/** Favicon e ícones PWA (gerados via npm run generate:brand-icons) */
 export const brandIcons: Metadata["icons"] = {
   icon: [
+    { url: "/favicon.ico", sizes: "any" },
     { url: "/icons/icon-192.png", sizes: "192x192", type: "image/png" },
-    { url: "/brand/app-icon.svg", type: "image/svg+xml" },
+    { url: "/icons/icon-512.png", sizes: "512x512", type: "image/png" },
   ],
-  apple: [{ url: "/icons/icon-192.png", sizes: "180x180", type: "image/png" }],
+  apple: [
+    {
+      url: "/icons/apple-touch-icon.png",
+      sizes: "180x180",
+      type: "image/png",
+    },
+  ],
 };
 
 /** @deprecated Use LogoContext */

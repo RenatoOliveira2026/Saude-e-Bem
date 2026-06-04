@@ -25,7 +25,7 @@ export function ClubDashboard({ data }: ClubDashboardProps) {
 
   return (
     <div className="space-y-8">
-      <section>
+      <section className="rounded-2xl border border-border bg-gradient-to-br from-sage-muted/60 via-surface to-gold-muted/30 p-6 shadow-soft md:p-8">
         <Badge variant="gold" className="mb-3">
           {membership.isPremium ? "Assinante Premium" : "Área de membros"}
         </Badge>

@@ -10,7 +10,8 @@
     "validate:supabase": "node scripts/validate-supabase.mjs",
     "check:auth-user": "node scripts/check-auth-user.mjs",
     "test:signup": "node scripts/test-signup.mjs",
-    "generate:content-seed": "node scripts/generate-content-seed.mjs"
+    "generate:content-seed": "node scripts/generate-content-seed.mjs",
+    "generate:brand-icons": "node scripts/generate-brand-icons.mjs"
   },
   "dependencies": {
     "@supabase/ssr": "^0.10.3",

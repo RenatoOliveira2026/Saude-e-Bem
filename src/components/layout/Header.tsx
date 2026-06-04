@@ -53,12 +53,19 @@ export function Header({ user }: HeaderProps) {
       className={cn(
         "sticky top-0 z-50 w-full transition-all duration-300",
         scrolled
-          ? "border-b border-border bg-surface/95 shadow-soft backdrop-blur-md"
-          : "bg-off-white/80 backdrop-blur-sm",
+          ? "border-b border-forest/10 bg-surface/95 shadow-soft backdrop-blur-md"
+          : "bg-off-white/90 backdrop-blur-sm",
       )}
     >
-      <div className="mx-auto flex h-16 max-w-[var(--container-max)] items-center justify-between gap-4 px-[var(--container-px)] lg:h-20">
-        <LogoHeader />
+      <div
+        className={cn(
+          "brand-accent-bar transition-opacity duration-300",
+          scrolled ? "opacity-100" : "opacity-80",
+        )}
+        aria-hidden
+      />
+      <div className="mx-auto flex min-h-16 max-w-[var(--container-max)] items-center justify-between gap-4 px-[var(--container-px)] md:min-h-[4.5rem] lg:min-h-20">
+        <LogoHeader className="shrink-0" />
 
         <nav
           className="hidden items-center gap-1 xl:flex"

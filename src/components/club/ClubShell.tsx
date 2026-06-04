@@ -1,4 +1,4 @@
-import { LogoMark } from "@/components/brand";
+import { LogoImage } from "@/components/brand/Logo";
 import { Icon, type IconName } from "@/components/icons";
 import { Badge } from "@/components/ui/Badge";
 import { Container } from "@/components/ui/Container";
@@ -23,13 +23,18 @@ interface ClubShellProps {
 
 export function ClubShell({ children, activePath, isPremium }: ClubShellProps) {
   return (
-    <div className="border-b border-border bg-surface">
+    <div className="border-b border-border bg-gradient-to-r from-sage-muted/40 via-surface to-gold-muted/20">
+      <div className="brand-accent-bar" aria-hidden />
       <Container>
         <div className="flex flex-col gap-6 py-6 lg:flex-row lg:gap-10 lg:py-8">
           <aside className="lg:w-56 lg:shrink-0">
-            <div className="flex items-center gap-3">
-              <LogoMark size={36} />
-              <div>
+            <Link
+              href={routes.clubeDashboard}
+              className="flex items-center gap-3 transition-opacity hover:opacity-90"
+              aria-label="Clube Saúde & Bem — Dashboard"
+            >
+              <LogoImage context="header" priority />
+              <div className="hidden sm:block">
                 <p className="font-heading text-sm font-semibold text-forest">
                   Clube Saúde &amp; Bem
                 </p>
@@ -37,7 +42,7 @@ export function ClubShell({ children, activePath, isPremium }: ClubShellProps) {
                   {isPremium ? "Premium" : "Gratuito"}
                 </Badge>
               </div>
-            </div>
+            </Link>
             <nav className="mt-6 flex flex-wrap gap-2 lg:flex-col lg:gap-1">
               {navItems.map((item) => {
                 const active = activePath === item.href;

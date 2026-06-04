@@ -46,11 +46,16 @@ function LogoImage({
       onError={() => setImgError(true)}
       priority={priority}
       className={cn(
-        "object-contain object-left",
+        "object-contain",
+        context === "auth" ? "object-center" : "object-left",
         logoContextClasses[context],
         className,
       )}
-      sizes="(max-width: 640px) 168px, (max-width: 768px) 200px, 280px"
+      sizes={
+        context === "auth"
+          ? "(max-width: 768px) 90vw, 640px"
+          : "(max-width: 640px) 220px, (max-width: 768px) 248px, 280px"
+      }
     />
   );
 
@@ -66,7 +71,8 @@ function LogoImage({
 }
 
 function LogoFallback({ context }: { context: LogoContext }) {
-  const markSize = context === "auth" ? 48 : context === "footer" ? 40 : 32;
+  const markSize =
+    context === "auth" ? 72 : context === "footer" ? 40 : 56;
 
   return (
     <span className="inline-flex items-center gap-3">

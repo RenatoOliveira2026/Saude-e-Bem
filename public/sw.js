@@ -4,7 +4,7 @@
  * Cache de assets estáticos; navegação network-first com fallback offline.
  */
 
-const CACHE_VERSION = "saude-bem-pwa-v1";
+const CACHE_VERSION = "saude-bem-pwa-v2";
 const STATIC_CACHE = `${CACHE_VERSION}-static`;
 const RUNTIME_CACHE = `${CACHE_VERSION}-runtime`;
 
@@ -12,10 +12,12 @@ const PRECACHE_URLS = [
   "/offline",
   "/offline.html",
   "/manifest.json",
+  "/favicon.ico",
   "/icons/icon-192.png",
   "/icons/icon-512.png",
-  "/icons/icon-maskable.svg",
-  "/brand/app-icon.svg",
+  "/icons/apple-touch-icon.png",
+  "/icons/icon-maskable.png",
+  "/logo-saude-bem.png",
 ];
 
 const STATIC_DESTINATIONS = ["style", "script", "font", "image"];

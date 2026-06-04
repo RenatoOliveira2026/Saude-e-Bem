@@ -10,8 +10,8 @@
   "display": "standalone",
   "display_override": ["standalone", "minimal-ui", "browser"],
   "orientation": "portrait-primary",
-  "theme_color": "#2E4A3D",
-  "background_color": "#F8F6F2",
+  "theme_color": "#2E6B1F",
+  "background_color": "#F8FAF7",
   "categories": ["health", "lifestyle", "medical"],
   "prefer_related_applications": false,
   "icons": [
@@ -28,15 +28,15 @@
       "purpose": "any"
     },
     {
-      "src": "/icons/icon-maskable.svg",
-      "sizes": "any",
-      "type": "image/svg+xml",
+      "src": "/icons/icon-maskable.png",
+      "sizes": "512x512",
+      "type": "image/png",
       "purpose": "maskable"
     },
     {
-      "src": "/brand/app-icon.svg",
-      "sizes": "any",
-      "type": "image/svg+xml",
+      "src": "/icons/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png",
       "purpose": "any"
     }
   ],

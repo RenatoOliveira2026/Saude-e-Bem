@@ -1,25 +1,25 @@
 @import "tailwindcss";
 
-/* ─── Design Tokens ─────────────────────────────────────────── */
+/* ─── Design Tokens (Fase 4.1 — identidade oficial) ─────────── */
 :root {
   /* Brand palette */
-  --color-sage: #6f8f72;
-  --color-forest: #2e4a3d;
-  --color-gold: #c9a86a;
-  --color-off-white: #f8f6f2;
-  --color-graphite: #333333;
+  --color-sage: #4f8f3a;
+  --color-forest: #2e6b1f;
+  --color-gold: #e97d4b;
+  --color-off-white: #f8faf7;
+  --color-graphite: #1f2937;
 
   /* Extended palette */
-  --color-sage-light: #8aa88d;
-  --color-sage-muted: #e8efe9;
-  --color-forest-light: #3d6352;
-  --color-gold-light: #d9c08a;
-  --color-gold-muted: #f3ead8;
+  --color-sage-light: #6ba85a;
+  --color-sage-muted: #e8f3e4;
+  --color-forest-light: #3a8528;
+  --color-gold-light: #f0a07a;
+  --color-gold-muted: #fceee6;
   --color-white: #ffffff;
-  --color-muted: #6b6b6b;
-  --color-muted-light: #9a9a9a;
-  --color-border: rgba(46, 74, 61, 0.1);
-  --color-border-strong: rgba(46, 74, 61, 0.18);
+  --color-muted: #4b5563;
+  --color-muted-light: #6b7280;
+  --color-border: rgba(46, 107, 31, 0.1);
+  --color-border-strong: rgba(46, 107, 31, 0.18);
 
   /* Semantic tokens */
   --background: var(--color-off-white);
@@ -50,9 +50,9 @@
   --radius-full: 9999px;
 
   /* Shadows */
-  --shadow-soft: 0 4px 24px rgba(46, 74, 61, 0.06);
-  --shadow-card: 0 8px 40px rgba(46, 74, 61, 0.08);
-  --shadow-elevated: 0 16px 48px rgba(46, 74, 61, 0.12);
+  --shadow-soft: 0 4px 24px rgba(46, 107, 31, 0.06);
+  --shadow-card: 0 8px 40px rgba(46, 107, 31, 0.08);
+  --shadow-elevated: 0 16px 48px rgba(46, 107, 31, 0.12);
 
   /* Transitions */
   --transition-fast: 150ms ease;
@@ -91,9 +91,9 @@
   --radius-md: var(--radius-md);
   --radius-lg: var(--radius-lg);
   --radius-xl: var(--radius-xl);
-  --shadow-soft: 0 4px 24px rgba(46, 74, 61, 0.06);
-  --shadow-card: 0 8px 40px rgba(46, 74, 61, 0.08);
-  --shadow-elevated: 0 16px 48px rgba(46, 74, 61, 0.12);
+  --shadow-soft: 0 4px 24px rgba(46, 107, 31, 0.06);
+  --shadow-card: 0 8px 40px rgba(46, 107, 31, 0.08);
+  --shadow-elevated: 0 16px 48px rgba(46, 107, 31, 0.12);
 }
 
 /* ─── Base Styles ───────────────────────────────────────────── */
@@ -162,6 +162,16 @@ h6 {
     135deg,
     var(--color-gold) 0%,
     var(--color-gold-light) 100%
+  );
+}
+
+.brand-accent-bar {
+  height: 3px;
+  background: linear-gradient(
+    90deg,
+    var(--color-forest) 0%,
+    var(--color-sage) 45%,
+    var(--color-gold) 100%
   );
 }
 

@@ -1,8 +1,8 @@
-import { featuredTool, tools } from "../tools";
+import { featuredTool, sortToolsForDisplay, tools } from "../tools";
 import type { Tool } from "../types";
 
 export async function getTools(): Promise<Tool[]> {
-  return tools.filter((t) => t.status === "published");
+  return sortToolsForDisplay(tools.filter((t) => t.status === "published"));
 }
 
 export async function getToolBySlug(slug: string): Promise<Tool | null> {

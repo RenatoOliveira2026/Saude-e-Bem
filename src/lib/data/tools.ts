@@ -107,3 +107,22 @@ const rawTools: Omit<Tool, "status" | "createdAt" | "updatedAt">[] = [
 
 export const tools: Tool[] = rawTools.map((t) => withBase(t));
 export const featuredTool = tools.find((t) => t.featured)!;
+
+/** Ordem estável de exibição na listagem e seções inferiores */
+export const toolDisplayOrder = [
+  "calculadora-imc",
+  "consumo-agua",
+  "proteina-diaria",
+  "metabolismo-basal",
+  "quiz-saude-bem",
+  "risco-cardiometabolico",
+] as const;
+
+export function sortToolsForDisplay(list: Tool[]): Tool[] {
+  const order = new Map<string, number>(
+    toolDisplayOrder.map((slug, index) => [slug, index]),
+  );
+  return [...list].sort(
+    (a, b) => (order.get(a.slug) ?? 999) - (order.get(b.slug) ?? 999),
+  );
+}

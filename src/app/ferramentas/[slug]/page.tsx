@@ -1,10 +1,9 @@
-import { CrossLinks, PageCta } from "@/components/pages";
+import { CrossLinks, PageCta, ToolsExploreSection } from "@/components/pages";
 import { getToolComponent } from "@/components/tools";
 import { Breadcrumbs } from "@/components/layout/Breadcrumbs";
 import {
   DetailHero,
   PremiumGate,
-  RelatedNav,
 } from "@/components/layout/DetailPage";
 import { Container } from "@/components/ui/Container";
 import { Section } from "@/components/ui/Section";
@@ -40,7 +39,7 @@ export default async function FerramentaDetailPage({ params }: PageProps) {
   if (!tool) notFound();
 
   const all = await getTools();
-  const related = all.filter((t) => t.slug !== slug).slice(0, 3);
+  const otherTools = all.filter((t) => t.slug !== slug);
   const ToolInteractive = getToolComponent(slug);
   if (!ToolInteractive && !tool.isPremium) {
     console.warn(`[ferramentas] Sem componente interativo para slug: ${slug}`);
@@ -127,19 +126,11 @@ export default async function FerramentaDetailPage({ params }: PageProps) {
         </Container>
       </Section>
 
-      <RelatedNav
-        links={[
-          ...related.map((t) => ({
-            label: t.title,
-            href: routes.ferramenta(t.slug),
-            description: t.duration,
-          })),
-          {
-            label: "Protocolos",
-            href: routes.protocolos,
-            description: "Rotinas estruturadas",
-          },
-        ]}
+      <ToolsExploreSection
+        tools={otherTools}
+        title="Outras ferramentas"
+        description="Explore toda a biblioteca de ferramentas gratuitas da plataforma."
+        showAllLink
       />
 
       <PageCta

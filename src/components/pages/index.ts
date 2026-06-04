@@ -23,4 +23,6 @@ export { CrossLinks, PageCta } from "./PageCta";
 export { FeaturedProtocolBanner, ProtocolCard } from "./ProtocolCard";
 export { ProtocolsListing } from "./ProtocolsListing";
 export { FeaturedToolBanner, ToolCard } from "./ToolCard";
+export { ToolsExploreSection } from "./ToolsExploreSection";
+export { ToolsGrid } from "./ToolsGrid";
 export { ToolsListing } from "./ToolsListing";

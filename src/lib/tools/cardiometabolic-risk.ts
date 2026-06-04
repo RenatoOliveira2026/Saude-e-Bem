@@ -1,3 +1,6 @@
+import { calcBmi } from "./bmi";
+import { parsePositiveNumber } from "./form-utils";
+
 export type Sex = "female" | "male";
 
 export type ActivityLevel = "sedentary" | "moderate" | "active";
@@ -28,12 +31,6 @@ export interface CardiometabolicResult {
 }
 
 const MAX_SCORE = 28;
-
-export function calcBmi(weightKg: number, heightCm: number): number {
-  const m = heightCm / 100;
-  if (m <= 0) return 0;
-  return Math.round((weightKg / (m * m)) * 10) / 10;
-}
 
 function waistThresholds(sex: Sex): { elevated: number; high: number } {
   return sex === "male"
@@ -191,23 +188,17 @@ function buildRecommendations(
 export function parseCardiometabolicForm(
   data: FormData,
 ): CardiometabolicInput | { error: string } {
-  const age = Number(data.get("age"));
-  const heightCm = Number(data.get("heightCm"));
-  const weightKg = Number(data.get("weightKg"));
-  const waistCm = Number(data.get("waistCm"));
+  const age = parsePositiveNumber(data, "age", "Idade", 18, 100);
+  if (typeof age !== "number") return age;
 
-  if (!Number.isFinite(age) || age < 18 || age > 100) {
-    return { error: "Informe uma idade entre 18 e 100 anos." };
-  }
-  if (!Number.isFinite(heightCm) || heightCm < 120 || heightCm > 230) {
-    return { error: "Informe altura entre 120 e 230 cm." };
-  }
-  if (!Number.isFinite(weightKg) || weightKg < 35 || weightKg > 250) {
-    return { error: "Informe peso entre 35 e 250 kg." };
-  }
-  if (!Number.isFinite(waistCm) || waistCm < 50 || waistCm > 200) {
-    return { error: "Informe circunferência abdominal entre 50 e 200 cm." };
-  }
+  const heightCm = parsePositiveNumber(data, "heightCm", "Altura", 120, 230);
+  if (typeof heightCm !== "number") return heightCm;
+
+  const weightKg = parsePositiveNumber(data, "weightKg", "Peso", 35, 250);
+  if (typeof weightKg !== "number") return weightKg;
+
+  const waistCm = parsePositiveNumber(data, "waistCm", "Circunferência abdominal", 50, 200);
+  if (typeof waistCm !== "number") return waistCm;
 
   const sex = data.get("sex");
   if (sex !== "female" && sex !== "male") {

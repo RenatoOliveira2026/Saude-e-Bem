@@ -42,6 +42,9 @@ export default async function FerramentaDetailPage({ params }: PageProps) {
   const all = await getTools();
   const related = all.filter((t) => t.slug !== slug).slice(0, 3);
   const ToolInteractive = getToolComponent(slug);
+  if (!ToolInteractive && !tool.isPremium) {
+    console.warn(`[ferramentas] Sem componente interativo para slug: ${slug}`);
+  }
 
   if (tool.isPremium) {
     return (

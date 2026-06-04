@@ -20,7 +20,7 @@ const rawTools: Omit<Tool, "status" | "createdAt" | "updatedAt">[] = [
     categoryLabel: "Calculadora",
     icon: "chart",
     duration: "1 min",
-    features: ["Faixas OMS", "Interpretação", "Resultado instantâneo"],
+    features: ["Faixas OMS", "Interpretação", "Calculadora interativa"],
     isPremium: false,
     featured: true,
   },
@@ -36,7 +36,7 @@ const rawTools: Omit<Tool, "status" | "createdAt" | "updatedAt">[] = [
     categoryLabel: "Calculadora",
     icon: "water",
     duration: "1 min",
-    features: ["Personalizado", "Ajuste por clima", "Lembretes sugeridos"],
+    features: ["Personalizado", "Ajuste por clima", "Calculadora interativa"],
     isPremium: false,
   },
   {
@@ -51,7 +51,7 @@ const rawTools: Omit<Tool, "status" | "createdAt" | "updatedAt">[] = [
     categoryLabel: "Calculadora",
     icon: "nutrition",
     duration: "1 min",
-    features: ["Por objetivo", "Por peso", "Distribuição por refeição"],
+    features: ["Por objetivo", "Por peso", "Calculadora interativa"],
     isPremium: false,
   },
   {
@@ -66,7 +66,7 @@ const rawTools: Omit<Tool, "status" | "createdAt" | "updatedAt">[] = [
     categoryLabel: "Calculadora",
     icon: "activity",
     duration: "2 min",
-    features: ["Fórmula Mifflin-St Jeor", "GET total", "Déficit/superávit"],
+    features: ["Fórmula Mifflin-St Jeor", "TMB e GET", "Calculadora interativa"],
     isPremium: false,
   },
   {
@@ -100,7 +100,7 @@ const rawTools: Omit<Tool, "status" | "createdAt" | "updatedAt">[] = [
     categoryLabel: "Avaliação",
     icon: "profile",
     duration: "3 min",
-    features: ["Perfil personalizado", "Recomendações", "Resultado instantâneo"],
+    features: ["Perfil personalizado", "Quiz interativo", "Protocolos sugeridos"],
     isPremium: false,
   },
 ];

@@ -44,4 +44,7 @@ export async function toggleFavoriteAction(input: {
 function revalidateClubPaths() {
   revalidatePath(routes.clubeDashboard);
   revalidatePath(routes.clubeFavoritos);
+  revalidatePath(routes.protocolos);
+  revalidatePath(routes.protocolosPainel);
+  revalidatePath(routes.protocolosRecentes);
 }

@@ -12,7 +12,17 @@ export interface BillingPlan {
   periodLabel: string;
   billingInterval: "free" | "month" | "year";
   checkoutEnabled: boolean;
+  /** Selo comercial (ex.: plano anual) */
+  highlightBadge?: string;
+  /** Texto de economia vs. 12× mensal */
+  savingsLabel?: string;
 }
+
+/** Fase 4.2.1 — preços comerciais oficiais */
+export const PREMIUM_MONTHLY_PRICE_LABEL = "R$ 29,90";
+export const PREMIUM_ANNUAL_PRICE_LABEL = "R$ 297,00";
+export const PREMIUM_ANNUAL_BADGE = "Mais Escolhido";
+export const PREMIUM_ANNUAL_SAVINGS_LABEL = "Economize R$ 61,80 por ano";
 
 export const FREE_PLAN: BillingPlan = {
   id: "free",
@@ -28,9 +38,9 @@ export const FREE_PLAN: BillingPlan = {
 
 export const PREMIUM_MONTHLY_PLAN: BillingPlan = {
   id: "premium_monthly",
-  name: "Plano Premium Mensal",
+  name: "Plano Mensal",
   description: "Acesso completo a protocolos, biblioteca e artigos premium.",
-  amountCents: 1990,
+  amountCents: 2990,
   currency: "BRL",
   periodDays: 30,
   periodLabel: "mês",
@@ -40,14 +50,16 @@ export const PREMIUM_MONTHLY_PLAN: BillingPlan = {
 
 export const PREMIUM_ANNUAL_PLAN: BillingPlan = {
   id: "premium_annual",
-  name: "Plano Premium Anual",
-  description: "Acesso premium por 12 meses com economia no plano anual.",
-  amountCents: 19700,
+  name: "Plano Anual",
+  description: "Acesso premium por 12 meses com o melhor custo-benefício.",
+  amountCents: 29700,
   currency: "BRL",
   periodDays: 365,
   periodLabel: "ano",
   billingInterval: "year",
   checkoutEnabled: true,
+  highlightBadge: PREMIUM_ANNUAL_BADGE,
+  savingsLabel: PREMIUM_ANNUAL_SAVINGS_LABEL,
 };
 
 /** Planos exibidos na página /assinar */

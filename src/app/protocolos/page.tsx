@@ -2,39 +2,62 @@ import {
   ContentEmptyState,
   CrossLinks,
   PageCta,
-  ProtocolsListing,
 } from "@/components/pages";
+import { ProtocolLibraryListing } from "@/components/protocol-library";
 import { PageHero } from "@/components/layout/PageHero";
-import {
-  getFeaturedProtocol,
-  getProtocols,
-} from "@/lib/data/repositories/protocols.repository";
+import { Button } from "@/components/ui/Button";
+import { Container } from "@/components/ui/Container";
+import { Section } from "@/components/ui/Section";
+import { getCurrentUser } from "@/lib/auth/session";
+import { getProtocolLibraryItems } from "@/lib/protocol-library/services/library.service";
+import { fetchUserFavorites } from "@/lib/supabase/services/favorites.service";
 import { routes } from "@/lib/routes";
 import type { Metadata } from "next";
 
 export const revalidate = 3600;
 
 export const metadata: Metadata = {
-  title: "Protocolos",
+  title: "Biblioteca de Protocolos",
   description:
-    "Rotinas estruturadas baseadas em evidências para sono, energia, longevidade, imunidade e equilíbrio.",
+    "Rotinas estruturadas por categoria — sono, alimentação, estresse, saúde mental e mais. Gratuitos e Premium com recomendações IA.",
 };
 
 export default async function ProtocolosPage() {
-  const [protocols, featured] = await Promise.all([
-    getProtocols(),
-    getFeaturedProtocol(),
+  const [protocols, user] = await Promise.all([
+    getProtocolLibraryItems(),
+    getCurrentUser(),
   ]);
+
+  const featured =
+    protocols.find((p) => p.featured) ?? protocols[0] ?? null;
+
+  const favoriteIds =
+    user &&
+    (await fetchUserFavorites(user.id))
+      .filter((f) => f.contentType === "protocol")
+      .map((f) => f.contentId);
 
   const isEmpty = protocols.length === 0;
 
   return (
     <>
       <PageHero
-        badge="Protocolos"
-        title="Rotinas que transformam sua saúde"
-        description="Planos passo a passo desenvolvidos com base científica — do iniciante ao avançado. Escolha por objetivo, nível e duração."
+        badge="Biblioteca Inteligente"
+        title="Protocolos para sua jornada"
+        description="Filtre por categoria, busque por palavra-chave e acesse protocolos gratuitos ou Premium com recomendações personalizadas."
       />
+      {user && (
+        <Section background="sage" spacing="compact">
+          <Container className="flex flex-wrap items-center justify-between gap-4">
+            <p className="text-sm text-muted">
+              Acesse seu painel com recomendações IA, favoritos e histórico.
+            </p>
+            <Button href={routes.protocolosPainel} size="sm">
+              Meu painel de protocolos
+            </Button>
+          </Container>
+        </Section>
+      )}
       {isEmpty ? (
         <ContentEmptyState
           icon="sparkle"
@@ -44,15 +67,20 @@ export default async function ProtocolosPage() {
           actionHref={routes.ferramentas}
         />
       ) : (
-        <ProtocolsListing protocols={protocols} featured={featured} />
+        <ProtocolLibraryListing
+          protocols={protocols}
+          featured={featured}
+          favoriteIds={favoriteIds ?? []}
+          isLoggedIn={Boolean(user)}
+        />
       )}
       <PageCta
         title="Protocolos premium no Clube Saúde & Bem"
         description="Desbloqueie rotinas avançadas, acompanhamento e comunidade exclusiva para acelerar sua jornada."
         primaryLabel="Conhecer o Clube"
         primaryHref={routes.clube}
-        secondaryLabel="Ferramentas gratuitas"
-        secondaryHref={routes.ferramentas}
+        secondaryLabel={user ? "Meu painel" : "Entrar"}
+        secondaryHref={user ? routes.protocolosPainel : routes.entrar}
       />
       <CrossLinks />
     </>

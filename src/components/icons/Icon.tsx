@@ -66,6 +66,15 @@ export const categoryIcons: Record<ContentCategory, IconName> = {
   menopausa: "heart-leaf",
   nutricao: "leaf",
   mente: "brain",
+  "saude-mental": "brain",
+  ansiedade: "heart-leaf",
+  "alimentacao-saudavel": "leaf",
+  exercicios: "activity",
+  "controle-estresse": "vitality",
+  "saude-feminina": "heart-leaf",
+  "saude-masculina": "bolt",
+  "saude-idoso": "sparkle",
+  "bem-estar-geral": "star",
 };
 
 export const blogCategoryIcons: Record<BlogCategory, IconName> = {

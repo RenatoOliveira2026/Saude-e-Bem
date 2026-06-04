@@ -11,6 +11,8 @@ export const privateRoutes = [
   "/clube/recomendacoes",
   "/clube/recomendacoes-ia",
   "/clube/perfil",
+  "/protocolos/painel",
+  "/protocolos/recentes",
 ] as const;
 
 /** Rotas do clube acessíveis sem login */

@@ -37,8 +37,8 @@ export const clubBenefits = [
 export const clubPlans: ClubPlan[] = [
   {
     id: "mensal",
-    name: "Mensal",
-    price: "R$ 97",
+    name: "Plano Mensal",
+    price: "R$ 29,90",
     period: "/mês",
     description: "Flexibilidade total para experimentar a experiência premium.",
     features: [
@@ -50,19 +50,19 @@ export const clubPlans: ClubPlan[] = [
   },
   {
     id: "anual",
-    name: "Anual",
-    price: "R$ 797",
+    name: "Plano Anual",
+    price: "R$ 297,00",
     period: "/ano",
     description: "Melhor custo-benefício para quem leva longevidade a sério.",
     features: [
       "Tudo do plano mensal",
-      "2 meses grátis",
       "Lives exclusivas gravadas",
       "Suporte prioritário",
       "Acesso antecipado a novidades",
     ],
     highlighted: true,
-    badge: "Mais escolhido",
+    badge: "Mais Escolhido",
+    savingsLabel: "Economize R$ 61,80 por ano",
   },
 ];
 

@@ -279,6 +279,25 @@ type UserContentHistoryRow = {
   last_accessed_at: string;
 };
 
+type UserProtocolHistoryRow = {
+  id: string;
+  user_id: string;
+  protocol_id: string;
+  view_count: number;
+  first_viewed_at: string;
+  last_viewed_at: string;
+};
+
+type ProtocolCategoryRow = {
+  slug: string;
+  label: string;
+  description: string | null;
+  icon: string;
+  sort_order: number;
+  is_active: boolean;
+  created_at: string;
+};
+
 type ContentRankingRow = {
   id: string;
   content_type: "article" | "protocol" | "ebook";
@@ -657,6 +676,25 @@ export interface Database {
         Update: Partial<UserContentHistoryRow>;
         Relationships: [];
       };
+      protocol_categories: {
+        Row: ProtocolCategoryRow;
+        Insert: Partial<ProtocolCategoryRow> & Pick<ProtocolCategoryRow, "slug" | "label">;
+        Update: Partial<ProtocolCategoryRow>;
+        Relationships: [];
+      };
+      user_protocol_history: {
+        Row: UserProtocolHistoryRow;
+        Insert: {
+          id?: string;
+          user_id: string;
+          protocol_id: string;
+          view_count?: number;
+          first_viewed_at?: string;
+          last_viewed_at?: string;
+        };
+        Update: Partial<UserProtocolHistoryRow>;
+        Relationships: [];
+      };
       content_rankings: {
         Row: ContentRankingRow;
         Insert: {
@@ -725,6 +763,10 @@ export interface Database {
           reason: string;
           score: number;
         }>;
+      };
+      record_protocol_view: {
+        Args: { p_user_id: string; p_protocol_id: string };
+        Returns: undefined;
       };
     };
     Enums: Record<string, never>;

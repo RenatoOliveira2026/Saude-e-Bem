@@ -8,6 +8,12 @@ import {
   SectionTitle,
 } from "@/components/ui/Section";
 import { clubBenefits } from "@/lib/home-content";
+import {
+  formatPlanPriceLabel,
+  PREMIUM_ANNUAL_PLAN,
+  PREMIUM_ANNUAL_SAVINGS_LABEL,
+  PREMIUM_MONTHLY_PLAN,
+} from "@/lib/payments/plans";
 import { routes } from "@/lib/routes";
 
 export function ClubSection() {
@@ -59,11 +65,14 @@ export function ClubSection() {
           </ul>
           <div className="mt-8 rounded-xl border border-gold/20 bg-gold/10 p-5">
             <p className="font-heading text-sm font-semibold text-gold">
-              Lançamento em breve
+              Planos Premium
             </p>
-            <p className="mt-1 text-sm text-off-white/60">
-              Cadastre-se na newsletter e garanta acesso antecipado com
-              condições especiais.
+            <p className="mt-2 text-sm text-off-white/85">
+              {formatPlanPriceLabel(PREMIUM_MONTHLY_PLAN)} ·{" "}
+              {formatPlanPriceLabel(PREMIUM_ANNUAL_PLAN)}
+            </p>
+            <p className="mt-1 text-xs font-semibold text-gold">
+              {PREMIUM_ANNUAL_SAVINGS_LABEL}
             </p>
           </div>
         </div>

@@ -4,6 +4,7 @@ import type { BaseEntity } from "./base";
 
 export type { ContentBlock };
 
+/** Categorias legadas (seed) + taxonomia Fase 4.2 */
 export type ContentCategory =
   | "sono"
   | "energia"
@@ -12,7 +13,16 @@ export type ContentCategory =
   | "longevidade"
   | "menopausa"
   | "nutricao"
-  | "mente";
+  | "mente"
+  | "saude-mental"
+  | "ansiedade"
+  | "alimentacao-saudavel"
+  | "exercicios"
+  | "controle-estresse"
+  | "saude-feminina"
+  | "saude-masculina"
+  | "saude-idoso"
+  | "bem-estar-geral";
 
 export type BlogCategory =
   | "longevidade"
@@ -111,6 +121,7 @@ export interface ClubPlan {
   features: string[];
   highlighted?: boolean;
   badge?: string;
+  savingsLabel?: string;
 }
 
 export interface ClubFaq {
@@ -134,6 +145,15 @@ export const categoryLabels: Record<ContentCategory, string> = {
   menopausa: "Menopausa",
   nutricao: "Nutrição",
   mente: "Saúde Mental",
+  "saude-mental": "Saúde Mental",
+  ansiedade: "Ansiedade",
+  "alimentacao-saudavel": "Alimentação Saudável",
+  exercicios: "Exercícios",
+  "controle-estresse": "Controle de Estresse",
+  "saude-feminina": "Saúde Feminina",
+  "saude-masculina": "Saúde Masculina",
+  "saude-idoso": "Saúde do Idoso",
+  "bem-estar-geral": "Bem-Estar Geral",
 };
 
 export const blogCategoryLabels: Record<BlogCategory, string> = {

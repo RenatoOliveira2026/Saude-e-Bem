@@ -83,7 +83,7 @@ curl -X POST "https://SEU-DOMINIO/api/payments/cron/subscriptions" \
 
 ### `/assinar`
 
-- [ ] Planos mensal (R$ 19,90) e anual (R$ 197,00)
+- [ ] Planos mensal (R$ 29,90) e anual (R$ 297,00) — selo «Mais Escolhido» no anual
 - [ ] PIX, cartão e boleto
 - [ ] Redireciona para Checkout Pro ou preapproval MP
 

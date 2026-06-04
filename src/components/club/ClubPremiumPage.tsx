@@ -1,6 +1,12 @@
+import { Badge } from "@/components/ui/Badge";
 import { Button } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
 import { Icon } from "@/components/icons";
+import {
+  formatPlanPriceLabel,
+  PREMIUM_ANNUAL_PLAN,
+  PREMIUM_MONTHLY_PLAN,
+} from "@/lib/payments/plans";
 import { routes } from "@/lib/routes";
 
 const premiumFeatures = [
@@ -31,9 +37,19 @@ export function ClubPremiumPage() {
         <Icon name="star" size={32} className="mx-auto text-gold" />
         <p className="mt-4 font-heading text-4xl text-forest">Premium</p>
         <p className="mt-2 text-muted">
-          Assine o Clube Saúde &amp; Bem e desbloqueie protocolos, biblioteca e
-          artigos exclusivos.
+          {formatPlanPriceLabel(PREMIUM_MONTHLY_PLAN)} ou{" "}
+          {formatPlanPriceLabel(PREMIUM_ANNUAL_PLAN)}.
         </p>
+        {PREMIUM_ANNUAL_PLAN.highlightBadge && (
+          <Badge variant="gold" className="mt-4">
+            {PREMIUM_ANNUAL_PLAN.highlightBadge}
+          </Badge>
+        )}
+        {PREMIUM_ANNUAL_PLAN.savingsLabel && (
+          <p className="mt-2 text-sm font-semibold text-gold">
+            {PREMIUM_ANNUAL_PLAN.savingsLabel}
+          </p>
+        )}
         <ul className="mt-6 space-y-2 text-left text-sm text-forest">
           {premiumFeatures.map((feature) => (
             <li key={feature} className="flex items-start gap-2">

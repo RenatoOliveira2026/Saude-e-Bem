@@ -135,6 +135,11 @@ export function ClubPricing() {
               </span>
               <span className="text-sm text-muted">{plan.period}</span>
             </div>
+            {plan.savingsLabel && (
+              <p className="mt-2 text-sm font-semibold text-gold">
+                {plan.savingsLabel}
+              </p>
+            )}
             <p className="mt-3 text-sm text-muted">{plan.description}</p>
             <ul className="mt-6 flex-1 space-y-2.5">
               {plan.features.map((f) => (

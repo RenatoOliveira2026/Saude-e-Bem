@@ -57,9 +57,10 @@ export function FeaturedProtocolBanner({ protocol }: { protocol: Protocol }) {
 }
 
 export function ProtocolCard({ protocol }: { protocol: Protocol }) {
-  const href = protocol.isPremium
-    ? routes.clube
-    : routes.protocolo(protocol.slug);
+  const href = routes.protocolo(protocol.slug);
+  const icon =
+    categoryIcons[protocol.category as keyof typeof categoryIcons] ??
+    categoryIcons.sono;
 
   return (
     <Card variant="default" hover padding="lg" className="flex h-full flex-col">
@@ -69,9 +70,12 @@ export function ProtocolCard({ protocol }: { protocol: Protocol }) {
           alt={protocol.title}
           className="h-16 w-16 shrink-0"
         >
-          <IconBox name={categoryIcons[protocol.category]} size={20} />
+          <IconBox name={icon} size={20} />
         </ContentCover>
-        {protocol.isPremium && <Badge variant="gold">Premium</Badge>}
+        <div className="flex flex-wrap justify-end gap-2">
+          {!protocol.isPremium && <Badge variant="forest">Gratuito</Badge>}
+          {protocol.isPremium && <Badge variant="gold">Premium</Badge>}
+        </div>
       </div>
       <CardHeader className="mb-0 mt-4 flex-1">
         <CardTitle className="text-lg">{protocol.title}</CardTitle>
@@ -94,7 +98,7 @@ export function ProtocolCard({ protocol }: { protocol: Protocol }) {
           size="sm"
           className="w-full justify-center"
         >
-          Ver protocolo
+          {protocol.isPremium ? "Ver detalhes" : "Ver protocolo"}
         </Button>
       </div>
     </Card>

@@ -1,15 +1,7 @@
 import { withBase } from "./base";
 import type { Protocol } from "./types";
 
-export const protocolCategories = [
-  { id: "todos", label: "Todos" },
-  { id: "energia", label: "Energia" },
-  { id: "sono", label: "Sono" },
-  { id: "intestinal", label: "Saúde Intestinal" },
-  { id: "detox", label: "Detox" },
-  { id: "longevidade", label: "Longevidade" },
-  { id: "menopausa", label: "Menopausa" },
-] as const;
+export { protocolLibraryFilterCategories as protocolCategories } from "@/lib/protocol-library/constants";
 
 const rawProtocols: Omit<Protocol, "status" | "createdAt" | "updatedAt">[] = [
   {

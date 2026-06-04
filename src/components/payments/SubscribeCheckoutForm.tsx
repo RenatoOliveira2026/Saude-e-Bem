@@ -1,5 +1,6 @@
 "use client";
 
+import { Badge } from "@/components/ui/Badge";
 import { Button } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
 import {
@@ -86,15 +87,27 @@ export function SubscribeCheckoutForm() {
                     className="sr-only"
                   />
                 )}
-                <span className="text-xs uppercase tracking-wide text-muted-light">
-                  {plan.name}
-                </span>
+                <div className="flex flex-wrap items-center gap-2">
+                  <span className="text-xs uppercase tracking-wide text-muted-light">
+                    {plan.name}
+                  </span>
+                  {plan.highlightBadge && (
+                    <Badge variant="gold" className="text-[10px]">
+                      {plan.highlightBadge}
+                    </Badge>
+                  )}
+                </div>
                 <span className="mt-2 font-heading text-2xl text-forest">
                   {formatPlanAmount(plan)}
                 </span>
                 {plan.periodLabel && (
                   <span className="mt-1 text-sm text-muted">
                     / {plan.periodLabel}
+                  </span>
+                )}
+                {plan.savingsLabel && (
+                  <span className="mt-2 text-xs font-semibold text-gold">
+                    {plan.savingsLabel}
                   </span>
                 )}
                 {!isPaid && (
@@ -110,15 +123,25 @@ export function SubscribeCheckoutForm() {
 
       {activePlan && (
         <Card className="border-gold/30 bg-gold-muted/10 p-6 text-center">
-          <p className="text-sm uppercase tracking-wide text-gold">
-            {activePlan.name}
-          </p>
+          <div className="flex flex-wrap items-center justify-center gap-2">
+            <p className="text-sm uppercase tracking-wide text-gold">
+              {activePlan.name}
+            </p>
+            {activePlan.highlightBadge && (
+              <Badge variant="gold">{activePlan.highlightBadge}</Badge>
+            )}
+          </div>
           <p className="mt-2 font-heading text-4xl text-forest">
             {formatPlanAmount(activePlan)}
           </p>
           <p className="mt-1 text-sm text-muted">
             {formatPlanPriceLabel(activePlan)}
           </p>
+          {activePlan.savingsLabel && (
+            <p className="mt-3 text-sm font-semibold text-forest">
+              {activePlan.savingsLabel}
+            </p>
+          )}
         </Card>
       )}
 

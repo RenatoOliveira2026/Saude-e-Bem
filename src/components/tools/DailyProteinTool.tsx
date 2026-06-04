@@ -7,12 +7,14 @@ import {
   parseDailyProteinForm,
   type DailyProteinResult,
 } from "@/lib/tools/daily-protein";
+import { usePersistToolResult } from "@/lib/health-profile/use-persist-tool-result";
 import { useState } from "react";
 import { ToolDisclaimer, ToolFieldset, ToolResultPanel, scrollToResult } from "./tool-ui";
 
 export function DailyProteinTool() {
   const [result, setResult] = useState<DailyProteinResult | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const { persist, saved, status, message } = usePersistToolResult("proteina-diaria");
 
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -23,9 +25,13 @@ export function DailyProteinTool() {
       setResult(null);
       return;
     }
-    setResult(
-      evaluateDailyProtein(parsed.weightKg, parsed.goal, parsed.activity),
+    const evaluated = evaluateDailyProtein(
+      parsed.weightKg,
+      parsed.goal,
+      parsed.activity,
     );
+    setResult(evaluated);
+    void persist(evaluated as unknown as Record<string, unknown>);
     scrollToResult();
   }
 
@@ -82,6 +88,9 @@ export function DailyProteinTool() {
           badge={`${result.gramsPerDay} g / dia`}
           subtitle={`${result.gramsPerKg} g por kg de peso`}
           recommendations={result.recommendations}
+          saved={saved}
+          saveStatus={status}
+          saveMessage={message}
         >
           <p className="text-muted text-pretty">{result.guidance}</p>
           <dl className="mt-6 grid gap-4 sm:grid-cols-2">

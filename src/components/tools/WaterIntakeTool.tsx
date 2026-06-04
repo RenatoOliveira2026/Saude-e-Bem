@@ -7,12 +7,14 @@ import {
   parseWaterIntakeForm,
   type WaterIntakeResult,
 } from "@/lib/tools/water-intake";
+import { usePersistToolResult } from "@/lib/health-profile/use-persist-tool-result";
 import { useState } from "react";
 import { ToolDisclaimer, ToolFieldset, ToolResultPanel, scrollToResult } from "./tool-ui";
 
 export function WaterIntakeTool() {
   const [result, setResult] = useState<WaterIntakeResult | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const { persist, saved, status, message } = usePersistToolResult("consumo-agua");
 
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -23,9 +25,13 @@ export function WaterIntakeTool() {
       setResult(null);
       return;
     }
-    setResult(
-      evaluateWaterIntake(parsed.weightKg, parsed.activity, parsed.climate),
+    const evaluated = evaluateWaterIntake(
+      parsed.weightKg,
+      parsed.activity,
+      parsed.climate,
     );
+    setResult(evaluated);
+    void persist(evaluated as unknown as Record<string, unknown>);
     scrollToResult();
   }
 
@@ -81,6 +87,9 @@ export function WaterIntakeTool() {
           badge={`${result.litersPerDay} L / dia`}
           subtitle={`~${result.glasses250ml} copos de 250 ml`}
           recommendations={result.recommendations}
+          saved={saved}
+          saveStatus={status}
+          saveMessage={message}
         >
           <p className="text-muted text-pretty">{result.guidance}</p>
           <dl className="mt-6 grid gap-4 sm:grid-cols-2">

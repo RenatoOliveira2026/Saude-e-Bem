@@ -7,12 +7,14 @@ import {
   parseBasalMetabolismForm,
   type BasalMetabolismResult,
 } from "@/lib/tools/basal-metabolism";
+import { usePersistToolResult } from "@/lib/health-profile/use-persist-tool-result";
 import { useState } from "react";
 import { ToolDisclaimer, ToolFieldset, ToolResultPanel, scrollToResult } from "./tool-ui";
 
 export function BasalMetabolismTool() {
   const [result, setResult] = useState<BasalMetabolismResult | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const { persist, saved, status, message } = usePersistToolResult("metabolismo-basal");
 
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -23,15 +25,15 @@ export function BasalMetabolismTool() {
       setResult(null);
       return;
     }
-    setResult(
-      evaluateBasalMetabolism(
-        parsed.sex,
-        parsed.age,
-        parsed.weightKg,
-        parsed.heightCm,
-        parsed.activity,
-      ),
+    const evaluated = evaluateBasalMetabolism(
+      parsed.sex,
+      parsed.age,
+      parsed.weightKg,
+      parsed.heightCm,
+      parsed.activity,
     );
+    setResult(evaluated);
+    void persist(evaluated as unknown as Record<string, unknown>);
     scrollToResult();
   }
 
@@ -108,6 +110,9 @@ export function BasalMetabolismTool() {
           badge={`GET ~${result.tdeeKcal} kcal`}
           subtitle={`TMB ${result.bmrKcal} kcal`}
           recommendations={result.recommendations}
+          saved={saved}
+          saveStatus={status}
+          saveMessage={message}
         >
           <p className="text-muted text-pretty">{result.guidance}</p>
           <p className="mt-3 text-sm text-muted">{result.activityLabel}</p>

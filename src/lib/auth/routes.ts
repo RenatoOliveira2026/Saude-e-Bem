@@ -1,5 +1,6 @@
 export const privateRoutes = [
   "/minha-jornada",
+  "/minha-saude",
   "/perfil",
   "/assinar",
   "/minha-assinatura",

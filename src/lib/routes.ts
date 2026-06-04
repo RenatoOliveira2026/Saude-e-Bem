@@ -26,6 +26,7 @@ export const routes = {
   recuperarSenha: "/recuperar-senha",
   redefinirSenha: "/redefinir-senha",
   minhaJornada: "/minha-jornada",
+  minhaSaude: "/minha-saude",
   perfil: "/perfil",
   protocolo: (slug: string) => `/protocolos/${slug}`,
   ferramenta: (slug: string) => `/ferramentas/${slug}`,
@@ -84,6 +85,7 @@ export const authNavLoggedOut = [
 
 export const authNavLoggedIn = [
   { label: "Minha Jornada", href: routes.minhaJornada },
+  { label: "Minha Saúde", href: routes.minhaSaude },
   { label: "Clube", href: routes.clubeDashboard },
   { label: "Perfil", href: routes.perfil },
 ] as const;
@@ -98,6 +100,7 @@ export const footerNav = {
   ],
   conta: [
     { label: "Minha Jornada", href: routes.minhaJornada },
+    { label: "Minha Saúde", href: routes.minhaSaude },
     { label: "Perfil", href: routes.perfil },
     { label: "Entrar", href: routes.entrar },
     { label: "Cadastrar", href: routes.cadastro },

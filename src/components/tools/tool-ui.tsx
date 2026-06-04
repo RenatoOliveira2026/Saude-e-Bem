@@ -28,12 +28,18 @@ export function ToolResultPanel({
   children,
   recommendations,
   resultId = "resultado-ferramenta",
+  saved = false,
+  saveMessage,
+  saveStatus = "idle",
 }: {
   badge?: string;
   subtitle?: string;
   children: ReactNode;
   recommendations?: string[];
   resultId?: string;
+  saved?: boolean;
+  saveMessage?: string | null;
+  saveStatus?: "idle" | "saving" | "saved" | "skipped" | "error";
 }) {
   return (
     <div
@@ -45,7 +51,7 @@ export function ToolResultPanel({
       <p className="font-heading text-sm font-semibold uppercase tracking-wider text-muted">
         Seu resultado
       </p>
-      {(badge || subtitle) && (
+      {(badge || subtitle || saved || saveStatus === "saving" || saveMessage) && (
         <div className="mt-4 flex flex-wrap items-center gap-3">
           {badge && (
             <Badge variant="sage" className="text-sm">
@@ -53,7 +59,34 @@ export function ToolResultPanel({
             </Badge>
           )}
           {subtitle && <span className="text-sm text-muted">{subtitle}</span>}
+          {saveStatus === "saving" && (
+            <Badge variant="outline" className="text-xs normal-case tracking-normal">
+              Salvando…
+            </Badge>
+          )}
+          {saved && (
+            <Badge variant="outline" className="text-xs normal-case tracking-normal">
+              Salvo em Minha Saúde
+            </Badge>
+          )}
         </div>
+      )}
+      {saveMessage && !saved && saveStatus !== "saving" && (
+        <p
+          className={`mt-3 text-sm text-pretty ${
+            saveStatus === "error" ? "text-red-700" : "text-muted"
+          }`}
+        >
+          {saveMessage}
+          {saveStatus === "skipped" && (
+            <>
+              {" "}
+              <a href={routes.entrar} className="font-medium text-forest underline">
+                Entrar
+              </a>
+            </>
+          )}
+        </p>
       )}
       <div className="mt-6">{children}</div>
       {recommendations && recommendations.length > 0 && (
@@ -70,15 +103,20 @@ export function ToolResultPanel({
           </ul>
         </div>
       )}
-      <ToolResultActions />
+      <ToolResultActions showHealthLink={saved} />
     </div>
   );
 }
 
-export function ToolResultActions() {
+export function ToolResultActions({ showHealthLink = false }: { showHealthLink?: boolean }) {
   return (
     <div className="mt-8 flex flex-wrap gap-3">
-      <Button href={routes.protocolos} variant="primary" size="md">
+      {showHealthLink && (
+        <Button href={routes.minhaSaude} variant="primary" size="md">
+          Ver Minha Saúde
+        </Button>
+      )}
+      <Button href={routes.protocolos} variant={showHealthLink ? "outline" : "primary"} size="md">
         Ver protocolos
       </Button>
       <Button href={routes.ferramentas} variant="outline" size="md">

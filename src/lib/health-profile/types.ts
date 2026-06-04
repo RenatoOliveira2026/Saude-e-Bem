@@ -1,0 +1,34 @@
+import type { SavableToolSlug } from "./constants";
+
+export interface UserToolResultRecord {
+  id: string;
+  userId: string;
+  toolSlug: SavableToolSlug | string;
+  resultJson: Record<string, unknown>;
+  createdAt: string;
+}
+
+export interface ToolResultSummary {
+  toolSlug: SavableToolSlug;
+  toolTitle: string;
+  summary: string;
+  detail?: string;
+  recordedAt: string;
+  resultId: string;
+}
+
+export interface HealthRecommendation {
+  protocolSlug: string;
+  protocolTitle: string;
+  categoryLabel: string;
+  reason: string;
+  href: string;
+  isPremium: boolean;
+}
+
+export interface HealthProfileData {
+  displayName: string;
+  latestByTool: ToolResultSummary[];
+  history: UserToolResultRecord[];
+  recommendations: HealthRecommendation[];
+}

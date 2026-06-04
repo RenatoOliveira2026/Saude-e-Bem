@@ -347,6 +347,14 @@ type PaymentRow = {
   updated_at: string;
 };
 
+type UserToolResultRow = {
+  id: string;
+  user_id: string;
+  tool_slug: string;
+  result_json: Json;
+  created_at: string;
+};
+
 type AdminUserRow = {
   id: string;
   user_id: string;
@@ -695,6 +703,18 @@ export interface Database {
         Update: Partial<UserProtocolHistoryRow>;
         Relationships: [];
       };
+      user_tool_results: {
+        Row: UserToolResultRow;
+        Insert: {
+          id?: string;
+          user_id: string;
+          tool_slug: string;
+          result_json?: Json;
+          created_at?: string;
+        };
+        Update: Partial<UserToolResultRow>;
+        Relationships: [];
+      };
       content_rankings: {
         Row: ContentRankingRow;
         Insert: {
@@ -767,6 +787,10 @@ export interface Database {
       record_protocol_view: {
         Args: { p_user_id: string; p_protocol_id: string };
         Returns: undefined;
+      };
+      save_user_tool_result: {
+        Args: { p_tool_slug: string; p_result_json?: Json };
+        Returns: string;
       };
     };
     Enums: Record<string, never>;

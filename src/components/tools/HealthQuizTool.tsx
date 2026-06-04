@@ -9,6 +9,7 @@ import {
   quizQuestions,
   type HealthQuizResult,
 } from "@/lib/tools/health-quiz";
+import { usePersistToolResult } from "@/lib/health-profile/use-persist-tool-result";
 import Link from "next/link";
 import { useState } from "react";
 import { ToolDisclaimer, ToolFieldset, ToolResultPanel, scrollToResult } from "./tool-ui";
@@ -16,6 +17,7 @@ import { ToolDisclaimer, ToolFieldset, ToolResultPanel, scrollToResult } from ".
 export function HealthQuizTool() {
   const [result, setResult] = useState<HealthQuizResult | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const { persist, saved, status, message } = usePersistToolResult("quiz-saude-bem");
 
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -33,6 +35,7 @@ export function HealthQuizTool() {
       return;
     }
     setResult(evaluated);
+    void persist(evaluated as unknown as Record<string, unknown>);
     scrollToResult();
   }
 
@@ -66,6 +69,9 @@ export function HealthQuizTool() {
           badge={result.profileTitle}
           subtitle={`${result.profileIcon} Perfil dominante`}
           recommendations={result.recommendations}
+          saved={saved}
+          saveStatus={status}
+          saveMessage={message}
         >
           <p className="text-muted text-pretty">{result.profileDescription}</p>
           <div className="mt-4 flex flex-wrap gap-2">

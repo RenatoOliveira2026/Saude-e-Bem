@@ -3,12 +3,14 @@
 import { Button } from "@/components/ui/Button";
 import { Input } from "@/components/ui/Input";
 import { evaluateBmi, parseBmiForm, type BmiResult } from "@/lib/tools/bmi";
+import { usePersistToolResult } from "@/lib/health-profile/use-persist-tool-result";
 import { useState } from "react";
 import { ToolDisclaimer, ToolFieldset, ToolResultPanel, scrollToResult } from "./tool-ui";
 
 export function BmiCalculatorTool() {
   const [result, setResult] = useState<BmiResult | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const { persist, saved, status, message } = usePersistToolResult("calculadora-imc");
 
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -19,7 +21,9 @@ export function BmiCalculatorTool() {
       setResult(null);
       return;
     }
-    setResult(evaluateBmi(parsed.weightKg, parsed.heightCm));
+    const evaluated = evaluateBmi(parsed.weightKg, parsed.heightCm);
+    setResult(evaluated);
+    void persist(evaluated as unknown as Record<string, unknown>);
     scrollToResult();
   }
 
@@ -66,6 +70,9 @@ export function BmiCalculatorTool() {
           badge={result.categoryLabel}
           subtitle={`IMC ${result.bmi}`}
           recommendations={result.recommendations}
+          saved={saved}
+          saveStatus={status}
+          saveMessage={message}
         >
           <p className="text-muted text-pretty">{result.guidance}</p>
           <dl className="mt-6 grid gap-4 sm:grid-cols-2">

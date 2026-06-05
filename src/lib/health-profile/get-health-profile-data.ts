@@ -1,5 +1,5 @@
+import { buildIntelligentRecommendations } from "@/lib/recommendations/recommendation-engine";
 import { getSessionProfile } from "@/lib/auth/session";
-import { buildHealthRecommendations } from "./recommendations";
 import {
   buildLatestSummaries,
   fetchUserToolResults,
@@ -14,14 +14,23 @@ export async function getHealthProfileData(): Promise<HealthProfileData> {
     "Membro";
 
   const records = await fetchUserToolResults(user.id);
-
   const latestByTool = buildLatestSummaries(records);
-  const recommendations = await buildHealthRecommendations(records);
+  const intelligent = await buildIntelligentRecommendations(records);
 
   return {
     displayName,
     latestByTool,
     history: records,
-    recommendations,
+    recommendations: intelligent.protocols.map((p) => ({
+      protocolSlug: p.protocolSlug,
+      protocolTitle: p.protocolTitle,
+      categoryLabel: p.categoryLabel,
+      reason: p.reason,
+      href: p.href,
+      isPremium: p.isPremium,
+    })),
+    healthScore: intelligent.healthScore,
+    recommendedTools: intelligent.tools,
+    priorities: intelligent.priorities,
   };
 }

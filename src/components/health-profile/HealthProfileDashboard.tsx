@@ -3,6 +3,9 @@ import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
 import { Section } from "@/components/ui/Section";
 import { HealthRecommendations } from "@/components/health-profile/HealthRecommendations";
+import { HealthScoreCard } from "@/components/health-profile/HealthScoreCard";
+import { PrioritiesSection } from "@/components/health-profile/PrioritiesSection";
+import { RecommendedToolsSection } from "@/components/health-profile/RecommendedToolsSection";
 import {
   ToolHistoryList,
   ToolResultSummaryGrid,
@@ -59,8 +62,8 @@ export function HealthProfileDashboard({ data }: HealthProfileDashboardProps) {
               Minha Saúde
             </h1>
             <p className="mt-4 max-w-2xl text-muted leading-relaxed text-pretty">
-              Olá, {firstName}. Aqui você acompanha os resultados das ferramentas
-              interativas e recebe sugestões de protocolos alinhados ao seu perfil.
+              Olá, {firstName}. Acompanhe seu Score Saúde & Bem, resultados das
+              ferramentas e recomendações personalizadas com base no seu histórico.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <Button href={routes.ferramentas} variant="primary" size="sm">
@@ -75,6 +78,20 @@ export function HealthProfileDashboard({ data }: HealthProfileDashboardProps) {
       </Section>
 
       <Section background="white">
+        <Container>
+          <h2 className="font-heading text-2xl text-forest">Seu Score Saúde & Bem</h2>
+          <p className="mt-2 text-sm text-muted text-pretty">
+            Pontuação de 0 a 100 com base nos últimos resultados salvos — até 20
+            pontos por critério (IMC, água, proteína, metabolismo e risco
+            cardiometabólico).
+          </p>
+          <div className="mt-8">
+            <HealthScoreCard score={data.healthScore} />
+          </div>
+        </Container>
+      </Section>
+
+      <Section background="default">
         <Container>
           <h2 className="font-heading text-2xl text-forest">Últimos resultados</h2>
           <p className="mt-2 text-sm text-muted">
@@ -93,14 +110,14 @@ export function HealthProfileDashboard({ data }: HealthProfileDashboardProps) {
         </Container>
       </Section>
 
-      <Section background="default">
+      <Section background="white">
         <Container>
           <h2 className="font-heading text-2xl text-forest">
-            Protocolos recomendados
+            Protocolos recomendados para você
           </h2>
           <p className="mt-2 text-sm text-muted text-pretty">
-            Sugestões automáticas com base no quiz, IMC e demais resultados salvos —
-            integradas à biblioteca de protocolos.
+            Sugestões determinísticas com base no score, quiz, IMC e demais
+            resultados — integradas à biblioteca de protocolos.
           </p>
           <div className="mt-8">
             <HealthRecommendations recommendations={data.recommendations} />
@@ -108,7 +125,31 @@ export function HealthProfileDashboard({ data }: HealthProfileDashboardProps) {
         </Container>
       </Section>
 
+      <Section background="default">
+        <Container>
+          <h2 className="font-heading text-2xl text-forest">Ferramentas recomendadas</h2>
+          <p className="mt-2 text-sm text-muted text-pretty">
+            Ferramentas que mais impactam seu score e lacunas do seu perfil atual.
+          </p>
+          <div className="mt-8">
+            <RecommendedToolsSection tools={data.recommendedTools} />
+          </div>
+        </Container>
+      </Section>
+
       <Section background="white">
+        <Container>
+          <h2 className="font-heading text-2xl text-forest">Próximos passos</h2>
+          <p className="mt-2 text-sm text-muted text-pretty">
+            Prioridades ordenadas para evoluir seu perfil de saúde na plataforma.
+          </p>
+          <div className="mt-8">
+            <PrioritiesSection priorities={data.priorities} />
+          </div>
+        </Container>
+      </Section>
+
+      <Section background="default">
         <Container>
           <h2 className="font-heading text-2xl text-forest">Histórico completo</h2>
           <p className="mt-2 text-sm text-muted">

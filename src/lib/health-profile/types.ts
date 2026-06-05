@@ -1,4 +1,9 @@
 import type { SavableToolSlug } from "./constants";
+import type {
+  HealthScoreResult,
+  PriorityAction,
+  RecommendedTool,
+} from "@/lib/recommendations/recommendation-types";
 
 export interface UserToolResultRecord {
   id: string;
@@ -31,4 +36,7 @@ export interface HealthProfileData {
   latestByTool: ToolResultSummary[];
   history: UserToolResultRecord[];
   recommendations: HealthRecommendation[];
+  healthScore: HealthScoreResult;
+  recommendedTools: RecommendedTool[];
+  priorities: PriorityAction[];
 }

@@ -1,60 +1,50 @@
 import { NewsletterCaptureSection } from "@/components/newsletter";
-import {
-  ContentEmptyState,
-  CrossLinks,
-  LibraryListing,
-  PageCta,
-} from "@/components/pages";
+import { CrossLinks, PageCta } from "@/components/pages";
+import { IntelligentLibraryListing } from "@/components/intelligent-library";
 import { PageHero } from "@/components/layout/PageHero";
 import {
-  getFeaturedLibraryResource,
-  getLibraryResources,
-} from "@/lib/data/repositories/library.repository";
+  computeLibraryStats,
+  fetchFeaturedIntelligentLibraryItem,
+  fetchIntelligentLibraryItems,
+} from "@/lib/intelligent-library";
 import { routes } from "@/lib/routes";
 import type { Metadata } from "next";
 
 export const revalidate = 3600;
 
 export const metadata: Metadata = {
-  title: "Biblioteca",
+  title: "Biblioteca Saúde & Bem",
   description:
-    "Guias, checklists, estudos e planos curados — materiais gratuitos para aprofundar seu conhecimento em saúde e longevidade.",
+    "Biblioteca inteligente com e-books, protocolos e vídeos — materiais gratuitos e premium curados para sua evolução em saúde e longevidade.",
 };
 
 export default async function BibliotecaPage() {
-  const [resources, featured] = await Promise.all([
-    getLibraryResources(),
-    getFeaturedLibraryResource(),
+  const [items, featured] = await Promise.all([
+    fetchIntelligentLibraryItems(),
+    fetchFeaturedIntelligentLibraryItem(),
   ]);
 
-  const isEmpty = resources.length === 0;
+  const stats = computeLibraryStats(items);
 
   return (
     <>
       <PageHero
-        badge="Biblioteca"
-        title="Recursos curados para sua evolução"
-        description="Materiais selecionados pela equipe Saúde & Bem — guias práticos, checklists, estudos científicos e planos de ação para download."
+        badge="Biblioteca Inteligente"
+        title="Biblioteca Saúde & Bem"
+        description="E-books, protocolos e vídeos curados — gratuitos e premium. Filtre por tipo, acesse conteúdos ou assine para desbloquear materiais exclusivos."
       />
-      {isEmpty ? (
-        <ContentEmptyState
-          icon="download"
-          title="Biblioteca em expansão"
-          description="Guias e materiais curados serão adicionados em breve. Enquanto isso, leia artigos no blog ou inicie um protocolo."
-          actionLabel="Ler artigos no blog"
-          actionHref={routes.blog}
-        />
-      ) : (
-        <LibraryListing resources={resources} featured={featured} />
-      )}
+      <IntelligentLibraryListing
+        items={items}
+        featured={featured ?? null}
+      />
       <NewsletterCaptureSection source="biblioteca" />
       <PageCta
         title="Biblioteca premium no Clube"
-        description="Membros têm acesso a guias avançados, planos de 90 dias e estudos exclusivos atualizados mensalmente."
-        primaryLabel="Entrar na lista de espera"
-        primaryHref={`${routes.clube}#lista-espera`}
-        secondaryLabel="Ler artigos no blog"
-        secondaryHref={routes.blog}
+        description={`${stats.premium} materiais premium e ${stats.free} gratuitos no catálogo — assinantes têm acesso completo a e-books, protocolos e vídeos exclusivos.`}
+        primaryLabel="Assinar Clube Saúde & Bem"
+        primaryHref={routes.assinar}
+        secondaryLabel="Conhecer o Clube"
+        secondaryHref={routes.clubePremium}
       />
       <CrossLinks />
     </>

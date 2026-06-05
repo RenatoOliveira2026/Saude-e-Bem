@@ -1,4 +1,5 @@
 import { CrossLinks, LibraryDownloadPanel, PageCta } from "@/components/pages";
+import { IntelligentLibraryDetail } from "@/components/intelligent-library";
 import { ContentMemberActions } from "@/components/club/ContentMemberActions";
 import { PremiumContentGuard } from "@/components/club/PremiumContentGuard";
 import { recordContentViewForUser } from "@/lib/club/record-content-view";
@@ -12,6 +13,11 @@ import {
   getLibrarySlugs,
   getLibraryResources,
 } from "@/lib/data/repositories/library.repository";
+import {
+  fetchIntelligentLibraryItemBySlug,
+  fetchIntelligentLibraryItems,
+  getIntelligentLibrarySlugs,
+} from "@/lib/intelligent-library";
 import { routes } from "@/lib/routes";
 import { buildContentMetadata } from "@/lib/seo/metadata";
 import type { Metadata } from "next";
@@ -24,12 +30,25 @@ interface PageProps {
 export const revalidate = 3600;
 
 export async function generateStaticParams() {
-  const slugs = await getLibrarySlugs();
+  const [legacySlugs, intelligentSlugs] = await Promise.all([
+    getLibrarySlugs(),
+    Promise.resolve(getIntelligentLibrarySlugs()),
+  ]);
+  const slugs = [...new Set([...legacySlugs, ...intelligentSlugs])];
   return slugs.map((slug) => ({ slug }));
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params;
+  const intelligent = await fetchIntelligentLibraryItemBySlug(slug);
+  if (intelligent) {
+    return buildContentMetadata({
+      title: intelligent.title,
+      description: intelligent.description,
+      path: routes.bibliotecaItem(slug),
+      imageUrl: intelligent.image,
+    });
+  }
   const resource = await getLibraryResourceBySlug(slug);
   if (!resource) return { title: "Recurso não encontrado" };
   return buildContentMetadata({
@@ -42,6 +61,22 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
 export default async function BibliotecaDetailPage({ params }: PageProps) {
   const { slug } = await params;
+
+  const intelligentItem = await fetchIntelligentLibraryItemBySlug(slug);
+  if (intelligentItem) {
+    const allIntelligent = await fetchIntelligentLibraryItems();
+    const related = allIntelligent
+      .filter(
+        (r) =>
+          r.slug !== slug &&
+          (r.category === intelligentItem.category || r.type === intelligentItem.type),
+      )
+      .slice(0, 3);
+    return (
+      <IntelligentLibraryDetail item={intelligentItem} related={related} />
+    );
+  }
+
   const resource = await getLibraryResourceBySlug(slug);
   if (!resource) notFound();
 

@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" role="img" aria-label="Saúde cardiovascular">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fde8e8"/>
+      <stop offset="45%" stop-color="#fff5f5"/>
+      <stop offset="100%" stop-color="#e8f3e4"/>
+    </linearGradient>
+    <linearGradient id="heart" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#e63946"/>
+      <stop offset="100%" stop-color="#c1121f"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="450" fill="url(#bg)"/>
+  <ellipse cx="400" cy="390" rx="260" ry="26" fill="#2e6b1f" opacity="0.08"/>
+  <path d="M400 310c-45-38-95-62-95-110 0-38 30-62 62-62 22 0 33 12 33 12s11-12 33-12c32 0 62 24 62 62 0 48-50 72-95 110z" fill="url(#heart)"/>
+  <path d="M180 260h440" stroke="#e63946" stroke-width="3" fill="none" opacity="0.4" stroke-dasharray="8 6"/>
+  <path d="M180 260 Q220 220 260 260 T340 260 T420 260 T500 260 T580 260 T660 260" stroke="#c1121f" stroke-width="4" fill="none" stroke-linecap="round"/>
+  <circle cx="180" cy="260" r="6" fill="#c1121f"/>
+  <circle cx="660" cy="260" r="6" fill="#c1121f"/>
+  <path d="M620 150c0-20 16-36 36-36s36 16 36 36-16 36-36 36" fill="none" stroke="#2e6b1f" stroke-width="5" stroke-linecap="round"/>
+  <path d="M656 150v-18M638 132l18 18 18-18" stroke="#2e6b1f" stroke-width="4" stroke-linecap="round" fill="none"/>
+  <rect x="130" y="320" width="80" height="12" rx="6" fill="#4f8f3a" opacity="0.35"/>
+  <rect x="590" y="320" width="80" height="12" rx="6" fill="#4f8f3a" opacity="0.35"/>
+</svg>

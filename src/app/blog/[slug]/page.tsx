@@ -2,10 +2,12 @@ import { RelatedAffiliatesSection } from "@/components/affiliates";
 import { ContentMemberActions } from "@/components/club/ContentMemberActions";
 import { PremiumContentGuard } from "@/components/club/PremiumContentGuard";
 import { recordContentViewForUser } from "@/lib/club/record-content-view";
-import { CrossLinks, PageCta } from "@/components/pages";
+import { SmartConversionCta } from "@/components/conversion/SmartConversionCta";
+import { CrossLinks } from "@/components/pages";
 import { PublicArticleBody } from "@/components/content/PublicArticleBody";
 import { Breadcrumbs } from "@/components/layout/Breadcrumbs";
 import { DetailHero, RelatedNav } from "@/components/layout/DetailPage";
+import { JsonLdScript } from "@/components/seo/JsonLd";
 import { Container } from "@/components/ui/Container";
 import { Section } from "@/components/ui/Section";
 import {
@@ -14,7 +16,9 @@ import {
   getBlogSlugs,
 } from "@/lib/data/repositories/blog.repository";
 import { trackEvent } from "@/lib/analytics/track-event";
+import { resolveArticleCoverUrl } from "@/lib/blog/resolve-article-cover";
 import { routes } from "@/lib/routes";
+import { articleJsonLd, breadcrumbJsonLd } from "@/lib/seo/json-ld";
 import { buildContentMetadata } from "@/lib/seo/metadata";
 import { fetchAffiliatesForContentCategory } from "@/lib/supabase/services/affiliates.public";
 import type { Metadata } from "next";
@@ -35,12 +39,16 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const { slug } = await params;
   const article = await getBlogArticleBySlug(slug);
   if (!article) return { title: "Artigo não encontrado" };
+  const coverImage = resolveArticleCoverUrl(article);
   return buildContentMetadata({
     title: article.seoTitle ?? article.title,
     description: article.seoDescription ?? article.excerpt,
     path: routes.artigo(slug),
-    imageUrl: article.ogImageUrl ?? article.coverImageUrl,
+    imageUrl: coverImage,
     type: "article",
+    keywords: article.seoKeywords ?? undefined,
+    publishedAt: article.publishedAt,
+    authors: [article.author],
   });
 }
 
@@ -81,6 +89,24 @@ export default async function ArtigoDetailPage({ params }: PageProps) {
 
   return (
     <>
+      <JsonLdScript
+        data={[
+          breadcrumbJsonLd([
+            { name: "Início", path: routes.home },
+            { name: "Blog", path: routes.blog },
+            { name: article.title },
+          ]),
+          articleJsonLd({
+            title: article.title,
+            description: article.seoDescription ?? article.excerpt,
+            path: routes.artigo(slug),
+            imageUrl: resolveArticleCoverUrl(article),
+            author: article.author,
+            publishedAt: article.publishedAt,
+            isPremium: article.isPremium,
+          }),
+        ]}
+      />
       <Breadcrumbs
         items={[
           { label: "Início", href: routes.home },
@@ -142,14 +168,12 @@ export default async function ArtigoDetailPage({ params }: PageProps) {
         sourceType="blog"
       />
 
-      <PageCta
-        title="Coloque em prática"
-        description="Explore protocolos alinhados ao tema deste artigo."
-        primaryLabel="Ver protocolos"
-        primaryHref={routes.protocolos}
-        secondaryLabel="Ferramentas gratuitas"
-        secondaryHref={routes.ferramentas}
-        background="forest"
+      <SmartConversionCta
+        context="article"
+        category={article.category}
+        categoryLabel={article.categoryLabel}
+        contentTitle={article.title}
+        contentSlug={slug}
       />
       </PremiumContentGuard>
       <CrossLinks />

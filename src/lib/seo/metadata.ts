@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
-
-const SITE_NAME = "Saúde & Bem";
+import { absoluteUrl, DEFAULT_OG_IMAGE, SITE_NAME } from "./site-url";
 
 interface ContentMetadataInput {
   title: string;
@@ -8,6 +7,10 @@ interface ContentMetadataInput {
   path: string;
   imageUrl?: string;
   type?: "article" | "website";
+  keywords?: string;
+  publishedAt?: string;
+  authors?: string[];
+  noIndex?: boolean;
 }
 
 export function buildContentMetadata({
@@ -16,30 +19,39 @@ export function buildContentMetadata({
   path,
   imageUrl,
   type = "website",
+  keywords,
+  publishedAt,
+  authors,
+  noIndex = false,
 }: ContentMetadataInput): Metadata {
   const pageTitle = title.includes(SITE_NAME) ? title : `${title} | ${SITE_NAME}`;
-  const siteUrl = (process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3001").replace(
-    /\/$/,
-    "",
-  );
-  const url = path.startsWith("http") ? path : `${siteUrl}${path.startsWith("/") ? path : `/${path}`}`;
+  const canonical = absoluteUrl(path);
+  const ogImage = imageUrl ? absoluteUrl(imageUrl) : absoluteUrl(DEFAULT_OG_IMAGE);
 
   return {
     title: pageTitle,
     description,
+    ...(keywords ? { keywords: keywords.split(",").map((k) => k.trim()).filter(Boolean) } : {}),
+    alternates: { canonical },
+    robots: noIndex ? { index: false, follow: false } : { index: true, follow: true },
     openGraph: {
       title: pageTitle,
       description,
-      url,
+      url: canonical,
       siteName: SITE_NAME,
       type,
-      ...(imageUrl ? { images: [{ url: imageUrl, alt: title }] } : {}),
+      locale: "pt_BR",
+      ...(publishedAt && type === "article" ? { publishedTime: publishedAt } : {}),
+      ...(authors?.length && type === "article" ? { authors } : {}),
+      images: [{ url: ogImage, alt: title }],
     },
     twitter: {
-      card: imageUrl ? "summary_large_image" : "summary",
+      card: "summary_large_image",
       title: pageTitle,
       description,
-      ...(imageUrl ? { images: [imageUrl] } : {}),
+      images: [ogImage],
     },
   };
 }
+
+export { SITE_NAME, absoluteUrl, getSiteUrl, DEFAULT_OG_IMAGE } from "./site-url";

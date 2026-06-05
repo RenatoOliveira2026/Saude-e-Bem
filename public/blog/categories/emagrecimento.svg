@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" role="img" aria-label="Emagrecimento e alimentação saudável">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fff8e8"/>
+      <stop offset="50%" stop-color="#e8f3e4"/>
+      <stop offset="100%" stop-color="#d4edda"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="450" fill="url(#bg)"/>
+  <ellipse cx="400" cy="390" rx="260" ry="26" fill="#2e6b1f" opacity="0.08"/>
+  <ellipse cx="400" cy="280" rx="150" ry="38" fill="#ffffff" opacity="0.9"/>
+  <ellipse cx="400" cy="268" rx="130" ry="28" fill="#6ba85a" opacity="0.25"/>
+  <circle cx="340" cy="250" r="22" fill="#e63946" opacity="0.85"/>
+  <circle cx="385" cy="235" r="18" fill="#f4a261"/>
+  <circle cx="430" cy="255" r="16" fill="#2a9d8f"/>
+  <circle cx="470" cy="240" r="14" fill="#e9c46a"/>
+  <path d="M350 290c20 8 40 10 60 8" stroke="#4f8f3a" stroke-width="4" fill="none" stroke-linecap="round"/>
+  <rect x="330" y="295" width="140" height="8" rx="4" fill="#2e6b1f" opacity="0.15"/>
+  <path d="M520 180l28-48 28 48z" fill="#4f8f3a" opacity="0.7"/>
+  <path d="M545 180v55h-14v-55z" fill="#6ba85a"/>
+  <circle cx="250" cy="320" r="12" fill="#4f8f3a" opacity="0.3"/>
+  <circle cx="560" cy="310" r="10" fill="#4f8f3a" opacity="0.25"/>
+</svg>

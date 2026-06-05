@@ -16,6 +16,7 @@ import {
   SectionTitle,
 } from "@/components/ui/Section";
 import type { BlogArticle } from "@/lib/data/types";
+import { resolveArticleCoverUrl } from "@/lib/blog/resolve-article-cover";
 import { routes } from "@/lib/routes";
 import Link from "next/link";
 
@@ -51,7 +52,7 @@ export function FeaturedArticlesSection({ articles }: FeaturedArticlesSectionPro
           >
             <Card variant="default" hover padding="lg" className="flex h-full flex-col">
               <ContentCover
-                src={article.coverImageUrl}
+                src={resolveArticleCoverUrl(article)}
                 alt={article.title}
                 className="mb-5"
               >

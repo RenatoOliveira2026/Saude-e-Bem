@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" role="img" aria-label="Hidratação">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#e8f3e4"/>
+      <stop offset="55%" stop-color="#c5e8f0"/>
+      <stop offset="100%" stop-color="#8ecae6"/>
+    </linearGradient>
+    <linearGradient id="water" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#90e0ef"/>
+      <stop offset="100%" stop-color="#219ebc"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="450" fill="url(#bg)"/>
+  <ellipse cx="400" cy="390" rx="280" ry="28" fill="#2e6b1f" opacity="0.08"/>
+  <path d="M320 340c0-70 80-130 80-200 0 70 80 130 80 200z" fill="url(#water)" opacity="0.35"/>
+  <path d="M360 310c0-55 40-95 40-145 0 50 40 90 40 145z" fill="#219ebc" opacity="0.5"/>
+  <rect x="355" y="155" width="90" height="185" rx="12" fill="#ffffff" opacity="0.85"/>
+  <rect x="365" y="210" width="70" height="120" rx="8" fill="url(#water)"/>
+  <ellipse cx="400" cy="210" rx="35" ry="8" fill="#ffffff" opacity="0.5"/>
+  <circle cx="250" cy="120" r="18" fill="#219ebc" opacity="0.35"/>
+  <circle cx="290" cy="90" r="10" fill="#219ebc" opacity="0.25"/>
+  <circle cx="540" cy="130" r="14" fill="#219ebc" opacity="0.3"/>
+  <circle cx="580" cy="95" r="8" fill="#219ebc" opacity="0.2"/>
+</svg>

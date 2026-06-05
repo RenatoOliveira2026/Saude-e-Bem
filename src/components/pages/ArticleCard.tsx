@@ -8,13 +8,16 @@ import {
 } from "@/components/ui/Card";
 import { ContentCover } from "@/components/content/ContentCover";
 import { blogCategoryIcons, Icon, IconBox } from "@/components/icons";
+import { resolveArticleCoverUrl } from "@/lib/blog/resolve-article-cover";
 import { routes } from "@/lib/routes";
 import type { BlogArticle } from "@/lib/data/types";
 
 export function ArticleCard({ article }: { article: BlogArticle }) {
+  const coverSrc = resolveArticleCoverUrl(article);
+
   return (
     <Card variant="default" hover padding="lg" className="flex h-full flex-col">
-      <ContentCover src={article.coverImageUrl} alt={article.title} className="mb-5 h-36">
+      <ContentCover src={coverSrc} alt={article.title} className="mb-5 h-36">
         <IconBox
           name={blogCategoryIcons[article.category]}
           size={32}
@@ -50,11 +53,13 @@ export function ArticleCard({ article }: { article: BlogArticle }) {
 }
 
 export function FeaturedArticleBanner({ article }: { article: BlogArticle }) {
+  const coverSrc = resolveArticleCoverUrl(article);
+
   return (
     <Card variant="featured" padding="lg" className="overflow-hidden">
       <div className="grid gap-8 lg:grid-cols-2">
         <ContentCover
-          src={article.coverImageUrl}
+          src={coverSrc}
           alt={article.title}
           aspect="video"
           className="min-h-[220px] bg-gradient-to-br from-forest/90 to-sage/70"

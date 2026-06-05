@@ -2,6 +2,7 @@ import { PageViewTracker } from "@/components/analytics";
 import { brandIcons } from "@/components/brand/logo-config";
 import { AppShell } from "@/components/layout/AppShell";
 import { PwaProvider } from "@/components/pwa";
+import { JsonLdScript } from "@/components/seo/JsonLd";
 import {
   MANIFEST_URL,
   PWA_DESCRIPTION,
@@ -9,6 +10,8 @@ import {
   PWA_SHORT_NAME,
   PWA_THEME_COLOR,
 } from "@/lib/pwa/config";
+import { organizationJsonLd, websiteJsonLd } from "@/lib/seo/json-ld";
+import { getSiteUrl } from "@/lib/seo/site-url";
 import type { Metadata, Viewport } from "next";
 import { Montserrat, Open_Sans } from "next/font/google";
 import "./globals.css";
@@ -39,6 +42,7 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
+  metadataBase: new URL(getSiteUrl()),
   title: {
     default: "Saúde & Bem — Longevidade & Vitalidade",
     template: "%s | Saúde & Bem",
@@ -76,6 +80,7 @@ export default function RootLayout({
       className={`${montserrat.variable} ${openSans.variable} h-full scroll-smooth antialiased`}
     >
       <body className="flex min-h-full flex-col bg-off-white font-body text-graphite">
+        <JsonLdScript data={[organizationJsonLd(), websiteJsonLd()]} />
         <PageViewTracker />
         <PwaProvider />
         <AppShell>{children}</AppShell>

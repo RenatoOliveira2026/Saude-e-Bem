@@ -11,6 +11,7 @@ import { Section } from "@/components/ui/Section";
 import { HomeEmptyNote } from "@/components/home/HomeEmptyNote";
 import { HomeSectionHeader } from "@/components/home/HomeSectionHeader";
 import type { BlogArticle, LibraryResource, Protocol } from "@/lib/data/types";
+import { resolveArticleCoverUrl } from "@/lib/blog/resolve-article-cover";
 import { routes } from "@/lib/routes";
 import Link from "next/link";
 
@@ -49,7 +50,7 @@ export function FeaturedHighlightSection({
               {articles.map((article) => (
                 <Link key={article.id} href={routes.artigo(article.slug)} className="group block">
                   <Card variant="default" hover padding="lg" className="flex h-full flex-col bg-surface">
-                    <ContentCover src={article.coverImageUrl} alt={article.title} className="mb-4">
+                    <ContentCover src={resolveArticleCoverUrl(article)} alt={article.title} className="mb-4">
                       <IconBox name={blogCategoryIcons[article.category]} size={28} className="bg-surface shadow-soft" />
                     </ContentCover>
                     <Badge variant="gold" className="mb-2 w-fit text-[10px]">

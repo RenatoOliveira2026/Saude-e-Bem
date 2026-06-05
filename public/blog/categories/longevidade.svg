@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" role="img" aria-label="Longevidade e envelhecimento saudável">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#e8f3e4"/>
+      <stop offset="40%" stop-color="#fff8e8"/>
+      <stop offset="100%" stop-color="#fde8c8"/>
+    </linearGradient>
+    <linearGradient id="sun" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffd166"/>
+      <stop offset="100%" stop-color="#f4a261"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="450" fill="url(#bg)"/>
+  <circle cx="620" cy="90" r="48" fill="url(#sun)" opacity="0.9"/>
+  <path d="M120 320 Q200 260 280 300 T440 280 T560 310 T680 290" stroke="#4f8f3a" stroke-width="3" fill="none" opacity="0.4"/>
+  <ellipse cx="400" cy="350" rx="220" ry="24" fill="#2e6b1f" opacity="0.08"/>
+  <circle cx="360" cy="250" r="22" fill="#f4a261"/>
+  <path d="M360 272v55c0 8 12 8 12 0v-55" stroke="#2e6b1f" stroke-width="8" stroke-linecap="round"/>
+  <path d="M330 310c15-20 30-20 45 0M345 310c15-20 30-20 45 0" stroke="#2e6b1f" stroke-width="6" stroke-linecap="round" fill="none"/>
+  <path d="M420 265c8-12 20-12 28 0" stroke="#2e6b1f" stroke-width="5" stroke-linecap="round" fill="none"/>
+  <path d="M500 240 Q530 200 560 240" stroke="#4f8f3a" stroke-width="4" fill="none" stroke-linecap="round"/>
+  <circle cx="560" cy="248" r="14" fill="#6ba85a" opacity="0.8"/>
+  <rect x="490" y="248" width="8" height="40" rx="4" fill="#4f8f3a"/>
+  <path d="M140 300 Q160 250 180 300" stroke="#2e6b1f" stroke-width="5" fill="none" stroke-linecap="round"/>
+  <ellipse cx="160" cy="300" rx="28" ry="12" fill="#4f8f3a" opacity="0.35"/>
+</svg>

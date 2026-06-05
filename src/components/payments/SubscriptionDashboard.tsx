@@ -1,9 +1,10 @@
 import { Badge } from "@/components/ui/Badge";
 import { Button } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
+import { ActiveBenefitsList } from "@/components/subscription/ActiveBenefitsList";
+import { PlanBadge } from "@/components/subscription/PlanBadge";
 import {
   formatSubscriptionDate,
-  membershipPlanLabels,
   subscriptionStatusLabels,
 } from "@/lib/club/constants";
 import {
@@ -13,6 +14,7 @@ import {
   PREMIUM_ANNUAL_PLAN,
   PREMIUM_MONTHLY_PLAN,
 } from "@/lib/payments/plans";
+import { profilePlanLabels, profilePlanStatusLabels } from "@/lib/subscription";
 import type { SubscriptionBillingData } from "@/lib/payments/types";
 import { routes } from "@/lib/routes";
 import { PaymentHistoryList } from "./PaymentHistoryList";
@@ -68,8 +70,11 @@ export function SubscriptionDashboard({ data }: SubscriptionDashboardProps) {
           <p className="text-xs uppercase tracking-wide text-muted-light">
             Plano atual
           </p>
-          <p className="mt-1 font-heading text-2xl text-forest">
-            {membershipPlanLabels[membership.plan]}
+          <div className="mt-2 flex flex-wrap items-center gap-2">
+            <PlanBadge tier={membership.isPremium ? "premium" : "free"} />
+          </div>
+          <p className="mt-2 font-heading text-xl text-forest">
+            {profilePlanLabels[membership.profilePlan]}
           </p>
         </Card>
         <Card className="p-5">
@@ -78,6 +83,9 @@ export function SubscriptionDashboard({ data }: SubscriptionDashboardProps) {
           </p>
           <p className="mt-1 font-heading text-2xl text-forest">
             {subscriptionStatusLabels[membership.status]}
+          </p>
+          <p className="mt-1 text-xs text-muted">
+            {profilePlanStatusLabels[membership.profilePlan]}
           </p>
         </Card>
         <Card className="p-5">
@@ -123,6 +131,8 @@ export function SubscriptionDashboard({ data }: SubscriptionDashboardProps) {
           )}
         </div>
       </Card>
+
+      <ActiveBenefitsList membership={membership} />
 
       {membership.isPremium &&
         subscription &&

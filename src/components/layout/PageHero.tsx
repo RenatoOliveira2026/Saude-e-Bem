@@ -7,6 +7,8 @@ interface PageHeroProps {
   title: string;
   description: string;
   className?: string;
+  /** Limita largura do bloco de texto (padrão páginas internas). */
+  narrow?: boolean;
 }
 
 export function PageHero({
@@ -14,27 +16,30 @@ export function PageHero({
   title,
   description,
   className,
+  narrow = true,
 }: PageHeroProps) {
   return (
     <section
       className={cn(
-        "border-b border-border bg-surface pt-12 pb-16 md:pt-16 md:pb-20",
+        "border-b border-border bg-surface pt-10 pb-14 md:pt-14 md:pb-16",
         className,
       )}
     >
-      <Container size="md">
-        {badge && (
-          <Badge variant="gold" className="mb-6">
-            {badge}
-          </Badge>
-        )}
-        <h1 className="font-heading text-4xl text-forest text-balance md:text-5xl">
-          {title}
-        </h1>
-        <p className="mt-5 max-w-2xl text-lg leading-relaxed text-muted text-pretty">
-          {description}
-        </p>
-        <div className="divider-gold mt-8" />
+      <Container size="md" className="min-w-0">
+        <div className={cn(narrow && "max-w-3xl")}>
+          {badge && (
+            <Badge variant="gold" className="mb-4 md:mb-5">
+              {badge}
+            </Badge>
+          )}
+          <h1 className="font-heading text-3xl leading-snug text-forest text-pretty sm:text-4xl md:leading-tight">
+            {title}
+          </h1>
+          <p className="mt-4 max-w-2xl text-base leading-relaxed text-muted text-pretty md:mt-5 md:text-lg">
+            {description}
+          </p>
+        </div>
+        <div className={cn("divider-gold mt-8 md:mt-10", narrow && "max-w-3xl")} />
       </Container>
     </section>
   );

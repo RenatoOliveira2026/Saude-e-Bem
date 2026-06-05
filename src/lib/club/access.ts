@@ -4,6 +4,12 @@ import { routes } from "@/lib/routes";
 import { createClient } from "@/lib/supabase/server";
 import { isSupabaseConfigured } from "@/lib/supabase/config";
 import type { SubscriptionRow } from "@/lib/supabase/types";
+import {
+  isPremiumPlan,
+  isPremiumUser,
+  normalizeProfilePlan,
+  resolveIsPremiumUser,
+} from "@/lib/subscription";
 import type {
   ClubMembership,
   PremiumAccessContext,
@@ -47,8 +53,13 @@ function mapSubscriptionRow(row: SubscriptionSelectRow): Subscription {
 
 function buildMembership(
   subscription: Subscription | null,
-  profileTier: "free" | "premium" | null | undefined,
+  profile: { membership_tier?: "free" | "premium" | null; plan?: string | null } | null,
 ): ClubMembership {
+  const profilePlan = normalizeProfilePlan(
+    profile?.plan,
+    profile?.membership_tier ?? undefined,
+  );
+
   const activeFromSubscription =
     subscription &&
     subscription.plan === "premium" &&
@@ -56,14 +67,18 @@ function buildMembership(
     (!subscription.currentPeriodEnd ||
       new Date(subscription.currentPeriodEnd) > new Date());
 
-  const isPremium = Boolean(activeFromSubscription) || profileTier === "premium";
+  const isPremium =
+    Boolean(activeFromSubscription) ||
+    isPremiumPlan(profilePlan) ||
+    profile?.membership_tier === "premium";
 
   return {
     plan: isPremium ? "premium" : "free",
+    profilePlan,
     isPremium,
     subscription,
     expiresAt: subscription?.currentPeriodEnd ?? null,
-    status: subscription?.status ?? "none",
+    status: subscription?.status ?? (isPremium ? "active" : "none"),
     provider: subscription?.provider ?? null,
   };
 }
@@ -94,6 +109,7 @@ export async function getClubMembership(userId: string): Promise<ClubMembership>
   if (!isSupabaseConfigured()) {
     return {
       plan: "free",
+      profilePlan: "free",
       isPremium: false,
       subscription: null,
       expiresAt: null,
@@ -115,7 +131,7 @@ export async function getClubMembership(userId: string): Promise<ClubMembership>
       .maybeSingle(),
     supabase
       .from("profiles")
-      .select("membership_tier")
+      .select("membership_tier, plan")
       .eq("id", userId)
       .maybeSingle(),
   ]);
@@ -127,10 +143,7 @@ export async function getClubMembership(userId: string): Promise<ClubMembership>
     ? mapSubscriptionRow(subscriptionResult.data)
     : null;
 
-  return buildMembership(
-    subscription,
-    profileResult.data?.membership_tier as "free" | "premium" | undefined,
-  );
+  return buildMembership(subscription, profileResult.data);
 }
 
 /** Verifica premium via RPC (fallback para tier local). */
@@ -188,6 +201,9 @@ export function getPremiumUpgradeHref(isLoggedIn: boolean): string {
     ? routes.assinar
     : `${routes.entrar}?redirect=${encodeURIComponent(routes.assinar)}`;
 }
+
+/** Reexporta helper Fase 4.7 para uso em gates e biblioteca. */
+export { isPremiumUser, resolveIsPremiumUser as resolveIsPremiumUserFromAccess };
 
 /** Marca entrada na área de membros (idempotente). */
 export async function touchClubJoined(userId: string): Promise<void> {

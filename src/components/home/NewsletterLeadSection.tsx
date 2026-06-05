@@ -1,6 +1,6 @@
-import { NewsletterCaptureSection } from "@/components/newsletter";
+import { LeadCaptureSection } from "@/components/leads";
 
-/** Seção de captura na Home — Fase 3.3 */
+/** Seção de captura na Home — Fase 4.8 */
 export function NewsletterLeadSection() {
-  return <NewsletterCaptureSection source="home" />;
+  return <LeadCaptureSection source="home" />;
 }

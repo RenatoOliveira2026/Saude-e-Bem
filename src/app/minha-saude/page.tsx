@@ -1,4 +1,5 @@
 import { HealthProfileDashboard } from "@/components/health-profile/HealthProfileDashboard";
+import { LeadCaptureSection } from "@/components/leads";
 import { CrossLinks } from "@/components/pages";
 import { getHealthProfileData } from "@/lib/health-profile/get-health-profile-data";
 import type { Metadata } from "next";
@@ -15,6 +16,7 @@ export default async function MinhaSaudePage() {
   return (
     <>
       <HealthProfileDashboard data={data} />
+      <LeadCaptureSection source="minha-saude" />
       <CrossLinks />
     </>
   );

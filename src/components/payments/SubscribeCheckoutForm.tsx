@@ -131,7 +131,7 @@ export function SubscribeCheckoutForm() {
               <Badge variant="gold">{activePlan.highlightBadge}</Badge>
             )}
           </div>
-          <p className="mt-2 font-heading text-4xl text-forest">
+          <p className="mt-2 font-heading text-2xl leading-snug text-forest sm:text-3xl">
             {formatPlanAmount(activePlan)}
           </p>
           <p className="mt-1 text-sm text-muted">

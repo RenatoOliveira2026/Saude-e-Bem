@@ -1,4 +1,4 @@
-import { PremiumGate } from "@/components/layout/DetailPage";
+import { PremiumGate } from "@/components/subscription/PremiumGate";
 import {
   getPremiumUpgradeHref,
   resolvePremiumAccess,
@@ -34,7 +34,7 @@ export async function PremiumContentGuard({
       description={gateDescription}
       upgradeHref={getPremiumUpgradeHref(access.isLoggedIn)}
       ctaLabel={
-        access.isLoggedIn ? "Assinar Premium" : "Entrar e conhecer o Premium"
+        access.isLoggedIn ? "Assinar agora" : "Entrar e assinar"
       }
     />
   );

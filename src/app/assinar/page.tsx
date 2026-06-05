@@ -1,3 +1,4 @@
+import { LeadCaptureSection } from "@/components/leads";
 import { PageHero } from "@/components/layout/PageHero";
 import { SubscribeCheckoutForm } from "@/components/payments";
 import { Container } from "@/components/ui/Container";
@@ -26,8 +27,8 @@ export default function AssinarPage() {
         title="Assinar Clube Saúde & Bem"
         description={`Premium ${formatPlanPriceLabel(PREMIUM_MONTHLY_PLAN)} ou ${formatPlanPriceLabel(PREMIUM_ANNUAL_PLAN)}. Escolha PIX, cartão ou boleto.`}
       />
-      <Section background="white">
-        <Container size="sm">
+      <Section background="white" spacing="compact">
+        <Container size="sm" className="min-w-0">
           {!configured && (
             <p className="mb-6 rounded-lg border border-gold/30 bg-gold-muted/20 px-4 py-3 text-sm text-forest">
               Modo stub: configure{" "}
@@ -39,6 +40,7 @@ export default function AssinarPage() {
           <SubscribeCheckoutForm />
         </Container>
       </Section>
+      <LeadCaptureSection source="assinar" />
     </>
   );
 }

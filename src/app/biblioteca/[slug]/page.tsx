@@ -18,6 +18,7 @@ import {
   fetchIntelligentLibraryItems,
   getIntelligentLibrarySlugs,
 } from "@/lib/intelligent-library";
+import { canAccessPremiumContent } from "@/lib/club/access";
 import { routes } from "@/lib/routes";
 import { buildContentMetadata } from "@/lib/seo/metadata";
 import type { Metadata } from "next";
@@ -65,6 +66,9 @@ export default async function BibliotecaDetailPage({ params }: PageProps) {
   const intelligentItem = await fetchIntelligentLibraryItemBySlug(slug);
   if (intelligentItem) {
     const allIntelligent = await fetchIntelligentLibraryItems();
+    const canAccessPremium = intelligentItem.isPremium
+      ? await canAccessPremiumContent()
+      : true;
     const related = allIntelligent
       .filter(
         (r) =>
@@ -73,7 +77,11 @@ export default async function BibliotecaDetailPage({ params }: PageProps) {
       )
       .slice(0, 3);
     return (
-      <IntelligentLibraryDetail item={intelligentItem} related={related} />
+      <IntelligentLibraryDetail
+        item={intelligentItem}
+        related={related}
+        canAccessPremium={canAccessPremium}
+      />
     );
   }
 

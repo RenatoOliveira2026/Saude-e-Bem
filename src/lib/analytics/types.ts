@@ -14,6 +14,7 @@ export type AnalyticsMetadata = {
   slug?: string;
   category?: string;
   source?: string;
+  interest?: string;
   /** Flags de integração futura (sem enviar dados a terceiros nesta fase) */
   integrations?: {
     ga4_ready?: boolean;

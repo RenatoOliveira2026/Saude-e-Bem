@@ -1,10 +1,11 @@
 import { CrossLinks, PageCta } from "@/components/pages";
 import { Breadcrumbs } from "@/components/layout/Breadcrumbs";
 import { DetailHero, RelatedNav } from "@/components/layout/DetailPage";
+import { PremiumGate } from "@/components/subscription/PremiumGate";
+import { PlanBadge } from "@/components/subscription/PlanBadge";
 import { Container } from "@/components/ui/Container";
 import { Section } from "@/components/ui/Section";
 import { Badge } from "@/components/ui/Badge";
-import { Button } from "@/components/ui/Button";
 import { Icon } from "@/components/icons";
 import type { LibraryItem } from "@/lib/intelligent-library";
 import { resolveLibraryAssetUrl } from "@/lib/intelligent-library";
@@ -21,15 +22,16 @@ const typeLabels: Record<LibraryItem["type"], string> = {
 interface IntelligentLibraryDetailProps {
   item: LibraryItem;
   related: LibraryItem[];
+  canAccessPremium: boolean;
 }
 
 export function IntelligentLibraryDetail({
   item,
   related,
+  canAccessPremium,
 }: IntelligentLibraryDetailProps) {
   const assetUrl = resolveLibraryAssetUrl(item);
-  const actionHref = item.isPremium ? routes.assinar : assetUrl ?? "#conteudo";
-  const actionLabel = item.isPremium ? "Assinar para acessar" : "Acessar conteúdo";
+  const isLocked = item.isPremium && !canAccessPremium;
 
   return (
     <>
@@ -53,69 +55,75 @@ export function IntelligentLibraryDetail({
           },
           {
             icon: item.isPremium ? "lock" : "download",
-            label: item.isPremium ? "Conteúdo exclusivo" : "Acesso gratuito",
+            label: item.isPremium ? "🔒 Exclusivo para assinantes" : "Acesso gratuito",
           },
         ]}
         cta={
-          item.isPremium
+          isLocked
             ? {
-                label: actionLabel,
-                href: actionHref,
+                label: "Assinar agora",
+                href: routes.assinar,
                 variant: "gold",
               }
-            : {
-                label: actionLabel,
-                href: actionHref,
-                variant: "primary",
-              }
+            : item.isPremium
+              ? undefined
+              : {
+                  label: "Acessar conteúdo",
+                  href: assetUrl ?? "#conteudo",
+                  variant: "primary",
+                }
         }
       />
 
-      <Section background="white" id="conteudo">
-        <Container size="md">
-          <div className="flex flex-wrap gap-2">
-            <Badge variant={item.isPremium ? "gold" : "sage"}>
-              {item.isPremium ? "Premium" : "Gratuito"}
-            </Badge>
-            <Badge variant="default">{typeLabels[item.type]}</Badge>
-          </div>
+      {isLocked ? (
+        <PremiumGate
+          title="Conteúdo exclusivo para assinantes"
+          description="Assine o Clube Saúde & Bem para desbloquear este material e toda a biblioteca premium."
+          ctaLabel="Assinar agora"
+        />
+      ) : (
+        <Section background="white" id="conteudo">
+          <Container size="md">
+            <div className="flex flex-wrap gap-2">
+              <PlanBadge tier={item.isPremium ? "premium" : "free"} />
+              <Badge variant="default">{typeLabels[item.type]}</Badge>
+            </div>
 
-          <h2 className="mt-8 font-heading text-2xl text-forest">Sobre este material</h2>
-          <p className="mt-4 text-muted leading-relaxed text-pretty">{item.description}</p>
+            <h2 className="mt-8 font-heading text-2xl text-forest">Sobre este material</h2>
+            <p className="mt-4 text-muted leading-relaxed text-pretty">{item.description}</p>
 
-          {item.isPremium ? (
-            <div className="mt-8 rounded-2xl border border-gold/30 bg-gold-muted/40 p-6">
-              <div className="flex items-start gap-3">
-                <Icon name="lock" size={20} className="mt-0.5 shrink-0 text-gold" />
-                <div>
-                  <p className="font-heading text-lg text-forest">Conteúdo para assinantes</p>
-                  <p className="mt-2 text-sm text-muted text-pretty">
-                    Assine o Clube Saúde & Bem para desbloquear este material e toda a
-                    biblioteca premium — e-books, protocolos, vídeos e novidades mensais.
+            {!item.isPremium && (
+              <div className="mt-8 rounded-2xl border border-sage/30 bg-sage-muted/30 p-6">
+                <p className="font-heading text-lg text-forest">Conteúdo gratuito</p>
+                <p className="mt-2 text-sm text-muted text-pretty">
+                  {assetUrl
+                    ? "O download estará disponível em breve via Supabase Storage."
+                    : "Material preparado para entrega via Supabase Storage (PDF, vídeo ou e-book)."}
+                </p>
+                {item.assets?.storagePath && (
+                  <p className="mt-3 font-mono text-xs text-muted-light">
+                    Storage: {item.assets.storagePath}
                   </p>
-                  <Button href={routes.assinar} variant="secondary" size="md" className="mt-4">
-                    Assinar para acessar
-                  </Button>
+                )}
+              </div>
+            )}
+
+            {item.isPremium && canAccessPremium && (
+              <div className="mt-8 rounded-2xl border border-gold/30 bg-gold-muted/30 p-6">
+                <div className="flex items-start gap-3">
+                  <Icon name="star" size={20} className="mt-0.5 shrink-0 text-gold" />
+                  <div>
+                    <p className="font-heading text-lg text-forest">Acesso premium liberado</p>
+                    <p className="mt-2 text-sm text-muted text-pretty">
+                      Conteúdo disponível para sua assinatura ativa.
+                    </p>
+                  </div>
                 </div>
               </div>
-            </div>
-          ) : (
-            <div className="mt-8 rounded-2xl border border-sage/30 bg-sage-muted/30 p-6">
-              <p className="font-heading text-lg text-forest">Conteúdo gratuito</p>
-              <p className="mt-2 text-sm text-muted text-pretty">
-                {assetUrl
-                  ? "O download estará disponível em breve via Supabase Storage."
-                  : "Material preparado para entrega via Supabase Storage (PDF, vídeo ou e-book)."}
-              </p>
-              {item.assets?.storagePath && (
-                <p className="mt-3 font-mono text-xs text-muted-light">
-                  Storage: {item.assets.storagePath}
-                </p>
-              )}
-            </div>
-          )}
-        </Container>
-      </Section>
+            )}
+          </Container>
+        </Section>
+      )}
 
       {related.length > 0 && (
         <RelatedNav

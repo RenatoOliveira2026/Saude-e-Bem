@@ -1,5 +1,6 @@
 import { getClubMembership } from "@/lib/club/access";
 import { getSessionProfile } from "@/lib/auth/session";
+import { resolveNextRenewal } from "@/lib/subscription";
 import { fetchUserPayments } from "./services/payments.service";
 import type { SubscriptionBillingData } from "./types";
 
@@ -13,7 +14,7 @@ export async function getSubscriptionBillingData(): Promise<SubscriptionBillingD
   return {
     membership,
     payments,
-    nextRenewal: membership.isPremium ? membership.expiresAt : null,
+    nextRenewal: resolveNextRenewal(membership),
   };
 }
 
@@ -29,3 +30,4 @@ export { cancelUserSubscription } from "./services/subscriptions.service";
 export { fetchUserPayments } from "./services/payments.service";
 export { activateSubscriptionFromPayment } from "./services/subscriptions.service";
 export { getPaymentsConfigSummary } from "./config";
+export { getPaymentProvider, getPaymentProviderRegistry } from "./providers";

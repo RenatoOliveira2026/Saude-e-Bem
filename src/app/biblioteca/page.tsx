@@ -1,4 +1,4 @@
-import { NewsletterCaptureSection } from "@/components/newsletter";
+import { LeadCaptureSection } from "@/components/leads";
 import { CrossLinks, PageCta } from "@/components/pages";
 import { IntelligentLibraryListing } from "@/components/intelligent-library";
 import { PageHero } from "@/components/layout/PageHero";
@@ -37,7 +37,7 @@ export default async function BibliotecaPage() {
         items={items}
         featured={featured ?? null}
       />
-      <NewsletterCaptureSection source="biblioteca" />
+      <LeadCaptureSection source="biblioteca" />
       <PageCta
         title="Biblioteca premium no Clube"
         description={`${stats.premium} materiais premium e ${stats.free} gratuitos no catálogo — assinantes têm acesso completo a e-books, protocolos e vídeos exclusivos.`}

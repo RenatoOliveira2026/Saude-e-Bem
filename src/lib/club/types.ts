@@ -1,6 +1,11 @@
 import type { FavoriteContentType } from "@/lib/favorites/types";
 
 import type { Payment } from "@/lib/payments/types";
+import {
+  isPremiumPlan,
+  normalizeProfilePlan,
+} from "@/lib/subscription";
+import type { ProfilePlan } from "@/lib/subscription/plan.types";
 
 export type MembershipPlan = "free" | "premium";
 
@@ -32,6 +37,7 @@ export interface Subscription {
 
 export interface ClubMembership {
   plan: MembershipPlan;
+  profilePlan: ProfilePlan;
   isPremium: boolean;
   subscription: Subscription | null;
   expiresAt: string | null;

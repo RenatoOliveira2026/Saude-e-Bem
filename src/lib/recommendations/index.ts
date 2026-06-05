@@ -1,4 +1,4 @@
-export { calculateHealthScore, getUnmetCriteria } from "./health-score";
+export { calculateHealthScore, getUnmetCriteria, SCORE_CRITERION_ORDER } from "./health-score";
 export { buildIntelligentRecommendations } from "./recommendation-engine";
 export type {
   HealthScoreResult,

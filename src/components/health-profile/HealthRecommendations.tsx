@@ -20,15 +20,25 @@ export function HealthRecommendations({
   }
 
   return (
-    <div className="grid gap-4 sm:grid-cols-2">
+    <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
       {recommendations.map((rec) => (
         <Card key={rec.protocolSlug} variant="outline" padding="md" hover>
-          <div className="flex items-start justify-between gap-3">
-            <Badge variant="default">{rec.categoryLabel}</Badge>
+          <div className="flex flex-wrap items-start justify-between gap-2">
+            <div className="flex flex-wrap gap-2">
+              {rec.priority != null && (
+                <Badge variant="sage">Prioridade {rec.priority}</Badge>
+              )}
+              <Badge variant="default">{rec.categoryLabel}</Badge>
+            </div>
             {rec.isPremium && <Badge variant="gold">Premium</Badge>}
           </div>
           <h3 className="mt-3 font-heading text-lg text-forest">{rec.protocolTitle}</h3>
-          <p className="mt-2 text-sm text-muted text-pretty">{rec.reason}</p>
+          {rec.description && (
+            <p className="mt-2 text-sm text-muted text-pretty line-clamp-2">
+              {rec.description}
+            </p>
+          )}
+          <p className="mt-2 text-sm text-forest/80 text-pretty">{rec.reason}</p>
           <Link
             href={rec.href}
             className="mt-4 inline-flex items-center gap-2 text-sm font-medium text-forest hover:text-sage"

@@ -5,7 +5,8 @@ export type ScoreCriterionId =
   | "water"
   | "protein"
   | "metabolism"
-  | "cardiometabolic";
+  | "cardiometabolic"
+  | "habits";
 
 export interface ScoreCriterionResult {
   id: ScoreCriterionId;
@@ -33,6 +34,7 @@ export interface RecommendedProtocol {
   protocolSlug: string;
   protocolTitle: string;
   categoryLabel: string;
+  description?: string;
   reason: string;
   href: string;
   isPremium: boolean;

@@ -81,9 +81,8 @@ export function HealthProfileDashboard({ data }: HealthProfileDashboardProps) {
         <Container>
           <h2 className="font-heading text-2xl text-forest">Seu Score Saúde & Bem</h2>
           <p className="mt-2 text-sm text-muted text-pretty">
-            Pontuação de 0 a 100 com base nos últimos resultados salvos — até 20
-            pontos por critério (IMC, água, proteína, metabolismo e risco
-            cardiometabólico).
+            Pontuação normalizada de 0 a 100 — até 20 pontos por critério (IMC,
+            água, proteína, metabolismo, risco cardiometabólico e hábitos do quiz).
           </p>
           <div className="mt-8">
             <HealthScoreCard score={data.healthScore} />
@@ -113,11 +112,11 @@ export function HealthProfileDashboard({ data }: HealthProfileDashboardProps) {
       <Section background="white">
         <Container>
           <h2 className="font-heading text-2xl text-forest">
-            Protocolos recomendados para você
+            Protocolos Recomendados para Você
           </h2>
           <p className="mt-2 text-sm text-muted text-pretty">
-            Sugestões determinísticas com base no score, quiz, IMC e demais
-            resultados — integradas à biblioteca de protocolos.
+            De 1 a 3 protocolos prioritários com base no IMC, hidratação, proteína,
+            metabolismo, risco cardiometabólico e quiz Saúde & Bem.
           </p>
           <div className="mt-8">
             <HealthRecommendations recommendations={data.recommendations} />

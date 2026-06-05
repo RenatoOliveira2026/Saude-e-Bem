@@ -1,18 +1,26 @@
 import { SAVABLE_TOOL_SLUGS, type SavableToolSlug } from "@/lib/health-profile/constants";
 import type { UserToolResultRecord } from "@/lib/health-profile/types";
-import type {
-  HealthScoreResult,
-  ScoreCriterionId,
-  ScoreCriterionResult,
-} from "./recommendation-types";
+import type { HealthScoreResult, ScoreCriterionId, ScoreCriterionResult } from "./recommendation-types";
 
 const POINTS_PER_CRITERION = 20;
+
+/** Soma mínima/máxima de `scores` no quiz (todas respostas favoráveis vs. desfavoráveis). */
+const QUIZ_DISTRESS_MIN = 3;
+const QUIZ_DISTRESS_MAX = 23;
+const QUIZ_HABITS_MET_THRESHOLD = 16;
 
 function latestResultFor(
   records: UserToolResultRecord[],
   slug: SavableToolSlug,
 ): UserToolResultRecord | null {
-  return records.find((r) => r.toolSlug === slug) ?? null;
+  let latest: UserToolResultRecord | null = null;
+  for (const record of records) {
+    if (record.toolSlug !== slug) continue;
+    if (!latest || record.createdAt > latest.createdAt) {
+      latest = record;
+    }
+  }
+  return latest;
 }
 
 function asRecord(value: unknown): Record<string, unknown> {
@@ -181,6 +189,72 @@ function evaluateMetabolismCriterion(
   };
 }
 
+function sumQuizDistress(scores: Record<string, unknown>): number {
+  return Object.values(scores).reduce<number>(
+    (sum, value) => sum + (typeof value === "number" ? value : 0),
+    0,
+  );
+}
+
+function quizHabitPoints(distressTotal: number): number {
+  const ratio = (QUIZ_DISTRESS_MAX - distressTotal) / (QUIZ_DISTRESS_MAX - QUIZ_DISTRESS_MIN);
+  return Math.max(0, Math.min(POINTS_PER_CRITERION, Math.round(ratio * POINTS_PER_CRITERION)));
+}
+
+function evaluateHabitsCriterion(
+  records: UserToolResultRecord[],
+): ScoreCriterionResult {
+  const record = latestResultFor(records, "quiz-saude-bem");
+  const r = asRecord(record?.resultJson);
+  const profileTitle =
+    typeof r.profileTitle === "string" ? r.profileTitle : null;
+  const scores =
+    r.scores && typeof r.scores === "object" && !Array.isArray(r.scores)
+      ? (r.scores as Record<string, unknown>)
+      : null;
+
+  if (!record) {
+    return {
+      id: "habits",
+      label: "Hábitos saudáveis",
+      points: 0,
+      maxPoints: POINTS_PER_CRITERION,
+      met: false,
+      detail: "Complete o Quiz Saúde & Bem para avaliar seus hábitos.",
+      toolSlug: "quiz-saude-bem",
+    };
+  }
+
+  if (!scores) {
+    return {
+      id: "habits",
+      label: "Hábitos saudáveis",
+      points: 0,
+      maxPoints: POINTS_PER_CRITERION,
+      met: false,
+      detail: profileTitle
+        ? `${profileTitle} — quiz registrado; refaça para atualizar a pontuação.`
+        : "Quiz registrado; refaça para atualizar a pontuação de hábitos.",
+      toolSlug: "quiz-saude-bem",
+    };
+  }
+
+  const distressTotal = sumQuizDistress(scores);
+  const points = quizHabitPoints(distressTotal);
+  const met = points >= QUIZ_HABITS_MET_THRESHOLD;
+  const summary = profileTitle ?? "Perfil de saúde";
+
+  return {
+    id: "habits",
+    label: "Hábitos saudáveis",
+    points,
+    maxPoints: POINTS_PER_CRITERION,
+    met,
+    detail: `${summary} — ${points}/${POINTS_PER_CRITERION} pts no quiz (índice de hábitos ${distressTotal}/${QUIZ_DISTRESS_MAX}).`,
+    toolSlug: "quiz-saude-bem",
+  };
+}
+
 function evaluateCardiometabolicCriterion(
   records: UserToolResultRecord[],
 ): ScoreCriterionResult {
@@ -225,33 +299,48 @@ function evaluateCardiometabolicCriterion(
   };
 }
 
-const evaluators: ((
-  records: UserToolResultRecord[],
-) => ScoreCriterionResult)[] = [
-  evaluateBmiCriterion,
-  evaluateWaterCriterion,
-  evaluateProteinCriterion,
-  evaluateMetabolismCriterion,
-  evaluateCardiometabolicCriterion,
+const DISPLAY_SCORE_MAX = 100;
+
+/** Ordem fixa dos 6 critérios exibidos no painel (1 card por ferramenta). */
+export const SCORE_CRITERION_ORDER: ScoreCriterionId[] = [
+  "bmi",
+  "water",
+  "protein",
+  "metabolism",
+  "cardiometabolic",
+  "habits",
 ];
+
+const evaluators: Record<
+  ScoreCriterionId,
+  (records: UserToolResultRecord[]) => ScoreCriterionResult
+> = {
+  bmi: evaluateBmiCriterion,
+  water: evaluateWaterCriterion,
+  protein: evaluateProteinCriterion,
+  metabolism: evaluateMetabolismCriterion,
+  cardiometabolic: evaluateCardiometabolicCriterion,
+  habits: evaluateHabitsCriterion,
+};
 
 export function calculateHealthScore(
   records: UserToolResultRecord[],
 ): HealthScoreResult {
-  const criteria = evaluators.map((fn) => fn(records));
-  const total = criteria.reduce((sum, c) => sum + c.points, 0);
-  const maxTotal = criteria.reduce((sum, c) => sum + c.maxPoints, 0);
-  const percentage = maxTotal > 0 ? Math.round((total / maxTotal) * 100) : 0;
-  const level = scoreLevel(percentage);
+  const criteria = SCORE_CRITERION_ORDER.map((id) => evaluators[id](records));
+  const rawTotal = criteria.reduce((sum, c) => sum + c.points, 0);
+  const rawMax = criteria.reduce((sum, c) => sum + c.maxPoints, 0);
+  const normalized =
+    rawMax > 0 ? Math.round((rawTotal / rawMax) * DISPLAY_SCORE_MAX) : 0;
+  const level = scoreLevel(normalized);
 
   const toolsUsed = SAVABLE_TOOL_SLUGS.filter((slug) =>
     records.some((r) => r.toolSlug === slug),
   ).length;
 
   return {
-    total,
-    maxTotal,
-    percentage,
+    total: normalized,
+    maxTotal: DISPLAY_SCORE_MAX,
+    percentage: normalized,
     level,
     levelLabel: levelLabels[level],
     summary: levelSummaries[level],

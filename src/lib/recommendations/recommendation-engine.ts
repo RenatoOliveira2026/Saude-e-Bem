@@ -4,8 +4,7 @@ import {
   type SavableToolSlug,
 } from "@/lib/health-profile/constants";
 import type { UserToolResultRecord } from "@/lib/health-profile/types";
-import { getProtocolLibraryItems } from "@/lib/protocol-library/services/library.service";
-import type { ProtocolLibraryItem } from "@/lib/protocol-library/types";
+import { recommendIntelligentProtocols } from "@/lib/intelligent-protocols";
 import { routes } from "@/lib/routes";
 import { calculateHealthScore, getUnmetCriteria } from "./health-score";
 import type {
@@ -15,192 +14,19 @@ import type {
   RecommendedTool,
 } from "./recommendation-types";
 
-interface CategoryHint {
-  categorySlug: string;
-  reason: string;
-  priority: number;
-}
-
-function latestResultFor(
+function buildProtocolRecommendations(
   records: UserToolResultRecord[],
-  slug: SavableToolSlug,
-): UserToolResultRecord | null {
-  return records.find((r) => r.toolSlug === slug) ?? null;
-}
-
-function collectCategoryHints(records: UserToolResultRecord[]): CategoryHint[] {
-  const hints: CategoryHint[] = [];
-  const score = calculateHealthScore(records);
-
-  for (const criterion of getUnmetCriteria(score)) {
-    switch (criterion.id) {
-      case "bmi":
-        hints.push({
-          categorySlug: "alimentacao-saudavel",
-          reason: "Apoio nutricional alinhado ao seu IMC registrado",
-          priority: 1,
-        });
-        hints.push({
-          categorySlug: "exercicios",
-          reason: "Movimento regular para composição corporal e metabolismo",
-          priority: 2,
-        });
-        break;
-      case "water":
-        hints.push({
-          categorySlug: "bem-estar-geral",
-          reason: "Hábitos diários incluindo hidratação consistente",
-          priority: 1,
-        });
-        break;
-      case "protein":
-        hints.push({
-          categorySlug: "alimentacao-saudavel",
-          reason: "Estruturar refeições com foco em proteína adequada",
-          priority: 1,
-        });
-        break;
-      case "metabolism":
-        hints.push({
-          categorySlug: "exercicios",
-          reason: "Atividade física compatível com seu gasto energético",
-          priority: 1,
-        });
-        hints.push({
-          categorySlug: "alimentacao-saudavel",
-          reason: "Energia e nutrientes alinhados ao seu metabolismo",
-          priority: 2,
-        });
-        break;
-      case "cardiometabolic":
-        hints.push({
-          categorySlug: "longevidade",
-          reason: "Prevenção cardiometabólica e marcadores de saúde",
-          priority: 1,
-        });
-        hints.push({
-          categorySlug: "exercicios",
-          reason: "Condicionamento cardiovascular e controle de risco",
-          priority: 2,
-        });
-        break;
-    }
-  }
-
-  const quiz = latestResultFor(records, "quiz-saude-bem");
-  if (quiz) {
-    const categories = quiz.resultJson.protocolCategories;
-    if (Array.isArray(categories)) {
-      for (const cat of categories) {
-        if (cat && typeof cat === "object" && !Array.isArray(cat)) {
-          const slug = (cat as { categorySlug?: string }).categorySlug;
-          const label = (cat as { categoryLabel?: string }).categoryLabel;
-          if (slug) {
-            hints.push({
-              categorySlug: slug,
-              reason: `Perfil do Quiz Saúde & Bem${label ? ` (${label})` : ""}`,
-              priority: 0,
-            });
-          }
-        }
-      }
-    }
-  }
-
-  const bmi = latestResultFor(records, "calculadora-imc");
-  if (bmi) {
-    const category = bmi.resultJson.category;
-    if (
-      category === "overweight" ||
-      category === "obese1" ||
-      category === "obese2" ||
-      category === "obese3"
-    ) {
-      hints.push({
-        categorySlug: "alimentacao-saudavel",
-        reason: "Com base no seu IMC — foco em composição corporal",
-        priority: 1,
-      });
-    }
-  }
-
-  const cardio = latestResultFor(records, "risco-cardiometabolico");
-  if (cardio) {
-    const level = cardio.resultJson.level;
-    if (level === "elevated" || level === "high") {
-      hints.push({
-        categorySlug: "longevidade",
-        reason: "Risco cardiometabólico elevado — prevenção estruturada",
-        priority: 0,
-      });
-    }
-  }
-
-  if (hints.length === 0) {
-    hints.push({
-      categorySlug: "bem-estar-geral",
-      reason: "Protocolo gratuito para consolidar hábitos de saúde",
-      priority: 3,
-    });
-  }
-
-  return hints.sort((a, b) => a.priority - b.priority);
-}
-
-function pickProtocolsForCategory(
-  pool: ProtocolLibraryItem[],
-  categorySlug: string,
-  usedSlugs: Set<string>,
-): ProtocolLibraryItem | null {
-  const matches = pool.filter(
-    (p) =>
-      !usedSlugs.has(p.slug) &&
-      (p.normalizedCategory === categorySlug || p.category === categorySlug),
-  );
-  const free = matches.find((p) => !p.isPremium);
-  return free ?? matches[0] ?? null;
-}
-
-async function buildProtocolRecommendations(
-  records: UserToolResultRecord[],
-): Promise<RecommendedProtocol[]> {
-  const pool = await getProtocolLibraryItems();
-  const hints = collectCategoryHints(records);
-  const usedSlugs = new Set<string>();
-  const recommendations: RecommendedProtocol[] = [];
-
-  for (const hint of hints) {
-    if (recommendations.length >= 4) break;
-    const protocol = pickProtocolsForCategory(pool, hint.categorySlug, usedSlugs);
-    if (!protocol) continue;
-    usedSlugs.add(protocol.slug);
-    recommendations.push({
-      protocolSlug: protocol.slug,
-      protocolTitle: protocol.title,
-      categoryLabel: protocol.categoryLabel,
-      reason: hint.reason,
-      href: routes.protocolo(protocol.slug),
-      isPremium: protocol.isPremium,
-      priority: hint.priority,
-    });
-  }
-
-  if (recommendations.length === 0) {
-    const fallback = pool.filter((p) => !p.isPremium).slice(0, 3);
-    for (const [index, protocol] of fallback.entries()) {
-      recommendations.push({
-        protocolSlug: protocol.slug,
-        protocolTitle: protocol.title,
-        categoryLabel: protocol.categoryLabel,
-        reason: "Protocolo gratuito sugerido para começar",
-        href: routes.protocolo(protocol.slug),
-        isPremium: protocol.isPremium,
-        priority: index + 1,
-      });
-    }
-  }
-
-  return recommendations;
+): RecommendedProtocol[] {
+  return recommendIntelligentProtocols(records).map((p) => ({
+    protocolSlug: p.protocolSlug,
+    protocolTitle: p.protocolTitle,
+    categoryLabel: p.categoryLabel,
+    description: p.description,
+    reason: p.reason,
+    href: p.href,
+    isPremium: p.isPremium,
+    priority: p.priority,
+  }));
 }
 
 function buildToolRecommendations(
@@ -318,7 +144,7 @@ export async function buildIntelligentRecommendations(
   records: UserToolResultRecord[],
 ): Promise<IntelligentRecommendations> {
   const healthScore = calculateHealthScore(records);
-  const protocols = await buildProtocolRecommendations(records);
+  const protocols = buildProtocolRecommendations(records);
   const tools = buildToolRecommendations(records);
   const priorities = buildPriorities(records, protocols, tools);
 

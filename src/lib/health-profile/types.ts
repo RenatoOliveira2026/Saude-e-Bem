@@ -26,9 +26,11 @@ export interface HealthRecommendation {
   protocolSlug: string;
   protocolTitle: string;
   categoryLabel: string;
+  description?: string;
   reason: string;
   href: string;
   isPremium: boolean;
+  priority?: number;
 }
 
 export interface HealthProfileData {

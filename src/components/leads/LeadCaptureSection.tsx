@@ -1,6 +1,6 @@
 import { LeadCaptureForm } from "@/components/leads/LeadCaptureForm";
 import { Section, SectionTitle } from "@/components/ui/Section";
-import type { LeadSource } from "@/lib/leads/lead.types";
+import type { LeadInterestId, LeadSource } from "@/lib/leads/lead.types";
 
 type SectionVariant = "forest" | "light";
 
@@ -11,6 +11,12 @@ interface LeadCaptureSectionProps {
   description?: string;
   id?: string;
   submitLabel?: string;
+  defaultInterest?: LeadInterestId;
+  hideInterestSelect?: boolean;
+  contentType?: string;
+  contentSlug?: string;
+  contentTitle?: string;
+  lpSlug?: string;
 }
 
 const defaults: Record<
@@ -52,6 +58,36 @@ const defaults: Record<
     description: "Conteúdo de saúde e longevidade, sem spam.",
     variant: "light",
   },
+  "lp-hidratacao": {
+    title: "Receba o guia de hidratação",
+    description: "Material gratuito no seu e-mail.",
+    variant: "forest",
+  },
+  "lp-emagrecimento": {
+    title: "Plano prático no seu e-mail",
+    description: "Emagrecimento sustentável, sem promessas vazias.",
+    variant: "forest",
+  },
+  "lp-longevidade": {
+    title: "Longevidade saudável na prática",
+    description: "Conteúdos selecionados pela equipe Saúde & Bem.",
+    variant: "forest",
+  },
+  "lp-sono": {
+    title: "Guia de sono reparador",
+    description: "Rotina noturna em passos simples.",
+    variant: "forest",
+  },
+  artigo: {
+    title: "Continue aprendendo por e-mail",
+    description: "Receba artigos alinhados ao tema que você acabou de ler.",
+    variant: "light",
+  },
+  protocolo: {
+    title: "Acompanhe sua jornada por e-mail",
+    description: "Materiais e lembretes para manter consistência no protocolo.",
+    variant: "light",
+  },
 };
 
 export function LeadCaptureSection({
@@ -61,6 +97,12 @@ export function LeadCaptureSection({
   description,
   id = "captura-leads",
   submitLabel,
+  defaultInterest,
+  hideInterestSelect,
+  contentType,
+  contentSlug,
+  contentTitle,
+  lpSlug,
 }: LeadCaptureSectionProps) {
   const preset = defaults[source];
   const resolvedVariant = variant ?? preset.variant;
@@ -100,6 +142,12 @@ export function LeadCaptureSection({
             source={source}
             variant={resolvedVariant}
             submitLabel={submitLabel}
+            defaultInterest={defaultInterest}
+            hideInterestSelect={hideInterestSelect}
+            contentType={contentType}
+            contentSlug={contentSlug}
+            contentTitle={contentTitle}
+            lpSlug={lpSlug}
           />
         </div>
 

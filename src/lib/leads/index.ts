@@ -20,3 +20,10 @@ export {
   validateLeadName,
 } from "./lead.validate";
 export { saveLeadAction, type LeadCaptureActionState } from "./actions/save-lead.action";
+export {
+  computeLeadScore,
+  LEAD_SCORE_LABELS,
+  LEAD_SCORE_ORDER,
+  leadScoreBadgeVariant,
+  type LeadScoreId,
+} from "./lead-score";

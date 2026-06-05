@@ -3,7 +3,7 @@
 import { Button } from "@/components/ui/Button";
 import { saveLeadAction, type LeadCaptureActionState } from "@/lib/leads/actions/save-lead.action";
 import { LEAD_INTERESTS } from "@/lib/leads/lead.constants";
-import type { LeadSource } from "@/lib/leads/lead.types";
+import type { LeadInterestId, LeadSource } from "@/lib/leads/lead.types";
 import { useActionState } from "react";
 
 const initialState: LeadCaptureActionState = {};
@@ -15,6 +15,12 @@ interface LeadCaptureFormProps {
   variant?: LeadFormVariant;
   submitLabel?: string;
   className?: string;
+  defaultInterest?: LeadInterestId;
+  hideInterestSelect?: boolean;
+  contentType?: string;
+  contentSlug?: string;
+  contentTitle?: string;
+  lpSlug?: string;
 }
 
 const inputStyles: Record<LeadFormVariant, string> = {
@@ -36,6 +42,12 @@ export function LeadCaptureForm({
   variant = "light",
   submitLabel = "Quero receber conteúdos",
   className,
+  defaultInterest,
+  hideInterestSelect = false,
+  contentType,
+  contentSlug,
+  contentTitle,
+  lpSlug,
 }: LeadCaptureFormProps) {
   const [state, formAction, pending] = useActionState(saveLeadAction, initialState);
 
@@ -47,6 +59,10 @@ export function LeadCaptureForm({
   return (
     <form action={formAction} className={className ?? "space-y-3"}>
       <input type="hidden" name="source" value={source} />
+      {contentType && <input type="hidden" name="content_type" value={contentType} />}
+      {contentSlug && <input type="hidden" name="content_slug" value={contentSlug} />}
+      {contentTitle && <input type="hidden" name="content_title" value={contentTitle} />}
+      {lpSlug && <input type="hidden" name="lp_slug" value={lpSlug} />}
       <div>
         <label htmlFor={`lead-name-${source}`} className="sr-only">
           Nome
@@ -75,27 +91,33 @@ export function LeadCaptureForm({
           className={inputStyles[variant]}
         />
       </div>
-      <div>
-        <label htmlFor={`lead-interest-${source}`} className="sr-only">
-          Interesse principal
-        </label>
-        <select
-          id={`lead-interest-${source}`}
-          name="interest"
-          required
-          defaultValue=""
-          className={selectStyles[variant]}
-        >
-          <option value="" disabled>
+      {hideInterestSelect && defaultInterest ? (
+        <input type="hidden" name="interest" value={defaultInterest} />
+      ) : (
+        <div>
+          <label htmlFor={`lead-interest-${source}`} className="sr-only">
             Interesse principal
-          </option>
-          {LEAD_INTERESTS.map((item) => (
-            <option key={item.id} value={item.id}>
-              {item.label}
-            </option>
-          ))}
-        </select>
-      </div>
+          </label>
+          <select
+            id={`lead-interest-${source}`}
+            name="interest"
+            required
+            defaultValue={defaultInterest ?? ""}
+            className={selectStyles[variant]}
+          >
+            {!defaultInterest && (
+              <option value="" disabled>
+                Interesse principal
+              </option>
+            )}
+            {LEAD_INTERESTS.map((item) => (
+              <option key={item.id} value={item.id}>
+                {item.label}
+              </option>
+            ))}
+          </select>
+        </div>
+      )}
       {state.error && <p className={errorClass}>{state.error}</p>}
       <Button
         type="submit"

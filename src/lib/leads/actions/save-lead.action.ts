@@ -1,9 +1,11 @@
 "use server";
 
+import { triggerLeadAutomation } from "@/lib/email-automation";
 import { trackEvent } from "@/lib/analytics/track-event";
 import { parseLeadSource } from "@/lib/leads/lead.constants";
+import { computeLeadScore, type LeadScoreId } from "@/lib/leads/lead-score";
 import { LEAD_MESSAGES } from "@/lib/leads/lead.types";
-import type { LeadSource } from "@/lib/leads/lead.types";
+import type { LeadInterestId, LeadSource } from "@/lib/leads/lead.types";
 import {
   isLeadPermissionError,
   isLeadTableMissingError,
@@ -24,8 +26,13 @@ function getString(formData: FormData, key: string): string {
   return formData.get(key)?.toString().trim() ?? "";
 }
 
-function thankYouUrl(source: LeadSource, existing: boolean, interest: string): string {
-  const params = new URLSearchParams({ source, type: "lead" });
+function thankYouUrl(
+  source: LeadSource,
+  existing: boolean,
+  interest: string,
+  score: string,
+): string {
+  const params = new URLSearchParams({ source, type: "lead", score });
   if (interest) params.set("interest", interest);
   if (existing) params.set("existing", "1");
   return `${routes.obrigado}?${params.toString()}`;
@@ -38,7 +45,31 @@ const sourcePages: Record<LeadSource, string> = {
   assinar: routes.assinar,
   "minha-saude": routes.minhaSaude,
   other: routes.home,
+  "lp-hidratacao": routes.lpHidratacao,
+  "lp-emagrecimento": routes.lpEmagrecimento,
+  "lp-longevidade": routes.lpLongevidade,
+  "lp-sono": routes.lpSono,
+  artigo: routes.blog,
+  protocolo: routes.protocolos,
 };
+
+function buildContentContext(formData: FormData) {
+  const contentType = getString(formData, "content_type");
+  const contentSlug = getString(formData, "content_slug");
+  const contentTitle = getString(formData, "content_title");
+  const lpSlug = getString(formData, "lp_slug");
+
+  if (!contentType && !contentSlug && !contentTitle && !lpSlug) {
+    return {};
+  }
+
+  return {
+    ...(contentType ? { content_type: contentType } : {}),
+    ...(contentSlug ? { content_slug: contentSlug } : {}),
+    ...(contentTitle ? { content_title: contentTitle } : {}),
+    ...(lpSlug ? { lp_slug: lpSlug } : {}),
+  };
+}
 
 export async function saveLeadAction(
   _prev: LeadCaptureActionState,
@@ -48,6 +79,8 @@ export async function saveLeadAction(
   const email = getString(formData, "email");
   const interest = getString(formData, "interest");
   const source = parseLeadSource(getString(formData, "source") || "home");
+  const contentContext = buildContentContext(formData);
+  const hasContentContext = Object.keys(contentContext).length > 0;
 
   const nameError = validateLeadName(name);
   if (nameError) return { error: nameError };
@@ -58,25 +91,28 @@ export async function saveLeadAction(
   const interestError = validateLeadInterest(interest);
   if (interestError) return { error: interestError };
 
+  const leadScore = computeLeadScore({
+    source,
+    interest: interest as LeadInterestId,
+    hasContentContext,
+  });
   const normalizedEmail = normalizeLeadEmail(email);
   const supabase = await createClient();
 
-  const { error } = await supabase.from("newsletter_leads").insert({
-    name: name.trim(),
-    email: normalizedEmail,
-    source,
-    interest,
+  const { data, error } = await supabase.rpc("capture_newsletter_lead", {
+    p_name: name.trim(),
+    p_email: normalizedEmail,
+    p_source: source,
+    p_interest: interest,
+    p_lead_score: leadScore,
+    p_content_context: contentContext,
   });
 
   if (error) {
-    if (error.code === "23505") {
-      redirect(thankYouUrl(source, true, interest));
-    }
-
     if (isLeadTableMissingError(error)) {
       return {
         error:
-          "Cadastro temporariamente indisponível. Execute a migration 023 no Supabase.",
+          "Cadastro temporariamente indisponível. Execute as migrations 023, 027 e 028 no Supabase.",
       };
     }
 
@@ -91,12 +127,37 @@ export async function saveLeadAction(
     return { error: LEAD_MESSAGES.error };
   }
 
+  const row = Array.isArray(data) ? data[0] : data;
+  const leadId = row?.lead_id as string | undefined;
+  const isExisting = Boolean(row?.is_existing);
+  const finalScore = ((row?.final_score as LeadScoreId) ?? leadScore) as LeadScoreId;
+  const previousScore = (row?.previous_score as string | null) ?? null;
+
   void trackEvent({
     eventType: "lead_submitted",
-    sourcePage: sourcePages[source],
+    sourcePage: sourcePages[source] ?? routes.home,
     sourceType: source,
-    metadata: { source, interest },
+    metadata: {
+      source,
+      interest,
+      leadScore: finalScore,
+      ...contentContext,
+    },
   });
 
-  redirect(thankYouUrl(source, false, interest));
+  if (leadId) {
+    void triggerLeadAutomation({
+      leadId,
+      email: normalizedEmail,
+      name: name.trim(),
+      source,
+      interest: interest as LeadInterestId,
+      leadScore: finalScore,
+      contentContext,
+      isExisting,
+      previousScore,
+    });
+  }
+
+  redirect(thankYouUrl(source, isExisting, interest, finalScore));
 }

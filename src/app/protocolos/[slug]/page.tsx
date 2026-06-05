@@ -3,7 +3,8 @@ import { ContentMemberActions } from "@/components/club/ContentMemberActions";
 import { PremiumContentGuard } from "@/components/club/PremiumContentGuard";
 import { RelatedContentSection } from "@/components/club/RelatedContentSection";
 import { recordContentViewForUser } from "@/lib/club/record-content-view";
-import { CrossLinks, PageCta } from "@/components/pages";
+import { SmartConversionCta } from "@/components/conversion/SmartConversionCta";
+import { CrossLinks } from "@/components/pages";
 import { Breadcrumbs } from "@/components/layout/Breadcrumbs";
 import { DetailHero, RelatedNav } from "@/components/layout/DetailPage";
 import { Container } from "@/components/ui/Container";
@@ -206,14 +207,12 @@ export default async function ProtocoloDetailPage({ params }: PageProps) {
         sourceType="protocol"
       />
 
-      <PageCta
-        title="Descubra seu perfil de saúde"
-        description="Faça a avaliação gratuita e receba protocolos personalizados para sua biologia."
-        primaryLabel="Fazer avaliação"
-        primaryHref={routes.ferramentas}
-        secondaryLabel="Ver biblioteca"
-        secondaryHref={routes.biblioteca}
-        background="sage"
+      <SmartConversionCta
+        context="protocol"
+        category={protocol.category}
+        categoryLabel={protocol.categoryLabel}
+        contentTitle={protocol.title}
+        contentSlug={slug}
       />
       </PremiumContentGuard>
       <CrossLinks />

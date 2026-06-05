@@ -1,13 +1,20 @@
-/** Origem da captura de lead (Fase 4.8). */
+/** Origem da captura de lead (Fase 4.8 / 5.2). */
 export type LeadSource =
   | "home"
   | "blog"
   | "biblioteca"
   | "assinar"
   | "minha-saude"
-  | "other";
+  | "other"
+  | "lp-hidratacao"
+  | "lp-emagrecimento"
+  | "lp-longevidade"
+  | "lp-sono"
+  | "artigo"
+  | "protocolo";
 
 export type LeadInterestId =
+  | "hidratacao"
   | "emagrecimento"
   | "sono"
   | "energia"
@@ -20,11 +27,19 @@ export interface LeadInterestOption {
   label: string;
 }
 
+export interface LeadContentContext {
+  content_type?: string;
+  content_slug?: string;
+  content_title?: string;
+  lp_slug?: string;
+}
+
 export interface LeadCaptureInput {
   name: string;
   email: string;
   source: LeadSource;
   interest: LeadInterestId;
+  contentContext?: LeadContentContext;
 }
 
 export const LEAD_MESSAGES = {

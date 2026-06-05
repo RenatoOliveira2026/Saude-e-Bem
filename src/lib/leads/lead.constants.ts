@@ -1,6 +1,7 @@
 import type { LeadInterestOption, LeadInterestId, LeadSource } from "./lead.types";
 
 export const LEAD_INTERESTS: LeadInterestOption[] = [
+  { id: "hidratacao", label: "Hidratação" },
   { id: "emagrecimento", label: "Emagrecimento" },
   { id: "sono", label: "Sono" },
   { id: "energia", label: "Energia" },
@@ -16,6 +17,12 @@ export const LEAD_SOURCE_LABELS: Record<LeadSource, string> = {
   assinar: "Assinatura",
   "minha-saude": "Minha Saúde",
   other: "Outro",
+  "lp-hidratacao": "LP Hidratação",
+  "lp-emagrecimento": "LP Emagrecimento",
+  "lp-longevidade": "LP Longevidade",
+  "lp-sono": "LP Sono",
+  artigo: "Artigo",
+  protocolo: "Protocolo",
 };
 
 export function isLeadSource(value: string): value is LeadSource {

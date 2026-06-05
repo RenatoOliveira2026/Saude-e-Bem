@@ -8,6 +8,7 @@ export const routes = {
   ferramentas: "/ferramentas",
   biblioteca: "/biblioteca",
   recomendados: "/recomendados",
+  marketplace: "/marketplace",
   obrigado: "/obrigado",
   clube: "/clube",
   clubeDashboard: "/clube/dashboard",
@@ -33,6 +34,7 @@ export const routes = {
   bibliotecaItem: (slug: string) => `/biblioteca/${slug}`,
   artigo: (slug: string) => `/blog/${slug}`,
   recomendado: (slug: string) => `/recomendados/${slug}`,
+  marketplaceItem: (slug: string) => `/marketplace/${slug}`,
   admin: "/admin",
 } as const;
 
@@ -75,6 +77,7 @@ export const mainNav = [
   { label: "Protocolos", href: routes.protocolos },
   { label: "Ferramentas", href: routes.ferramentas },
   { label: "Biblioteca", href: routes.biblioteca },
+  { label: "Marketplace", href: routes.marketplace },
   { label: "Clube Saúde & Bem", href: routes.clube },
 ] as const;
 
@@ -96,6 +99,7 @@ export const footerNav = {
     { label: "Protocolos", href: routes.protocolos },
     { label: "Ferramentas", href: routes.ferramentas },
     { label: "Biblioteca", href: routes.biblioteca },
+    { label: "Marketplace", href: routes.marketplace },
     { label: "Recomendados", href: routes.recomendados },
   ],
   conta: [
@@ -116,6 +120,7 @@ export const crossNav = [
   { label: "Protocolos", href: routes.protocolos, icon: "sparkle" as const },
   { label: "Ferramentas", href: routes.ferramentas, icon: "chart" as const },
   { label: "Biblioteca", href: routes.biblioteca, icon: "library" as const },
+  { label: "Marketplace", href: routes.marketplace, icon: "star" as const },
   { label: "Blog", href: routes.blog, icon: "book" as const },
   { label: "Clube", href: routes.clube, icon: "star" as const },
 ] as const;

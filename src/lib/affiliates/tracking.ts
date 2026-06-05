@@ -5,7 +5,9 @@ export type AffiliateSourceType =
   | "detail"
   | "blog"
   | "protocol"
-  | "related";
+  | "related"
+  | "marketplace"
+  | "minha-saude";
 
 export function buildAffiliateGoUrl(
   slug: string,

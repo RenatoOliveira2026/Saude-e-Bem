@@ -4,6 +4,7 @@ import type {
   PriorityAction,
   RecommendedTool,
 } from "@/lib/recommendations/recommendation-types";
+import type { RecommendedMarketplaceProduct } from "@/lib/marketplace";
 
 export interface UserToolResultRecord {
   id: string;
@@ -40,5 +41,6 @@ export interface HealthProfileData {
   recommendations: HealthRecommendation[];
   healthScore: HealthScoreResult;
   recommendedTools: RecommendedTool[];
+  recommendedProducts: RecommendedMarketplaceProduct[];
   priorities: PriorityAction[];
 }

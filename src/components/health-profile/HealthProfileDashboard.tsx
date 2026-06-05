@@ -5,6 +5,7 @@ import { Section } from "@/components/ui/Section";
 import { HealthRecommendations } from "@/components/health-profile/HealthRecommendations";
 import { HealthScoreCard } from "@/components/health-profile/HealthScoreCard";
 import { PrioritiesSection } from "@/components/health-profile/PrioritiesSection";
+import { RecommendedProductsSection } from "@/components/marketplace/RecommendedProductsSection";
 import { RecommendedToolsSection } from "@/components/health-profile/RecommendedToolsSection";
 import {
   ToolHistoryList,
@@ -132,6 +133,18 @@ export function HealthProfileDashboard({ data }: HealthProfileDashboardProps) {
           </p>
           <div className="mt-8">
             <RecommendedToolsSection tools={data.recommendedTools} />
+          </div>
+        </Container>
+      </Section>
+
+      <Section background="default">
+        <Container>
+          <h2 className="font-heading text-2xl text-forest">Produtos recomendados para você</h2>
+          <p className="mt-2 text-sm text-muted text-pretty">
+            E-books, afiliados e assinatura Premium sugeridos com base no seu Score Saúde & Bem.
+          </p>
+          <div className="mt-8">
+            <RecommendedProductsSection products={data.recommendedProducts} />
           </div>
         </Container>
       </Section>

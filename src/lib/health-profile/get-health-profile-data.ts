@@ -1,4 +1,8 @@
 import { buildIntelligentRecommendations } from "@/lib/recommendations/recommendation-engine";
+import {
+  fetchMarketplaceItems,
+  recommendMarketplaceProducts,
+} from "@/lib/marketplace";
 import { getSessionProfile } from "@/lib/auth/session";
 import {
   buildLatestSummaries,
@@ -15,7 +19,14 @@ export async function getHealthProfileData(): Promise<HealthProfileData> {
 
   const records = await fetchUserToolResults(user.id);
   const latestByTool = buildLatestSummaries(records);
-  const intelligent = await buildIntelligentRecommendations(records);
+  const [intelligent, marketplaceCatalog] = await Promise.all([
+    buildIntelligentRecommendations(records),
+    fetchMarketplaceItems(),
+  ]);
+  const recommendedProducts = recommendMarketplaceProducts(
+    records,
+    marketplaceCatalog,
+  );
 
   return {
     displayName,
@@ -33,6 +44,7 @@ export async function getHealthProfileData(): Promise<HealthProfileData> {
     })),
     healthScore: intelligent.healthScore,
     recommendedTools: intelligent.tools,
+    recommendedProducts,
     priorities: intelligent.priorities,
   };
 }

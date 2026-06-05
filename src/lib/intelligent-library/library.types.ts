@@ -31,14 +31,17 @@ export interface LibraryItem {
   slug: string;
   title: string;
   description: string;
+  longDescription?: string;
   category: string;
   type: LibraryItemType;
   isPremium: boolean;
   image?: string;
   estimatedReadTime: string;
-  /** Destaque na listagem */
   featured?: boolean;
-  /** Integração futura com Storage, PDFs, vídeos e afiliados */
+  seoTitle?: string;
+  seoDescription?: string;
+  seoKeywords?: string;
+  ogImageUrl?: string;
   assets?: LibraryItemAssets;
 }
 

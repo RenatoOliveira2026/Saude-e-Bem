@@ -1,4 +1,6 @@
 import { getAffiliateAdminCounts } from "@/lib/admin/services/affiliates.service";
+import { getLibraryItemAdminCounts } from "@/lib/admin/services/library-items.service";
+import { getMarketplaceProductAdminCounts } from "@/lib/admin/services/marketplace.service";
 import { getNewsletterLeadStats } from "@/lib/admin/services/newsletter.service";
 import { createClient } from "@/lib/supabase/server";
 import { getAffiliateClickStats } from "@/lib/supabase/services/affiliates.clicks";
@@ -47,7 +49,8 @@ export async function getDashboardStats(): Promise<DashboardStats> {
     countByStatus("ebooks", "archived"),
   ]);
 
-  const [affiliateCounts, clickStats, newsletterStats] = await Promise.all([
+  const [affiliateCounts, clickStats, newsletterStats, libraryCounts, marketplaceCounts] =
+    await Promise.all([
     getAffiliateAdminCounts(),
     getAffiliateClickStats(),
     getNewsletterLeadStats().catch(() => ({
@@ -58,6 +61,8 @@ export async function getDashboardStats(): Promise<DashboardStats> {
       bySource: { home: 0, blog: 0, biblioteca: 0, clube: 0, other: 0 },
       pendingSync: 0,
     })),
+    getLibraryItemAdminCounts(),
+    getMarketplaceProductAdminCounts(),
   ]);
 
   return {
@@ -65,6 +70,8 @@ export async function getDashboardStats(): Promise<DashboardStats> {
     articles: articles.count ?? 0,
     protocols: protocols.count ?? 0,
     ebooks: ebooks.count ?? 0,
+    libraryItems: libraryCounts.total,
+    marketplaceProducts: marketplaceCounts.total,
     favorites: favorites.count ?? 0,
     publishedTotal: publishedArticles + publishedProtocols + publishedEbooks,
     draftsTotal: draftArticles + draftProtocols + draftEbooks,

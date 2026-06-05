@@ -14,6 +14,7 @@ import Link from "next/link";
 const fulfillmentLabels: Record<MarketplaceItem["fulfillment"], string> = {
   digital: "Digital",
   affiliate: "Afiliado",
+  own: "Próprio",
   subscription: "Assinatura",
 };
 
@@ -121,6 +122,10 @@ export function MarketplaceCard({
         ) : item.fulfillment === "subscription" ? (
           <Button href={routes.assinar} variant="gold" size="sm" className="w-full justify-center">
             Assinar agora
+          </Button>
+        ) : item.fulfillment === "own" ? (
+          <Button href={detailHref} variant="primary" size="sm" className="w-full justify-center">
+            Ver produto
           </Button>
         ) : item.isPremium ? (
           <Button href={routes.assinar} variant="secondary" size="sm" className="w-full justify-center">

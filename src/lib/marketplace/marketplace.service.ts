@@ -1,5 +1,8 @@
 import { fetchAllActiveAffiliateLinks } from "@/lib/supabase/services/affiliates.public";
-import { MARKETPLACE_CATALOG, getCatalogItemBySlug } from "./marketplace-catalog";
+import { fetchPublishedMarketplaceProductsWithFallback } from "@/lib/supabase/services/marketplace-products.public";
+import { fetchMarketplaceProductSlugsFromDb } from "@/lib/supabase/services/marketplace-products.public";
+import { getContentEngineMarketplaceCatalog } from "@/lib/content-engine/mappers";
+import { getCatalogItemBySlug } from "./marketplace-catalog";
 import { filterMarketplaceItems } from "./marketplace-filters";
 import {
   affiliateToMarketplaceItem,
@@ -17,9 +20,14 @@ import type {
  * Futuro: tabela `marketplace_products` + merge com afiliados e biblioteca.
  */
 export async function fetchMarketplaceItems(): Promise<MarketplaceItem[]> {
-  const affiliates = await fetchAllActiveAffiliateLinks();
+  const [catalog, affiliates] = await Promise.all([
+    fetchPublishedMarketplaceProductsWithFallback(async () =>
+      getContentEngineMarketplaceCatalog(),
+    ),
+    fetchAllActiveAffiliateLinks(),
+  ]);
   const affiliateItems = affiliates.map(affiliateToMarketplaceItem);
-  return mergeMarketplaceCatalog(MARKETPLACE_CATALOG, affiliateItems);
+  return mergeMarketplaceCatalog(catalog, affiliateItems);
 }
 
 export async function fetchMarketplaceItemBySlug(
@@ -29,8 +37,14 @@ export async function fetchMarketplaceItemBySlug(
   return items.find((item) => item.slug === slug) ?? getCatalogItemBySlug(slug);
 }
 
-export function getMarketplaceSlugs(): string[] {
-  return MARKETPLACE_CATALOG.map((item) => item.slug);
+export async function fetchMarketplaceSlugs(): Promise<string[]> {
+  try {
+    const fromDb = await fetchMarketplaceProductSlugsFromDb();
+    if (fromDb.length > 0) return fromDb;
+  } catch {
+    /* fallback */
+  }
+  return getContentEngineMarketplaceCatalog().map((item) => item.slug);
 }
 
 export function filterMarketplaceCatalog(
@@ -45,6 +59,7 @@ export function computeMarketplaceStats(items: MarketplaceItem[]): MarketplaceSt
     total: items.length,
     digital: items.filter((i) => i.fulfillment === "digital").length,
     affiliate: items.filter((i) => i.fulfillment === "affiliate").length,
+    own: items.filter((i) => i.fulfillment === "own").length,
     premium: items.filter((i) => i.isPremium).length,
   };
 }

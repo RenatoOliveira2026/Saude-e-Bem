@@ -14,6 +14,7 @@ import { routes } from "@/lib/routes";
 const fulfillmentLabels: Record<MarketplaceItem["fulfillment"], string> = {
   digital: "Produto digital",
   affiliate: "Produto afiliado",
+  own: "Produto próprio",
   subscription: "Assinatura",
 };
 
@@ -71,6 +72,10 @@ export function MarketplaceDetail({ item }: MarketplaceDetailProps) {
             ) : item.fulfillment === "subscription" ? (
               <Button href={routes.assinar} variant="gold" size="lg">
                 Assinar Clube Premium
+              </Button>
+            ) : item.fulfillment === "own" ? (
+              <Button href={routes.assinar} variant="gold" size="lg">
+                Comprar agora
               </Button>
             ) : (
               <Button

@@ -30,7 +30,7 @@ export default async function MarketplacePage() {
       <MarketplaceListing items={items} />
       <PageCta
         title="Personalizado para você"
-        description={`${stats.digital} digitais · ${stats.affiliate} afiliados · ${stats.premium} premium — recomendações inteligentes no seu perfil em Minha Saúde.`}
+        description={`${stats.digital} digitais · ${stats.affiliate} afiliados · ${stats.own} próprios · ${stats.premium} premium — recomendações inteligentes no seu perfil em Minha Saúde.`}
         primaryLabel="Ver Minha Saúde"
         primaryHref={routes.minhaSaude}
         secondaryLabel="Biblioteca gratuita"

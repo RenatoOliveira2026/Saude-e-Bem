@@ -1,7 +1,9 @@
+import { fetchPublishedLibraryItemsWithFallback } from "@/lib/supabase/services/library-items.public";
+import { getContentEngineLibraryCatalog } from "@/lib/content-engine/mappers";
+import { fetchLibraryItemSlugsFromDb } from "@/lib/supabase/services/library-items.public";
 import {
   getCatalogItemBySlug,
   getFeaturedCatalogItem,
-  INTELLIGENT_LIBRARY_CATALOG,
 } from "./library-catalog";
 import { filterLibraryItems } from "./library-filters";
 import type {
@@ -15,8 +17,9 @@ import type {
  * Futuro: `fetchLibraryFromSupabase()` com fallback para mock local.
  */
 export async function fetchIntelligentLibraryItems(): Promise<LibraryItem[]> {
-  // TODO Fase 5+: substituir por Supabase quando `library_items` existir
-  return INTELLIGENT_LIBRARY_CATALOG;
+  return fetchPublishedLibraryItemsWithFallback(async () =>
+    getContentEngineLibraryCatalog(),
+  );
 }
 
 export async function fetchIntelligentLibraryItemBySlug(
@@ -33,8 +36,14 @@ export async function fetchFeaturedIntelligentLibraryItem(): Promise<
   return items.find((item) => item.featured) ?? getFeaturedCatalogItem();
 }
 
-export function getIntelligentLibrarySlugs(): string[] {
-  return INTELLIGENT_LIBRARY_CATALOG.map((item) => item.slug);
+export async function fetchIntelligentLibrarySlugs(): Promise<string[]> {
+  try {
+    const fromDb = await fetchLibraryItemSlugsFromDb();
+    if (fromDb.length > 0) return fromDb;
+  } catch {
+    /* fallback abaixo */
+  }
+  return getContentEngineLibraryCatalog().map((item) => item.slug);
 }
 
 export function filterIntelligentLibraryItems(
@@ -73,6 +82,9 @@ export function resolveLibraryAssetUrl(item: LibraryItem): string | undefined {
     assets.pdfUrl ??
     assets.ebookFileUrl ??
     assets.videoUrl ??
-    assets.affiliateUrl
+    assets.affiliateUrl ??
+    (assets.storagePath
+      ? `${process.env.NEXT_PUBLIC_SUPABASE_URL?.replace(/\/$/, "")}/storage/v1/object/public/library/${assets.storagePath.replace(/^library\//, "")}`
+      : undefined)
   );
 }

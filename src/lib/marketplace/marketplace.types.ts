@@ -1,12 +1,13 @@
 import type { ScoreCriterionId } from "@/lib/recommendations/recommendation-types";
 
 /** Tipo de entrega do item no marketplace. */
-export type MarketplaceFulfillment = "digital" | "affiliate" | "subscription";
+export type MarketplaceFulfillment = "digital" | "affiliate" | "own" | "subscription";
 
 export type MarketplaceFilterId =
   | "todos"
   | "digitais"
   | "afiliados"
+  | "proprios"
   | "premium"
   | "ebooks";
 
@@ -38,6 +39,10 @@ export interface MarketplaceItem {
   librarySlug?: string;
   /** Critérios do Score Saúde & Bem relacionados */
   healthTags?: ScoreCriterionId[];
+  seoTitle?: string;
+  seoDescription?: string;
+  seoKeywords?: string;
+  ogImageUrl?: string;
 }
 
 export interface RecommendedMarketplaceProduct {
@@ -52,5 +57,6 @@ export interface MarketplaceStats {
   total: number;
   digital: number;
   affiliate: number;
+  own: number;
   premium: number;
 }

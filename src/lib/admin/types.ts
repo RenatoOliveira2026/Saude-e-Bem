@@ -3,6 +3,8 @@ export interface DashboardStats {
   articles: number;
   protocols: number;
   ebooks: number;
+  libraryItems: number;
+  marketplaceProducts: number;
   favorites: number;
   publishedTotal: number;
   draftsTotal: number;

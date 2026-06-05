@@ -25,12 +25,11 @@ export type ContentCategory =
   | "bem-estar-geral";
 
 export type BlogCategory =
-  | "longevidade"
-  | "energia"
+  | "hidratacao"
   | "sono"
-  | "saude-intestinal"
-  | "alimentacao"
-  | "saude-mental";
+  | "emagrecimento"
+  | "saude-cardiovascular"
+  | "longevidade";
 
 export type ContentLevel = "Iniciante" | "Intermediário" | "Avançado";
 
@@ -157,10 +156,9 @@ export const categoryLabels: Record<ContentCategory, string> = {
 };
 
 export const blogCategoryLabels: Record<BlogCategory, string> = {
-  longevidade: "Longevidade",
-  energia: "Energia",
+  hidratacao: "Hidratação",
   sono: "Sono",
-  "saude-intestinal": "Saúde Intestinal",
-  alimentacao: "Alimentação",
-  "saude-mental": "Saúde Mental",
+  emagrecimento: "Emagrecimento",
+  "saude-cardiovascular": "Saúde Cardiovascular",
+  longevidade: "Longevidade",
 };

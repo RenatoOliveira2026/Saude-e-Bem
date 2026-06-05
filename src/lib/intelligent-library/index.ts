@@ -18,6 +18,6 @@ export {
   fetchIntelligentLibraryItemBySlug,
   fetchIntelligentLibraryItems,
   filterIntelligentLibraryItems,
-  getIntelligentLibrarySlugs,
+  fetchIntelligentLibrarySlugs,
   resolveLibraryAssetUrl,
 } from "./library.service";

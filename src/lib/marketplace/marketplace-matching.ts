@@ -27,6 +27,9 @@ function resolveItemHref(item: MarketplaceItem): string {
   if (item.fulfillment === "subscription") {
     return routes.assinar;
   }
+  if (item.fulfillment === "own") {
+    return routes.marketplaceItem(item.slug);
+  }
   return routes.marketplaceItem(item.slug);
 }
 

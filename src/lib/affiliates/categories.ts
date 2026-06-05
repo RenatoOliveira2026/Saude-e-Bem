@@ -24,9 +24,11 @@ export function normalizeAffiliateCategory(value: string): string {
 }
 
 const BLOG_CATEGORY_ALIASES: Partial<Record<BlogCategory, string[]>> = {
-  "saude-intestinal": ["intestinal", "saude-intestinal"],
-  alimentacao: ["nutricao", "alimentacao"],
-  "saude-mental": ["mente", "saude-mental"],
+  hidratacao: ["hidratacao", "nutricao", "agua"],
+  sono: ["sono"],
+  emagrecimento: ["emagrecimento", "nutricao", "metabolismo"],
+  "saude-cardiovascular": ["saude-cardiovascular", "cardiovascular", "coracao"],
+  longevidade: ["longevidade"],
 };
 
 /** Chaves normalizadas para comparar afiliado com artigo ou protocolo */

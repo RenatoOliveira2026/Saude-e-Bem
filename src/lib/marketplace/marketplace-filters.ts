@@ -4,6 +4,7 @@ export const MARKETPLACE_FILTERS: MarketplaceFilterOption[] = [
   { id: "todos", label: "Todos" },
   { id: "digitais", label: "Digitais" },
   { id: "afiliados", label: "Afiliados" },
+  { id: "proprios", label: "Próprios" },
   { id: "premium", label: "Premium" },
   { id: "ebooks", label: "E-books" },
 ];
@@ -19,6 +20,8 @@ export function filterMarketplaceItems(
       return items.filter((item) => item.fulfillment === "digital");
     case "afiliados":
       return items.filter((item) => item.fulfillment === "affiliate");
+    case "proprios":
+      return items.filter((item) => item.fulfillment === "own");
     case "premium":
       return items.filter((item) => item.isPremium);
     case "ebooks":

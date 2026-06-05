@@ -8,12 +8,14 @@ import {
 import { Container } from "@/components/ui/Container";
 import { Section } from "@/components/ui/Section";
 import {
-  filterIntelligentLibraryItems,
+  filterLibraryItems,
   getFilterLabel,
   LIBRARY_FILTERS,
-  type LibraryFilterId,
-  type LibraryItem,
-} from "@/lib/intelligent-library";
+} from "@/lib/intelligent-library/library-filters";
+import type {
+  LibraryFilterId,
+  LibraryItem,
+} from "@/lib/intelligent-library/library.types";
 import { useMemo, useState } from "react";
 
 interface IntelligentLibraryListingProps {
@@ -28,7 +30,7 @@ export function IntelligentLibraryListing({
   const [active, setActive] = useState<LibraryFilterId>("todos");
 
   const filtered = useMemo(
-    () => filterIntelligentLibraryItems(items, active),
+    () => filterLibraryItems(items, active),
     [active, items],
   );
 

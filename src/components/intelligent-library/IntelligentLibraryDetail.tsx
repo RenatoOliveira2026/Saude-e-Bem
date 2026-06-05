@@ -1,6 +1,7 @@
 import { CrossLinks, PageCta } from "@/components/pages";
 import { Breadcrumbs } from "@/components/layout/Breadcrumbs";
 import { DetailHero, RelatedNav } from "@/components/layout/DetailPage";
+import { JsonLdScript } from "@/components/seo/JsonLd";
 import { PremiumGate } from "@/components/subscription/PremiumGate";
 import { PlanBadge } from "@/components/subscription/PlanBadge";
 import { Container } from "@/components/ui/Container";
@@ -10,6 +11,7 @@ import { Icon } from "@/components/icons";
 import type { LibraryItem } from "@/lib/intelligent-library";
 import { resolveLibraryAssetUrl } from "@/lib/intelligent-library";
 import { routes } from "@/lib/routes";
+import { bookJsonLd, breadcrumbJsonLd } from "@/lib/seo/json-ld";
 
 const typeLabels: Record<LibraryItem["type"], string> = {
   ebook: "E-book",
@@ -32,9 +34,27 @@ export function IntelligentLibraryDetail({
 }: IntelligentLibraryDetailProps) {
   const assetUrl = resolveLibraryAssetUrl(item);
   const isLocked = item.isPremium && !canAccessPremium;
+  const summary = item.longDescription ?? item.description;
+  const path = routes.bibliotecaItem(item.slug);
 
   return (
     <>
+      <JsonLdScript
+        data={[
+          breadcrumbJsonLd([
+            { name: "Início", path: routes.home },
+            { name: "Biblioteca", path: routes.biblioteca },
+            { name: item.title },
+          ]),
+          bookJsonLd({
+            title: item.title,
+            description: item.seoDescription ?? summary,
+            path,
+            imageUrl: item.ogImageUrl ?? item.image ?? undefined,
+            isPremium: item.isPremium,
+          }),
+        ]}
+      />
       <Breadcrumbs
         items={[
           { label: "Início", href: routes.home },
@@ -46,7 +66,7 @@ export function IntelligentLibraryDetail({
       <DetailHero
         badge={item.category}
         title={item.title}
-        description={item.description}
+        description={summary}
         premium={item.isPremium}
         meta={[
           {
@@ -90,7 +110,7 @@ export function IntelligentLibraryDetail({
             </div>
 
             <h2 className="mt-8 font-heading text-2xl text-forest">Sobre este material</h2>
-            <p className="mt-4 text-muted leading-relaxed text-pretty">{item.description}</p>
+            <p className="mt-4 text-muted leading-relaxed text-pretty">{summary}</p>
 
             {!item.isPremium && (
               <div className="mt-8 rounded-2xl border border-sage/30 bg-sage-muted/30 p-6">

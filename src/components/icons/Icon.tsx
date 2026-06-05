@@ -78,12 +78,11 @@ export const categoryIcons: Record<ContentCategory, IconName> = {
 };
 
 export const blogCategoryIcons: Record<BlogCategory, IconName> = {
-  longevidade: "sparkle",
-  energia: "bolt",
+  hidratacao: "leaf",
   sono: "moon",
-  "saude-intestinal": "vitality",
-  alimentacao: "leaf",
-  "saude-mental": "brain",
+  emagrecimento: "chart",
+  "saude-cardiovascular": "heart-leaf",
+  longevidade: "sparkle",
 };
 
 const stroke = {

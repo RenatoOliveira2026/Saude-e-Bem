@@ -23,5 +23,5 @@ export {
   fetchMarketplaceItems,
   filterMarketplaceCatalog,
   getMarketplaceItemHref,
-  getMarketplaceSlugs,
+  fetchMarketplaceSlugs,
 } from "./marketplace.service";

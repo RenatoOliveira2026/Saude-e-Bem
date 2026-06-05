@@ -4,6 +4,8 @@ import { AdminDeleteButton } from "@/components/admin/AdminDeleteButton";
 import type { AdminListItem } from "@/components/admin/AdminContentList";
 import { Button } from "@/components/ui/Button";
 import { deleteAffiliateAction } from "@/lib/admin/actions/affiliates.actions";
+import { deleteLibraryItemAction } from "@/lib/admin/actions/library-items.actions";
+import { deleteMarketplaceProductAction } from "@/lib/admin/actions/marketplace.actions";
 import {
   deleteArticleAction,
   publishArticleFormAction,
@@ -18,7 +20,13 @@ import {
 } from "@/lib/admin/actions/protocols.actions";
 import { adminRoutes, routes } from "@/lib/routes";
 
-export type AdminListResource = "articles" | "protocols" | "ebooks" | "affiliates";
+export type AdminListResource =
+  | "articles"
+  | "protocols"
+  | "ebooks"
+  | "affiliates"
+  | "library-items"
+  | "marketplace";
 
 interface AdminRowActionsProps {
   resource: AdminListResource;
@@ -33,6 +41,38 @@ export function AdminRowActions({ resource, item }: AdminRowActionsProps) {
           Editar
         </Button>
         <AdminDeleteButton onDelete={() => deleteAffiliateAction(item.id)} />
+      </>
+    );
+  }
+
+  if (resource === "library-items") {
+    return (
+      <>
+        <Button href={adminRoutes.bibliotecaItemEditar(item.id)} variant="ghost" size="sm">
+          Editar
+        </Button>
+        {item.status === "published" && (
+          <Button href={routes.bibliotecaItem(item.slug)} variant="ghost" size="sm">
+            Ver
+          </Button>
+        )}
+        <AdminDeleteButton onDelete={() => deleteLibraryItemAction(item.id)} />
+      </>
+    );
+  }
+
+  if (resource === "marketplace") {
+    return (
+      <>
+        <Button href={adminRoutes.marketplaceEditar(item.id)} variant="ghost" size="sm">
+          Editar
+        </Button>
+        {item.status === "published" && (
+          <Button href={routes.marketplaceItem(item.slug)} variant="ghost" size="sm">
+            Ver
+          </Button>
+        )}
+        <AdminDeleteButton onDelete={() => deleteMarketplaceProductAction(item.id)} />
       </>
     );
   }

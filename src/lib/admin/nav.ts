@@ -17,6 +17,12 @@ export const adminNavItems: AdminNavItem[] = [
     roles: ["super_admin", "admin"],
   },
   {
+    label: "Conteúdos",
+    href: adminRoutes.conteudos,
+    icon: "book",
+    roles: ["super_admin", "admin"],
+  },
+  {
     label: "Artigos",
     href: adminRoutes.artigos,
     icon: "book",
@@ -29,9 +35,21 @@ export const adminNavItems: AdminNavItem[] = [
     roles: ["super_admin", "admin"],
   },
   {
+    label: "Biblioteca digital",
+    href: adminRoutes.bibliotecaItens,
+    icon: "library",
+    roles: ["super_admin", "admin"],
+  },
+  {
     label: "Biblioteca",
     href: adminRoutes.biblioteca,
     icon: "library",
+    roles: ["super_admin", "admin"],
+  },
+  {
+    label: "Marketplace",
+    href: adminRoutes.marketplace,
+    icon: "star",
     roles: ["super_admin", "admin"],
   },
   {
@@ -44,6 +62,12 @@ export const adminNavItems: AdminNavItem[] = [
     label: "Leads",
     href: adminRoutes.leads,
     icon: "activity",
+    roles: ["super_admin", "admin"],
+  },
+  {
+    label: "Conversão",
+    href: adminRoutes.conversao,
+    icon: "chart",
     roles: ["super_admin", "admin"],
   },
   {

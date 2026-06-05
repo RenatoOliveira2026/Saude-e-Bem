@@ -108,6 +108,58 @@ type EbookRow = {
   updated_at: string;
 };
 
+type LibraryItemRow = {
+  id: string;
+  slug: string;
+  title: string;
+  description: string;
+  category: string;
+  category_label: string;
+  item_type: string;
+  tier: "free" | "premium";
+  is_premium: boolean;
+  image_url: string | null;
+  estimated_read_time: string;
+  featured: boolean;
+  assets: Json;
+  long_description: string;
+  seo_title: string | null;
+  seo_description: string | null;
+  seo_keywords: string | null;
+  og_image_url: string | null;
+  status: ContentStatus;
+  created_at: string;
+  updated_at: string;
+};
+
+type MarketplaceProductRow = {
+  id: string;
+  slug: string;
+  title: string;
+  description: string;
+  category: string;
+  category_label: string;
+  product_type: string;
+  fulfillment: "digital" | "affiliate" | "own" | "subscription";
+  is_premium: boolean;
+  image_url: string | null;
+  current_price: number | null;
+  old_price: number | null;
+  installments: string | null;
+  featured: boolean;
+  editor_choice: boolean;
+  library_slug: string | null;
+  affiliate_slug: string | null;
+  health_tags: string[];
+  seo_title: string | null;
+  seo_description: string | null;
+  seo_keywords: string | null;
+  og_image_url: string | null;
+  status: ContentStatus;
+  created_at: string;
+  updated_at: string;
+};
+
 type AffiliateLinkRow = {
   id: string;
   title: string;
@@ -154,13 +206,49 @@ type AffiliateClickRow = {
   created_at: string;
 };
 
-type NewsletterLeadRow = {
+export type NewsletterLeadRow = {
   id: string;
   name: string | null;
   email: string;
   source: string;
   interest: string | null;
+  lead_score: string;
+  content_context: Record<string, unknown>;
+  updated_at: string;
+  last_interaction_at: string | null;
+  interaction_count: number;
+  esp_provider: string | null;
+  esp_external_id: string | null;
+  esp_synced_at: string | null;
+  esp_sync_error: string | null;
   created_at: string;
+};
+
+export type LeadInteractionRow = {
+  id: string;
+  lead_id: string;
+  event_type: string;
+  title: string;
+  description: string | null;
+  source: string | null;
+  metadata: Record<string, unknown>;
+  created_at: string;
+};
+
+export type LeadAutomationRunRow = {
+  id: string;
+  lead_id: string;
+  sequence_id: string;
+  status: string;
+  current_step_index: number;
+  steps_completed: unknown[];
+  next_step_at: string | null;
+  esp_provider: string | null;
+  started_at: string;
+  completed_at: string | null;
+  metadata: Record<string, unknown>;
+  created_at: string;
+  updated_at: string;
 };
 
 type NewsletterSubscriberRow = {
@@ -494,6 +582,66 @@ export interface Database {
         Update: Partial<EbookRow>;
         Relationships: [];
       };
+      library_items: {
+        Row: LibraryItemRow;
+        Insert: {
+          id?: string;
+          slug: string;
+          title: string;
+          description: string;
+          long_description?: string;
+          category: string;
+          category_label: string;
+          item_type: string;
+          tier?: "free" | "premium";
+          is_premium?: boolean;
+          image_url?: string | null;
+          estimated_read_time?: string;
+          featured?: boolean;
+          assets?: Json;
+          seo_title?: string | null;
+          seo_description?: string | null;
+          seo_keywords?: string | null;
+          og_image_url?: string | null;
+          status?: ContentStatus;
+          created_at?: string;
+          updated_at?: string;
+        };
+        Update: Partial<LibraryItemRow>;
+        Relationships: [];
+      };
+      marketplace_products: {
+        Row: MarketplaceProductRow;
+        Insert: {
+          id?: string;
+          slug: string;
+          title: string;
+          description: string;
+          category: string;
+          category_label: string;
+          product_type: string;
+          fulfillment: MarketplaceProductRow["fulfillment"];
+          is_premium?: boolean;
+          image_url?: string | null;
+          current_price?: number | null;
+          old_price?: number | null;
+          installments?: string | null;
+          featured?: boolean;
+          editor_choice?: boolean;
+          library_slug?: string | null;
+          affiliate_slug?: string | null;
+          health_tags?: string[];
+          seo_title?: string | null;
+          seo_description?: string | null;
+          seo_keywords?: string | null;
+          og_image_url?: string | null;
+          status?: ContentStatus;
+          created_at?: string;
+          updated_at?: string;
+        };
+        Update: Partial<MarketplaceProductRow>;
+        Relationships: [];
+      };
       favorites: {
         Row: FavoriteRow;
         Insert: {
@@ -548,9 +696,53 @@ export interface Database {
           email: string;
           source?: string;
           interest?: string | null;
+          lead_score?: string;
+          content_context?: Record<string, unknown>;
+          updated_at?: string;
+          last_interaction_at?: string | null;
+          interaction_count?: number;
+          esp_provider?: string | null;
+          esp_external_id?: string | null;
+          esp_synced_at?: string | null;
+          esp_sync_error?: string | null;
           created_at?: string;
         };
         Update: Partial<NewsletterLeadRow>;
+        Relationships: [];
+      };
+      lead_interactions: {
+        Row: LeadInteractionRow;
+        Insert: {
+          id?: string;
+          lead_id: string;
+          event_type: string;
+          title: string;
+          description?: string | null;
+          source?: string | null;
+          metadata?: Record<string, unknown>;
+          created_at?: string;
+        };
+        Update: Partial<LeadInteractionRow>;
+        Relationships: [];
+      };
+      lead_automation_runs: {
+        Row: LeadAutomationRunRow;
+        Insert: {
+          id?: string;
+          lead_id: string;
+          sequence_id: string;
+          status?: string;
+          current_step_index?: number;
+          steps_completed?: unknown[];
+          next_step_at?: string | null;
+          esp_provider?: string | null;
+          started_at?: string;
+          completed_at?: string | null;
+          metadata?: Record<string, unknown>;
+          created_at?: string;
+          updated_at?: string;
+        };
+        Update: Partial<LeadAutomationRunRow>;
         Relationships: [];
       };
       newsletter_subscribers: {
@@ -797,6 +989,26 @@ export interface Database {
         Args: { p_tool_slug: string; p_result_json?: Json };
         Returns: string;
       };
+      capture_newsletter_lead: {
+        Args: {
+          p_name: string;
+          p_email: string;
+          p_source: string;
+          p_interest: string;
+          p_lead_score: string;
+          p_content_context?: Record<string, unknown>;
+        };
+        Returns: Array<{
+          lead_id: string;
+          is_existing: boolean;
+          final_score: string;
+          previous_score: string | null;
+        }>;
+      };
+      lead_score_rank: {
+        Args: { p_score: string };
+        Returns: number;
+      };
     };
     Enums: Record<string, never>;
     CompositeTypes: Record<string, never>;
@@ -809,6 +1021,8 @@ export type {
   ArticleRow,
   ProtocolRow,
   EbookRow,
+  LibraryItemRow,
+  MarketplaceProductRow,
   FavoriteRow,
   AdminUserRow,
   AffiliateLinkRow,

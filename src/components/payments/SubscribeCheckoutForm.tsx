@@ -198,6 +198,14 @@ export function SubscribeCheckoutForm() {
 
       <p className="text-center text-xs text-muted">
         Pagamento processado com segurança via Mercado Pago.{" "}
+        {selectedPlan === "premium_monthly" && selectedMethod === "credit_card" && (
+          <>Renovação automática mensal no cartão. </>
+        )}
+        {(selectedPlan === "premium_annual" ||
+          selectedMethod === "pix" ||
+          selectedMethod === "ticket") && (
+          <>Pagamento único — renove manualmente ao fim do período. </>
+        )}
         <a href={routes.minhaAssinatura} className="text-sage hover:underline">
           Ver minha assinatura
         </a>

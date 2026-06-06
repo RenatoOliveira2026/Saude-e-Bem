@@ -35,6 +35,7 @@ export function PaymentHistoryList({ payments }: PaymentHistoryListProps) {
                   {formatPaymentAmount(payment.amountCents, payment.currency)}
                   {payment.paymentMethod &&
                     ` · ${paymentMethodLabels[payment.paymentMethod]}`}
+                  {payment.billingPlanId && ` · ${payment.billingPlanId}`}
                 </p>
                 <p className="mt-1 text-xs text-muted-light">
                   {formatSubscriptionDate(payment.paidAt ?? payment.createdAt)}

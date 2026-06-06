@@ -431,10 +431,25 @@ type PaymentRow = {
   amount_cents: number;
   currency: string;
   description: string | null;
+  billing_plan_id: string | null;
   metadata: Record<string, unknown>;
   paid_at: string | null;
   created_at: string;
   updated_at: string;
+};
+
+export type FinancialEventRow = {
+  id: string;
+  user_id: string;
+  payment_id: string | null;
+  subscription_id: string | null;
+  event_type: string;
+  title: string;
+  description: string | null;
+  amount_cents: number | null;
+  currency: string;
+  metadata: Record<string, unknown>;
+  created_at: string;
 };
 
 type UserToolResultRow = {
@@ -945,12 +960,31 @@ export interface Database {
           amount_cents: number;
           currency?: string;
           description?: string | null;
+          billing_plan_id?: string | null;
           metadata?: Record<string, unknown>;
           paid_at?: string | null;
           created_at?: string;
           updated_at?: string;
         };
         Update: Partial<PaymentRow>;
+        Relationships: [];
+      };
+      financial_events: {
+        Row: FinancialEventRow;
+        Insert: {
+          id?: string;
+          user_id: string;
+          payment_id?: string | null;
+          subscription_id?: string | null;
+          event_type: string;
+          title: string;
+          description?: string | null;
+          amount_cents?: number | null;
+          currency?: string;
+          metadata?: Record<string, unknown>;
+          created_at?: string;
+        };
+        Update: Partial<FinancialEventRow>;
         Relationships: [];
       };
     };
@@ -1008,6 +1042,10 @@ export interface Database {
       lead_score_rank: {
         Args: { p_score: string };
         Returns: number;
+      };
+      get_finance_dashboard_stats: {
+        Args: Record<string, never>;
+        Returns: Record<string, unknown>;
       };
     };
     Enums: Record<string, never>;

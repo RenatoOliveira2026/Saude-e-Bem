@@ -18,6 +18,7 @@ import { profilePlanLabels, profilePlanStatusLabels } from "@/lib/subscription";
 import type { SubscriptionBillingData } from "@/lib/payments/types";
 import { routes } from "@/lib/routes";
 import { PaymentHistoryList } from "./PaymentHistoryList";
+import { FinancialHistoryList } from "./FinancialHistoryList";
 import { CancelSubscriptionButton } from "./CancelSubscriptionButton";
 
 interface SubscriptionDashboardProps {
@@ -151,6 +152,18 @@ export function SubscriptionDashboard({ data }: SubscriptionDashboardProps) {
         </h2>
         <div className="mt-4">
           <PaymentHistoryList payments={data.payments} />
+        </div>
+      </section>
+
+      <section>
+        <h2 className="font-heading text-xl text-forest">
+          Linha do tempo financeira
+        </h2>
+        <p className="mt-1 text-sm text-muted">
+          Checkout, aprovações e ciclo da assinatura Premium.
+        </p>
+        <div className="mt-4">
+          <FinancialHistoryList events={data.financialEvents} />
         </div>
       </section>
     </div>

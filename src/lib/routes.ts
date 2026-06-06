@@ -61,6 +61,8 @@ export const adminRoutes = {
   afiliadoEditar: (id: string) => `/admin/afiliados/${id}/editar`,
   leads: "/admin/leads",
   leadDetail: (id: string) => `/admin/leads/${id}`,
+  financeiro: "/admin/financeiro",
+  financeExport: "/api/admin/finance/export",
   conversao: "/admin/conversao",
   leadsExport: "/api/admin/leads/export",
   leadsSubscribersExport: "/api/admin/newsletter/export",

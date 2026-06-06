@@ -1,3 +1,4 @@
+export { FinancialHistoryList } from "./FinancialHistoryList";
 export { CancelSubscriptionButton } from "./CancelSubscriptionButton";
 export { CheckoutReturnSync } from "./CheckoutReturnSync";
 export { PaymentHistoryList } from "./PaymentHistoryList";

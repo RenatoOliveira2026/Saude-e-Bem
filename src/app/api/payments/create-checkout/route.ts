@@ -1,4 +1,5 @@
 import { createPremiumCheckout } from "@/lib/payments/mercadopago/checkout";
+import { assertProductionCheckoutReady } from "@/lib/payments/config";
 import { isCheckoutPlanId } from "@/lib/payments/plans";
 import { getCurrentUser, getUserProfile } from "@/lib/auth/session";
 import type { PaymentMethod } from "@/lib/payments/types";
@@ -36,6 +37,7 @@ export async function POST(request: Request) {
   }
 
   try {
+    assertProductionCheckoutReady();
     const profile = await getUserProfile(user.id);
     const result = await createPremiumCheckout({
       userId: user.id,

@@ -2,6 +2,7 @@ import type { SupabaseClient } from "@supabase/supabase-js";
 import type { Database } from "@/lib/supabase/types";
 import { cancelMercadoPagoPreapproval } from "../mercadopago/preapproval";
 import { getPlanById, PREMIUM_MONTHLY_PLAN } from "../plans";
+import { recordFinancialEvent } from "./financial-events.service";
 import type { Payment } from "../types";
 
 function addDays(date: Date, days: number): Date {
@@ -96,6 +97,19 @@ export async function activateSubscriptionFromPayment(
     .from("payments")
     .update({ subscription_id: subscriptionId })
     .eq("id", payment.id);
+
+  const isRenewal = Boolean(existing?.current_period_end);
+  await recordFinancialEvent(admin, {
+    userId: payment.userId,
+    paymentId: payment.id,
+    subscriptionId,
+    eventType: isRenewal ? "subscription_renewed" : "subscription_activated",
+    title: isRenewal ? "Assinatura renovada" : "Assinatura Premium ativada",
+    description: `${plan.name} válido até ${periodEnd.toISOString()}`,
+    amountCents: payment.amountCents,
+    currency: payment.currency,
+    metadata: { billing_plan_id: plan.id, auto_renew: autoRenew },
+  });
 }
 
 /** Cancela ou rejeita assinatura após pagamento recusado/cancelado/reembolsado. */
@@ -143,6 +157,16 @@ export async function cancelSubscriptionFromPayment(
       },
     })
     .eq("id", subscription.id);
+
+  await recordFinancialEvent(admin, {
+    userId: payment.userId,
+    paymentId: payment.id,
+    subscriptionId: subscription.id,
+    eventType: "subscription_canceled",
+    title: "Assinatura cancelada",
+    description: `Motivo: ${reason}`,
+    metadata: { reason },
+  });
 }
 
 /** Ativa assinatura a partir de preapproval autorizado (renovação automática). */
@@ -194,6 +218,18 @@ export async function activateSubscriptionFromPreapproval(
       ...payload,
     });
   }
+
+  await recordFinancialEvent(admin, {
+    userId: input.userId,
+    eventType: "preapproval_authorized",
+    title: "Renovação automática autorizada",
+    description: "Assinatura mensal com cartão via Mercado Pago",
+    metadata: {
+      preapproval_id: input.preapprovalId,
+      external_reference: input.externalReference,
+      plan: plan.id,
+    },
+  });
 }
 
 /** Agenda cancelamento ao fim do período ou cancela imediatamente. */

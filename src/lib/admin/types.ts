@@ -47,12 +47,6 @@ export type AdminActionState = {
 /** Placeholders para integrações futuras */
 export const adminFutureIntegrations = [
   {
-    id: "clube",
-    title: "Clube Saúde & Bem",
-    description: "Gestão de membros, planos e conteúdo premium.",
-    status: "em-breve" as const,
-  },
-  {
     id: "ia",
     title: "IA Saúde & Bem",
     description: "Assistente inteligente e recomendações personalizadas.",

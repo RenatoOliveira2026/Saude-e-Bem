@@ -33,6 +33,7 @@ export interface Payment {
   currency: string;
   description: string | null;
   metadata?: Record<string, unknown>;
+  billingPlanId?: string | null;
   paidAt: string | null;
   createdAt: string;
   updatedAt: string;
@@ -64,5 +65,7 @@ export interface MercadoPagoWebhookPayload {
 export interface SubscriptionBillingData {
   membership: import("@/lib/club/types").ClubMembership;
   payments: Payment[];
+  financialEvents: import("./services/financial-events.service").FinancialEvent[];
   nextRenewal: string | null;
+  checkoutMode: "real" | "stub";
 }

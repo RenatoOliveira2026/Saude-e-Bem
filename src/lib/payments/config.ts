@@ -58,9 +58,23 @@ export function getPaymentsCronSecret(): string | null {
   return process.env.PAYMENTS_CRON_SECRET?.trim() || null;
 }
 
+/** Checkout real habilitado quando MP está configurado (não stub). */
+export function isRealCheckoutEnabled(): boolean {
+  return isMercadoPagoConfigured() && !isStubModeEnabled();
+}
+
+export function assertProductionCheckoutReady(): void {
+  if (process.env.NODE_ENV === "production" && !isMercadoPagoConfigured()) {
+    throw new Error(
+      "MERCADOPAGO_ACCESS_TOKEN é obrigatório em produção para checkout real.",
+    );
+  }
+}
+
 export function getPaymentsConfigSummary() {
   return {
     mercadoPagoConfigured: isMercadoPagoConfigured(),
+    realCheckoutEnabled: isRealCheckoutEnabled(),
     webhookSecretConfigured: isWebhookSecretConfigured(),
     stubMode: isStubModeEnabled(),
     sandbox: shouldUseSandboxCheckout(),

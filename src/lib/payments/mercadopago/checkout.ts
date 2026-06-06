@@ -9,6 +9,7 @@ import {
 } from "../config";
 import { createMercadoPagoPreference } from "./client";
 import { createMercadoPagoPreapproval } from "./preapproval";
+import { recordFinancialEvent } from "../services/financial-events.service";
 import type { CheckoutRequest, CheckoutResult } from "../types";
 
 function buildExternalReference(userId: string): string {
@@ -59,6 +60,7 @@ export async function createPremiumCheckout(input: {
       amount_cents: plan.amountCents,
       currency: plan.currency,
       description: plan.name,
+      billing_plan_id: plan.id,
       metadata: {
         plan: plan.id,
         payment_method: paymentMethod,
@@ -74,6 +76,21 @@ export async function createPremiumCheckout(input: {
   }
 
   const paymentId = paymentRow.id;
+
+  await recordFinancialEvent(admin, {
+    userId: input.userId,
+    paymentId,
+    eventType: "checkout_started",
+    title: "Checkout iniciado",
+    description: `${plan.name} via Mercado Pago (${paymentMethod})`,
+    amountCents: plan.amountCents,
+    currency: plan.currency,
+    metadata: {
+      external_reference: externalReference,
+      checkout_mode: usePreapproval ? "preapproval" : "checkout_pro",
+      plan: plan.id,
+    },
+  });
 
   let checkoutUrl: string;
   let preferenceId: string | null = null;

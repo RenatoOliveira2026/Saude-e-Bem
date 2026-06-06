@@ -16,6 +16,7 @@ import {
   cancelSubscriptionFromPayment,
 } from "../services/subscriptions.service";
 import { updatePaymentByReference } from "../services/payments.service";
+import { recordFinancialEvent } from "../services/financial-events.service";
 import { registerWebhookEvent } from "../services/webhook-events.service";
 import type { MercadoPagoWebhookPayload, PaymentStatus } from "../types";
 
@@ -103,14 +104,44 @@ async function handlePaymentNotification(
   }
 
   if (status === "approved") {
+    await recordFinancialEvent(admin, {
+      userId: payment.userId,
+      paymentId: payment.id,
+      eventType: "payment_approved",
+      title: "Pagamento aprovado",
+      description: `Mercado Pago #${mpPayment.id}`,
+      amountCents: payment.amountCents,
+      currency: payment.currency,
+      metadata: { mercadopago_id: mpPayment.id },
+    });
     await activateSubscriptionFromPayment(admin, payment);
     return { ok: true, message: "Pagamento aprovado e assinatura ativada." };
   }
 
   if (["rejected", "cancelled", "refunded", "charged_back"].includes(status)) {
+    await recordFinancialEvent(admin, {
+      userId: payment.userId,
+      paymentId: payment.id,
+      eventType: "payment_rejected",
+      title: "Pagamento não concluído",
+      description: `Status: ${status}`,
+      amountCents: payment.amountCents,
+      currency: payment.currency,
+      metadata: { mercadopago_id: mpPayment.id, status },
+    });
     await cancelSubscriptionFromPayment(admin, payment, status);
     return { ok: true, message: `Assinatura cancelada: ${status}.` };
   }
+
+  await recordFinancialEvent(admin, {
+    userId: payment.userId,
+    paymentId: payment.id,
+    eventType: "payment_pending",
+    title: "Pagamento em processamento",
+    description: `Status: ${status}`,
+    amountCents: payment.amountCents,
+    currency: payment.currency,
+  });
 
   return { ok: true, message: `Pagamento atualizado: ${status}.` };
 }

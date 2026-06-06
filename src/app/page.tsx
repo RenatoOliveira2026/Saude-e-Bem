@@ -2,7 +2,7 @@ import {
   AffiliatesRecommendedSection,
   ClubPremiumSection,
   FeaturedHighlightSection,
-  HeroPremiumSection,
+  HeroSection,
   LibraryPremiumSection,
   NewsletterLeadSection,
   ObjectivesPremiumSection,
@@ -36,7 +36,7 @@ export default async function HomePage() {
 
   return (
     <>
-      <HeroPremiumSection />
+      <HeroSection />
       <ObjectivesPremiumSection />
       {hasHighlights ? (
         <FeaturedHighlightSection

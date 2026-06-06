@@ -18,6 +18,7 @@ export function mapPaymentRow(row: PaymentRow): Payment {
     amountCents: row.amount_cents,
     currency: row.currency,
     description: row.description,
+    billingPlanId: row.billing_plan_id,
     metadata: row.metadata,
     paidAt: row.paid_at,
     createdAt: row.created_at,
@@ -31,7 +32,7 @@ export async function fetchUserPayments(userId: string): Promise<Payment[]> {
   const { data, error } = await supabase
     .from("payments")
     .select(
-      "id, user_id, subscription_id, provider, external_id, preference_id, external_reference, status, payment_method, amount_cents, currency, description, metadata, paid_at, created_at, updated_at",
+      "id, user_id, subscription_id, provider, external_id, preference_id, external_reference, status, payment_method, amount_cents, currency, description, billing_plan_id, metadata, paid_at, created_at, updated_at",
     )
     .eq("user_id", userId)
     .order("created_at", { ascending: false })
@@ -74,7 +75,7 @@ export async function updatePaymentByReference(
     })
     .eq("id", existing.id)
     .select(
-      "id, user_id, subscription_id, provider, external_id, preference_id, external_reference, status, payment_method, amount_cents, currency, description, metadata, paid_at, created_at, updated_at",
+      "id, user_id, subscription_id, provider, external_id, preference_id, external_reference, status, payment_method, amount_cents, currency, description, billing_plan_id, metadata, paid_at, created_at, updated_at",
     )
     .single();
 
@@ -92,7 +93,7 @@ export async function getPaymentByReference(
   const { data, error } = await admin
     .from("payments")
     .select(
-      "id, user_id, subscription_id, provider, external_id, preference_id, external_reference, status, payment_method, amount_cents, currency, description, metadata, paid_at, created_at, updated_at",
+      "id, user_id, subscription_id, provider, external_id, preference_id, external_reference, status, payment_method, amount_cents, currency, description, billing_plan_id, metadata, paid_at, created_at, updated_at",
     )
     .eq("external_reference", externalReference)
     .maybeSingle();

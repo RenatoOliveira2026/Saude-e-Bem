@@ -1,6 +1,7 @@
 export { AffiliatesRecommendedSection } from "./AffiliatesRecommendedSection";
 export { ClubPremiumSection } from "./ClubPremiumSection";
 export { FeaturedHighlightSection } from "./FeaturedHighlightSection";
+export { HeroSection } from "./HeroSection";
 export { HeroPremiumSection } from "./HeroPremiumSection";
 export { LibraryPremiumSection } from "./LibraryPremiumSection";
 export { NewsletterLeadSection } from "./NewsletterLeadSection";

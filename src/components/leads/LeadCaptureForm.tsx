@@ -17,6 +17,7 @@ interface LeadCaptureFormProps {
   className?: string;
   defaultInterest?: LeadInterestId;
   hideInterestSelect?: boolean;
+  showWhatsAppFields?: boolean;
   contentType?: string;
   contentSlug?: string;
   contentTitle?: string;
@@ -44,6 +45,7 @@ export function LeadCaptureForm({
   className,
   defaultInterest,
   hideInterestSelect = false,
+  showWhatsAppFields = false,
   contentType,
   contentSlug,
   contentTitle,
@@ -117,6 +119,38 @@ export function LeadCaptureForm({
             ))}
           </select>
         </div>
+      )}
+      {showWhatsAppFields && (
+        <>
+          <div>
+            <label htmlFor={`lead-phone-${source}`} className="sr-only">
+              WhatsApp
+            </label>
+            <input
+              id={`lead-phone-${source}`}
+              name="phone"
+              type="tel"
+              autoComplete="tel"
+              placeholder="WhatsApp com DDD (opcional)"
+              className={inputStyles[variant]}
+            />
+          </div>
+          <label
+            className={`flex items-start gap-3 text-left text-sm ${
+              variant === "forest" ? "text-off-white/80" : "text-muted"
+            }`}
+          >
+            <input
+              type="checkbox"
+              name="whatsapp_opt_in"
+              className="mt-1 rounded border-border"
+            />
+            <span>
+              Aceito receber mensagens do Saúde &amp; Bem no WhatsApp sobre conteúdos
+              e ofertas. Posso cancelar a qualquer momento respondendo SAIR.
+            </span>
+          </label>
+        </>
       )}
       {state.error && <p className={errorClass}>{state.error}</p>}
       <Button

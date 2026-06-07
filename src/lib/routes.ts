@@ -64,6 +64,8 @@ export const adminRoutes = {
   financeiro: "/admin/financeiro",
   financeExport: "/api/admin/finance/export",
   conversao: "/admin/conversao",
+  comunicacao: "/admin/comunicacao",
+  comunicacaoTemplates: "/admin/comunicacao/templates",
   leadsExport: "/api/admin/leads/export",
   leadsSubscribersExport: "/api/admin/newsletter/export",
   analytics: "/admin/analytics",

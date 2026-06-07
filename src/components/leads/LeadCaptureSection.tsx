@@ -1,4 +1,5 @@
 import { LeadCaptureForm } from "@/components/leads/LeadCaptureForm";
+import { WhatsAppCaptureSection } from "@/components/whatsapp";
 import { Section, SectionTitle } from "@/components/ui/Section";
 import type { LeadInterestId, LeadSource } from "@/lib/leads/lead.types";
 
@@ -17,6 +18,7 @@ interface LeadCaptureSectionProps {
   contentSlug?: string;
   contentTitle?: string;
   lpSlug?: string;
+  showWhatsApp?: boolean;
 }
 
 const defaults: Record<
@@ -103,6 +105,7 @@ export function LeadCaptureSection({
   contentSlug,
   contentTitle,
   lpSlug,
+  showWhatsApp = true,
 }: LeadCaptureSectionProps) {
   const preset = defaults[source];
   const resolvedVariant = variant ?? preset.variant;
@@ -148,7 +151,13 @@ export function LeadCaptureSection({
             contentSlug={contentSlug}
             contentTitle={contentTitle}
             lpSlug={lpSlug}
+            showWhatsAppFields={showWhatsApp}
           />
+          {showWhatsApp && (
+            <WhatsAppCaptureSection
+              message={`Olá! Vim pela página ${title ?? preset.title} e quero saber mais.`}
+            />
+          )}
         </div>
 
         <p

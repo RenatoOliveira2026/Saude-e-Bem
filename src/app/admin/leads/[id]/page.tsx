@@ -7,6 +7,8 @@ import { getAdminLeadById } from "@/lib/admin/services/leads.service";
 import { requireAdmin } from "@/lib/admin/session";
 import { listLeadAutomationRuns } from "@/lib/crm/automation-runs";
 import { listLeadInteractions } from "@/lib/crm/interactions";
+import { listLeadWhatsAppMessages } from "@/lib/whatsapp/messages.service";
+import { formatPhoneDisplay } from "@/lib/whatsapp";
 import {
   getLeadInterestLabel,
   LEAD_SOURCE_LABELS,
@@ -33,9 +35,10 @@ export default async function AdminLeadDetailPage({ params }: AdminLeadDetailPag
   const lead = await getAdminLeadById(id);
   if (!lead) notFound();
 
-  const [interactions, automationRuns] = await Promise.all([
+  const [interactions, automationRuns, whatsappMessages] = await Promise.all([
     listLeadInteractions(id),
     listLeadAutomationRuns(id),
+    listLeadWhatsAppMessages(id),
   ]);
 
   return (
@@ -74,6 +77,17 @@ export default async function AdminLeadDetailPage({ params }: AdminLeadDetailPag
                 {LEAD_SCORE_LABELS[lead.leadScore]}
               </Badge>
             </div>
+          </div>
+          <div>
+            <p className="text-xs uppercase tracking-wide text-muted">WhatsApp</p>
+            <p className="mt-1 text-forest">
+              {lead.phone ? formatPhoneDisplay(lead.phone) : "—"}
+            </p>
+            {lead.whatsappOptIn && (
+              <Badge variant="sage" className="mt-2">
+                Opt-in ativo
+              </Badge>
+            )}
           </div>
           <div>
             <p className="text-xs uppercase tracking-wide text-muted">Interações</p>
@@ -122,6 +136,30 @@ export default async function AdminLeadDetailPage({ params }: AdminLeadDetailPag
                   </AdminTableCell>
                   <AdminTableCell>
                     {new Date(run.startedAt).toLocaleString("pt-BR")}
+                  </AdminTableCell>
+                </tr>
+              ))}
+            </AdminTable>
+          )}
+        </section>
+
+        <section>
+          <h2 className="mb-4 font-heading text-lg font-semibold text-forest">
+            Mensagens WhatsApp
+          </h2>
+          {whatsappMessages.length === 0 ? (
+            <p className="text-sm text-muted">Nenhuma mensagem WhatsApp.</p>
+          ) : (
+            <AdminTable columns={["Direção", "Template", "Status", "Data"]}>
+              {whatsappMessages.map((msg) => (
+                <tr key={msg.id}>
+                  <AdminTableCell>
+                    {msg.direction === "inbound" ? "Entrada" : "Saída"}
+                  </AdminTableCell>
+                  <AdminTableCell>{msg.templateKey ?? msg.body ?? msg.messageType}</AdminTableCell>
+                  <AdminTableCell>{msg.status}</AdminTableCell>
+                  <AdminTableCell>
+                    {new Date(msg.createdAt).toLocaleString("pt-BR")}
                   </AdminTableCell>
                 </tr>
               ))}

@@ -1,4 +1,5 @@
 import { ThankYouRecommendations } from "@/components/conversion/ThankYouRecommendations";
+import { WhatsAppCaptureSection } from "@/components/whatsapp";
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
 import { Icon } from "@/components/icons";
@@ -89,6 +90,15 @@ export default async function ObrigadoPage({ searchParams }: ObrigadoPageProps) 
             Clube Premium
           </Link>
         </p>
+        {isLeadFlow && (
+          <div className="mt-10 w-full max-w-lg">
+            <WhatsAppCaptureSection
+              title="Continue pelo WhatsApp"
+              description="Tire dúvidas ou receba conteúdos exclusivos no WhatsApp."
+              message="Olá! Acabei de me cadastrar no Saúde & Bem."
+            />
+          </div>
+        )}
       </Container>
 
       {isLeadFlow && <ThankYouRecommendations interest={params.interest} />}

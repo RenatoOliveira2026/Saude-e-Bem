@@ -12,7 +12,10 @@ export type LeadInteractionEventType =
   | "sequence_completed"
   | "sequence_failed"
   | "esp_synced"
-  | "esp_sync_failed";
+  | "esp_sync_failed"
+  | "whatsapp_inbound"
+  | "whatsapp_sent"
+  | "whatsapp_opt_out";
 
 export type LeadAutomationRunStatus = "active" | "completed" | "failed" | "paused";
 

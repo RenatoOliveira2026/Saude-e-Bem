@@ -1,6 +1,7 @@
 "use server";
 
 import { triggerLeadAutomation } from "@/lib/email-automation";
+import { recordLeadInteraction } from "@/lib/crm/interactions";
 import { trackEvent } from "@/lib/analytics/track-event";
 import { parseLeadSource } from "@/lib/leads/lead.constants";
 import { computeLeadScore, type LeadScoreId } from "@/lib/leads/lead-score";
@@ -14,6 +15,8 @@ import {
   validateLeadInterest,
   validateLeadName,
 } from "@/lib/leads/lead.validate";
+import { normalizeWhatsAppPhone } from "@/lib/whatsapp/phone";
+import { startWhatsAppAutomation } from "@/lib/whatsapp/automation.service";
 import { routes } from "@/lib/routes";
 import { createClient } from "@/lib/supabase/server";
 import { redirect } from "next/navigation";
@@ -91,6 +94,16 @@ export async function saveLeadAction(
   const interestError = validateLeadInterest(interest);
   if (interestError) return { error: interestError };
 
+  const whatsappOptIn = formData.get("whatsapp_opt_in") === "on";
+  const phoneRaw = getString(formData, "phone");
+  const normalizedPhone = phoneRaw ? normalizeWhatsAppPhone(phoneRaw) : null;
+
+  if (whatsappOptIn && !normalizedPhone) {
+    return {
+      error: "Informe um telefone válido para receber mensagens no WhatsApp.",
+    };
+  }
+
   const leadScore = computeLeadScore({
     source,
     interest: interest as LeadInterestId,
@@ -106,13 +119,15 @@ export async function saveLeadAction(
     p_interest: interest,
     p_lead_score: leadScore,
     p_content_context: contentContext,
+    p_phone: normalizedPhone,
+    p_whatsapp_opt_in: whatsappOptIn,
   });
 
   if (error) {
     if (isLeadTableMissingError(error)) {
       return {
         error:
-          "Cadastro temporariamente indisponível. Execute as migrations 023, 027 e 028 no Supabase.",
+          "Cadastro temporariamente indisponível. Execute as migrations 023, 027, 028 e 031 no Supabase.",
       };
     }
 
@@ -157,6 +172,25 @@ export async function saveLeadAction(
       isExisting,
       previousScore,
     });
+
+    if (whatsappOptIn && normalizedPhone) {
+      void recordLeadInteraction({
+        leadId,
+        eventType: isExisting ? "lead_recaptured" : "lead_captured",
+        title: "Opt-in WhatsApp",
+        description: "Consentimento para comunicação via WhatsApp",
+        source: "whatsapp",
+        metadata: { phone: normalizedPhone },
+      });
+
+      void startWhatsAppAutomation({
+        leadId,
+        phone: normalizedPhone,
+        name: name.trim(),
+        interest,
+        leadScore: finalScore,
+      });
+    }
   }
 
   redirect(thankYouUrl(source, isExisting, interest, finalScore));

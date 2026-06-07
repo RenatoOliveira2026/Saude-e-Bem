@@ -7,6 +7,10 @@
     {
       "path": "/api/payments/cron/subscriptions",
       "schedule": "0 6 * * *"
+    },
+    {
+      "path": "/api/cron/whatsapp-automation",
+      "schedule": "0 7 * * *"
     }
   ]
 }

@@ -3,6 +3,7 @@ import type { Database } from "@/lib/supabase/types";
 import { cancelMercadoPagoPreapproval } from "../mercadopago/preapproval";
 import { getPlanById, PREMIUM_MONTHLY_PLAN } from "../plans";
 import { recordFinancialEvent } from "./financial-events.service";
+import { notifyPremiumViaWhatsApp } from "@/lib/whatsapp/hooks";
 import type { Payment } from "../types";
 
 function addDays(date: Date, days: number): Date {
@@ -110,6 +111,8 @@ export async function activateSubscriptionFromPayment(
     currency: payment.currency,
     metadata: { billing_plan_id: plan.id, auto_renew: autoRenew },
   });
+
+  void notifyPremiumViaWhatsApp(admin, payment, plan);
 }
 
 /** Cancela ou rejeita assinatura após pagamento recusado/cancelado/reembolsado. */

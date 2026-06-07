@@ -15,6 +15,9 @@ const EVENT_LABELS: Record<string, string> = {
   sequence_failed: "Falha",
   esp_synced: "ESP",
   esp_sync_failed: "ESP",
+  whatsapp_inbound: "WhatsApp",
+  whatsapp_sent: "WhatsApp",
+  whatsapp_opt_out: "Opt-out",
 };
 
 export function LeadTimeline({ interactions }: LeadTimelineProps) {

@@ -222,6 +222,10 @@ export type NewsletterLeadRow = {
   esp_synced_at: string | null;
   esp_sync_error: string | null;
   created_at: string;
+  phone: string | null;
+  whatsapp_opt_in: boolean;
+  whatsapp_opt_in_at: string | null;
+  whatsapp_opt_out_at: string | null;
 };
 
 export type LeadInteractionRow = {
@@ -244,6 +248,54 @@ export type LeadAutomationRunRow = {
   steps_completed: unknown[];
   next_step_at: string | null;
   esp_provider: string | null;
+  started_at: string;
+  completed_at: string | null;
+  metadata: Record<string, unknown>;
+  created_at: string;
+  updated_at: string;
+};
+
+export type WhatsAppTemplateRow = {
+  id: string;
+  template_key: string;
+  meta_name: string;
+  language_code: string;
+  category: string;
+  status: string;
+  body_preview: string | null;
+  variables: unknown;
+  active: boolean;
+  created_at: string;
+  updated_at: string;
+};
+
+export type WhatsAppMessageRow = {
+  id: string;
+  lead_id: string | null;
+  user_id: string | null;
+  direction: string;
+  message_type: string;
+  template_key: string | null;
+  phone: string;
+  body: string | null;
+  status: string;
+  provider_message_id: string | null;
+  error_message: string | null;
+  metadata: Record<string, unknown>;
+  sent_at: string | null;
+  delivered_at: string | null;
+  read_at: string | null;
+  created_at: string;
+};
+
+export type WhatsAppAutomationRunRow = {
+  id: string;
+  lead_id: string;
+  sequence_id: string;
+  status: string;
+  current_step_index: number;
+  steps_completed: unknown[];
+  next_step_at: string | null;
   started_at: string;
   completed_at: string | null;
   metadata: Record<string, unknown>;
@@ -760,6 +812,24 @@ export interface Database {
         Update: Partial<LeadAutomationRunRow>;
         Relationships: [];
       };
+      whatsapp_templates: {
+        Row: WhatsAppTemplateRow;
+        Insert: Partial<WhatsAppTemplateRow>;
+        Update: Partial<WhatsAppTemplateRow>;
+        Relationships: [];
+      };
+      whatsapp_messages: {
+        Row: WhatsAppMessageRow;
+        Insert: Partial<WhatsAppMessageRow>;
+        Update: Partial<WhatsAppMessageRow>;
+        Relationships: [];
+      };
+      whatsapp_automation_runs: {
+        Row: WhatsAppAutomationRunRow;
+        Insert: Partial<WhatsAppAutomationRunRow>;
+        Update: Partial<WhatsAppAutomationRunRow>;
+        Relationships: [];
+      };
       newsletter_subscribers: {
         Row: NewsletterSubscriberRow;
         Insert: {
@@ -1031,6 +1101,8 @@ export interface Database {
           p_interest: string;
           p_lead_score: string;
           p_content_context?: Record<string, unknown>;
+          p_phone?: string | null;
+          p_whatsapp_opt_in?: boolean;
         };
         Returns: Array<{
           lead_id: string;
@@ -1044,6 +1116,10 @@ export interface Database {
         Returns: number;
       };
       get_finance_dashboard_stats: {
+        Args: Record<string, never>;
+        Returns: Record<string, unknown>;
+      };
+      get_whatsapp_dashboard_stats: {
         Args: Record<string, never>;
         Returns: Record<string, unknown>;
       };

@@ -13,6 +13,9 @@ export interface AdminLeadRecord {
   id: string;
   name: string | null;
   email: string;
+  phone: string | null;
+  whatsappOptIn: boolean;
+  whatsappOptInAt: string | null;
   source: LeadSource;
   interest: string | null;
   leadScore: LeadScoreId;
@@ -39,6 +42,9 @@ function mapRow(row: NewsletterLeadRow): AdminLeadRecord {
     id: row.id,
     name: row.name,
     email: row.email,
+    phone: row.phone ?? null,
+    whatsappOptIn: row.whatsapp_opt_in ?? false,
+    whatsappOptInAt: row.whatsapp_opt_in_at ?? null,
     source: parseLeadSource(row.source),
     interest: row.interest,
     leadScore: (row.lead_score as LeadScoreId) ?? "frio",

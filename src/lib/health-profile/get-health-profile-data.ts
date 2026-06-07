@@ -3,6 +3,8 @@ import {
   fetchMarketplaceItems,
   recommendMarketplaceProducts,
 } from "@/lib/marketplace";
+import { getClubMembership } from "@/lib/club/access";
+import type { ClubMembership } from "@/lib/club/types";
 import { getSessionProfile } from "@/lib/auth/session";
 import {
   buildLatestSummaries,
@@ -19,9 +21,10 @@ export async function getHealthProfileData(): Promise<HealthProfileData> {
 
   const records = await fetchUserToolResults(user.id);
   const latestByTool = buildLatestSummaries(records);
-  const [intelligent, marketplaceCatalog] = await Promise.all([
+  const [intelligent, marketplaceCatalog, membership] = await Promise.all([
     buildIntelligentRecommendations(records),
     fetchMarketplaceItems(),
+    getClubMembership(user.id),
   ]);
   const recommendedProducts = recommendMarketplaceProducts(
     records,
@@ -30,6 +33,7 @@ export async function getHealthProfileData(): Promise<HealthProfileData> {
 
   return {
     displayName,
+    membership,
     latestByTool,
     history: records,
     recommendations: intelligent.protocols.map((p) => ({

@@ -44,6 +44,8 @@ import type { CheckoutPlanId } from "./plans";
 export interface CheckoutRequest {
   paymentMethod: PaymentMethod;
   plan: CheckoutPlanId;
+  /** Reservado para cupons — validação em fase futura */
+  couponCode?: string;
 }
 
 export interface CheckoutResult {

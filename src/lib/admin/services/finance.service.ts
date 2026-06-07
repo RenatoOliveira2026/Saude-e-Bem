@@ -13,6 +13,7 @@ export interface AdminFinanceStats {
   activeSubscriptions: number;
   pendingPayments: number;
   monthlySubscribers: number;
+  quarterlySubscribers: number;
   annualSubscribers: number;
   estimatedMrrCents: number;
 }
@@ -70,9 +71,12 @@ export async function getAdminFinanceDashboard(): Promise<AdminFinanceDashboard>
 
   const statsJson = (statsRaw ?? {}) as Record<string, number>;
   const monthlySubscribers = statsJson.monthly_subscribers ?? 0;
+  const quarterlySubscribers = statsJson.quarterly_subscribers ?? 0;
   const annualSubscribers = statsJson.annual_subscribers ?? 0;
   const estimatedMrrCents =
-    monthlySubscribers * 2990 + Math.round((annualSubscribers * 29700) / 12);
+    monthlySubscribers * 2990 +
+    Math.round((quarterlySubscribers * 7990) / 3) +
+    Math.round((annualSubscribers * 29700) / 12);
 
   const stats: AdminFinanceStats = {
     totalRevenueCents: Number(statsJson.total_revenue_cents ?? 0),
@@ -80,6 +84,7 @@ export async function getAdminFinanceDashboard(): Promise<AdminFinanceDashboard>
     activeSubscriptions: statsJson.active_subscriptions ?? 0,
     pendingPayments: statsJson.pending_payments ?? 0,
     monthlySubscribers,
+    quarterlySubscribers,
     annualSubscribers,
     estimatedMrrCents,
   };

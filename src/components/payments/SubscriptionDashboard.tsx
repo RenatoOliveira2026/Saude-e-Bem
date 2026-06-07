@@ -50,7 +50,7 @@ export function SubscriptionDashboard({ data }: SubscriptionDashboardProps) {
     ? activeBillingPlan
       ? `${activeBillingPlan.name} · ${formatPlanPriceLabel(activeBillingPlan)}`
       : "Plano Premium"
-    : `Plano Gratuito · ${formatPlanPriceLabel(FREE_PLAN)} · upgrade ${formatPlanPriceLabel(PREMIUM_MONTHLY_PLAN)} ou ${formatPlanPriceLabel(PREMIUM_ANNUAL_PLAN)}`;
+    : `Plano Gratuito · ${formatPlanPriceLabel(FREE_PLAN)} · planos a partir de ${formatPlanPriceLabel(PREMIUM_MONTHLY_PLAN)}`;
 
   return (
     <div className="space-y-8">

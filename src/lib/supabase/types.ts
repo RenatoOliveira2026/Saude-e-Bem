@@ -14,7 +14,7 @@ type ProfileRow = {
   email: string;
   name: string | null;
   membership_tier: "free" | "premium";
-  plan: "free" | "premium_monthly" | "premium_annual" | "admin";
+  plan: "free" | "premium_monthly" | "premium_quarterly" | "premium_annual" | "admin";
   club_joined_at: string | null;
   created_at: string;
   updated_at: string;
@@ -478,7 +478,7 @@ export interface Database {
           email: string;
           name?: string | null;
           membership_tier?: "free" | "premium";
-          plan?: "free" | "premium_monthly" | "premium_annual" | "admin";
+          plan?: "free" | "premium_monthly" | "premium_quarterly" | "premium_annual" | "admin";
           club_joined_at?: string | null;
           created_at?: string;
           updated_at?: string;
@@ -487,7 +487,7 @@ export interface Database {
           email?: string;
           name?: string | null;
           membership_tier?: "free" | "premium";
-          plan?: "free" | "premium_monthly" | "premium_annual" | "admin";
+          plan?: "free" | "premium_monthly" | "premium_quarterly" | "premium_annual" | "admin";
           club_joined_at?: string | null;
           updated_at?: string;
         };

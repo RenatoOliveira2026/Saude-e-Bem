@@ -31,7 +31,10 @@ export async function POST(request: Request) {
   const plan = body.plan ?? "premium_monthly";
   if (!isCheckoutPlanId(plan)) {
     return NextResponse.json(
-      { error: "Plano inválido. Use premium_monthly ou premium_annual." },
+      {
+        error:
+          "Plano inválido. Use premium_monthly, premium_quarterly ou premium_annual.",
+      },
       { status: 400 },
     );
   }

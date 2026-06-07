@@ -1,3 +1,4 @@
+import { SubscriptionStatusCard } from "@/components/subscription/SubscriptionStatusCard";
 import { Badge } from "@/components/ui/Badge";
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
@@ -75,6 +76,12 @@ export function HealthProfileDashboard({ data }: HealthProfileDashboardProps) {
               </Button>
             </div>
           </div>
+        </Container>
+      </Section>
+
+      <Section background="white" spacing="compact">
+        <Container>
+          <SubscriptionStatusCard membership={data.membership} />
         </Container>
       </Section>
 

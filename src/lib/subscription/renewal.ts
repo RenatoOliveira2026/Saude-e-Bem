@@ -3,7 +3,12 @@ import type { ProfilePlan } from "./plan.types";
 
 /** Próxima renovação mock quando não há `current_period_end` no banco. */
 export function mockNextRenewalDate(profilePlan: ProfilePlan): string {
-  const days = profilePlan === "premium_annual" ? 365 : 30;
+  const days =
+    profilePlan === "premium_annual"
+      ? 365
+      : profilePlan === "premium_quarterly"
+        ? 90
+        : 30;
   const date = new Date();
   date.setDate(date.getDate() + days);
   return date.toISOString();

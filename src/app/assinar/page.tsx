@@ -8,6 +8,7 @@ import {
   formatPlanPriceLabel,
   PREMIUM_ANNUAL_PLAN,
   PREMIUM_MONTHLY_PLAN,
+  PREMIUM_QUARTERLY_PLAN,
 } from "@/lib/payments/plans";
 import type { Metadata } from "next";
 
@@ -26,7 +27,7 @@ export default function AssinarPage() {
       <PageHero
         badge="Premium"
         title="Assinar Clube Saúde & Bem"
-        description={`Premium ${formatPlanPriceLabel(PREMIUM_MONTHLY_PLAN)} ou ${formatPlanPriceLabel(PREMIUM_ANNUAL_PLAN)}. PIX, cartão ou boleto via Mercado Pago.`}
+        description={`Gratuito, ${formatPlanPriceLabel(PREMIUM_MONTHLY_PLAN)}, ${formatPlanPriceLabel(PREMIUM_QUARTERLY_PLAN)} ou ${formatPlanPriceLabel(PREMIUM_ANNUAL_PLAN)}. PIX, cartão ou boleto via Mercado Pago.`}
       />
       <Section background="white" spacing="compact">
         <Container size="sm" className="min-w-0">

@@ -1,3 +1,4 @@
+import type { ClubMembership } from "@/lib/club/types";
 import type { SavableToolSlug } from "./constants";
 import type {
   HealthScoreResult,
@@ -36,6 +37,7 @@ export interface HealthRecommendation {
 
 export interface HealthProfileData {
   displayName: string;
+  membership: ClubMembership;
   latestByTool: ToolResultSummary[];
   history: UserToolResultRecord[];
   recommendations: HealthRecommendation[];

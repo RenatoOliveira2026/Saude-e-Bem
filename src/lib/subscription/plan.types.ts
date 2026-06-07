@@ -1,13 +1,15 @@
-/** Plano persistido em `profiles.plan` (Fase 4.7). */
+/** Plano persistido em `profiles.plan` (Fase 4.7 / 5.5). */
 export type ProfilePlan =
   | "free"
   | "premium_monthly"
+  | "premium_quarterly"
   | "premium_annual"
   | "admin";
 
 export const PROFILE_PLANS: ProfilePlan[] = [
   "free",
   "premium_monthly",
+  "premium_quarterly",
   "premium_annual",
   "admin",
 ];

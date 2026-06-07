@@ -85,7 +85,7 @@ export default async function AdminFinanceiroPage() {
           />
         </div>
 
-        <div className="grid gap-4 sm:grid-cols-3">
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           <div className="rounded-xl border border-border bg-surface px-4 py-3 text-center shadow-soft">
             <p className="text-xs uppercase tracking-wide text-muted">MRR estimado</p>
             <p className="mt-1 font-heading text-2xl text-forest">
@@ -96,6 +96,12 @@ export default async function AdminFinanceiroPage() {
             <p className="text-xs uppercase tracking-wide text-muted">Mensais ativos</p>
             <p className="mt-1 font-heading text-2xl text-forest">
               {data.stats.monthlySubscribers}
+            </p>
+          </div>
+          <div className="rounded-xl border border-border bg-surface px-4 py-3 text-center shadow-soft">
+            <p className="text-xs uppercase tracking-wide text-muted">Trimestrais ativos</p>
+            <p className="mt-1 font-heading text-2xl text-forest">
+              {data.stats.quarterlySubscribers}
             </p>
           </div>
           <div className="rounded-xl border border-border bg-surface px-4 py-3 text-center shadow-soft">

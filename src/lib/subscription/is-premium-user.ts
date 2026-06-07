@@ -9,6 +9,7 @@ import { isValidProfilePlan } from "./plan.types";
 export function isPremiumPlan(plan: ProfilePlan | string | null | undefined): boolean {
   return (
     plan === "premium_monthly" ||
+    plan === "premium_quarterly" ||
     plan === "premium_annual" ||
     plan === "admin"
   );

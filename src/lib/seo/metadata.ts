@@ -54,4 +54,4 @@ export function buildContentMetadata({
   };
 }
 
-export { SITE_NAME, absoluteUrl, getSiteUrl, DEFAULT_OG_IMAGE } from "./site-url";
+export { SITE_NAME, absoluteUrl, getSiteUrl, getMetadataBaseUrl, DEFAULT_OG_IMAGE } from "./site-url";

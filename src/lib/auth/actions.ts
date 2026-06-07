@@ -8,6 +8,7 @@ import {
   logSupabaseConfig,
 } from "@/lib/supabase/config";
 import { routes } from "@/lib/routes";
+import { getSiteUrl } from "@/lib/seo/site-url";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { isRedirectError } from "next/dist/client/components/redirect-error";
@@ -65,7 +66,7 @@ export async function signUp(
       password,
       options: {
         data: { name, goal: goal || null },
-        emailRedirectTo: `${process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3001"}/auth/callback?redirect=${encodeURIComponent(routes.minhaJornada)}`,
+        emailRedirectTo: `${getSiteUrl()}/auth/callback?redirect=${encodeURIComponent(routes.minhaJornada)}`,
       },
     });
 
@@ -164,7 +165,7 @@ export async function resetPassword(
 
   try {
     const supabase = await createClient();
-    const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3001";
+    const siteUrl = getSiteUrl();
 
     const { error } = await supabase.auth.resetPasswordForEmail(email, {
       redirectTo: `${siteUrl}/auth/callback?next=${encodeURIComponent("/redefinir-senha")}`,

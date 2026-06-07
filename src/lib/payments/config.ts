@@ -1,17 +1,12 @@
+import { getSiteUrl } from "@/lib/seo/site-url";
+
+export { getSiteUrl };
+
 const PLACEHOLDER_TOKEN_PATTERNS = [
   "your-access-token",
   "COLE-SEU-TOKEN",
   "test-your-token",
 ] as const;
-
-export function getSiteUrl(): string {
-  const url =
-    process.env.NEXT_PUBLIC_SITE_URL?.trim() ||
-    (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : null) ||
-    "http://localhost:3001";
-
-  return url.replace(/\/+$/, "");
-}
 
 export function isMercadoPagoConfigured(): boolean {
   const token = process.env.MERCADOPAGO_ACCESS_TOKEN?.trim();

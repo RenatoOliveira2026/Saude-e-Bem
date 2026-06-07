@@ -11,7 +11,7 @@ import {
   PWA_THEME_COLOR,
 } from "@/lib/pwa/config";
 import { organizationJsonLd, websiteJsonLd } from "@/lib/seo/json-ld";
-import { getSiteUrl } from "@/lib/seo/site-url";
+import { getMetadataBaseUrl } from "@/lib/seo/site-url";
 import type { Metadata, Viewport } from "next";
 import { Montserrat, Open_Sans } from "next/font/google";
 import "./globals.css";
@@ -42,7 +42,7 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  metadataBase: new URL(getSiteUrl()),
+  metadataBase: getMetadataBaseUrl(),
   title: {
     default: "Saúde & Bem — Longevidade & Vitalidade",
     template: "%s | Saúde & Bem",

@@ -1,3 +1,5 @@
+import { getSiteUrl } from "@/lib/seo/site-url";
+
 /** Credenciais de desenvolvimento local — nunca use em produção */
 export const DEV_LOGIN_EMAIL = "renatoao2013@gmail.com";
 export const DEV_LOGIN_PASSWORD = "SaudeBem@2026";
@@ -15,7 +17,7 @@ export function isDevLoginAllowed(): boolean {
     return false;
   }
 
-  const siteUrl = (process.env.NEXT_PUBLIC_SITE_URL ?? "").toLowerCase();
+  const siteUrl = getSiteUrl().toLowerCase();
 
   if (
     siteUrl.includes("saudeebem.com.br") &&

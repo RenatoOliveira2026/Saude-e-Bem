@@ -32,9 +32,18 @@ const projectDir = join(__dirname, "..");
 
 loadEnvConfig(projectDir);
 
+function normalizeSiteUrl(raw) {
+  const trimmed = String(raw ?? "").trim().replace(/\/+$/, "");
+  if (!trimmed) return "http://localhost:3001";
+  if (/^https?:\/\//i.test(trimmed)) return trimmed;
+  return `https://${trimmed}`;
+}
+
 const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
 const anonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3001";
+const siteUrl = normalizeSiteUrl(
+  process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3001",
+);
 
 console.log("\n🔍 Saúde & Bem — Validação Supabase\n");
 console.log("─".repeat(50));

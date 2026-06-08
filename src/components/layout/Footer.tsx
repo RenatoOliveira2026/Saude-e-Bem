@@ -81,10 +81,10 @@ export function Footer() {
           © {year} Saúde & Bem. Todos os direitos reservados.
         </p>
         <div className="flex flex-wrap items-center justify-center gap-6">
-          <FooterLink href="#">Privacidade</FooterLink>
-          <FooterLink href="#">Termos de uso</FooterLink>
-          <FooterLink href="#">Cookies</FooterLink>
-          <FooterLink href="#">Contato</FooterLink>
+          <FooterLink href={routes.privacidade}>Privacidade</FooterLink>
+          <FooterLink href={routes.termos}>Termos de uso</FooterLink>
+          <FooterLink href={`${routes.privacidade}#cookies`}>Cookies</FooterLink>
+          <FooterLink href="mailto:contato@saudeebem.com.br">Contato</FooterLink>
         </div>
         <p className="text-xs text-off-white/40">
           Feito com cuidado para quem prioriza longevidade.

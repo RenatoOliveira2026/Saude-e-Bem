@@ -27,6 +27,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     routes.recomendados,
     routes.clube,
     routes.assinar,
+    routes.privacidade,
+    routes.termos,
   ];
 
   const [articleSlugs, librarySlugs, marketplaceSlugs] = await Promise.all([

@@ -33,6 +33,8 @@ export const routes = {
   minhaJornada: "/minha-jornada",
   minhaSaude: "/minha-saude",
   perfil: "/perfil",
+  privacidade: "/privacidade",
+  termos: "/termos",
   protocolo: (slug: string) => `/protocolos/${slug}`,
   ferramenta: (slug: string) => `/ferramentas/${slug}`,
   bibliotecaItem: (slug: string) => `/biblioteca/${slug}`,
@@ -130,7 +132,7 @@ export const footerNav = {
   comunidade: [
     { label: "Clube Saúde & Bem", href: routes.clube },
     { label: "Sobre", href: "#" },
-    { label: "Contato", href: "#" },
+    { label: "Contato", href: "mailto:contato@saudeebem.com.br" },
   ],
 } as const;
 

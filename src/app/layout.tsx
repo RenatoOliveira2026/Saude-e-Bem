@@ -1,4 +1,4 @@
-import { PageViewTracker } from "@/components/analytics";
+import { GoogleAnalytics, GoogleTagManager, PageViewTracker } from "@/components/analytics";
 import { brandIcons } from "@/components/brand/logo-config";
 import { AppShell } from "@/components/layout/AppShell";
 import { PwaProvider } from "@/components/pwa";
@@ -80,6 +80,8 @@ export default function RootLayout({
       className={`${montserrat.variable} ${openSans.variable} h-full scroll-smooth antialiased`}
     >
       <body className="flex min-h-full flex-col bg-off-white font-body text-graphite">
+        <GoogleAnalytics />
+        <GoogleTagManager />
         <JsonLdScript data={[organizationJsonLd(), websiteJsonLd()]} />
         <PageViewTracker />
         <PwaProvider />

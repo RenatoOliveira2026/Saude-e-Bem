@@ -1,7 +1,9 @@
 /**
- * Integrações futuras — apenas leitura de env e flags.
- * Não envia dados a terceiros nesta fase.
+ * Integrações de analytics — GA4 ativo via GoogleAnalytics + PageViewTracker.
+ * GTM, Meta Pixel e Search Console: ative via variáveis de ambiente.
  */
+import { getGa4MeasurementId } from "./ga4-config";
+
 export interface AnalyticsIntegrationsConfig {
   ga4: {
     enabled: boolean;
@@ -22,7 +24,7 @@ export interface AnalyticsIntegrationsConfig {
 }
 
 export function getAnalyticsIntegrationsConfig(): AnalyticsIntegrationsConfig {
-  const ga4Id = process.env.NEXT_PUBLIC_GA4_MEASUREMENT_ID?.trim() || null;
+  const ga4Id = getGa4MeasurementId();
   const metaId = process.env.NEXT_PUBLIC_META_PIXEL_ID?.trim() || null;
   const gtmId = process.env.NEXT_PUBLIC_GTM_CONTAINER_ID?.trim() || null;
   const scMeta = process.env.NEXT_PUBLIC_SEARCH_CONSOLE_VERIFICATION?.trim() || null;

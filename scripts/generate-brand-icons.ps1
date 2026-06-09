@@ -1,4 +1,4 @@
-# Generate favicon.ico and PWA icons from public/logo-saude-bem.png
+# Generate favicon.ico and PWA icons from public/logo-saude-bem.png (lockup oficial)
 $ErrorActionPreference = "Stop"
 Add-Type -AssemblyName System.Drawing
 
@@ -53,6 +53,9 @@ New-SquareIcon -Size 192 -OutPath (Join-Path $iconsDir "icon-192.png")
 New-SquareIcon -Size 512 -OutPath (Join-Path $iconsDir "icon-512.png")
 New-SquareIcon -Size 180 -OutPath (Join-Path $iconsDir "apple-touch-icon.png")
 New-SquareIcon -Size 512 -OutPath (Join-Path $iconsDir "icon-maskable.png") -PaddingRatio 0.22
+
+New-SquareIcon -Size 32 -OutPath (Join-Path $publicDir "icon.png") -PaddingRatio 0.12
+New-SquareIcon -Size 180 -OutPath (Join-Path $publicDir "apple-touch-icon.png")
 
 $favicon32 = Join-Path $iconsDir "favicon-32.png"
 New-SquareIcon -Size 32 -OutPath $favicon32 -PaddingRatio 0.12

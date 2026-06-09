@@ -1,5 +1,6 @@
 /**
  * Gera favicon.ico e ícones PWA (Windows: PowerShell + System.Drawing).
+ * Fonte: public/brand/app-icon.svg rasterizado ou lockup PNG.
  * Uso: npm run generate:brand-icons
  */
 import { spawnSync } from "node:child_process";

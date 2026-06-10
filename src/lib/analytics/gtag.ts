@@ -21,3 +21,47 @@ export function sendGa4PageView(pagePath: string): void {
     send_to: measurementId,
   });
 }
+
+export interface Ga4GenerateLeadParams {
+  source?: string;
+  interest?: string;
+  leadScore?: string;
+  existing?: boolean;
+}
+
+/** Conversão de lead — evento recomendado GA4 `generate_lead`. */
+export function sendGa4GenerateLead(params: Ga4GenerateLeadParams): void {
+  if (typeof window === "undefined") return;
+
+  const measurementId = getGa4MeasurementId();
+  if (!measurementId || !window.gtag) return;
+
+  window.gtag("event", "generate_lead", {
+    send_to: measurementId,
+    event_timestamp: Date.now(),
+    source: params.source ?? "unknown",
+    interest: params.interest ?? undefined,
+    lead_score: params.leadScore ?? undefined,
+    is_existing_lead: params.existing ?? false,
+  });
+}
+
+export interface Ga4WhatsAppClickParams {
+  sourcePage: string;
+  buttonType: string;
+}
+
+/** Clique em botão WhatsApp (wa.me / floating / seção de captação). */
+export function sendGa4WhatsAppClick(params: Ga4WhatsAppClickParams): void {
+  if (typeof window === "undefined") return;
+
+  const measurementId = getGa4MeasurementId();
+  if (!measurementId || !window.gtag) return;
+
+  window.gtag("event", "whatsapp_click", {
+    send_to: measurementId,
+    event_timestamp: Date.now(),
+    source_page: params.sourcePage,
+    button_type: params.buttonType,
+  });
+}

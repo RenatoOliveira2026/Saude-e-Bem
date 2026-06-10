@@ -8,16 +8,24 @@ import {
   ObjectivesPremiumSection,
   ProtocolsPremiumSection,
 } from "@/components/home";
+import { JsonLdScript } from "@/components/seo/JsonLd";
 import { getHomePageContent } from "@/lib/content/home";
-import type { Metadata } from "next";
+import { routes } from "@/lib/routes";
+import { homeWebPageJsonLd } from "@/lib/seo/json-ld";
+import { buildContentMetadata } from "@/lib/seo/metadata";
 
 export const revalidate = 3600;
 
-export const metadata: Metadata = {
-  title: "Saúde & Bem — Sua jornada para uma vida mais saudável",
-  description:
-    "Conteúdo confiável, hábitos saudáveis, protocolos e ferramentas para viver com mais energia, equilíbrio e longevidade.",
-};
+const HOME_TITLE = "Saúde & Bem — Sua jornada para uma vida mais saudável";
+const HOME_DESCRIPTION =
+  "Conteúdo confiável, hábitos saudáveis, protocolos e ferramentas para viver com mais energia, equilíbrio e longevidade.";
+
+export const metadata = buildContentMetadata({
+  title: HOME_TITLE,
+  description: HOME_DESCRIPTION,
+  path: routes.home,
+  type: "website",
+});
 
 export default async function HomePage() {
   const {
@@ -36,6 +44,12 @@ export default async function HomePage() {
 
   return (
     <>
+      <JsonLdScript
+        data={homeWebPageJsonLd({
+          title: HOME_TITLE,
+          description: HOME_DESCRIPTION,
+        })}
+      />
       <HeroSection />
       <ObjectivesPremiumSection />
       {hasHighlights ? (

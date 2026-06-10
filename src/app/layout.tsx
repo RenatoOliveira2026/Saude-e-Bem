@@ -41,6 +41,9 @@ export const viewport: Viewport = {
   viewportFit: "cover",
 };
 
+const searchConsoleVerification =
+  process.env.NEXT_PUBLIC_SEARCH_CONSOLE_VERIFICATION?.trim() || undefined;
+
 export const metadata: Metadata = {
   metadataBase: getMetadataBaseUrl(),
   title: {
@@ -50,6 +53,9 @@ export const metadata: Metadata = {
   description: PWA_DESCRIPTION,
   applicationName: PWA_SHORT_NAME,
   manifest: MANIFEST_URL,
+  ...(searchConsoleVerification
+    ? { verification: { google: searchConsoleVerification } }
+    : {}),
   appleWebApp: {
     capable: true,
     statusBarStyle: "default",

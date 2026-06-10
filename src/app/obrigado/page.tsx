@@ -1,3 +1,4 @@
+import { LeadConversionTracker } from "@/components/analytics/LeadConversionTracker";
 import { ThankYouRecommendations } from "@/components/conversion/ThankYouRecommendations";
 import { WhatsAppCaptureSection } from "@/components/whatsapp";
 import { Button } from "@/components/ui/Button";
@@ -63,6 +64,14 @@ export default async function ObrigadoPage({ searchParams }: ObrigadoPageProps) 
 
   return (
     <>
+      {isLeadFlow && (
+        <LeadConversionTracker
+          source={params.source}
+          interest={params.interest}
+          score={params.score}
+          existing={existing}
+        />
+      )}
       <Container className="flex min-h-[50vh] flex-col items-center justify-center py-16 text-center">
         <div className="flex h-16 w-16 items-center justify-center rounded-full bg-sage-muted">
           <Icon name="checklist" className="h-8 w-8 text-forest" />

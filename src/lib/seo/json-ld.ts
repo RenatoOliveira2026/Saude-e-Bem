@@ -23,6 +23,24 @@ export function websiteJsonLd(): JsonLd {
   };
 }
 
+export function homeWebPageJsonLd(input: {
+  title: string;
+  description: string;
+}): JsonLd {
+  return {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    name: input.title,
+    description: input.description,
+    url: getSiteUrl(),
+    isPartOf: {
+      "@type": "WebSite",
+      name: SITE_NAME,
+      url: getSiteUrl(),
+    },
+  };
+}
+
 export function breadcrumbJsonLd(items: { name: string; path?: string }[]): JsonLd {
   return {
     "@context": "https://schema.org",

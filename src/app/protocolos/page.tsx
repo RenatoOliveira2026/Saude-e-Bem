@@ -12,15 +12,16 @@ import { getCurrentUser } from "@/lib/auth/session";
 import { getProtocolLibraryItems } from "@/lib/protocol-library/services/library.service";
 import { fetchUserFavorites } from "@/lib/supabase/services/favorites.service";
 import { routes } from "@/lib/routes";
-import type { Metadata } from "next";
+import { buildContentMetadata } from "@/lib/seo/metadata";
 
 export const revalidate = 3600;
 
-export const metadata: Metadata = {
+export const metadata = buildContentMetadata({
   title: "Biblioteca de Protocolos",
   description:
     "Rotinas estruturadas por categoria — sono, alimentação, estresse, saúde mental e mais. Gratuitos e Premium com recomendações IA.",
-};
+  path: routes.protocolos,
+});
 
 export default async function ProtocolosPage() {
   const [protocols, user] = await Promise.all([

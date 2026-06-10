@@ -6,15 +6,16 @@ import {
   getFeaturedBlogArticle,
 } from "@/lib/data/repositories/blog.repository";
 import { routes } from "@/lib/routes";
-import type { Metadata } from "next";
+import { buildContentMetadata } from "@/lib/seo/metadata";
 
 export const revalidate = 3600;
 
-export const metadata: Metadata = {
+export const metadata = buildContentMetadata({
   title: "Blog",
   description:
     "Artigos aprofundados sobre longevidade, sono, nutrição, imunidade e bem-estar — conteúdo baseado em evidências.",
-};
+  path: routes.blog,
+});
 
 export default async function BlogPage() {
   const [articles, featured] = await Promise.all([

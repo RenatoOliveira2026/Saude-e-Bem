@@ -8,15 +8,16 @@ import {
   fetchIntelligentLibraryItems,
 } from "@/lib/intelligent-library";
 import { routes } from "@/lib/routes";
-import type { Metadata } from "next";
+import { buildContentMetadata } from "@/lib/seo/metadata";
 
 export const revalidate = 3600;
 
-export const metadata: Metadata = {
+export const metadata = buildContentMetadata({
   title: "Biblioteca Saúde & Bem",
   description:
     "Biblioteca inteligente com e-books, protocolos e vídeos — materiais gratuitos e premium curados para sua evolução em saúde e longevidade.",
-};
+  path: routes.biblioteca,
+});
 
 export default async function BibliotecaPage() {
   const [items, featured] = await Promise.all([

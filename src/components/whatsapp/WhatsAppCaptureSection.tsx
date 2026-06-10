@@ -21,6 +21,7 @@ export function WhatsAppCaptureSection({
         <WhatsAppCaptureButton
           message={message}
           label={buttonLabel}
+          buttonType="capture_section"
           className="inline-flex items-center justify-center rounded-full bg-[#25D366] px-6 py-3 text-sm font-semibold text-white shadow-soft transition-opacity hover:opacity-90"
         />
       </div>

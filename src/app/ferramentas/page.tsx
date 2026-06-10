@@ -5,13 +5,14 @@ import {
   getTools,
 } from "@/lib/data/repositories/tools.repository";
 import { routes } from "@/lib/routes";
-import type { Metadata } from "next";
+import { buildContentMetadata } from "@/lib/seo/metadata";
 
-export const metadata: Metadata = {
+export const metadata = buildContentMetadata({
   title: "Ferramentas",
   description:
     "Avaliações, calculadoras e ferramentas de monitoramento gratuitas para entender e acompanhar sua saúde.",
-};
+  path: routes.ferramentas,
+});
 
 export default async function FerramentasPage() {
   const [tools, featured] = await Promise.all([

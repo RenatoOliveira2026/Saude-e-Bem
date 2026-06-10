@@ -1,6 +1,7 @@
 "use client";
 
 import { buildWhatsAppClickToChatUrl } from "@/lib/whatsapp/config";
+import { trackWhatsAppClick } from "@/lib/whatsapp/track-click";
 
 export function WhatsAppFloatingButton() {
   const href = buildWhatsAppClickToChatUrl(
@@ -14,6 +15,7 @@ export function WhatsAppFloatingButton() {
       href={href}
       target="_blank"
       rel="noopener noreferrer"
+      onClick={() => trackWhatsAppClick("floating")}
       className="fixed bottom-6 right-6 z-40 flex h-14 w-14 items-center justify-center rounded-full bg-[#25D366] text-white shadow-elevated transition-transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-[#25D366]/50 focus:ring-offset-2"
       aria-label="Falar no WhatsApp"
     >

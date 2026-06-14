@@ -5,7 +5,7 @@ import {
   subscribeNewsletterAction,
   type NewsletterActionState,
 } from "@/lib/actions/newsletter.actions";
-import type { NewsletterSource } from "@/lib/newsletter/types";
+import type { NewsletterConversionEvent, NewsletterSource } from "@/lib/newsletter/types";
 import { useActionState } from "react";
 
 const initialState: NewsletterActionState = {};
@@ -17,6 +17,8 @@ interface NewsletterCaptureFormProps {
   variant?: NewsletterVariant;
   submitLabel?: string;
   className?: string;
+  showPhone?: boolean;
+  conversionEvent?: NewsletterConversionEvent;
 }
 
 const inputStyles: Record<NewsletterVariant, string> = {
@@ -31,6 +33,8 @@ export function NewsletterCaptureForm({
   variant = "light",
   submitLabel = "Quero receber",
   className,
+  showPhone = false,
+  conversionEvent = "newsletter_signup",
 }: NewsletterCaptureFormProps) {
   const [state, formAction, pending] = useActionState(
     subscribeNewsletterAction,
@@ -45,6 +49,7 @@ export function NewsletterCaptureForm({
   return (
     <form action={formAction} className={className ?? "space-y-3"}>
       <input type="hidden" name="source" value={source} />
+      <input type="hidden" name="conversion_event" value={conversionEvent} />
       <div>
         <label htmlFor={`newsletter-name-${source}`} className="sr-only">
           Nome
@@ -73,6 +78,21 @@ export function NewsletterCaptureForm({
           className={inputStyles[variant]}
         />
       </div>
+      {showPhone && (
+        <div>
+          <label htmlFor={`newsletter-phone-${source}`} className="sr-only">
+            WhatsApp
+          </label>
+          <input
+            id={`newsletter-phone-${source}`}
+            name="phone"
+            type="tel"
+            autoComplete="tel"
+            placeholder="WhatsApp com DDD (opcional)"
+            className={inputStyles[variant]}
+          />
+        </div>
+      )}
       {state.error && <p className={errorClass}>{state.error}</p>}
       <Button
         type="submit"

@@ -1,5 +1,16 @@
-/** Origem da captura do lead */
-export type NewsletterSource = "home" | "blog" | "biblioteca" | "clube" | "other";
+/** Origem da captura do lead / newsletter */
+export type NewsletterSource =
+  | "home"
+  | "blog"
+  | "biblioteca"
+  | "protocolos"
+  | "footer"
+  | "popup"
+  | "guia-30-dias"
+  | "clube"
+  | "other";
+
+export type NewsletterConversionEvent = "newsletter_signup" | "lead_magnet_download";
 
 export type NewsletterSubscriberStatus = "active" | "unsubscribed" | "bounced";
 
@@ -9,6 +20,7 @@ export interface NewsletterSubscriber {
   id: string;
   name: string;
   email: string;
+  phone: string | null;
   source: NewsletterSource;
   status: NewsletterSubscriberStatus;
   provider: NewsletterProviderId | null;
@@ -23,6 +35,7 @@ export interface NewsletterSubscriber {
 export interface NewsletterSubscribeInput {
   name: string;
   email: string;
+  phone?: string | null;
   source: NewsletterSource;
 }
 

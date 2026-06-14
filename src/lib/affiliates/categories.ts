@@ -1,18 +1,39 @@
 import type { BlogCategory, ContentCategory } from "@/lib/data/types";
 import { blogCategoryLabels, categoryLabels } from "@/lib/data/types";
 
-/** Slugs usados no admin e para correspondência com conteúdo */
+/** Taxonomia oficial — Fase 5.3 Central de Recomendações */
 export const AFFILIATE_CATEGORY_OPTIONS = [
+  { value: "suplementos", label: "Suplementos" },
+  { value: "livros", label: "Livros" },
+  { value: "saude-mental", label: "Saúde Mental" },
+  { value: "exercicios", label: "Exercícios" },
   { value: "sono", label: "Sono" },
-  { value: "energia", label: "Energia" },
-  { value: "intestinal", label: "Saúde Intestinal" },
-  { value: "detox", label: "Detox" },
-  { value: "longevidade", label: "Longevidade" },
-  { value: "menopausa", label: "Menopausa" },
-  { value: "nutricao", label: "Nutrição" },
-  { value: "mente", label: "Saúde Mental" },
-  { value: "alimentacao", label: "Alimentação" },
+  { value: "alimentacao-saudavel", label: "Alimentação Saudável" },
+  { value: "equipamentos-saude", label: "Equipamentos de Saúde" },
+  { value: "bem-estar", label: "Bem-estar" },
 ] as const;
+
+export type AffiliateCategorySlug = (typeof AFFILIATE_CATEGORY_OPTIONS)[number]["value"];
+
+/** Mapeamento de categorias legadas (migrations anteriores) */
+export const LEGACY_AFFILIATE_CATEGORY_MAP: Record<string, AffiliateCategorySlug> = {
+  mente: "saude-mental",
+  "saúde-mental": "saude-mental",
+  alimentacao: "alimentacao-saudavel",
+  nutricao: "alimentacao-saudavel",
+  suplemento: "suplementos",
+  livro: "livros",
+  exercicio: "exercicios",
+  movimento: "exercicios",
+  equipamento: "equipamentos-saude",
+  dispositivo: "equipamentos-saude",
+  energia: "bem-estar",
+  intestinal: "bem-estar",
+  detox: "bem-estar",
+  longevidade: "bem-estar",
+  menopausa: "bem-estar",
+  wellness: "bem-estar",
+};
 
 export function normalizeAffiliateCategory(value: string): string {
   return value
@@ -23,12 +44,30 @@ export function normalizeAffiliateCategory(value: string): string {
     .trim();
 }
 
+/** Resolve slug canônico (inclui legado) */
+export function resolveAffiliateCategory(value: string): string {
+  const normalized = normalizeAffiliateCategory(value);
+  const legacy = LEGACY_AFFILIATE_CATEGORY_MAP[normalized];
+  if (legacy) return legacy;
+
+  const match = AFFILIATE_CATEGORY_OPTIONS.find(
+    (opt) => opt.value === normalized || normalizeAffiliateCategory(opt.label) === normalized,
+  );
+  return match?.value ?? normalized;
+}
+
+export function getAffiliateCategoryLabel(value: string): string {
+  const resolved = resolveAffiliateCategory(value);
+  const match = AFFILIATE_CATEGORY_OPTIONS.find((opt) => opt.value === resolved);
+  return match?.label ?? value;
+}
+
 const BLOG_CATEGORY_ALIASES: Partial<Record<BlogCategory, string[]>> = {
-  hidratacao: ["hidratacao", "nutricao", "agua"],
+  hidratacao: ["hidratacao", "alimentacao-saudavel", "agua"],
   sono: ["sono"],
-  emagrecimento: ["emagrecimento", "nutricao", "metabolismo"],
-  "saude-cardiovascular": ["saude-cardiovascular", "cardiovascular", "coracao"],
-  longevidade: ["longevidade"],
+  emagrecimento: ["emagrecimento", "alimentacao-saudavel", "metabolismo", "exercicios"],
+  "saude-cardiovascular": ["saude-cardiovascular", "cardiovascular", "coracao", "equipamentos-saude"],
+  longevidade: ["longevidade", "bem-estar", "suplementos"],
 };
 
 /** Chaves normalizadas para comparar afiliado com artigo ou protocolo */
@@ -39,11 +78,12 @@ export function getContentCategoryMatchKeys(
 ): Set<string> {
   const keys = new Set<string>();
   const add = (v: string | undefined) => {
-    if (v) keys.add(normalizeAffiliateCategory(v));
+    if (v) keys.add(resolveAffiliateCategory(v));
   };
 
   add(category);
   add(categoryLabel);
+  add(resolveAffiliateCategory(category));
 
   if (kind === "blog") {
     const aliases = BLOG_CATEGORY_ALIASES[category as BlogCategory];
@@ -56,7 +96,7 @@ export function getContentCategoryMatchKeys(
   }
 
   for (const opt of AFFILIATE_CATEGORY_OPTIONS) {
-    if (keys.has(normalizeAffiliateCategory(opt.value))) {
+    if (keys.has(opt.value)) {
       add(opt.label);
     }
     if (keys.has(normalizeAffiliateCategory(opt.label))) {
@@ -73,7 +113,7 @@ export function affiliateMatchesContentCategory(
   contentCategoryLabel: string,
   kind: "blog" | "protocol",
 ): boolean {
-  const affiliateKey = normalizeAffiliateCategory(affiliateCategory);
+  const affiliateKey = resolveAffiliateCategory(affiliateCategory);
   const matchKeys = getContentCategoryMatchKeys(
     contentCategory,
     contentCategoryLabel,

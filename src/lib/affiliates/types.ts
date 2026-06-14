@@ -18,10 +18,11 @@ export const AFFILIATE_COMMISSION_TYPES = [
 ] as const;
 
 export const AFFILIATE_PLATFORMS = [
-  { value: "amazon", label: "Amazon" },
+  { value: "amazon", label: "Amazon Associados" },
   { value: "hotmart", label: "Hotmart" },
   { value: "kiwify", label: "Kiwify" },
   { value: "eduzz", label: "Eduzz" },
+  { value: "braip", label: "Braip" },
   { value: "monetizze", label: "Monetizze" },
   { value: "outra", label: "Outra" },
 ] as const;
@@ -81,6 +82,7 @@ export interface PublicAffiliateSummary {
   currentPrice: number | null;
   oldPrice: number | null;
   installments: string;
+  benefits: string[];
 }
 
 export interface PublicAffiliateProduct extends PublicAffiliateSummary {
@@ -93,6 +95,7 @@ export interface PublicAffiliateProduct extends PublicAffiliateSummary {
   officialUrl: string | null;
   seoTitle: string | null;
   seoDescription: string | null;
+  seoKeywords: string | null;
 }
 
 /** @deprecated Use PublicAffiliateSummary */

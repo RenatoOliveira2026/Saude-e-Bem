@@ -3,7 +3,7 @@ import { Badge } from "@/components/ui/Badge";
 import { Card, CardDescription, CardHeader, CardTitle } from "@/components/ui/Card";
 import { Icon } from "@/components/icons";
 import { AFFILIATE_CTA_LABEL } from "@/lib/affiliates/constants";
-import { AFFILIATE_CATEGORY_OPTIONS } from "@/lib/affiliates/categories";
+import { getAffiliateCategoryLabel } from "@/lib/affiliates/categories";
 import { formatBrl } from "@/lib/affiliates/tracking";
 import type { AffiliateSourceType } from "@/lib/affiliates/tracking";
 import type { PublicAffiliateSummary } from "@/lib/affiliates/types";
@@ -12,10 +12,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 function categoryDisplay(category: string): string {
-  const match = AFFILIATE_CATEGORY_OPTIONS.find(
-    (opt) => opt.value === category || opt.label.toLowerCase() === category.toLowerCase(),
-  );
-  return match?.label ?? category;
+  return getAffiliateCategoryLabel(category);
 }
 
 function productTypeLabel(type: string): string {
@@ -103,6 +100,19 @@ export function AffiliateCard({
             >
               {link.description}
             </CardDescription>
+          )}
+          {link.benefits.length > 0 && (
+            <ul className="mt-3 space-y-1 text-left">
+              {link.benefits.slice(0, compact ? 2 : 3).map((benefit) => (
+                <li
+                  key={benefit}
+                  className="flex items-start gap-2 text-xs text-muted"
+                >
+                  <Icon name="checklist" size={14} className="mt-0.5 shrink-0 text-sage" />
+                  <span className="line-clamp-2">{benefit}</span>
+                </li>
+              ))}
+            </ul>
           )}
         </CardHeader>
       </Link>

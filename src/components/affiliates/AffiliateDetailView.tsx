@@ -4,15 +4,14 @@ import { Badge } from "@/components/ui/Badge";
 import { Container } from "@/components/ui/Container";
 import { Section } from "@/components/ui/Section";
 import { Icon } from "@/components/icons";
-import { AFFILIATE_CATEGORY_OPTIONS } from "@/lib/affiliates/categories";
+import { getAffiliateCategoryLabel } from "@/lib/affiliates/categories";
 import { AFFILIATE_OFFER_CTA_LABEL } from "@/lib/affiliates/constants";
 import { formatBrl, youtubeEmbedId } from "@/lib/affiliates/tracking";
 import type { PublicAffiliateProduct } from "@/lib/affiliates/types";
 import Image from "next/image";
 
 function categoryDisplay(category: string): string {
-  const match = AFFILIATE_CATEGORY_OPTIONS.find((opt) => opt.value === category);
-  return match?.label ?? category;
+  return getAffiliateCategoryLabel(category);
 }
 
 interface AffiliateDetailViewProps {

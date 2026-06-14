@@ -28,9 +28,9 @@ export default async function RecomendadosPage() {
         ]}
       />
       <PageHero
-        badge="Curadoria"
+        badge="Central de Recomendações"
         title="Recursos recomendados"
-        description="Uma seleção discreta de parceiros e ferramentas que podem apoiar seus hábitos — sem pressão, com transparência."
+        description="Produtos curados por categoria — suplementos, livros, sono, alimentação e bem-estar. Transparência total: links podem gerar comissão sem custo extra para você."
       />
 
       <Section background="white">

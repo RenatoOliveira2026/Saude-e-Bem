@@ -3,6 +3,7 @@ import {
   CrossLinks,
   PageCta,
 } from "@/components/pages";
+import { GlobalNewsletterSection } from "@/components/newsletter/NewsletterCaptureSection";
 import { ProtocolLibraryListing } from "@/components/protocol-library";
 import { PageHero } from "@/components/layout/PageHero";
 import { Button } from "@/components/ui/Button";
@@ -75,6 +76,7 @@ export default async function ProtocolosPage() {
           isLoggedIn={Boolean(user)}
         />
       )}
+      <GlobalNewsletterSection source="protocolos" />
       <PageCta
         title="Protocolos premium no Clube Saúde & Bem"
         description="Desbloqueie rotinas avançadas, acompanhamento e comunidade exclusiva para acelerar sua jornada."

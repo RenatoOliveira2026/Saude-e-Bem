@@ -46,7 +46,13 @@ export async function GET(request: Request, context: RouteContext) {
     });
   }
 
-  await recordAffiliateClick(data.id, sourcePage, sourceType);
+  await recordAffiliateClick({
+    affiliateId: data.id,
+    sourcePage,
+    sourceType,
+    userAgent: request.headers.get("user-agent"),
+    referrer: request.headers.get("referer"),
+  });
 
   void trackEvent({
     eventType: "affiliate_click",

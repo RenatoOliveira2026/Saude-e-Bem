@@ -15,9 +15,9 @@ export type { PublicAffiliateProduct, PublicAffiliateSummary };
 export type PublicAffiliateLink = PublicAffiliateSummary;
 
 const PUBLIC_SUMMARY_COLUMNS =
-  "id, slug, title, category, description, product_type, brand, image_url, featured, editor_choice, rating, reviews_count, current_price, old_price, installments, url, affiliate_url, active, created_at" as const;
+  "id, slug, title, category, description, product_type, brand, image_url, featured, editor_choice, rating, reviews_count, current_price, old_price, installments, benefits, url, affiliate_url, active, created_at" as const;
 
-const PUBLIC_DETAIL_COLUMNS = `${PUBLIC_SUMMARY_COLUMNS}, producer_name, benefits, target_audience, contraindications, video_url, testimonial_1, testimonial_2, testimonial_3, official_url, seo_title, seo_description` as const;
+const PUBLIC_DETAIL_COLUMNS = `${PUBLIC_SUMMARY_COLUMNS}, producer_name, target_audience, contraindications, video_url, testimonial_1, testimonial_2, testimonial_3, official_url, seo_title, seo_description, seo_keywords` as const;
 
 async function fetchActiveRows(
   filter?: { featuredOnly?: boolean },

@@ -1,3 +1,4 @@
+import { NEWSLETTER_SOURCES } from "@/lib/newsletter/sources";
 import type { NewsletterSource, NewsletterSubscriber } from "@/lib/newsletter/types";
 import { createClient } from "@/lib/supabase/server";
 
@@ -15,6 +16,7 @@ function mapRow(row: Record<string, unknown>): NewsletterSubscriber {
     id: String(row.id),
     name: String(row.name),
     email: String(row.email),
+    phone: row.phone ? String(row.phone) : null,
     source: row.source as NewsletterSubscriber["source"],
     status: row.status as NewsletterSubscriber["status"],
     provider: (row.provider as NewsletterSubscriber["provider"]) ?? null,
@@ -68,13 +70,9 @@ export async function getNewsletterLeadStats(): Promise<NewsletterLeadStats> {
   const day7 = now - 7 * 24 * 60 * 60 * 1000;
   const day30 = now - 30 * 24 * 60 * 60 * 1000;
 
-  const bySource: NewsletterLeadStats["bySource"] = {
-    home: 0,
-    blog: 0,
-    biblioteca: 0,
-    clube: 0,
-    other: 0,
-  };
+  const bySource = Object.fromEntries(
+    NEWSLETTER_SOURCES.map((source) => [source, 0]),
+  ) as NewsletterLeadStats["bySource"];
 
   let active = 0;
   let last7Days = 0;

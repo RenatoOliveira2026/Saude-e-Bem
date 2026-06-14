@@ -203,6 +203,8 @@ type AffiliateClickRow = {
   affiliate_id: string;
   source_page: string;
   source_type: string;
+  user_agent: string | null;
+  referrer: string | null;
   created_at: string;
 };
 
@@ -307,6 +309,7 @@ type NewsletterSubscriberRow = {
   id: string;
   name: string;
   email: string;
+  phone: string | null;
   source: string;
   status: string;
   provider: string | null;
@@ -750,6 +753,8 @@ export interface Database {
           affiliate_id: string;
           source_page?: string;
           source_type?: string;
+          user_agent?: string | null;
+          referrer?: string | null;
           created_at?: string;
         };
         Update: Partial<AffiliateClickRow>;
@@ -836,6 +841,7 @@ export interface Database {
           id?: string;
           name: string;
           email: string;
+          phone?: string | null;
           source?: string;
           status?: string;
           provider?: string | null;

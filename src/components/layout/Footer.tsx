@@ -1,4 +1,5 @@
 import { LogoFooter } from "@/components/brand/Logo";
+import { NewsletterFooterCapture } from "@/components/newsletter/NewsletterFooterCapture";
 import { Container } from "@/components/ui/Container";
 import { footerNav, routes } from "@/lib/routes";
 import Link from "next/link";
@@ -46,6 +47,10 @@ export function Footer() {
               <FooterColumn title="Recursos" links={footerSections.recursos} />
               <FooterColumn title="Comunidade" links={footerNav.comunidade} />
             </div>
+          </div>
+
+          <div className="mt-12 lg:col-span-12">
+            <NewsletterFooterCapture />
           </div>
 
           <div className="mt-16 grid gap-6 rounded-2xl border border-off-white/10 bg-off-white/5 p-6 md:grid-cols-3 md:p-8">

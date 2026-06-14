@@ -3,7 +3,10 @@
 import { AffiliateCardGrid } from "@/components/affiliates/AffiliateCardGrid";
 import { AffiliateDisclosure } from "@/components/affiliates/AffiliateDisclosure";
 import { ContentSearch } from "@/components/pages/ContentSearch";
-import { AFFILIATE_CATEGORY_OPTIONS } from "@/lib/affiliates/categories";
+import {
+  AFFILIATE_CATEGORY_OPTIONS,
+  resolveAffiliateCategory,
+} from "@/lib/affiliates/categories";
 import { AFFILIATE_PRODUCT_TYPES } from "@/lib/affiliates/types";
 import type { PublicAffiliateSummary } from "@/lib/affiliates/types";
 import { useMemo, useState } from "react";
@@ -18,7 +21,9 @@ function matchesFilters(
   category: string,
   productType: string,
 ): boolean {
-  if (category !== "todos" && link.category !== category) return false;
+  if (category !== "todos" && resolveAffiliateCategory(link.category) !== category) {
+    return false;
+  }
   if (productType !== "todos" && link.productType !== productType) return false;
   const q = query.trim().toLowerCase();
   if (!q) return true;

@@ -4,12 +4,19 @@ import type { NewsletterSource } from "@/lib/newsletter/types";
 
 type SectionVariant = "forest" | "light";
 
+export const GLOBAL_NEWSLETTER_CTA =
+  "Receba conteúdos exclusivos sobre saúde, bem-estar e qualidade de vida.";
+
+export const GLOBAL_NEWSLETTER_SUBTITLE =
+  "Cadastre-se gratuitamente e receba materiais práticos no seu e-mail.";
+
 interface NewsletterCaptureSectionProps {
   source: NewsletterSource;
   variant?: SectionVariant;
   title?: string;
   description?: string;
   id?: string;
+  useGlobalCopy?: boolean;
 }
 
 const defaults: Record<
@@ -17,22 +24,39 @@ const defaults: Record<
   { title: string; description: string; variant: SectionVariant }
 > = {
   home: {
-    title: "Receba conteúdos exclusivos sobre saúde, hábitos e longevidade",
-    description:
-      "Uma curadoria mensal com artigos, protocolos e insights práticos — sem spam, apenas valor.",
+    title: GLOBAL_NEWSLETTER_CTA,
+    description: GLOBAL_NEWSLETTER_SUBTITLE,
     variant: "forest",
   },
   blog: {
-    title: "Não perca os próximos artigos",
-    description:
-      "Receba no seu e-mail os melhores conteúdos sobre longevidade, sono, nutrição e bem-estar.",
+    title: GLOBAL_NEWSLETTER_CTA,
+    description: GLOBAL_NEWSLETTER_SUBTITLE,
     variant: "light",
   },
   biblioteca: {
-    title: "Novos materiais direto no seu e-mail",
-    description:
-      "Seja avisado quando publicarmos guias, checklists e estudos na biblioteca gratuita.",
+    title: GLOBAL_NEWSLETTER_CTA,
+    description: GLOBAL_NEWSLETTER_SUBTITLE,
     variant: "light",
+  },
+  protocolos: {
+    title: GLOBAL_NEWSLETTER_CTA,
+    description: GLOBAL_NEWSLETTER_SUBTITLE,
+    variant: "light",
+  },
+  footer: {
+    title: GLOBAL_NEWSLETTER_CTA,
+    description: GLOBAL_NEWSLETTER_SUBTITLE,
+    variant: "forest",
+  },
+  popup: {
+    title: GLOBAL_NEWSLETTER_CTA,
+    description: GLOBAL_NEWSLETTER_SUBTITLE,
+    variant: "light",
+  },
+  "guia-30-dias": {
+    title: GLOBAL_NEWSLETTER_CTA,
+    description: GLOBAL_NEWSLETTER_SUBTITLE,
+    variant: "forest",
   },
   clube: {
     title: "Fique por dentro do Clube Saúde & Bem",
@@ -40,8 +64,8 @@ const defaults: Record<
     variant: "light",
   },
   other: {
-    title: "Assine nossa newsletter",
-    description: "Conteúdo de saúde e longevidade, sem spam.",
+    title: GLOBAL_NEWSLETTER_CTA,
+    description: GLOBAL_NEWSLETTER_SUBTITLE,
     variant: "light",
   },
 };
@@ -52,10 +76,15 @@ export function NewsletterCaptureSection({
   title,
   description,
   id = "newsletter",
+  useGlobalCopy = true,
 }: NewsletterCaptureSectionProps) {
   const preset = defaults[source];
   const resolvedVariant = variant ?? preset.variant;
   const isForest = resolvedVariant === "forest";
+  const resolvedTitle =
+    title ?? (useGlobalCopy ? GLOBAL_NEWSLETTER_CTA : preset.title);
+  const resolvedDescription =
+    description ?? (useGlobalCopy ? GLOBAL_NEWSLETTER_SUBTITLE : preset.description);
 
   return (
     <Section
@@ -72,25 +101,22 @@ export function NewsletterCaptureSection({
           Newsletter
         </p>
         <SectionTitle
-          className={`mt-4 text-2xl md:text-3xl text-balance ${
+          className={`mt-4 text-2xl text-balance md:text-3xl ${
             isForest ? "text-off-white" : ""
           }`}
         >
-          {title ?? preset.title}
+          {resolvedTitle}
         </SectionTitle>
         <p
           className={`mt-4 leading-relaxed text-pretty ${
             isForest ? "text-off-white/70" : "text-muted"
           }`}
         >
-          {description ?? preset.description}
+          {resolvedDescription}
         </p>
 
         <div className="mt-10 sm:mx-auto sm:max-w-md">
-          <NewsletterCaptureForm
-            source={source}
-            variant={resolvedVariant}
-          />
+          <NewsletterCaptureForm source={source} variant={resolvedVariant} />
         </div>
 
         <p
@@ -103,4 +129,11 @@ export function NewsletterCaptureSection({
       </div>
     </Section>
   );
+}
+
+/** Alias semântico — Fase 5.2 newsletter global */
+export function GlobalNewsletterSection(
+  props: Omit<NewsletterCaptureSectionProps, "useGlobalCopy">,
+) {
+  return <NewsletterCaptureSection {...props} useGlobalCopy />;
 }

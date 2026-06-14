@@ -70,6 +70,7 @@ export function mapPublicSummary(row: AffiliateLinkRow): PublicAffiliateSummary 
     currentPrice: mapped.currentPrice,
     oldPrice: mapped.oldPrice,
     installments: mapped.installments,
+    benefits: linesToArray(mapped.benefits).slice(0, 4),
   };
 }
 
@@ -89,6 +90,7 @@ export function mapPublicProduct(row: AffiliateLinkRow): PublicAffiliateProduct 
     officialUrl: mapped.officialUrl || null,
     seoTitle: mapped.seoTitle,
     seoDescription: mapped.seoDescription,
+    seoKeywords: mapped.seoKeywords,
   };
 }
 

@@ -5,6 +5,7 @@ import {
   fetchActiveAffiliateSlugs,
 } from "@/lib/supabase/services/affiliates.public";
 import { buildContentMetadata } from "@/lib/seo/metadata";
+import { assertValidPublicSlug } from "@/lib/seo/slug";
 import { routes } from "@/lib/routes";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
@@ -22,8 +23,9 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params;
+  assertValidPublicSlug(slug);
   const product = await fetchActiveAffiliateBySlug(slug);
-  if (!product) return { title: "Recurso não encontrado" };
+  if (!product) notFound();
 
   return buildContentMetadata({
     title: product.seoTitle ?? product.title,
@@ -37,6 +39,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
 export default async function RecomendadoDetailPage({ params }: PageProps) {
   const { slug } = await params;
+  assertValidPublicSlug(slug);
   const product = await fetchActiveAffiliateBySlug(slug);
   if (!product) notFound();
 

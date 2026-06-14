@@ -20,6 +20,7 @@ import { resolveArticleCoverUrl } from "@/lib/blog/resolve-article-cover";
 import { routes } from "@/lib/routes";
 import { articleJsonLd, breadcrumbJsonLd } from "@/lib/seo/json-ld";
 import { buildContentMetadata } from "@/lib/seo/metadata";
+import { assertValidPublicSlug } from "@/lib/seo/slug";
 import { fetchAffiliatesForContentCategory } from "@/lib/supabase/services/affiliates.public";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
@@ -37,8 +38,9 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params;
+  assertValidPublicSlug(slug);
   const article = await getBlogArticleBySlug(slug);
-  if (!article) return { title: "Artigo não encontrado" };
+  if (!article) notFound();
   const coverImage = resolveArticleCoverUrl(article);
   return buildContentMetadata({
     title: article.seoTitle ?? article.title,
@@ -54,6 +56,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
 export default async function ArtigoDetailPage({ params }: PageProps) {
   const { slug } = await params;
+  assertValidPublicSlug(slug);
   const article = await getBlogArticleBySlug(slug);
   if (!article) notFound();
 

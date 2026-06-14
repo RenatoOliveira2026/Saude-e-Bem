@@ -4,16 +4,17 @@ import { PageHero } from "@/components/layout/PageHero";
 import { Container } from "@/components/ui/Container";
 import { Section } from "@/components/ui/Section";
 import { routes } from "@/lib/routes";
+import { buildContentMetadata } from "@/lib/seo/metadata";
 import { fetchAllActiveAffiliateLinks } from "@/lib/supabase/services/affiliates.public";
-import type { Metadata } from "next";
 
 export const revalidate = 3600;
 
-export const metadata: Metadata = {
+export const metadata = buildContentMetadata({
   title: "Recursos recomendados — Saúde & Bem",
   description:
     "Seleção editorial de ferramentas e produtos que complementam sua jornada de saúde e bem-estar.",
-};
+  path: routes.recomendados,
+});
 
 export default async function RecomendadosPage() {
   const links = await fetchAllActiveAffiliateLinks();

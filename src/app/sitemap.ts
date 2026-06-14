@@ -1,8 +1,12 @@
 import { routes } from "@/lib/routes";
 import { getSiteUrl } from "@/lib/seo/site-url";
+import { filterValidPublicSlugs } from "@/lib/seo/slug";
 import { getBlogSlugs } from "@/lib/data/repositories/blog.repository";
+import { getProtocolSlugs } from "@/lib/data/repositories/protocols.repository";
+import { getToolSlugs } from "@/lib/data/repositories/tools.repository";
 import { fetchLibraryItemSlugsFromDb } from "@/lib/supabase/services/library-items.public";
 import { fetchMarketplaceProductSlugsFromDb } from "@/lib/supabase/services/marketplace-products.public";
+import { fetchActiveAffiliateSlugs } from "@/lib/supabase/services/affiliates.public";
 import { getContentEngineLibraryCatalog } from "@/lib/content-engine/mappers";
 import { getContentEngineMarketplaceCatalog } from "@/lib/content-engine/mappers";
 import type { MetadataRoute } from "next";
@@ -31,7 +35,14 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     routes.termos,
   ];
 
-  const [articleSlugs, librarySlugs, marketplaceSlugs] = await Promise.all([
+  const [
+    articleSlugs,
+    librarySlugs,
+    marketplaceSlugs,
+    protocolSlugs,
+    toolSlugs,
+    affiliateSlugs,
+  ] = await Promise.all([
     getBlogSlugs().catch(() => [] as string[]),
     fetchLibraryItemSlugsFromDb().catch(() =>
       getContentEngineLibraryCatalog().map((i) => i.slug),
@@ -39,12 +50,25 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     fetchMarketplaceProductSlugsFromDb().catch(() =>
       getContentEngineMarketplaceCatalog().map((i) => i.slug),
     ),
+    getProtocolSlugs().catch(() => [] as string[]),
+    getToolSlugs().catch(() => [] as string[]),
+    fetchActiveAffiliateSlugs().catch(() => [] as string[]),
   ]);
+
+  const validArticles = filterValidPublicSlugs(articleSlugs);
+  const validLibrary = filterValidPublicSlugs(librarySlugs);
+  const validMarketplace = filterValidPublicSlugs(marketplaceSlugs);
+  const validProtocols = filterValidPublicSlugs(protocolSlugs);
+  const validTools = filterValidPublicSlugs(toolSlugs);
+  const validAffiliates = filterValidPublicSlugs(affiliateSlugs);
 
   return [
     ...staticRoutes.map((path) => url(path)),
-    ...articleSlugs.map((slug) => url(routes.artigo(slug))),
-    ...librarySlugs.map((slug) => url(routes.bibliotecaItem(slug))),
-    ...marketplaceSlugs.map((slug) => url(routes.marketplaceItem(slug))),
+    ...validArticles.map((slug) => url(routes.artigo(slug))),
+    ...validLibrary.map((slug) => url(routes.bibliotecaItem(slug))),
+    ...validMarketplace.map((slug) => url(routes.marketplaceItem(slug))),
+    ...validProtocols.map((slug) => url(routes.protocolo(slug))),
+    ...validTools.map((slug) => url(routes.ferramenta(slug))),
+    ...validAffiliates.map((slug) => url(routes.recomendado(slug))),
   ];
 }

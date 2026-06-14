@@ -18,6 +18,7 @@ import {
 import { trackEvent } from "@/lib/analytics/track-event";
 import { routes } from "@/lib/routes";
 import { buildContentMetadata } from "@/lib/seo/metadata";
+import { assertValidPublicSlug } from "@/lib/seo/slug";
 import { fetchAffiliatesForContentCategory } from "@/lib/supabase/services/affiliates.public";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
@@ -35,8 +36,9 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params;
+  assertValidPublicSlug(slug);
   const protocol = await getProtocolBySlug(slug);
-  if (!protocol) return { title: "Protocolo não encontrado" };
+  if (!protocol) notFound();
   return buildContentMetadata({
     title: protocol.seoTitle ?? protocol.title,
     description: protocol.seoDescription ?? protocol.description,
@@ -47,6 +49,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
 export default async function ProtocoloDetailPage({ params }: PageProps) {
   const { slug } = await params;
+  assertValidPublicSlug(slug);
   const protocol = await getProtocolBySlug(slug);
   if (!protocol) notFound();
 

@@ -24,6 +24,7 @@ import { canAccessPremiumContent } from "@/lib/club/access";
 import { routes } from "@/lib/routes";
 import { bookJsonLd, breadcrumbJsonLd } from "@/lib/seo/json-ld";
 import { buildContentMetadata } from "@/lib/seo/metadata";
+import { assertValidPublicSlug } from "@/lib/seo/slug";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
@@ -44,6 +45,7 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params;
+  assertValidPublicSlug(slug);
   const intelligent = await fetchIntelligentLibraryItemBySlug(slug);
   if (intelligent) {
     return buildContentMetadata({
@@ -55,7 +57,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     });
   }
   const resource = await getLibraryResourceBySlug(slug);
-  if (!resource) return { title: "Recurso não encontrado" };
+  if (!resource) notFound();
   return buildContentMetadata({
     title: resource.seoTitle ?? resource.title,
     description: resource.seoDescription ?? resource.description,
@@ -66,6 +68,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
 export default async function BibliotecaDetailPage({ params }: PageProps) {
   const { slug } = await params;
+  assertValidPublicSlug(slug);
 
   const intelligentItem = await fetchIntelligentLibraryItemBySlug(slug);
   if (intelligentItem) {

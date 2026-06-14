@@ -1,0 +1,42 @@
+/** Primeiro segmento de rotas públicas conhecidas (listagens e estáticas). */
+export const KNOWN_ROOT_SEGMENTS = new Set([
+  "admin",
+  "api",
+  "assinar",
+  "auth",
+  "biblioteca",
+  "blog",
+  "cadastro",
+  "clube",
+  "dev-login",
+  "entrar",
+  "ferramentas",
+  "lp-emagrecimento",
+  "lp-hidratacao",
+  "lp-longevidade",
+  "lp-sono",
+  "marketplace",
+  "minha-assinatura",
+  "minha-jornada",
+  "minha-saude",
+  "obrigado",
+  "offline",
+  "perfil",
+  "privacidade",
+  "protocolos",
+  "recomendados",
+  "recuperar-senha",
+  "redefinir-senha",
+  "termos",
+]);
+
+/** Prefixos de rotas dinâmicas cujo segmento slug deve seguir PUBLIC_SLUG_PATTERN. */
+export const DYNAMIC_SLUG_PATH_PATTERNS: RegExp[] = [
+  /^\/blog\/([^/]+)/,
+  /^\/biblioteca\/([^/]+)/,
+  /^\/protocolos\/([^/]+)/,
+  /^\/marketplace\/([^/]+)/,
+  /^\/ferramentas\/([^/]+)/,
+  /^\/recomendados\/([^/]+)/,
+  /^\/api\/affiliates\/([^/]+)\/go$/,
+];

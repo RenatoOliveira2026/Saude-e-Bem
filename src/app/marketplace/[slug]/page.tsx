@@ -7,6 +7,7 @@ import {
 import { routes } from "@/lib/routes";
 import { breadcrumbJsonLd, productJsonLd } from "@/lib/seo/json-ld";
 import { buildContentMetadata } from "@/lib/seo/metadata";
+import { assertValidPublicSlug } from "@/lib/seo/slug";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
@@ -23,8 +24,9 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params;
+  assertValidPublicSlug(slug);
   const item = await fetchMarketplaceItemBySlug(slug);
-  if (!item) return { title: "Produto não encontrado" };
+  if (!item) notFound();
   return buildContentMetadata({
     title: item.seoTitle ?? item.title,
     description: item.seoDescription ?? item.description,
@@ -36,6 +38,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
 export default async function MarketplaceDetailPage({ params }: PageProps) {
   const { slug } = await params;
+  assertValidPublicSlug(slug);
   const item = await fetchMarketplaceItemBySlug(slug);
   if (!item) notFound();
 

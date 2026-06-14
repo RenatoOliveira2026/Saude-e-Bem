@@ -6,15 +6,16 @@ import {
   fetchMarketplaceItems,
 } from "@/lib/marketplace";
 import { routes } from "@/lib/routes";
-import type { Metadata } from "next";
+import { buildContentMetadata } from "@/lib/seo/metadata";
 
 export const revalidate = 3600;
 
-export const metadata: Metadata = {
+export const metadata = buildContentMetadata({
   title: "Marketplace Saúde & Bem",
   description:
     "E-books próprios, produtos afiliados curados e assinatura Premium — monetização alinhada à sua jornada de saúde.",
-};
+  path: routes.marketplace,
+});
 
 export default async function MarketplacePage() {
   const items = await fetchMarketplaceItems();

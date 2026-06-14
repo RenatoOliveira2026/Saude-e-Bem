@@ -1,5 +1,6 @@
 import { authRoutes, adminProtectedRoutes, privateRoutes, clubPublicRoutes } from "@/lib/auth/routes";
 import { routes } from "@/lib/routes";
+import { notFoundSeoHeaders, shouldRejectPublicPath } from "@/lib/seo/slug";
 import { updateSession } from "@/lib/supabase/middleware";
 import { NextResponse, type NextRequest } from "next/server";
 
@@ -11,8 +12,16 @@ function isClubMemberRoute(pathname: string): boolean {
 }
 
 export async function proxy(request: NextRequest) {
-  const { supabaseResponse, user } = await updateSession(request);
   const { pathname } = request.nextUrl;
+
+  if (shouldRejectPublicPath(pathname)) {
+    return new NextResponse(null, {
+      status: 404,
+      headers: notFoundSeoHeaders(),
+    });
+  }
+
+  const { supabaseResponse, user } = await updateSession(request);
 
   const requestHeaders = new Headers(request.headers);
   requestHeaders.set("x-pathname", pathname);

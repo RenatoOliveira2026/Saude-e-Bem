@@ -1,5 +1,6 @@
 import { trackEvent } from "@/lib/analytics/track-event";
 import { resolveAffiliateUrl } from "@/lib/affiliates/mappers";
+import { isValidPublicSlug, notFoundSeoHeaders } from "@/lib/seo/slug";
 import { recordAffiliateClick } from "@/lib/supabase/services/affiliates.clicks";
 import { createClient } from "@/lib/supabase/server";
 import { NextResponse } from "next/server";
@@ -10,6 +11,14 @@ interface RouteContext {
 
 export async function GET(request: Request, context: RouteContext) {
   const { slug } = await context.params;
+
+  if (!isValidPublicSlug(slug)) {
+    return new NextResponse(null, {
+      status: 404,
+      headers: notFoundSeoHeaders(),
+    });
+  }
+
   const { searchParams } = new URL(request.url);
   const sourcePage = searchParams.get("source_page") ?? "";
   const sourceType = searchParams.get("source_type") ?? "direct";
@@ -23,12 +32,18 @@ export async function GET(request: Request, context: RouteContext) {
     .maybeSingle();
 
   if (error || !data) {
-    return NextResponse.redirect(new URL("/recomendados", request.url));
+    return new NextResponse(null, {
+      status: 404,
+      headers: notFoundSeoHeaders(),
+    });
   }
 
   const destination = resolveAffiliateUrl(data);
   if (!destination) {
-    return NextResponse.redirect(new URL("/recomendados", request.url));
+    return new NextResponse(null, {
+      status: 404,
+      headers: notFoundSeoHeaders(),
+    });
   }
 
   await recordAffiliateClick(data.id, sourcePage, sourceType);

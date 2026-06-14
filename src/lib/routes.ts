@@ -131,7 +131,7 @@ export const footerNav = {
   ],
   comunidade: [
     { label: "Clube Saúde & Bem", href: routes.clube },
-    { label: "Sobre", href: "#" },
+    { label: "Sobre", href: routes.clube },
     { label: "Contato", href: "mailto:contato@saudeebem.com.br" },
   ],
 } as const;

@@ -14,6 +14,8 @@ import {
   getTools,
 } from "@/lib/data/repositories/tools.repository";
 import { routes } from "@/lib/routes";
+import { buildContentMetadata } from "@/lib/seo/metadata";
+import { assertValidPublicSlug } from "@/lib/seo/slug";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
@@ -28,13 +30,19 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params;
+  assertValidPublicSlug(slug);
   const tool = await getToolBySlug(slug);
-  if (!tool) return { title: "Ferramenta não encontrada" };
-  return { title: tool.title, description: tool.description };
+  if (!tool) notFound();
+  return buildContentMetadata({
+    title: tool.title,
+    description: tool.description,
+    path: routes.ferramenta(slug),
+  });
 }
 
 export default async function FerramentaDetailPage({ params }: PageProps) {
   const { slug } = await params;
+  assertValidPublicSlug(slug);
   const tool = await getToolBySlug(slug);
   if (!tool) notFound();
 

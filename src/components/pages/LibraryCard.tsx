@@ -1,4 +1,5 @@
 import { Badge } from "@/components/ui/Badge";
+import { ContentBadge } from "@/components/subscription/ContentBadge";
 import { Button } from "@/components/ui/Button";
 import {
   Card,
@@ -17,7 +18,10 @@ export function LibraryCard({ resource }: { resource: LibraryResource }) {
       <ContentCover src={resource.coverImageUrl} alt={resource.title} className="mb-4 h-20">
         <IconBox name={resource.icon} size={22} />
       </ContentCover>
-      <Badge variant="default">{resource.categoryLabel}</Badge>
+      <div className="flex flex-wrap items-center gap-2">
+        <Badge variant="default">{resource.categoryLabel}</Badge>
+        <ContentBadge variant={resource.isPremium ? "premium" : "free"} />
+      </div>
       <CardHeader className="mb-0 mt-4 flex-1">
         <CardTitle className="text-lg">{resource.title}</CardTitle>
         <CardDescription className="mt-2 text-sm leading-relaxed">

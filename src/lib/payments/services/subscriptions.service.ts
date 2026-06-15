@@ -1,5 +1,9 @@
 import type { SupabaseClient } from "@supabase/supabase-js";
 import type { Database } from "@/lib/supabase/types";
+import {
+  syncUserMembershipCancelled,
+  syncUserMembershipFromSubscription,
+} from "@/lib/membership/services/sync-membership.service";
 import { cancelMercadoPagoPreapproval } from "../mercadopago/preapproval";
 import { getPlanById, PREMIUM_MONTHLY_PLAN } from "../plans";
 import { recordFinancialEvent } from "./financial-events.service";
@@ -113,6 +117,16 @@ export async function activateSubscriptionFromPayment(
   });
 
   void notifyPremiumViaWhatsApp(admin, payment, plan);
+
+  await syncUserMembershipFromSubscription(admin, {
+    userId: payment.userId,
+    plan,
+    subscriptionStatus: "active",
+    startedAt: periodStart.toISOString(),
+    expiresAt: periodEnd.toISOString(),
+    provider: "mercadopago",
+    externalId: payment.externalReference,
+  });
 }
 
 /** Cancela ou rejeita assinatura após pagamento recusado/cancelado/reembolsado. */
@@ -170,6 +184,8 @@ export async function cancelSubscriptionFromPayment(
     description: `Motivo: ${reason}`,
     metadata: { reason },
   });
+
+  await syncUserMembershipCancelled(admin, payment.userId, "canceled");
 }
 
 /** Ativa assinatura a partir de preapproval autorizado (renovação automática). */
@@ -222,6 +238,16 @@ export async function activateSubscriptionFromPreapproval(
     });
   }
 
+  await syncUserMembershipFromSubscription(admin, {
+    userId: input.userId,
+    plan,
+    subscriptionStatus: "active",
+    startedAt: now.toISOString(),
+    expiresAt: periodEnd.toISOString(),
+    provider: "mercadopago",
+    externalId: input.preapprovalId,
+  });
+
   await recordFinancialEvent(admin, {
     userId: input.userId,
     eventType: "preapproval_authorized",
@@ -269,6 +295,7 @@ export async function cancelUserSubscription(
       })
       .eq("id", subscription.id);
 
+    await syncUserMembershipCancelled(admin, userId, "canceled");
     return { ok: true, message: "Assinatura cancelada imediatamente." };
   }
 

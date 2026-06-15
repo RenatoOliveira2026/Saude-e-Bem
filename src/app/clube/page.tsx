@@ -1,36 +1,64 @@
 import {
   ClubBenefitsGrid,
   ClubFaq,
-  ClubPricing,
   ClubStats,
   ClubTestimonials,
   ClubVipList,
   ClubWaitlist,
   CrossLinks,
 } from "@/components/pages";
+import {
+  ClubBenefitsSplit,
+  ClubCtaBand,
+  ClubIntroSection,
+  ClubMembershipPlans,
+  ClubPlanComparison,
+} from "@/components/club/ClubPublicSections";
 import { PageHero } from "@/components/layout/PageHero";
-import type { Metadata } from "next";
+import { JsonLdScript } from "@/components/seo/JsonLd";
+import { fetchActiveMembershipPlans } from "@/lib/membership";
+import { routes } from "@/lib/routes";
+import { webPageJsonLd } from "@/lib/seo/json-ld";
+import { buildContentMetadata } from "@/lib/seo/metadata";
 
-export const metadata: Metadata = {
-  title: "Clube Saúde & Bem",
-  description:
-    "Comunidade premium com protocolos exclusivos, ferramentas avançadas, lives e suporte dedicado à longevidade consciente.",
-};
+const CLUBE_TITLE = "Clube Saúde & Bem — Área Premium";
+const CLUBE_DESCRIPTION =
+  "Comunidade premium com protocolos exclusivos, ferramentas avançadas, biblioteca ampliada e acompanhamento contínuo para sua jornada de saúde e longevidade.";
 
-export default function ClubePage() {
+export const metadata = buildContentMetadata({
+  title: CLUBE_TITLE,
+  description: CLUBE_DESCRIPTION,
+  path: routes.clube,
+  keywords: "clube, premium, assinatura, saúde, bem-estar, longevidade",
+});
+
+export default async function ClubePage() {
+  const plans = await fetchActiveMembershipPlans();
+
   return (
     <>
-      <PageHero
-        badge="Exclusivo"
-        title="Clube Saúde & Bem"
-        description="O próximo nível da sua jornada de saúde. Acesso premium a protocolos avançados, comunidade privada, ferramentas exclusivas e acompanhamento contínuo."
+      <JsonLdScript
+        data={webPageJsonLd({
+          title: CLUBE_TITLE,
+          description: CLUBE_DESCRIPTION,
+          path: routes.clube,
+        })}
       />
+      <PageHero
+        badge="Clube Premium"
+        title="Clube Saúde & Bem"
+        description="O próximo nível da sua jornada de saúde. Acesso premium a protocolos avançados, ferramentas exclusivas, biblioteca ampliada e área de membros dedicada."
+      />
+      <ClubIntroSection />
       <ClubStats />
+      <ClubBenefitsSplit />
       <ClubBenefitsGrid />
+      <ClubPlanComparison />
+      <ClubMembershipPlans plans={plans} />
       <ClubVipList />
-      <ClubPricing />
       <ClubTestimonials />
       <ClubFaq />
+      <ClubCtaBand />
       <ClubWaitlist />
       <CrossLinks />
     </>

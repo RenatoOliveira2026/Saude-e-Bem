@@ -12,11 +12,29 @@ import type { CheckoutPlanId } from "@/lib/payments/plans";
 import { ASSINAR_PLANS } from "@/lib/payments/plans";
 import type { PaymentMethod } from "@/lib/payments/types";
 import { routes } from "@/lib/routes";
+import { useSearchParams } from "next/navigation";
 import { useState } from "react";
 
+function resolvePlanFromSearchParams(
+  planFromUrl: string | null,
+): CheckoutPlanId {
+  if (
+    planFromUrl === "premium_annual" ||
+    planFromUrl === "premium_monthly" ||
+    planFromUrl === "premium_quarterly"
+  ) {
+    return planFromUrl;
+  }
+  return "premium_monthly";
+}
+
 export function SubscribeCheckoutForm() {
-  const [selectedPlan, setSelectedPlan] =
-    useState<CheckoutPlanId>("premium_monthly");
+  const searchParams = useSearchParams();
+  const planFromUrl = searchParams.get("plano");
+
+  const [selectedPlan, setSelectedPlan] = useState<CheckoutPlanId>(() =>
+    resolvePlanFromSearchParams(planFromUrl),
+  );
   const [selectedMethod, setSelectedMethod] = useState<PaymentMethod>("pix");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);

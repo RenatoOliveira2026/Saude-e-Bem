@@ -15,6 +15,7 @@ import {
   activateSubscriptionFromPreapproval,
   cancelSubscriptionFromPayment,
 } from "../services/subscriptions.service";
+import { syncUserMembershipCancelled } from "@/lib/membership/services/sync-membership.service";
 import { updatePaymentByReference } from "../services/payments.service";
 import { recordFinancialEvent } from "../services/financial-events.service";
 import { registerWebhookEvent } from "../services/webhook-events.service";
@@ -65,7 +66,7 @@ async function handlePaymentNotification(
   admin: NonNullable<ReturnType<typeof createPaymentsAdminClient>>,
   resourceId: string,
 ): Promise<{ ok: boolean; message: string }> {
-  let mpPayment = await resolvePaymentRecord(resourceId);
+  const mpPayment = await resolvePaymentRecord(resourceId);
 
   if (!mpPayment && isStubModeEnabled()) {
     return { ok: true, message: "Stub: pagamento ignorado." };
@@ -185,12 +186,13 @@ async function handlePreapprovalNotification(
     return { ok: true, message: "Preapproval autorizado — assinatura ativa." };
   }
 
-  if (status === "cancelled" || status === "paused") {
+  if (status === "cancelled" || status === "paused" || status === "expired") {
     await cancelMercadoPagoPreapproval(resourceId);
+    const nextStatus = status === "expired" ? "expired" : "canceled";
     await admin
       .from("subscriptions")
       .update({
-        status: "canceled",
+        status: nextStatus,
         auto_renew: false,
         canceled_at: new Date().toISOString(),
         mercadopago_preapproval_id: resourceId,
@@ -198,7 +200,13 @@ async function handlePreapprovalNotification(
       .eq("user_id", paymentRow.user_id)
       .in("status", ["active", "trialing", "past_due"]);
 
-    return { ok: true, message: `Preapproval ${status} — assinatura cancelada.` };
+    await syncUserMembershipCancelled(
+      admin,
+      paymentRow.user_id,
+      status === "expired" ? "expired" : "canceled",
+    );
+
+    return { ok: true, message: `Preapproval ${status} — assinatura atualizada.` };
   }
 
   return { ok: true, message: `Preapproval status: ${status}.` };

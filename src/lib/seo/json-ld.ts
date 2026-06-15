@@ -27,12 +27,20 @@ export function homeWebPageJsonLd(input: {
   title: string;
   description: string;
 }): JsonLd {
+  return webPageJsonLd({ ...input, path: "/" });
+}
+
+export function webPageJsonLd(input: {
+  title: string;
+  description: string;
+  path: string;
+}): JsonLd {
   return {
     "@context": "https://schema.org",
     "@type": "WebPage",
     name: input.title,
     description: input.description,
-    url: getSiteUrl(),
+    url: absoluteUrl(input.path),
     isPartOf: {
       "@type": "WebSite",
       name: SITE_NAME,

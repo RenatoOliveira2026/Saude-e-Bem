@@ -1,9 +1,9 @@
 import { CrossLinks, PageCta, ToolsExploreSection } from "@/components/pages";
+import { PremiumContentGuard } from "@/components/club/PremiumContentGuard";
 import { getToolComponent } from "@/components/tools";
 import { Breadcrumbs } from "@/components/layout/Breadcrumbs";
 import {
   DetailHero,
-  PremiumGate,
 } from "@/components/layout/DetailPage";
 import { Container } from "@/components/ui/Container";
 import { Section } from "@/components/ui/Section";
@@ -69,10 +69,35 @@ export default async function FerramentaDetailPage({ params }: PageProps) {
           description={tool.description}
           premium
         />
-        <PremiumGate
-          title="Ferramenta premium"
-          description="Disponível exclusivamente para membros do Clube Saúde & Bem."
-        />
+        <PremiumContentGuard
+          isPremiumContent
+          gateTitle="Ferramenta premium do Clube"
+          gateDescription="Disponível exclusivamente para membros premium do Clube Saúde & Bem."
+          preview={
+            <Section background="default">
+              <Container size="md">
+                <h2 className="font-heading text-2xl text-forest">O que você recebe</h2>
+                <ul className="mt-6 grid gap-3 sm:grid-cols-2">
+                  {tool.features.slice(0, 4).map((f) => (
+                    <li
+                      key={f}
+                      className="flex items-center gap-3 rounded-xl border border-border bg-surface px-4 py-3 text-sm"
+                    >
+                      <Icon name="star" size={16} className="shrink-0 text-gold" />
+                      {f}
+                    </li>
+                  ))}
+                </ul>
+              </Container>
+            </Section>
+          }
+        >
+          <Section background="white" id="inicio">
+            <Container size="md">
+              {ToolInteractive ? <ToolInteractive /> : null}
+            </Container>
+          </Section>
+        </PremiumContentGuard>
         <CrossLinks />
       </>
     );

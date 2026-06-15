@@ -160,6 +160,30 @@ type MarketplaceProductRow = {
   updated_at: string;
 };
 
+type MembershipPlanRow = {
+  id: string;
+  name: string;
+  slug: string;
+  description: string;
+  price: number;
+  billing_cycle: string;
+  features: Json;
+  is_active: boolean;
+  created_at: string;
+};
+
+type UserMembershipRow = {
+  id: string;
+  user_id: string;
+  plan_id: string;
+  status: string;
+  started_at: string;
+  expires_at: string | null;
+  provider: string | null;
+  external_id: string | null;
+  created_at: string;
+};
+
 type AffiliateLinkRow = {
   id: string;
   title: string;
@@ -745,6 +769,18 @@ export interface Database {
           category: string;
         };
         Update: Partial<AffiliateLinkRow>;
+        Relationships: [];
+      };
+      membership_plans: {
+        Row: MembershipPlanRow;
+        Insert: Partial<MembershipPlanRow> & { name: string; slug: string };
+        Update: Partial<MembershipPlanRow>;
+        Relationships: [];
+      };
+      user_memberships: {
+        Row: UserMembershipRow;
+        Insert: Partial<UserMembershipRow> & { user_id: string; plan_id: string };
+        Update: Partial<UserMembershipRow>;
         Relationships: [];
       };
       affiliate_clicks: {

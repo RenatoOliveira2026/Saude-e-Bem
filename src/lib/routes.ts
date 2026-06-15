@@ -67,6 +67,7 @@ export const adminRoutes = {
   leadDetail: (id: string) => `/admin/leads/${id}`,
   newsletter: "/admin/newsletter",
   financeiro: "/admin/financeiro",
+  memberships: "/admin/memberships",
   financeExport: "/api/admin/finance/export",
   conversao: "/admin/conversao",
   comunicacao: "/admin/comunicacao",

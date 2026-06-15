@@ -4,6 +4,13 @@ export { ClubDashboard } from "./ClubDashboard";
 export { ClubDownloadsList } from "./ClubDownloadsList";
 export { ClubFavoritesList } from "./ClubFavoritesList";
 export { ClubPremiumPage } from "./ClubPremiumPage";
+export {
+  ClubBenefitsSplit,
+  ClubCtaBand,
+  ClubIntroSection,
+  ClubMembershipPlans,
+  ClubPlanComparison,
+} from "./ClubPublicSections";
 export { ClubRecommendationsList } from "./ClubRecommendationsList";
 export { ClubSavedProtocolsList } from "./ClubSavedProtocolsList";
 export { ClubShell } from "./ClubShell";

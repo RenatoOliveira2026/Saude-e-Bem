@@ -1,3 +1,5 @@
+import { CLUB_PRICING } from "./pricing";
+
 export type PlanId =
   | "free"
   | "premium_monthly"
@@ -19,19 +21,17 @@ export interface BillingPlan {
   periodLabel: string;
   billingInterval: "free" | "month" | "quarter" | "year";
   checkoutEnabled: boolean;
-  /** Selo comercial (ex.: plano anual) */
   highlightBadge?: string;
-  /** Texto de economia vs. período equivalente */
   savingsLabel?: string;
 }
 
-/** Fase 5.5 — preços comerciais oficiais */
-export const PREMIUM_MONTHLY_PRICE_LABEL = "R$ 29,90";
+/** Fase 6.1 — preços oficiais (fonte: pricing.ts) */
+export const PREMIUM_MONTHLY_PRICE_LABEL = CLUB_PRICING.premiumMonthly.label;
 export const PREMIUM_QUARTERLY_PRICE_LABEL = "R$ 79,90";
-export const PREMIUM_ANNUAL_PRICE_LABEL = "R$ 297,00";
-export const PREMIUM_ANNUAL_BADGE = "Mais Escolhido";
+export const PREMIUM_ANNUAL_PRICE_LABEL = CLUB_PRICING.premiumAnnual.label;
+export const PREMIUM_ANNUAL_BADGE = CLUB_PRICING.premiumAnnual.badge;
 export const PREMIUM_QUARTERLY_SAVINGS_LABEL = "Economize R$ 9,80 vs. 3× mensal";
-export const PREMIUM_ANNUAL_SAVINGS_LABEL = "Economize R$ 61,80 por ano";
+export const PREMIUM_ANNUAL_SAVINGS_LABEL = CLUB_PRICING.premiumAnnual.savingsLabel;
 
 export const FREE_PLAN: BillingPlan = {
   id: "free",
@@ -49,10 +49,10 @@ export const PREMIUM_MONTHLY_PLAN: BillingPlan = {
   id: "premium_monthly",
   name: "Premium Mensal",
   description: "Acesso completo a protocolos, biblioteca e artigos premium.",
-  amountCents: 2990,
+  amountCents: CLUB_PRICING.premiumMonthly.amountCents,
   currency: "BRL",
   periodDays: 30,
-  periodLabel: "mês",
+  periodLabel: CLUB_PRICING.premiumMonthly.periodLabel,
   billingInterval: "month",
   checkoutEnabled: true,
 };
@@ -66,7 +66,7 @@ export const PREMIUM_QUARTERLY_PLAN: BillingPlan = {
   periodDays: 90,
   periodLabel: "trimestre",
   billingInterval: "quarter",
-  checkoutEnabled: true,
+  checkoutEnabled: false,
   savingsLabel: PREMIUM_QUARTERLY_SAVINGS_LABEL,
 };
 
@@ -74,10 +74,10 @@ export const PREMIUM_ANNUAL_PLAN: BillingPlan = {
   id: "premium_annual",
   name: "Premium Anual",
   description: "Acesso premium por 12 meses com o melhor custo-benefício.",
-  amountCents: 29700,
+  amountCents: CLUB_PRICING.premiumAnnual.amountCents,
   currency: "BRL",
   periodDays: 365,
-  periodLabel: "ano",
+  periodLabel: CLUB_PRICING.premiumAnnual.periodLabel,
   billingInterval: "year",
   checkoutEnabled: true,
   highlightBadge: PREMIUM_ANNUAL_BADGE,
@@ -88,18 +88,17 @@ export const PREMIUM_ANNUAL_PLAN: BillingPlan = {
 export const ASSINAR_PLANS: BillingPlan[] = [
   FREE_PLAN,
   PREMIUM_MONTHLY_PLAN,
-  PREMIUM_QUARTERLY_PLAN,
   PREMIUM_ANNUAL_PLAN,
 ];
 
 export const CHECKOUT_PLANS: BillingPlan[] = [
   PREMIUM_MONTHLY_PLAN,
-  PREMIUM_QUARTERLY_PLAN,
   PREMIUM_ANNUAL_PLAN,
 ];
 
 export function getPlanById(id: string | null | undefined): BillingPlan | null {
-  return ASSINAR_PLANS.find((plan) => plan.id === id) ?? null;
+  const all = [FREE_PLAN, PREMIUM_MONTHLY_PLAN, PREMIUM_QUARTERLY_PLAN, PREMIUM_ANNUAL_PLAN];
+  return all.find((plan) => plan.id === id) ?? null;
 }
 
 export function getCheckoutPlan(id: string): BillingPlan {
@@ -132,3 +131,5 @@ export function formatPlanPriceLabel(plan: BillingPlan): string {
   }
   return formatPlanAmount(plan);
 }
+
+export { CLUB_PRICING } from "./pricing";

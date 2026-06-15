@@ -14,6 +14,7 @@ export const metadata: Metadata = {
   title: "Minha assinatura — Clube Saúde & Bem",
   description:
     "Plano, status, próxima renovação e histórico de pagamentos do Clube Premium.",
+  robots: { index: false, follow: false },
 };
 
 interface PageProps {

@@ -10,15 +10,31 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = { title: "Usuários — Admin" };
 
-export default async function AdminUsuariosPage() {
+interface PageProps {
+  searchParams: Promise<{ userId?: string; email?: string }>;
+}
+
+export default async function AdminUsuariosPage({ searchParams }: PageProps) {
   const { email, role } = await requireAdminPermission("manage_platform_users");
-  const users = await adminListUsers();
+  const params = await searchParams;
+  let users = await adminListUsers();
+
+  if (params.userId) {
+    users = users.filter((user) => user.id === params.userId);
+  } else if (params.email) {
+    const needle = params.email.trim().toLowerCase();
+    users = users.filter((user) => user.email.toLowerCase().includes(needle));
+  }
 
   return (
     <>
       <AdminHeader
         title="Usuários"
-        description="Visualize membros cadastrados na plataforma"
+        description={
+          params.userId || params.email
+            ? "Resultado filtrado a partir do dashboard de assinaturas"
+            : "Visualize membros cadastrados na plataforma"
+        }
         email={email}
         role={role}
       />

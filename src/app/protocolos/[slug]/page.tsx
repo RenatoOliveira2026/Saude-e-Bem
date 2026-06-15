@@ -132,6 +132,14 @@ export default async function ProtocoloDetailPage({ params }: PageProps) {
         isPremiumContent={protocol.isPremium}
         gateTitle="Protocolo exclusivo do Clube"
         gateDescription="Este protocolo faz parte do conteúdo premium do Clube Saúde & Bem. Assine o Premium para acesso completo."
+        preview={
+          <Section background="white">
+            <Container size="md">
+              <h2 className="font-heading text-2xl text-forest">Objetivo</h2>
+              <p className="mt-4 text-muted leading-relaxed">{protocol.objective}</p>
+            </Container>
+          </Section>
+        }
       >
       <Section background="white">
         <Container size="md">

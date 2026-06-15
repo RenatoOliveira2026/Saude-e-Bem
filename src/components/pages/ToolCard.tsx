@@ -1,4 +1,5 @@
 import { Badge } from "@/components/ui/Badge";
+import { ContentBadge } from "@/components/subscription/ContentBadge";
 import { Button } from "@/components/ui/Button";
 import {
   Card,
@@ -18,7 +19,10 @@ export function ToolCard({ tool }: { tool: Tool }) {
       <div className="flex items-start gap-4">
         <IconBox name={tool.icon} size={24} className="shrink-0 bg-surface shadow-soft" />
         <div className="min-w-0 flex-1">
-          <Badge variant="default">{tool.categoryLabel}</Badge>
+          <div className="flex flex-wrap items-center gap-2">
+            <Badge variant="default">{tool.categoryLabel}</Badge>
+            <ContentBadge variant={tool.isPremium ? "premium" : "free"} />
+          </div>
           <CardHeader className="mb-0 mt-2">
             <CardTitle className="text-lg">{tool.title}</CardTitle>
             <CardDescription className="mt-2 text-sm leading-relaxed">

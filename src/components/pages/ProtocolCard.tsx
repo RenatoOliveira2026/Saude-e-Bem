@@ -1,4 +1,5 @@
 import { Badge } from "@/components/ui/Badge";
+import { ContentBadge } from "@/components/subscription/ContentBadge";
 import { Button } from "@/components/ui/Button";
 import {
   Card,
@@ -73,8 +74,7 @@ export function ProtocolCard({ protocol }: { protocol: Protocol }) {
           <IconBox name={icon} size={20} />
         </ContentCover>
         <div className="flex flex-wrap justify-end gap-2">
-          {!protocol.isPremium && <Badge variant="forest">Gratuito</Badge>}
-          {protocol.isPremium && <Badge variant="gold">Premium</Badge>}
+          <ContentBadge variant={protocol.isPremium ? "premium" : "free"} />
         </div>
       </div>
       <CardHeader className="mb-0 mt-4 flex-1">

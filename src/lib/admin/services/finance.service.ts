@@ -1,6 +1,7 @@
 import { createClient } from "@/lib/supabase/server";
 import { createPaymentsAdminClient } from "@/lib/payments/admin-client";
 import { formatPaymentAmount, paymentMethodLabels, paymentStatusLabels } from "@/lib/payments/constants";
+import { CLUB_PRICING } from "@/lib/payments/pricing";
 import { mapPaymentRow } from "@/lib/payments/services/payments.service";
 import type { Payment, PaymentMethod } from "@/lib/payments/types";
 import type { Database } from "@/lib/supabase/types";
@@ -74,9 +75,9 @@ export async function getAdminFinanceDashboard(): Promise<AdminFinanceDashboard>
   const quarterlySubscribers = statsJson.quarterly_subscribers ?? 0;
   const annualSubscribers = statsJson.annual_subscribers ?? 0;
   const estimatedMrrCents =
-    monthlySubscribers * 2990 +
+    monthlySubscribers * CLUB_PRICING.premiumMonthly.amountCents +
     Math.round((quarterlySubscribers * 7990) / 3) +
-    Math.round((annualSubscribers * 29700) / 12);
+    Math.round((annualSubscribers * CLUB_PRICING.premiumAnnual.amountCents) / 12);
 
   const stats: AdminFinanceStats = {
     totalRevenueCents: Number(statsJson.total_revenue_cents ?? 0),

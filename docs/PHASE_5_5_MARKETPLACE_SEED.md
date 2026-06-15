@@ -112,6 +112,49 @@ where id::text like 'f0550005-%';
 
 - Seed SQL criado e idempotente.
 - 10 ofertas ativas, 2 por categoria, 3 em destaque.
-- Banco validado via service role.
-- Rotas públicas, detalhe, admin e tracking validados em ambiente local.
-- Produção depende de deploy alinhado ao Supabase onde o seed foi aplicado.
+- Banco validado via service role (`cizjkwihxqpbgajomjpr.supabase.co`).
+- Commit `6a1fa13` publicado em `origin/master`.
+- Deploy Vercel Production **success** (2026-06-15T02:41:17Z).
+- Rotas públicas em produção **pendentes** — ver seção abaixo.
+
+## Status produção (2026-06-15)
+
+### Git / Deploy
+
+| Item | Status |
+|------|--------|
+| Commit | `6a1fa13` — `feat(marketplace): popular produtos iniciais` |
+| Push | `origin/master` atualizado |
+| Vercel Production | `success` — deployment `5059174175` |
+
+### Banco (Supabase produção)
+
+| Verificação | Resultado |
+|-------------|-----------|
+| `affiliate_links` seed | 10 ativos, 3 featured |
+| `affiliate_products` view | 10 registros (incl. seed) |
+| Migration 034 | APROVADA |
+| Seed 035 | APLICADO (`verify-marketplace-seed.mjs --apply`) |
+
+### Rotas HTTPS (validação parcial)
+
+Scripts automatizados (`fetch`/`curl`) passaram a receber **401 Authentication Required** (proteção Vercel para bots). Validação manual via navegador:
+
+| Rota | Status | Observação |
+|------|--------|------------|
+| `/recomendados` | Erro na UI | Mensagem: *"Não foi possível carregar os recomendados"* (`error.tsx`) |
+| `/recomendados/habitos-atomicos` | 500 | *"This page couldn't load"* |
+| `/api/affiliates/habitos-atomicos/go` | 404 (script) / não testado no browser | Produto ou env Supabase no runtime Vercel |
+
+### Pendências
+
+1. **Conferir variáveis na Vercel** (Settings → Environment Variables → Production):
+   - `NEXT_PUBLIC_SUPABASE_URL` = `https://cizjkwihxqpbgajomjpr.supabase.co`
+   - `NEXT_PUBLIC_SUPABASE_ANON_KEY` = mesma chave anon do Dashboard
+   - Redeploy após salvar
+2. **Logs Vercel** → Functions / Runtime Logs ao abrir `/recomendados` (provável falha `getSupabaseEnv()` ou query Supabase).
+3. **Revalidar no browser** após env corrigido:
+   - `/recomendados` — seções Destaques + produtos seed
+   - `/recomendados/habitos-atomicos` — 200
+   - `/api/affiliates/habitos-atomicos/go` — redirect 307
+4. **Opcional:** desativar *Deployment Protection* em rotas públicas se bloquear smoke tests automatizados.

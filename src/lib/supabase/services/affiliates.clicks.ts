@@ -1,3 +1,7 @@
+import {
+  estimateConversions,
+  formatEstimatedConversionRate,
+} from "@/lib/affiliates/conversion-estimate";
 import { createClient } from "@/lib/supabase/server";
 
 export interface AffiliateClickRecordInput {
@@ -60,11 +64,16 @@ export interface AffiliateClickReport {
     title: string;
     slug: string;
     category: string;
+    platform: string;
     clicks: number;
+    estimatedConversions: number;
+    estimatedConversionRate: string;
   }[];
   clicksByDay: { date: string; clicks: number }[];
   topCategories: { category: string; clicks: number }[];
   clicksByProductId: Record<string, number>;
+  estimatedConversions: number;
+  estimatedConversionRate: string;
 }
 
 function dayKey(iso: string): string {
@@ -111,12 +120,15 @@ export async function getAffiliateClickReport(
   }
 
   const affiliateIds = Object.keys(clicksByProductId);
-  const productMeta = new Map<string, { title: string; slug: string; category: string }>();
+  const productMeta = new Map<
+    string,
+    { title: string; slug: string; category: string; platform: string }
+  >();
 
   if (affiliateIds.length > 0) {
     const { data: products } = await supabase
       .from("affiliate_links")
-      .select("id, title, slug, category")
+      .select("id, title, slug, category, affiliate_platform")
       .in("id", affiliateIds);
 
     for (const product of products ?? []) {
@@ -124,6 +136,7 @@ export async function getAffiliateClickReport(
         title: product.title,
         slug: product.slug,
         category: product.category,
+        platform: product.affiliate_platform ?? "",
       });
       clicksByCategory[product.category] =
         (clicksByCategory[product.category] ?? 0) +
@@ -134,12 +147,17 @@ export async function getAffiliateClickReport(
   const topProducts = affiliateIds
     .map((id) => {
       const meta = productMeta.get(id);
+      const clicks = clicksByProductId[id] ?? 0;
+      const estimated = estimateConversions(clicks, meta?.platform);
       return {
         id,
         title: meta?.title ?? "Produto removido",
         slug: meta?.slug ?? id,
         category: meta?.category ?? "other",
-        clicks: clicksByProductId[id] ?? 0,
+        platform: meta?.platform ?? "",
+        clicks,
+        estimatedConversions: estimated,
+        estimatedConversionRate: formatEstimatedConversionRate(clicks, estimated),
       };
     })
     .sort((a, b) => b.clicks - a.clicks)
@@ -159,13 +177,21 @@ export async function getAffiliateClickReport(
     .from("affiliate_clicks")
     .select("id", { count: "exact", head: true });
 
+  const total = totalClicks ?? rows.length;
+  const estimatedConversions = topProducts.reduce(
+    (sum, product) => sum + product.estimatedConversions,
+    0,
+  );
+
   return {
-    totalClicks: totalClicks ?? rows.length,
+    totalClicks: total,
     clicksLast7Days,
     clicksLast30Days,
     topProducts,
     clicksByDay,
     topCategories,
     clicksByProductId,
+    estimatedConversions,
+    estimatedConversionRate: formatEstimatedConversionRate(total, estimatedConversions),
   };
 }

@@ -27,7 +27,13 @@ function matchesFilters(
   if (productType !== "todos" && link.productType !== productType) return false;
   const q = query.trim().toLowerCase();
   if (!q) return true;
-  const haystack = [link.title, link.brand, link.description, link.category]
+  const haystack = [
+    link.title,
+    link.brand,
+    link.shortDescription,
+    link.description,
+    link.category,
+  ]
     .join(" ")
     .toLowerCase();
   return haystack.includes(q);

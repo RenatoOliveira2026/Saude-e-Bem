@@ -1,23 +1,23 @@
-import { RecomendadosListing } from "@/components/affiliates/RecomendadosListing";
+import { RecomendadosMarketplace } from "@/components/affiliates/RecomendadosMarketplace";
 import { Breadcrumbs } from "@/components/layout/Breadcrumbs";
 import { PageHero } from "@/components/layout/PageHero";
 import { Container } from "@/components/ui/Container";
 import { Section } from "@/components/ui/Section";
+import { getRecomendadosMarketplaceData } from "@/lib/affiliates/marketplace";
 import { routes } from "@/lib/routes";
 import { buildContentMetadata } from "@/lib/seo/metadata";
-import { fetchAllActiveAffiliateLinks } from "@/lib/supabase/services/affiliates.public";
 
 export const revalidate = 3600;
 
 export const metadata = buildContentMetadata({
   title: "Recursos recomendados — Saúde & Bem",
   description:
-    "Seleção editorial de ferramentas e produtos que complementam sua jornada de saúde e bem-estar.",
+    "Marketplace de ofertas reais em saúde e bem-estar — destaques, mais acessados, novidades e categorias curadas.",
   path: routes.recomendados,
 });
 
 export default async function RecomendadosPage() {
-  const links = await fetchAllActiveAffiliateLinks();
+  const data = await getRecomendadosMarketplaceData();
 
   return (
     <>
@@ -28,14 +28,14 @@ export default async function RecomendadosPage() {
         ]}
       />
       <PageHero
-        badge="Central de Recomendações"
+        badge="Marketplace de Ofertas"
         title="Recursos recomendados"
-        description="Produtos curados por categoria — suplementos, livros, sono, alimentação e bem-estar. Transparência total: links podem gerar comissão sem custo extra para você."
+        description="Ofertas reais curadas por categoria — suplementos, livros, sono, alimentação e bem-estar. Transparência total: links podem gerar comissão sem custo extra para você."
       />
 
       <Section background="white">
         <Container>
-          <RecomendadosListing links={links} />
+          <RecomendadosMarketplace data={data} />
         </Container>
       </Section>
     </>

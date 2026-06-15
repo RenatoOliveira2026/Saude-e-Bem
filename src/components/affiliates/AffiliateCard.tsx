@@ -92,15 +92,15 @@ export function AffiliateCard({
               {link.productType ? ` · ${productTypeLabel(link.productType)}` : ""}
             </p>
           )}
-          {link.description && (
+          {link.shortDescription || link.description ? (
             <CardDescription
               className={
                 compact ? "mt-1.5 line-clamp-2 text-xs" : "mt-2 line-clamp-3 text-sm"
               }
             >
-              {link.description}
+              {link.shortDescription || link.description}
             </CardDescription>
-          )}
+          ) : null}
           {link.benefits.length > 0 && (
             <ul className="mt-3 space-y-1 text-left">
               {link.benefits.slice(0, compact ? 2 : 3).map((benefit) => (

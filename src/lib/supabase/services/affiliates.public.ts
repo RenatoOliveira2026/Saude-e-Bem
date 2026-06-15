@@ -1,4 +1,7 @@
-import { affiliateMatchesContentCategory } from "@/lib/affiliates/categories";
+import {
+  affiliateMatchesContentCategory,
+  resolveAffiliateCategory,
+} from "@/lib/affiliates/categories";
 import {
   mapPublicProduct,
   mapPublicSummary,
@@ -15,7 +18,7 @@ export type { PublicAffiliateProduct, PublicAffiliateSummary };
 export type PublicAffiliateLink = PublicAffiliateSummary;
 
 const PUBLIC_SUMMARY_COLUMNS =
-  "id, slug, title, category, description, product_type, brand, image_url, featured, editor_choice, rating, reviews_count, current_price, old_price, installments, benefits, url, affiliate_url, active, created_at" as const;
+  "id, slug, title, category, short_description, description, product_type, brand, image_url, featured, editor_choice, rating, reviews_count, current_price, old_price, installments, benefits, url, affiliate_url, active, created_at" as const;
 
 const PUBLIC_DETAIL_COLUMNS = `${PUBLIC_SUMMARY_COLUMNS}, producer_name, target_audience, contraindications, video_url, testimonial_1, testimonial_2, testimonial_3, official_url, seo_title, seo_description, seo_keywords` as const;
 
@@ -111,6 +114,22 @@ export async function fetchAffiliatesForContentCategory(
         contentCategoryLabel,
         kind,
       ),
+    )
+    .slice(0, limit);
+}
+
+export async function fetchRelatedAffiliateProducts(
+  category: string,
+  excludeSlug: string,
+  limit = 4,
+): Promise<PublicAffiliateSummary[]> {
+  const target = resolveAffiliateCategory(category);
+  const all = await fetchAllActiveAffiliateLinks();
+  return all
+    .filter(
+      (link) =>
+        link.slug !== excludeSlug &&
+        resolveAffiliateCategory(link.category) === target,
     )
     .slice(0, limit);
 }

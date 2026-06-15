@@ -4,6 +4,7 @@ import { JsonLdScript } from "@/components/seo/JsonLd";
 import {
   fetchActiveAffiliateBySlug,
   fetchActiveAffiliateSlugs,
+  fetchRelatedAffiliateProducts,
 } from "@/lib/supabase/services/affiliates.public";
 import { breadcrumbJsonLd, productJsonLd } from "@/lib/seo/json-ld";
 import { buildContentMetadata } from "@/lib/seo/metadata";
@@ -33,6 +34,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     title: product.seoTitle ?? product.title,
     description:
       product.seoDescription ??
+      product.shortDescription ??
       (product.description.slice(0, 160) || `Recurso recomendado: ${product.title}`),
     path: routes.recomendado(slug),
     imageUrl: product.imageUrl ?? undefined,
@@ -45,6 +47,12 @@ export default async function RecomendadoDetailPage({ params }: PageProps) {
   assertValidPublicSlug(slug);
   const product = await fetchActiveAffiliateBySlug(slug);
   if (!product) notFound();
+
+  const relatedProducts = await fetchRelatedAffiliateProducts(
+    product.category,
+    product.slug,
+    4,
+  );
 
   const path = routes.recomendado(slug);
 
@@ -59,7 +67,10 @@ export default async function RecomendadoDetailPage({ params }: PageProps) {
           ]),
           productJsonLd({
             title: product.title,
-            description: product.seoDescription ?? product.description,
+            description:
+              product.seoDescription ??
+              product.shortDescription ??
+              product.description,
             path,
             imageUrl: product.imageUrl ?? undefined,
             price: product.currentPrice,
@@ -73,7 +84,7 @@ export default async function RecomendadoDetailPage({ params }: PageProps) {
           { label: product.title },
         ]}
       />
-      <AffiliateDetailView product={product} />
+      <AffiliateDetailView product={product} relatedProducts={relatedProducts} />
     </>
   );
 }

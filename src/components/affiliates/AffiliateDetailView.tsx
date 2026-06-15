@@ -1,5 +1,6 @@
 import { AffiliateDisclosure } from "@/components/affiliates/AffiliateDisclosure";
 import { AffiliateTrackLink } from "@/components/affiliates/AffiliateTrackLink";
+import { RelatedAffiliatesSection } from "@/components/affiliates/RelatedAffiliatesSection";
 import { Badge } from "@/components/ui/Badge";
 import { Container } from "@/components/ui/Container";
 import { Section } from "@/components/ui/Section";
@@ -7,7 +8,7 @@ import { Icon } from "@/components/icons";
 import { getAffiliateCategoryLabel } from "@/lib/affiliates/categories";
 import { AFFILIATE_OFFER_CTA_LABEL } from "@/lib/affiliates/constants";
 import { formatBrl, youtubeEmbedId } from "@/lib/affiliates/tracking";
-import type { PublicAffiliateProduct } from "@/lib/affiliates/types";
+import type { PublicAffiliateProduct, PublicAffiliateSummary } from "@/lib/affiliates/types";
 import Image from "next/image";
 
 function categoryDisplay(category: string): string {
@@ -16,9 +17,13 @@ function categoryDisplay(category: string): string {
 
 interface AffiliateDetailViewProps {
   product: PublicAffiliateProduct;
+  relatedProducts?: PublicAffiliateSummary[];
 }
 
-export function AffiliateDetailView({ product }: AffiliateDetailViewProps) {
+export function AffiliateDetailView({
+  product,
+  relatedProducts = [],
+}: AffiliateDetailViewProps) {
   const videoId = youtubeEmbedId(product.videoUrl);
   const currentPrice = formatBrl(product.currentPrice);
   const oldPrice = formatBrl(product.oldPrice);
@@ -44,7 +49,7 @@ export function AffiliateDetailView({ product }: AffiliateDetailViewProps) {
                 <div className="relative aspect-[4/3] overflow-hidden rounded-2xl border border-border">
                   <Image
                     src={product.imageUrl}
-                    alt=""
+                    alt={product.title}
                     fill
                     className="object-cover"
                     priority
@@ -104,7 +109,7 @@ export function AffiliateDetailView({ product }: AffiliateDetailViewProps) {
                   label={AFFILIATE_OFFER_CTA_LABEL}
                   sourcePage={sourcePage}
                   sourceType="detail"
-                  className="!h-12 !w-full max-w-sm text-base"
+                  className="!h-12 w-full max-w-none text-base sm:max-w-sm"
                 />
               </div>
               <div className="mt-4">
@@ -114,6 +119,16 @@ export function AffiliateDetailView({ product }: AffiliateDetailViewProps) {
           </div>
         </Container>
       </Section>
+
+      {product.shortDescription && (
+        <Section background="default">
+          <Container size="md">
+            <p className="text-lg leading-relaxed text-muted text-pretty">
+              {product.shortDescription}
+            </p>
+          </Container>
+        </Section>
+      )}
 
       {product.description && (
         <Section background="default">
@@ -202,10 +217,18 @@ export function AffiliateDetailView({ product }: AffiliateDetailViewProps) {
             label={AFFILIATE_OFFER_CTA_LABEL}
             sourcePage={sourcePage}
             sourceType="detail"
-            className="mx-auto mt-6 !h-12 !w-full max-w-xs !border-off-white/30 !text-off-white hover:!bg-off-white/10"
+            className="mx-auto mt-6 !h-12 w-full max-w-xs !border-off-white/30 !text-off-white hover:!bg-off-white/10"
           />
         </Container>
       </Section>
+
+      <RelatedAffiliatesSection
+        links={relatedProducts}
+        title="Produtos relacionados"
+        description="Outras ofertas na mesma categoria que podem complementar sua jornada."
+        sourcePage={sourcePage}
+        sourceType="related"
+      />
     </>
   );
 }

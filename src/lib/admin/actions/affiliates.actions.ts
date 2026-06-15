@@ -50,6 +50,7 @@ function parseAffiliateForm(formData: FormData): AffiliateLinkInput {
     title,
     slug,
     category: getString(formData, "category"),
+    shortDescription: getString(formData, "short_description"),
     description: getString(formData, "description"),
     productType: getString(formData, "product_type") || "outro",
     brand: getString(formData, "brand"),
@@ -100,7 +101,16 @@ export async function createAffiliateAction(
       return { error: "Nome, slug e categoria são obrigatórios." };
     }
     if (!input.affiliateUrl) {
-      return { error: "Link de afiliado é obrigatório." };
+      return { error: "URL afiliada é obrigatória." };
+    }
+    if (!input.shortDescription) {
+      return { error: "Descrição curta é obrigatória." };
+    }
+    if (!input.imageUrl) {
+      return { error: "Imagem é obrigatória." };
+    }
+    if (!input.affiliatePlatform) {
+      return { error: "Plataforma é obrigatória." };
     }
 
     const id = await adminInsertAffiliateLink(input);
@@ -128,7 +138,16 @@ export async function updateAffiliateAction(
       return { error: "Nome, slug e categoria são obrigatórios." };
     }
     if (!input.affiliateUrl) {
-      return { error: "Link de afiliado é obrigatório." };
+      return { error: "URL afiliada é obrigatória." };
+    }
+    if (!input.shortDescription) {
+      return { error: "Descrição curta é obrigatória." };
+    }
+    if (!input.imageUrl) {
+      return { error: "Imagem é obrigatória." };
+    }
+    if (!input.affiliatePlatform) {
+      return { error: "Plataforma é obrigatória." };
     }
 
     await adminUpdateAffiliateLink(id, input);

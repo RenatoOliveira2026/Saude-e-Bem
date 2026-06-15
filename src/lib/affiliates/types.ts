@@ -32,6 +32,7 @@ export interface AffiliateLinkRecord {
   title: string;
   slug: string;
   category: string;
+  shortDescription: string;
   description: string;
   productType: AffiliateProductType | string;
   brand: string;
@@ -71,6 +72,7 @@ export interface PublicAffiliateSummary {
   slug: string;
   title: string;
   category: string;
+  shortDescription: string;
   description: string;
   productType: string;
   brand: string;
@@ -83,6 +85,8 @@ export interface PublicAffiliateSummary {
   oldPrice: number | null;
   installments: string;
   benefits: string[];
+  createdAt: string;
+  clickCount?: number;
 }
 
 export interface PublicAffiliateProduct extends PublicAffiliateSummary {

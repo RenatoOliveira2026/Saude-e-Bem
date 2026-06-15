@@ -165,6 +165,7 @@ type AffiliateLinkRow = {
   title: string;
   slug: string;
   category: string;
+  short_description: string;
   description: string;
   url: string;
   product_type: string;

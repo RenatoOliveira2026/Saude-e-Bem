@@ -109,6 +109,7 @@ export function AffiliatePremiumForm({ link }: AffiliatePremiumFormProps) {
             folder="afiliados"
             defaultUrl={link?.imageUrl ?? undefined}
           />
+          <p className="text-xs text-muted">Imagem obrigatória para publicar a oferta.</p>
           <Input
             label="Vídeo YouTube (URL opcional)"
             name="video_url"
@@ -124,6 +125,14 @@ export function AffiliatePremiumForm({ link }: AffiliatePremiumFormProps) {
       label: "Conteúdo",
       content: (
         <div className="space-y-4">
+          <Textarea
+            label="Descrição curta"
+            name="short_description"
+            defaultValue={link?.shortDescription}
+            rows={2}
+            required
+            placeholder="Resumo para cards e listagens (até 160 caracteres)"
+          />
           <Textarea
             label="Descrição detalhada"
             name="description"
@@ -199,9 +208,12 @@ export function AffiliatePremiumForm({ link }: AffiliatePremiumFormProps) {
               id="affiliate_platform"
               name="affiliate_platform"
               defaultValue={link?.affiliatePlatform ?? ""}
+              required
               className={selectClass}
             >
-              <option value="">Selecione</option>
+              <option value="" disabled>
+                Selecione a plataforma
+              </option>
               {AFFILIATE_PLATFORMS.map((opt) => (
                 <option key={opt.value} value={opt.value}>
                   {opt.label}
@@ -343,7 +355,7 @@ export function AffiliatePremiumForm({ link }: AffiliatePremiumFormProps) {
               defaultChecked={link?.featured ?? false}
               className="h-4 w-4 rounded border-border text-sage"
             />
-            Destaque na Home
+            Destaque no marketplace (/recomendados)
           </label>
           <label className="flex items-center gap-2 text-sm text-graphite">
             <input

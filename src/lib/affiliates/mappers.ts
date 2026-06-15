@@ -19,6 +19,7 @@ export function mapAffiliateRow(row: AffiliateLinkRow): AffiliateLinkRecord {
     title: row.title,
     slug: row.slug || slugify(row.title) || row.id,
     category: row.category,
+    shortDescription: row.short_description ?? "",
     description: row.description,
     productType: row.product_type,
     brand: row.brand,
@@ -59,6 +60,9 @@ export function mapPublicSummary(row: AffiliateLinkRow): PublicAffiliateSummary 
     slug: mapped.slug,
     title: mapped.title,
     category: mapped.category,
+    shortDescription:
+      mapped.shortDescription ||
+      mapped.description.slice(0, 160),
     description: mapped.description,
     productType: mapped.productType,
     brand: mapped.brand,
@@ -71,6 +75,7 @@ export function mapPublicSummary(row: AffiliateLinkRow): PublicAffiliateSummary 
     oldPrice: mapped.oldPrice,
     installments: mapped.installments,
     benefits: linesToArray(mapped.benefits).slice(0, 4),
+    createdAt: mapped.createdAt,
   };
 }
 
@@ -101,6 +106,7 @@ export function affiliateRowToDb(
     title: input.title,
     slug: input.slug,
     category: input.category,
+    short_description: input.shortDescription ?? "",
     description: input.description ?? "",
     product_type: input.productType ?? "outro",
     brand: input.brand ?? "",

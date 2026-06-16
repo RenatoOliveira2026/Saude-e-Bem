@@ -1,3 +1,4 @@
+import { isBrevoConfigured } from "@/lib/brevo";
 import { brevoAddContact } from "./providers/brevo";
 import { convertKitAddContact } from "./providers/convertkit";
 import { mailerLiteAddContact } from "./providers/mailerlite";
@@ -16,13 +17,19 @@ export type {
   EmailSyncResult,
 } from "./types";
 
+const FUTURE_PROVIDERS: EmailProviderId[] = ["mailerlite", "convertkit"];
+
 function getConfiguredProviderId(): EmailProviderId | null {
-  const raw = process.env.EMAIL_PROVIDER?.trim().toLowerCase()
-    ?? process.env.NEWSLETTER_PROVIDER?.trim().toLowerCase();
+  const raw =
+    process.env.EMAIL_PROVIDER?.trim().toLowerCase() ??
+    process.env.NEWSLETTER_PROVIDER?.trim().toLowerCase();
 
   if (raw === "brevo" || raw === "mailerlite" || raw === "convertkit") {
     return raw;
   }
+
+  if (isBrevoConfigured()) return "brevo";
+
   return null;
 }
 
@@ -43,13 +50,17 @@ export function getEmailMarketingProvider(): EmailProvider | null {
 export function isEmailProviderConfigured(): boolean {
   const id = getConfiguredProviderId();
   if (!id) return false;
-  if (id === "brevo") return Boolean(process.env.BREVO_API_KEY?.trim());
+  if (id === "brevo") return isBrevoConfigured();
   if (id === "mailerlite") return Boolean(process.env.MAILERLITE_API_KEY?.trim());
   if (id === "convertkit") return Boolean(process.env.CONVERTKIT_API_KEY?.trim());
   return false;
 }
 
-/** Sincroniza contato com provedor externo (não conectado em produção nesta fase). */
+export function isFutureEmailProvider(id: EmailProviderId): boolean {
+  return FUTURE_PROVIDERS.includes(id);
+}
+
+/** Sincroniza contato com Brevo (principal) ou provedor futuro configurado. */
 export async function syncContactToEmailProvider(
   input: EmailContactInput,
 ): Promise<EmailSyncResult> {
@@ -59,7 +70,7 @@ export async function syncContactToEmailProvider(
     return {
       ok: false,
       skipped: true,
-      reason: "Nenhum provedor de e-mail marketing configurado.",
+      reason: "Nenhum provedor de e-mail configurado. Defina BREVO_API_KEY.",
     };
   }
 

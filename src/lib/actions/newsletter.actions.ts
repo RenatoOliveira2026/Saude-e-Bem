@@ -67,7 +67,6 @@ async function tryExternalSync(
     source,
     phone,
   });
-  if (!result.ok) return;
 
   const serviceKey = process.env.SUPABASE_SERVICE_ROLE_KEY?.trim();
   if (!serviceKey) return;
@@ -80,15 +79,28 @@ async function tryExternalSync(
     auth: { autoRefreshToken: false, persistSession: false },
   });
 
-  await admin
-    .from("newsletter_subscribers")
-    .update({
-      provider: result.provider,
-      external_id: result.externalId,
-      synced_at: new Date().toISOString(),
-      sync_error: null,
-    })
-    .eq("email", email);
+  if (result.ok) {
+    await admin
+      .from("newsletter_subscribers")
+      .update({
+        provider: result.provider,
+        external_id: result.externalId,
+        synced_at: new Date().toISOString(),
+        sync_error: null,
+      })
+      .eq("email", email);
+    return;
+  }
+
+  if (!result.ok && !result.skipped) {
+    await admin
+      .from("newsletter_subscribers")
+      .update({
+        sync_error: result.error,
+        updated_at: new Date().toISOString(),
+      })
+      .eq("email", email);
+  }
 }
 
 const sourcePages: Record<NewsletterSource, string> = {

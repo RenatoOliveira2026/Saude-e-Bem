@@ -45,10 +45,10 @@ export default async function AdminConversaoPage() {
             <span className="font-medium text-forest">ESP:</span>{" "}
             {data.espConfigured
               ? `Configurado (${data.configuredProviders.join(", ")})`
-              : "Configure BREVO_API_KEY, HUBSPOT_API_KEY ou RDSTATION_API_KEY"}
+              : "Configure BREVO_API_KEY (provedor principal). HubSpot e RD Station são opções futuras."}
           </p>
           <p className="mt-2 text-xs text-muted-light">
-            Use LEAD_ESP_PROVIDER para forçar provedor. LEAD_ESP_LIVE_SYNC=true ativa sync real (Brevo).
+            Use LEAD_ESP_PROVIDER para forçar provedor futuro. LEAD_ESP_LIVE_SYNC=false desativa sync real.
           </p>
         </section>
 

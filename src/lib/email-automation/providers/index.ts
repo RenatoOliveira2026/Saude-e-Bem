@@ -1,8 +1,12 @@
 import type {
-  AutomationDispatchResult,
   EmailAutomationProviderId,
   LeadAutomationPayload,
 } from "../types";
+import {
+  isBrevoConfigured,
+  isBrevoLiveSyncEnabled,
+  upsertBrevoContact,
+} from "@/lib/brevo";
 import {
   buildBrevoContactBody,
   buildHubSpotContactBody,
@@ -36,12 +40,9 @@ function getActiveProviders(): EmailAutomationProviderId[] {
   const preferred = getPreferredEspProvider();
   if (preferred) return [preferred];
 
-  const providers: EmailAutomationProviderId[] = [];
-  if (process.env.BREVO_API_KEY?.trim()) providers.push("brevo");
-  if (process.env.HUBSPOT_API_KEY?.trim()) providers.push("hubspot");
-  if (process.env.RDSTATION_API_KEY?.trim()) providers.push("rdstation");
-  if (process.env.MAILERLITE_API_KEY?.trim()) providers.push("mailerlite");
-  return providers;
+  if (isBrevoConfigured()) return ["brevo"];
+
+  return [];
 }
 
 export async function syncLeadToProviders(
@@ -53,7 +54,7 @@ export async function syncLeadToProviders(
   if (active.length === 0) {
     return {
       skipped: true,
-      reason: "Nenhum ESP configurado (Brevo, HubSpot, RD Station ou MailerLite).",
+      reason: "Nenhum ESP configurado. Defina BREVO_API_KEY como provedor principal.",
     };
   }
 
@@ -75,45 +76,35 @@ export async function syncLeadToProviders(
 }
 
 async function brevoSyncLead(payload: EspContactPayload): Promise<LeadEspSyncResult> {
-  const apiKey = process.env.BREVO_API_KEY?.trim();
-  if (!apiKey) {
+  if (!isBrevoConfigured()) {
     return { provider: "brevo", skipped: true, reason: "BREVO_API_KEY ausente." };
   }
 
-  const body = buildBrevoContactBody(payload);
-
-  if (process.env.LEAD_ESP_LIVE_SYNC === "true") {
-    try {
-      const response = await fetch("https://api.brevo.com/v3/contacts", {
-        method: "POST",
-        headers: {
-          "api-key": apiKey,
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        },
-        body: JSON.stringify(body),
-      });
-
-      if (!response.ok) {
-        const text = await response.text();
-        return { provider: "brevo", skipped: true, reason: `Brevo: ${text.slice(0, 200)}` };
-      }
-
-      const data = (await response.json()) as { id?: number };
-      return { provider: "brevo", externalId: data.id ? String(data.id) : undefined, skipped: false };
-    } catch (error) {
-      const message = error instanceof Error ? error.message : "Erro Brevo";
-      return { provider: "brevo", skipped: true, reason: message };
-    }
+  if (!isBrevoLiveSyncEnabled()) {
+    return {
+      provider: "brevo",
+      skipped: true,
+      reason: "Sync Brevo desativado (LEAD_ESP_LIVE_SYNC=false). Lead salvo no Supabase.",
+    };
   }
 
-  return {
-    provider: "brevo",
-    skipped: true,
-    reason: "Payload Brevo pronto — ative LEAD_ESP_LIVE_SYNC=true para envio real.",
-  };
+  try {
+    const body = buildBrevoContactBody(payload);
+    const result = await upsertBrevoContact(body);
+
+    return {
+      provider: "brevo",
+      externalId: result.externalId ?? payload.email,
+      skipped: false,
+      reason: result.duplicate ? "Contato já existia — atualizado no Brevo." : undefined,
+    };
+  } catch (error) {
+    const message = error instanceof Error ? error.message : "Erro Brevo";
+    return { provider: "brevo", skipped: true, reason: message };
+  }
 }
 
+/** Provedor futuro — ativar com LEAD_ESP_PROVIDER=hubspot quando implementado. */
 async function hubSpotSyncLead(payload: EspContactPayload): Promise<LeadEspSyncResult> {
   const apiKey = process.env.HUBSPOT_API_KEY?.trim();
   if (!apiKey) {
@@ -125,10 +116,11 @@ async function hubSpotSyncLead(payload: EspContactPayload): Promise<LeadEspSyncR
   return {
     provider: "hubspot",
     skipped: true,
-    reason: "Payload HubSpot pronto — implementar CRM v3 contacts quando LEAD_ESP_LIVE_SYNC=true.",
+    reason: "HubSpot reservado para fase futura — use Brevo como provedor principal.",
   };
 }
 
+/** Provedor futuro — ativar com LEAD_ESP_PROVIDER=rdstation quando implementado. */
 async function rdStationSyncLead(payload: EspContactPayload): Promise<LeadEspSyncResult> {
   const apiKey = process.env.RDSTATION_API_KEY?.trim();
   if (!apiKey) {
@@ -140,15 +132,16 @@ async function rdStationSyncLead(payload: EspContactPayload): Promise<LeadEspSyn
   return {
     provider: "rdstation",
     skipped: true,
-    reason: "Payload RD Station pronto — implementar conversion API quando LEAD_ESP_LIVE_SYNC=true.",
+    reason: "RD Station reservado para fase futura — use Brevo como provedor principal.",
   };
 }
 
+/** Provedor futuro — ativar com LEAD_ESP_PROVIDER=mailerlite quando implementado. */
 async function mailerLiteSyncLead(_payload: EspContactPayload): Promise<LeadEspSyncResult> {
   return {
     provider: "mailerlite",
     skipped: true,
-    reason: "MailerLite mantido como fallback — foco 5.3: Brevo, HubSpot, RD Station.",
+    reason: "MailerLite reservado para fase futura — use Brevo como provedor principal.",
   };
 }
 

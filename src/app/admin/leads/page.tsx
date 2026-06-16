@@ -186,7 +186,7 @@ export default async function AdminLeadsPage({ searchParams }: AdminLeadsPagePro
             <span className="font-medium text-forest">Automação de e-mail:</span>{" "}
             {automationReady
               ? `Provedores configurados: ${providers.join(", ")}. Sequências prontas — envio via integração pendente.`
-              : "Configure BREVO_API_KEY, MAILERLITE_API_KEY, RDSTATION_API_KEY ou HUBSPOT_API_KEY."}
+              : "Configure BREVO_API_KEY (provedor principal). HubSpot, RD Station e MailerLite são opções futuras."}
           </p>
           <p className="mt-2 text-xs text-muted-light">
             Inscritos legacy (newsletter_subscribers) continuam em export separado:{" "}

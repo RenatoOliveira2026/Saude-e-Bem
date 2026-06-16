@@ -1,4 +1,5 @@
 import type { EmailAutomationProviderId } from "@/lib/email-automation/types";
+import { getBrevoLeadsListId, isBrevoConfigured } from "@/lib/brevo";
 import type { LeadInterestId } from "@/lib/leads/lead.types";
 import { getServiceRoleClient } from "@/lib/supabase/service-role";
 
@@ -47,14 +48,13 @@ export function getPreferredEspProvider(): EmailAutomationProviderId | null {
     return configured;
   }
 
-  if (process.env.BREVO_API_KEY?.trim()) return "brevo";
-  if (process.env.HUBSPOT_API_KEY?.trim()) return "hubspot";
-  if (process.env.RDSTATION_API_KEY?.trim()) return "rdstation";
-  if (process.env.MAILERLITE_API_KEY?.trim()) return "mailerlite";
+  if (isBrevoConfigured()) return "brevo";
+
   return null;
 }
 
 export function buildBrevoContactBody(payload: EspContactPayload) {
+  const listId = getBrevoLeadsListId();
   return {
     email: payload.email,
     attributes: {
@@ -64,6 +64,7 @@ export function buildBrevoContactBody(payload: EspContactPayload) {
       LEAD_SCORE: payload.leadScore,
       SEQUENCE_ID: payload.sequenceId,
     },
+    ...(listId ? { listIds: [listId] } : {}),
     updateEnabled: true,
   };
 }

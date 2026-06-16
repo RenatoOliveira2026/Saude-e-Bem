@@ -1,6 +1,6 @@
 import type { EmailContactInput, EmailContactResult } from "../types";
 
-/** Stub MailerLite — conectar quando MAILERLITE_API_KEY estiver configurada. */
+/** Provedor futuro — use BREVO_API_KEY como principal. */
 export async function mailerLiteAddContact(
   _input: EmailContactInput,
 ): Promise<EmailContactResult> {
@@ -8,5 +8,5 @@ export async function mailerLiteAddContact(
   if (!apiKey) {
     throw new Error("MAILERLITE_API_KEY não configurada.");
   }
-  throw new Error("Integração MailerLite ainda não implementada.");
+  throw new Error("MailerLite reservado para fase futura — configure BREVO_API_KEY.");
 }

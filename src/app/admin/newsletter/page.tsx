@@ -101,7 +101,7 @@ export default async function AdminNewsletterPage({
             <span className="font-medium text-forest">E-mail marketing:</span>{" "}
             {emailProvider && isEmailProviderConfigured()
               ? `Provedor ${emailProvider.id} configurado (sync automático)`
-              : "Camada pronta — configure EMAIL_PROVIDER e API key (Brevo, MailerLite ou ConvertKit)"}
+              : "Configure BREVO_API_KEY (provedor principal). MailerLite e ConvertKit são opções futuras."}
           </p>
           {stats.pendingSync > 0 && (
             <p className="mt-2 text-xs text-muted-light">

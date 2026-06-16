@@ -1,12 +1,32 @@
+import {
+  getBrevoNewsletterListId,
+  isBrevoLiveSyncEnabled,
+  upsertBrevoContact,
+} from "@/lib/brevo";
 import type { EmailContactInput, EmailContactResult } from "../types";
 
-/** Stub Brevo — conectar quando BREVO_API_KEY estiver configurada. */
+/** Sincroniza assinante de newsletter com Brevo (provedor principal). */
 export async function brevoAddContact(
-  _input: EmailContactInput,
+  input: EmailContactInput,
 ): Promise<EmailContactResult> {
-  const apiKey = process.env.BREVO_API_KEY?.trim();
-  if (!apiKey) {
-    throw new Error("BREVO_API_KEY não configurada.");
+  if (!isBrevoLiveSyncEnabled()) {
+    throw new Error(
+      "Sync Brevo desativado (LEAD_ESP_LIVE_SYNC=false). Contato salvo apenas no Supabase.",
+    );
   }
-  throw new Error("Integração Brevo ainda não implementada.");
+
+  const listId = getBrevoNewsletterListId();
+  const result = await upsertBrevoContact({
+    email: input.email,
+    attributes: {
+      FIRSTNAME: input.name,
+      NEWSLETTER_SOURCE: input.source,
+      ...(input.phone ? { SMS: input.phone } : {}),
+    },
+    ...(listId ? { listIds: [listId] } : {}),
+  });
+
+  return {
+    externalId: result.externalId ?? input.email,
+  };
 }

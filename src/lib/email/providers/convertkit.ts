@@ -1,6 +1,6 @@
 import type { EmailContactInput, EmailContactResult } from "../types";
 
-/** Stub ConvertKit — conectar quando CONVERTKIT_API_KEY estiver configurada. */
+/** Provedor futuro — use BREVO_API_KEY como principal. */
 export async function convertKitAddContact(
   _input: EmailContactInput,
 ): Promise<EmailContactResult> {
@@ -8,5 +8,5 @@ export async function convertKitAddContact(
   if (!apiKey) {
     throw new Error("CONVERTKIT_API_KEY não configurada.");
   }
-  throw new Error("Integração ConvertKit ainda não implementada.");
+  throw new Error("ConvertKit reservado para fase futura — configure BREVO_API_KEY.");
 }

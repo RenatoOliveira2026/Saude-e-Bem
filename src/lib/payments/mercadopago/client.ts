@@ -38,8 +38,11 @@ export interface MercadoPagoPaymentRecord {
   metadata?: Record<string, unknown>;
 }
 
-const MP_PAYMENT_TYPES = [
-  "account_money",
+/**
+ * Tipos que podem ser excluídos na preferência Checkout Pro.
+ * `account_money` nunca entra aqui — a API MP retorna 400 se for excluído.
+ */
+export const MP_EXCLUDABLE_PAYMENT_TYPES = [
   "ticket",
   "bank_transfer",
   "atm",
@@ -48,16 +51,16 @@ const MP_PAYMENT_TYPES = [
   "digital_currency",
 ] as const;
 
-function getExcludedPaymentTypes(method: PaymentMethod): string[] {
+export function getExcludedPaymentTypes(method: PaymentMethod): string[] {
   switch (method) {
     case "pix":
-      return MP_PAYMENT_TYPES.filter((type) => type !== "bank_transfer");
+      return MP_EXCLUDABLE_PAYMENT_TYPES.filter((type) => type !== "bank_transfer");
     case "credit_card":
-      return MP_PAYMENT_TYPES.filter(
+      return MP_EXCLUDABLE_PAYMENT_TYPES.filter(
         (type) => !["credit_card", "debit_card"].includes(type),
       );
     case "ticket":
-      return MP_PAYMENT_TYPES.filter((type) => type !== "ticket");
+      return MP_EXCLUDABLE_PAYMENT_TYPES.filter((type) => type !== "ticket");
     default:
       return [];
   }

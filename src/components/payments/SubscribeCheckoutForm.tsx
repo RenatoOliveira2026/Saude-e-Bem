@@ -1,5 +1,6 @@
 "use client";
 
+import { ClubCheckoutErrorAlert } from "@/components/club/ClubCheckoutErrorAlert";
 import { Badge } from "@/components/ui/Badge";
 import { Button } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
@@ -38,6 +39,7 @@ export function SubscribeCheckoutForm() {
   const [selectedMethod, setSelectedMethod] = useState<PaymentMethod>("pix");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [hasActiveSubscription, setHasActiveSubscription] = useState(false);
   const [info, setInfo] = useState<string | null>(null);
 
   const activePlan = ASSINAR_PLANS.find((plan) => plan.id === selectedPlan);
@@ -45,6 +47,7 @@ export function SubscribeCheckoutForm() {
   async function handleCheckout() {
     setLoading(true);
     setError(null);
+    setHasActiveSubscription(false);
     setInfo(null);
 
     try {
@@ -58,6 +61,10 @@ export function SubscribeCheckoutForm() {
       });
 
       const data = await response.json();
+      if (response.status === 409) {
+        setHasActiveSubscription(true);
+        return;
+      }
       if (!response.ok) {
         setError(data.error ?? "Não foi possível iniciar o checkout.");
         return;
@@ -192,6 +199,7 @@ export function SubscribeCheckoutForm() {
         ))}
       </div>
 
+      {hasActiveSubscription && <ClubCheckoutErrorAlert />}
       {error && (
         <p className="rounded-lg bg-red-50 px-4 py-3 text-sm text-red-700">
           {error}

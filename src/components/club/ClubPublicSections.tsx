@@ -204,7 +204,7 @@ export function ClubMembershipPlans({ plans }: ClubPublicSectionsProps) {
                 <ClubSubscribePlanButton
                   plan="premium_monthly"
                   variant="primary"
-                  className="mt-8 w-full justify-center"
+                  className="w-full justify-center"
                 >
                   Assinar Premium Mensal
                 </ClubSubscribePlanButton>
@@ -212,7 +212,7 @@ export function ClubMembershipPlans({ plans }: ClubPublicSectionsProps) {
                 <ClubSubscribePlanButton
                   plan="premium_annual"
                   variant="gold"
-                  className="mt-8 w-full justify-center"
+                  className="w-full justify-center"
                 >
                   Assinar Premium Anual
                 </ClubSubscribePlanButton>
@@ -256,7 +256,7 @@ export function ClubCtaBand() {
         </p>
         <div className="mt-6 w-full max-w-xl">
           {isRealCheckoutEnabled() ? (
-            <ClubSubscribeButtons />
+            <ClubSubscribeButtons tone="onDark" />
           ) : (
             <div className="flex flex-wrap justify-center gap-3">
               <Button href={routes.cadastro} variant="gold" size="md">

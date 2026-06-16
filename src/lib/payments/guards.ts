@@ -3,6 +3,19 @@ import type { Database } from "@/lib/supabase/types";
 
 const ACTIVE_SUBSCRIPTION_STATUSES = ["active", "trialing", "past_due"] as const;
 
+export const ACTIVE_SUBSCRIPTION_CONFLICT_MESSAGE =
+  "Você já possui uma assinatura Premium ativa.\nAcesse Minha Assinatura para gerenciar seu plano.";
+
+export const PENDING_PAYMENT_CONFLICT_MESSAGE =
+  "Você já iniciou um pagamento. Aguarde a confirmação ou clique em tentar novamente para cancelar a tentativa anterior.";
+
+export function isActiveSubscriptionConflictError(message: string): boolean {
+  return (
+    message === ACTIVE_SUBSCRIPTION_CONFLICT_MESSAGE ||
+    message.includes("assinatura Premium ativa")
+  );
+}
+
 /** Impede múltiplas assinaturas premium simultâneas. */
 export async function assertUserCanSubscribe(
   admin: SupabaseClient<Database>,
@@ -18,9 +31,7 @@ export async function assertUserCanSubscribe(
     .maybeSingle();
 
   if (subscription) {
-    throw new Error(
-      "Você já possui uma assinatura ativa. Gerencie em Minha assinatura.",
-    );
+    throw new Error(ACTIVE_SUBSCRIPTION_CONFLICT_MESSAGE);
   }
 
   const { data: pendingPayment } = await admin
@@ -33,9 +44,7 @@ export async function assertUserCanSubscribe(
     .maybeSingle();
 
   if (pendingPayment) {
-    throw new Error(
-      "Há um pagamento pendente em andamento. Aguarde a confirmação ou tente novamente em alguns minutos.",
-    );
+    throw new Error(PENDING_PAYMENT_CONFLICT_MESSAGE);
   }
 }
 

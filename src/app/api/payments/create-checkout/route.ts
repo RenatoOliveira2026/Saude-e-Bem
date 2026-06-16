@@ -1,6 +1,6 @@
 import { createPaymentsAdminClient } from "@/lib/payments/admin-client";
 import { assertProductionCheckoutReady } from "@/lib/payments/config";
-import { assertUserCanSubscribe } from "@/lib/payments/guards";
+import { assertUserCanSubscribe, isActiveSubscriptionConflictError } from "@/lib/payments/guards";
 import { createPremiumCheckout } from "@/lib/payments/mercadopago/checkout";
 import { isCheckoutPlanId } from "@/lib/payments/plans";
 import { getCurrentUser, getUserProfile } from "@/lib/auth/session";
@@ -59,6 +59,7 @@ export async function POST(request: Request) {
   } catch (error) {
     const message =
       error instanceof Error ? error.message : "Erro ao criar checkout.";
-    return NextResponse.json({ error: message }, { status: 500 });
+    const status = isActiveSubscriptionConflictError(message) ? 409 : 500;
+    return NextResponse.json({ error: message }, { status });
   }
 }

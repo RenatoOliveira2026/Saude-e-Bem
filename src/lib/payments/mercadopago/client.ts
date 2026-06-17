@@ -106,6 +106,19 @@ export async function createMercadoPagoPreference(
 
   const excluded = getExcludedPaymentTypes(input.paymentMethod);
 
+  const paymentMethods: {
+    excluded_payment_types: { id: string }[];
+    default_payment_method_id?: string;
+    default_payment_type_id?: string;
+  } = {
+    excluded_payment_types: excluded.map((id) => ({ id })),
+  };
+
+  if (input.paymentMethod === "pix") {
+    paymentMethods.default_payment_method_id = "pix";
+    paymentMethods.default_payment_type_id = "bank_transfer";
+  }
+
   const body = {
     items: [
       {
@@ -129,9 +142,7 @@ export async function createMercadoPagoPreference(
     },
     auto_return: "approved",
     notification_url: `${siteUrl}/api/payments/webhook`,
-    payment_methods: {
-      excluded_payment_types: excluded.map((id) => ({ id })),
-    },
+    payment_methods: paymentMethods,
     metadata: {
       plan: input.plan.id,
       payment_method: input.paymentMethod,

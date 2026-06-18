@@ -1,6 +1,7 @@
 "use client";
 
 import {
+  sendGa4GuideDownload,
   sendGa4LeadMagnetDownload,
   sendGa4NewsletterSignup,
 } from "@/lib/analytics/gtag";
@@ -37,6 +38,7 @@ export function NewsletterConversionTracker({
 
     if (conversionEvent === "lead_magnet_download") {
       sendGa4LeadMagnetDownload(payload);
+      sendGa4GuideDownload(payload);
     } else {
       sendGa4NewsletterSignup(payload);
     }

@@ -100,12 +100,61 @@ export const EMAIL_AUTOMATION_SEQUENCES: EmailAutomationSequence[] = [
       },
     ],
   },
+  {
+    id: "launch-vip-nurture",
+    name: "Lançamento — Lista VIP (5 e-mails)",
+    interest: "default",
+    minScore: "frio",
+    steps: [
+      {
+        id: "lv1",
+        type: "immediate",
+        subject: "Boas-vindas ao Saúde & Bem",
+        templateKey: "launch_welcome",
+      },
+      {
+        id: "lv2",
+        type: "delay",
+        delayHours: 48,
+        subject: "Como melhorar sua rotina de saúde em pequenos passos",
+        templateKey: "launch_rotina_passos",
+      },
+      {
+        id: "lv3",
+        type: "delay",
+        delayHours: 120,
+        subject: "Protocolos recomendados para começar",
+        templateKey: "launch_protocolos",
+      },
+      {
+        id: "lv4",
+        type: "delay",
+        delayHours: 192,
+        subject: "Recursos e produtos recomendados",
+        templateKey: "launch_recursos",
+      },
+      {
+        id: "lv5",
+        type: "delay",
+        delayHours: 264,
+        subject: "Convite para o Clube Saúde & Bem",
+        templateKey: "launch_clube_convite",
+      },
+    ],
+  },
 ];
 
 export function getSequenceForLead(
   interest: string,
   leadScore: string,
+  source?: string,
 ): EmailAutomationSequence | null {
+  if (source === "lista-vip-lancamento") {
+    return (
+      EMAIL_AUTOMATION_SEQUENCES.find((seq) => seq.id === "launch-vip-nurture") ?? null
+    );
+  }
+
   const scoreRank = { frio: 0, morno: 1, quente: 2, muito_quente: 3 } as const;
   const rank = scoreRank[leadScore as keyof typeof scoreRank] ?? 0;
 

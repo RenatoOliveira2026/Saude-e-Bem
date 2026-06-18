@@ -54,6 +54,7 @@ const sourcePages: Record<LeadSource, string> = {
   "lp-sono": routes.lpSono,
   artigo: routes.blog,
   protocolo: routes.protocolos,
+  "lista-vip-lancamento": routes.lancamento,
 };
 
 function buildContentContext(formData: FormData) {

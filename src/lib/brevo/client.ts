@@ -61,6 +61,10 @@ export async function upsertBrevoContact(
   }
 
   if (response.status === 400 && /already exist|duplicate/i.test(text)) {
+    await updateBrevoContact(payload.email, {
+      attributes: payload.attributes,
+      listIds: payload.listIds,
+    });
     return { created: false, duplicate: true };
   }
 
@@ -69,4 +73,37 @@ export async function upsertBrevoContact(
     response.status,
     text,
   );
+}
+
+/** Atualiza atributos e listas de um contato existente. */
+export async function updateBrevoContact(
+  email: string,
+  input: { attributes?: Record<string, string | number | boolean>; listIds?: number[] },
+): Promise<void> {
+  const apiKey = getBrevoApiKey();
+  if (!apiKey) {
+    throw new BrevoApiError("BREVO_API_KEY não configurada.", 0);
+  }
+
+  const response = await fetch(
+    `${BREVO_API_BASE}/contacts/${encodeURIComponent(email)}`,
+    {
+      method: "PUT",
+      headers: {
+        "api-key": apiKey,
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+      body: JSON.stringify(input),
+    },
+  );
+
+  if (!response.ok) {
+    const text = await response.text();
+    throw new BrevoApiError(
+      `Brevo API ${response.status}: ${text.slice(0, 300)}`,
+      response.status,
+      text,
+    );
+  }
 }

@@ -1,9 +1,14 @@
+import { getCurrentUser, getUserProfile } from "@/lib/auth/session";
+import {
+  assertBillingProfileComplete,
+  BILLING_PROFILE_INCOMPLETE_CODE,
+  billingProfileRedirectUrl,
+} from "@/lib/billing/guards";
 import { createPaymentsAdminClient } from "@/lib/payments/admin-client";
 import { assertProductionCheckoutReady } from "@/lib/payments/config";
 import { assertUserCanSubscribe, isActiveSubscriptionConflictError } from "@/lib/payments/guards";
 import { createPremiumCheckout } from "@/lib/payments/mercadopago/checkout";
 import { isCheckoutPlanId } from "@/lib/payments/plans";
-import { getCurrentUser, getUserProfile } from "@/lib/auth/session";
 import type { PaymentMethod } from "@/lib/payments/types";
 import { NextResponse } from "next/server";
 
@@ -48,10 +53,13 @@ export async function POST(request: Request) {
       await assertUserCanSubscribe(admin, user.id);
     }
     const profile = await getUserProfile(user.id);
+    assertBillingProfileComplete(profile.profile);
+
     const result = await createPremiumCheckout({
       userId: user.id,
       email: user.email ?? "",
-      name: profile.profile?.name,
+      name: profile.profile?.full_name ?? profile.profile?.name,
+      profile: profile.profile,
       request: { paymentMethod, plan },
     });
 
@@ -59,6 +67,20 @@ export async function POST(request: Request) {
   } catch (error) {
     const message =
       error instanceof Error ? error.message : "Erro ao criar checkout.";
+    if (
+      error instanceof Error &&
+      "code" in error &&
+      error.code === BILLING_PROFILE_INCOMPLETE_CODE
+    ) {
+      return NextResponse.json(
+        {
+          error: message,
+          code: BILLING_PROFILE_INCOMPLETE_CODE,
+          redirectUrl: billingProfileRedirectUrl("/assinar"),
+        },
+        { status: 428 },
+      );
+    }
     const status = isActiveSubscriptionConflictError(message) ? 409 : 500;
     return NextResponse.json({ error: message }, { status });
   }

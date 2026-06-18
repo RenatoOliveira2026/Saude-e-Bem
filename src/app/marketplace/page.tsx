@@ -1,3 +1,4 @@
+import { LaunchFunnelCta } from "@/components/launch";
 import { CrossLinks, PageCta } from "@/components/pages";
 import { MarketplaceListing } from "@/components/marketplace";
 import { PageHero } from "@/components/layout/PageHero";
@@ -38,6 +39,7 @@ export default async function MarketplacePage() {
         secondaryHref={routes.biblioteca}
         background="sage"
       />
+      <LaunchFunnelCta showMarketplace />
       <CrossLinks />
     </>
   );

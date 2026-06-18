@@ -4,6 +4,7 @@ import { ClubCheckoutErrorAlert } from "@/components/club/ClubCheckoutErrorAlert
 import { Badge } from "@/components/ui/Badge";
 import { Button } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
+import { billingProfileRedirectUrl } from "@/lib/billing/guards";
 import {
   formatPlanAmount,
   formatPlanPriceLabel,
@@ -13,7 +14,7 @@ import type { CheckoutPlanId } from "@/lib/payments/plans";
 import { ASSINAR_PLANS } from "@/lib/payments/plans";
 import type { PaymentMethod } from "@/lib/payments/types";
 import { routes } from "@/lib/routes";
-import { useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
 
 function resolvePlanFromSearchParams(
@@ -29,7 +30,18 @@ function resolvePlanFromSearchParams(
   return "premium_monthly";
 }
 
-export function SubscribeCheckoutForm() {
+interface SubscribeCheckoutFormProps {
+  billingComplete: boolean;
+  isLoggedIn: boolean;
+  returnPath?: string;
+}
+
+export function SubscribeCheckoutForm({
+  billingComplete,
+  isLoggedIn,
+  returnPath = routes.assinar,
+}: SubscribeCheckoutFormProps) {
+  const router = useRouter();
   const searchParams = useSearchParams();
   const planFromUrl = searchParams.get("plano");
 
@@ -44,7 +56,21 @@ export function SubscribeCheckoutForm() {
 
   const activePlan = ASSINAR_PLANS.find((plan) => plan.id === selectedPlan);
 
+  function goToCompletarCadastro() {
+    router.push(billingProfileRedirectUrl(returnPath));
+  }
+
   async function handleCheckout() {
+    if (!isLoggedIn) {
+      router.push(`${routes.entrar}?redirect=${encodeURIComponent(returnPath)}`);
+      return;
+    }
+
+    if (!billingComplete) {
+      goToCompletarCadastro();
+      return;
+    }
+
     setLoading(true);
     setError(null);
     setHasActiveSubscription(false);
@@ -61,12 +87,16 @@ export function SubscribeCheckoutForm() {
       });
 
       const data = await response.json();
+      if (response.status === 428 && data.code === "profile_incomplete") {
+        router.push(data.redirectUrl ?? billingProfileRedirectUrl(returnPath));
+        return;
+      }
       if (response.status === 409) {
         setHasActiveSubscription(true);
         return;
       }
       if (!response.ok) {
-        setError(data.error ?? "Não foi possível iniciar o checkout.");
+        setError(data.error ?? "Não foi possível iniciar o pagamento.");
         return;
       }
 
@@ -78,11 +108,18 @@ export function SubscribeCheckoutForm() {
         window.location.href = data.checkoutUrl;
       }
     } catch {
-      setError("Falha de rede ao iniciar checkout.");
+      setError("Falha de rede. Verifique sua conexão e tente novamente.");
     } finally {
       setLoading(false);
     }
   }
+
+  const payButtonLabel =
+    selectedMethod === "pix"
+      ? "Pagar com PIX"
+      : selectedMethod === "credit_card"
+        ? "Pagar com cartão"
+        : "Pagar com boleto";
 
   return (
     <div className="space-y-8">
@@ -171,7 +208,7 @@ export function SubscribeCheckoutForm() {
       )}
 
       <div className="space-y-3">
-        <p className="text-sm font-medium text-forest">Forma de pagamento</p>
+        <p className="text-sm font-medium text-forest">Como deseja pagar?</p>
         {paymentMethodOptions.map((option) => (
           <label
             key={option.id}
@@ -219,7 +256,13 @@ export function SubscribeCheckoutForm() {
         disabled={loading}
         onClick={handleCheckout}
       >
-        {loading ? "Redirecionando..." : "Ir para checkout Mercado Pago"}
+        {loading
+          ? "Redirecionando..."
+          : !isLoggedIn
+            ? "Entrar para assinar"
+            : !billingComplete
+              ? "Completar cadastro para pagar"
+              : payButtonLabel}
       </Button>
 
       <p className="text-center text-xs text-muted">

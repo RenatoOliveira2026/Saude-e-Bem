@@ -22,12 +22,12 @@ export function ClubPremiumSection() {
               ferramentas avançadas em um só lugar.
             </p>
             <Button
-              href={`${routes.clube}#lista-espera`}
+              href={`${routes.lancamento}#lista-vip`}
               variant="gold"
               size="lg"
               className="mt-8"
             >
-              Entrar na lista de interesse
+              Entrar na lista VIP
             </Button>
           </div>
 

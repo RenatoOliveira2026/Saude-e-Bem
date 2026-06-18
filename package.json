@@ -11,8 +11,14 @@
     "check:auth-user": "node scripts/check-auth-user.mjs",
     "test:signup": "node scripts/test-signup.mjs",
     "generate:content-seed": "node scripts/generate-content-seed.mjs",
+    "generate:seo-articles": "node scripts/generate-seo-articles-seed.mjs",
+    "seed:seo-articles": "node scripts/seed-seo-articles.mjs",
+    "generate:premium-protocols": "node scripts/generate-premium-protocols-seed.mjs",
+    "seed:premium-protocols": "node scripts/seed-premium-protocols.mjs",
     "generate:brand-icons": "node scripts/generate-brand-icons.mjs",
-    "audit:seo": "node scripts/audit-seo.mjs"
+    "audit:seo": "node scripts/audit-seo.mjs",
+    "audit:go-live": "node --use-system-ca scripts/audit-phase-57-go-live.mjs",
+    "validate:billing": "node scripts/validate-billing-profile.mjs"
   },
   "dependencies": {
     "@supabase/ssr": "^0.10.3",

@@ -8,12 +8,16 @@ import {
 import { Button } from "@/components/ui/Button";
 import { Input } from "@/components/ui/Input";
 import { resetPassword, type AuthActionState } from "@/lib/auth/actions";
+import { getAuthUrlErrorMessage } from "@/lib/auth/url-errors";
 import { routes } from "@/lib/routes";
 import { useActionState } from "react";
+import { useSearchParams } from "next/navigation";
 
 const initialState: AuthActionState = {};
 
 export function RecoverPasswordForm() {
+  const searchParams = useSearchParams();
+  const urlError = getAuthUrlErrorMessage(searchParams.get("error"));
   const [state, formAction, pending] = useActionState(
     resetPassword,
     initialState,
@@ -29,6 +33,7 @@ export function RecoverPasswordForm() {
         </>
       }
     >
+      {urlError && <AuthMessage type="error" message={urlError} />}
       {state.error && <AuthMessage type="error" message={state.error} />}
       {state.success && <AuthMessage type="success" message={state.success} />}
 

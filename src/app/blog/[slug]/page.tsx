@@ -16,9 +16,10 @@ import {
   getBlogSlugs,
 } from "@/lib/data/repositories/blog.repository";
 import { trackEvent } from "@/lib/analytics/track-event";
+import { extractFaqFromBlocks } from "@/lib/blog/article-faq";
 import { resolveArticleCoverUrl } from "@/lib/blog/resolve-article-cover";
 import { routes } from "@/lib/routes";
-import { articleJsonLd, breadcrumbJsonLd } from "@/lib/seo/json-ld";
+import { articleJsonLd, breadcrumbJsonLd, faqJsonLd } from "@/lib/seo/json-ld";
 import { buildContentMetadata } from "@/lib/seo/metadata";
 import { assertValidPublicSlug } from "@/lib/seo/slug";
 import { fetchAffiliatesForContentCategory } from "@/lib/supabase/services/affiliates.public";
@@ -90,26 +91,28 @@ export default async function ArtigoDetailPage({ params }: PageProps) {
     .filter((a) => a.slug !== slug && a.category === article.category)
     .slice(0, 3);
 
+  const faqItems = extractFaqFromBlocks(article.contentBlocks);
+  const jsonLd = [
+    breadcrumbJsonLd([
+      { name: "Início", path: routes.home },
+      { name: "Blog", path: routes.blog },
+      { name: article.title },
+    ]),
+    articleJsonLd({
+      title: article.title,
+      description: article.seoDescription ?? article.excerpt,
+      path: routes.artigo(slug),
+      imageUrl: resolveArticleCoverUrl(article),
+      author: article.author,
+      publishedAt: article.publishedAt,
+      isPremium: article.isPremium,
+    }),
+    ...(faqItems.length > 0 ? [faqJsonLd(faqItems)] : []),
+  ];
+
   return (
     <>
-      <JsonLdScript
-        data={[
-          breadcrumbJsonLd([
-            { name: "Início", path: routes.home },
-            { name: "Blog", path: routes.blog },
-            { name: article.title },
-          ]),
-          articleJsonLd({
-            title: article.title,
-            description: article.seoDescription ?? article.excerpt,
-            path: routes.artigo(slug),
-            imageUrl: resolveArticleCoverUrl(article),
-            author: article.author,
-            publishedAt: article.publishedAt,
-            isPremium: article.isPremium,
-          }),
-        ]}
-      />
+      <JsonLdScript data={jsonLd} />
       <Breadcrumbs
         items={[
           { label: "Início", href: routes.home },

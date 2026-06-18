@@ -14,6 +14,8 @@ import {
   ClubMembershipPlans,
   ClubPlanComparison,
 } from "@/components/club/ClubPublicSections";
+import { ClubPremiumProtocolsSection } from "@/components/club/ClubPremiumProtocolsSection";
+import { LaunchFunnelCta } from "@/components/launch";
 import { PageHero } from "@/components/layout/PageHero";
 import { JsonLdScript } from "@/components/seo/JsonLd";
 import { fetchActiveMembershipPlans } from "@/lib/membership";
@@ -52,6 +54,7 @@ export default async function ClubePage() {
       <ClubIntroSection />
       <ClubStats />
       <ClubBenefitsSplit />
+      <ClubPremiumProtocolsSection />
       <ClubBenefitsGrid />
       <ClubPlanComparison />
       <ClubMembershipPlans plans={plans} />
@@ -60,6 +63,7 @@ export default async function ClubePage() {
       <ClubFaq />
       <ClubCtaBand />
       <ClubWaitlist />
+      <LaunchFunnelCta background="gold" />
       <CrossLinks />
     </>
   );

@@ -25,6 +25,7 @@ function createBlock(type: ContentBlock["type"]): ContentBlock {
   if (type === "image") return { type: "image", url: "", alt: "" };
   if (type === "list") return { type: "list", items: [""], ordered: false };
   if (type === "blockquote") return { type: "blockquote", text: "" };
+  if (type === "faq") return { type: "faq", items: [{ question: "", answer: "" }] };
   if (type === "divider") return { type: "divider" };
   return { type: "paragraph", text: "", html: "" };
 }
@@ -35,6 +36,7 @@ const blockLabels: Record<ContentBlock["type"], string> = {
   image: "Imagem",
   list: "Lista",
   blockquote: "Citação",
+  faq: "FAQ",
   divider: "Separador",
 };
 

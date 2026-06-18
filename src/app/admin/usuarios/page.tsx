@@ -39,15 +39,44 @@ export default async function AdminUsuariosPage({ searchParams }: PageProps) {
         role={role}
       />
       <main className="flex-1 p-6 lg:p-8">
-        <AdminTable columns={["Nome", "E-mail", "Objetivo", "Cadastro"]}>
+        <AdminTable
+          columns={[
+            "Nome",
+            "E-mail",
+            "CPF",
+            "Celular",
+            "Cidade/UF",
+            "Cadastro completo",
+            "Objetivo",
+            "Cadastro",
+          ]}
+        >
           {users.map((user) => (
             <tr key={user.id} className="hover:bg-sage-muted/20">
               <AdminTableCell>
                 <span className="font-medium text-forest">
-                  {user.name?.trim() || "—"}
+                  {user.full_name?.trim() || user.name?.trim() || "—"}
                 </span>
               </AdminTableCell>
               <AdminTableCell>{user.email}</AdminTableCell>
+              <AdminTableCell className="font-mono text-xs">
+                {user.cpf
+                  ? user.cpf.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, "$1.$2.$3-$4")
+                  : "—"}
+              </AdminTableCell>
+              <AdminTableCell>{user.celular ?? "—"}</AdminTableCell>
+              <AdminTableCell>
+                {user.cidade && user.estado
+                  ? `${user.cidade}/${user.estado}`
+                  : "—"}
+              </AdminTableCell>
+              <AdminTableCell>
+                {user.billing_complete ? (
+                  <span className="text-sage">Sim</span>
+                ) : (
+                  <span className="text-muted">Não</span>
+                )}
+              </AdminTableCell>
               <AdminTableCell>
                 {user.goal
                   ? (goalLabels[user.goal] ?? user.goal)

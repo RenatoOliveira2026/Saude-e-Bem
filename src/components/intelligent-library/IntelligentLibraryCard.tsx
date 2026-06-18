@@ -10,6 +10,7 @@ import { ContentCover } from "@/components/content/ContentCover";
 import { PlanBadge } from "@/components/subscription/PlanBadge";
 import { IconBox, type IconName } from "@/components/icons";
 import type { LibraryItem } from "@/lib/intelligent-library";
+import { getLibraryItemHref } from "@/lib/intelligent-library/library-links";
 import { routes } from "@/lib/routes";
 
 const typeIcons: Record<LibraryItem["type"], IconName> = {
@@ -33,6 +34,8 @@ interface IntelligentLibraryCardProps {
 }
 
 export function IntelligentLibraryCard({ item }: IntelligentLibraryCardProps) {
+  const href = getLibraryItemHref(item);
+
   return (
     <Card variant="default" hover padding="lg" className="flex h-full flex-col">
       <ContentCover src={item.image} alt={item.title} className="mb-4 aspect-[4/3] w-full">
@@ -59,18 +62,18 @@ export function IntelligentLibraryCard({ item }: IntelligentLibraryCardProps) {
         <div className="mt-6 border-t border-border pt-4">
           <p className="mb-3 text-sm text-forest/80">🔒 Exclusivo para assinantes</p>
           <Button
-            href={routes.assinar}
+            href={item.type === "protocolo" ? href : routes.assinar}
             variant="gold"
             size="sm"
             className="w-full justify-center"
           >
-            Assinar agora
+            {item.type === "protocolo" ? "Ver protocolo" : "Assinar agora"}
           </Button>
         </div>
       ) : (
         <div className="mt-6 border-t border-border pt-4">
           <Button
-            href={routes.bibliotecaItem(item.slug)}
+            href={href}
             variant="outline"
             size="sm"
             className="w-full justify-center"
@@ -84,6 +87,8 @@ export function IntelligentLibraryCard({ item }: IntelligentLibraryCardProps) {
 }
 
 export function FeaturedIntelligentLibraryBanner({ item }: { item: LibraryItem }) {
+  const href = getLibraryItemHref(item);
+
   return (
     <Card variant="featured" padding="lg">
       <div className="grid gap-6 lg:grid-cols-2 lg:items-center">
@@ -103,12 +108,16 @@ export function FeaturedIntelligentLibraryBanner({ item }: { item: LibraryItem }
           {item.isPremium ? (
             <>
               <p className="text-sm text-forest/80">🔒 Exclusivo para assinantes</p>
-              <Button href={routes.assinar} size="lg" variant="gold">
-                Assinar agora
+              <Button
+                href={item.type === "protocolo" ? href : routes.assinar}
+                size="lg"
+                variant="gold"
+              >
+                {item.type === "protocolo" ? "Ver protocolo" : "Assinar agora"}
               </Button>
             </>
           ) : (
-            <Button href={routes.bibliotecaItem(item.slug)} size="lg" variant="primary">
+            <Button href={href} size="lg" variant="primary">
               Acessar conteúdo
             </Button>
           )}

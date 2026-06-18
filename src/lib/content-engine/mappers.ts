@@ -3,6 +3,10 @@ import type { MarketplaceItem } from "@/lib/marketplace/marketplace.types";
 import type { ScoreCriterionId } from "@/lib/recommendations/recommendation-types";
 import type { ContentEngineMarketplaceFulfillment } from "./constants";
 import { CONTENT_ENGINE_LIBRARY_ITEMS } from "./seed/library-items";
+import {
+  mapPremiumLibrarySeedToItem,
+  PREMIUM_PROTOCOL_LIBRARY_71B,
+} from "./seed/premium-protocols-library-71b";
 import { CONTENT_ENGINE_MARKETPLACE_PRODUCTS } from "./seed/marketplace-products";
 
 type LibrarySeed = (typeof CONTENT_ENGINE_LIBRARY_ITEMS)[number];
@@ -65,7 +69,8 @@ export function mapSeedToMarketplaceItem(seed: MarketplaceSeed): MarketplaceItem
 }
 
 export function getContentEngineLibraryCatalog(): LibraryItem[] {
-  return CONTENT_ENGINE_LIBRARY_ITEMS.map(mapSeedToLibraryItem);
+  const premiumLibrary = PREMIUM_PROTOCOL_LIBRARY_71B.map(mapPremiumLibrarySeedToItem);
+  return [...CONTENT_ENGINE_LIBRARY_ITEMS.map(mapSeedToLibraryItem), ...premiumLibrary];
 }
 
 export function getContentEngineMarketplaceCatalog(): MarketplaceItem[] {

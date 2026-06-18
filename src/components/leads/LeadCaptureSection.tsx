@@ -90,6 +90,12 @@ const defaults: Record<
     description: "Materiais e lembretes para manter consistência no protocolo.",
     variant: "light",
   },
+  "lista-vip-lancamento": {
+    title: "Entre na lista VIP do lançamento",
+    description:
+      "Prioridade no acesso, condições de fundador e materiais exclusivos antes do público geral.",
+    variant: "forest",
+  },
 };
 
 export function LeadCaptureSection({

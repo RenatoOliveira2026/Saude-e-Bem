@@ -23,6 +23,8 @@ export interface LibraryItemAssets {
   ebookFileUrl?: string;
   affiliateProductId?: string;
   affiliateUrl?: string;
+  /** Slug do protocolo em /protocolos quando item_type é protocolo */
+  protocolSlug?: string;
 }
 
 /** Item do catálogo inteligente. */

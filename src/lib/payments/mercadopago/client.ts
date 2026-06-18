@@ -10,11 +10,14 @@ import type { PaymentMethod } from "../types";
 
 export const MP_API_BASE = "https://api.mercadopago.com";
 
+import type { MercadoPagoPayerData } from "@/lib/billing/profile";
+
 export interface MercadoPagoPreferenceInput {
   externalReference: string;
   paymentMethod: PaymentMethod;
   payerEmail: string;
   payerName?: string | null;
+  payer?: MercadoPagoPayerData | null;
   plan: BillingPlan;
   userId: string;
 }
@@ -130,10 +133,19 @@ export async function createMercadoPagoPreference(
         unit_price: amount,
       },
     ],
-    payer: {
-      email: input.payerEmail,
-      name: input.payerName ?? undefined,
-    },
+    payer: input.payer
+      ? {
+          email: input.payer.email,
+          name: input.payer.name,
+          surname: input.payer.surname,
+          identification: input.payer.identification,
+          phone: input.payer.phone,
+          address: input.payer.address,
+        }
+      : {
+          email: input.payerEmail,
+          name: input.payerName ?? undefined,
+        },
     external_reference: input.externalReference,
     back_urls: {
       success: `${siteUrl}/minha-assinatura?status=success&reference=${encodeURIComponent(input.externalReference)}`,

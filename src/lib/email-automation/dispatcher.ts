@@ -68,7 +68,7 @@ export async function triggerLeadAutomation(
     });
   }
 
-  const sequence = getSequenceForLead(lead.interest, lead.leadScore);
+  const sequence = getSequenceForLead(lead.interest, lead.leadScore, lead.source);
   if (!sequence) {
     return { ok: true, skipped: true, reason: "Nenhuma sequência para este perfil." };
   }

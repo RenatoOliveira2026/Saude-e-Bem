@@ -1,5 +1,6 @@
 import { RecoverPasswordForm } from "@/components/auth/RecoverPasswordForm";
 import type { Metadata } from "next";
+import { Suspense } from "react";
 
 export const metadata: Metadata = {
   title: "Recuperar senha",
@@ -7,5 +8,9 @@ export const metadata: Metadata = {
 };
 
 export default function RecuperarSenhaPage() {
-  return <RecoverPasswordForm />;
+  return (
+    <Suspense fallback={null}>
+      <RecoverPasswordForm />
+    </Suspense>
+  );
 }

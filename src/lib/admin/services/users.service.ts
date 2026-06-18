@@ -1,4 +1,5 @@
 import { createClient } from "@/lib/supabase/server";
+import { isBillingProfileComplete } from "@/lib/billing/profile";
 import type { AdminUserRow } from "../types";
 
 export async function adminListUsers(): Promise<AdminUserRow[]> {
@@ -6,7 +7,9 @@ export async function adminListUsers(): Promise<AdminUserRow[]> {
 
   const { data: profiles, error: profilesError } = await supabase
     .from("profiles")
-    .select("id, email, name, created_at")
+    .select(
+      "id, email, name, full_name, cpf, celular, cep, cidade, estado, endereco, numero, bairro, complemento, billing_completed_at, created_at",
+    )
     .order("created_at", { ascending: false });
 
   if (profilesError) throw profilesError;
@@ -25,6 +28,13 @@ export async function adminListUsers(): Promise<AdminUserRow[]> {
     id: profile.id,
     email: profile.email,
     name: profile.name,
+    full_name: profile.full_name,
+    cpf: profile.cpf,
+    celular: profile.celular,
+    cep: profile.cep,
+    cidade: profile.cidade,
+    estado: profile.estado,
+    billing_complete: isBillingProfileComplete(profile),
     goal: goalByUser.get(profile.id) ?? null,
     created_at: profile.created_at,
   }));

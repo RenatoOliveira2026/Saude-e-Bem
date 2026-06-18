@@ -1,6 +1,19 @@
 import type { ContentBlock } from "@/lib/admin/cms/content-blocks";
 import Image from "next/image";
 
+function FaqBlock({ items }: { items: { question: string; answer: string }[] }) {
+  return (
+    <dl className="space-y-5">
+      {items.map((item) => (
+        <div key={item.question} className="rounded-xl border border-border bg-surface p-5">
+          <dt className="font-heading text-base font-semibold text-forest">{item.question}</dt>
+          <dd className="mt-2 text-sm leading-relaxed text-muted">{item.answer}</dd>
+        </div>
+      ))}
+    </dl>
+  );
+}
+
 export function ContentBlockRenderer({ blocks }: { blocks: ContentBlock[] }) {
   return (
     <div className="prose-custom space-y-5">
@@ -69,6 +82,10 @@ export function ContentBlockRenderer({ blocks }: { blocks: ContentBlock[] }) {
               {block.text}
             </blockquote>
           );
+        }
+
+        if (block.type === "faq" && block.items.length > 0) {
+          return <FaqBlock key={key} items={block.items} />;
         }
 
         if (block.type === "divider") {

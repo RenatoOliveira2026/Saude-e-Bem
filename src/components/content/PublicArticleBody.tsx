@@ -11,6 +11,7 @@ function hasRichBlocks(blocks: ContentBlock[]): boolean {
     (b) =>
       b.type === "image" ||
       b.type === "list" ||
+      b.type === "faq" ||
       (b.type === "heading" && b.text.trim().length > 0),
   );
 }
@@ -24,7 +25,8 @@ export function PublicArticleBody({
       (b.type === "paragraph" && b.text.trim()) ||
       (b.type === "heading" && b.text.trim()) ||
       (b.type === "image" && b.url) ||
-      (b.type === "list" && b.items.length > 0),
+      (b.type === "list" && b.items.length > 0) ||
+      (b.type === "faq" && b.items.length > 0),
   );
 
   if (hasRichBlocks(nonEmptyBlocks)) {

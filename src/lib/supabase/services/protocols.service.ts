@@ -3,7 +3,7 @@ import { mapProtocolRow } from "@/lib/supabase/mappers/content";
 import type { Protocol } from "@/lib/data/types";
 
 const PROTOCOL_COLUMNS =
-  "id, slug, title, description, objective, long_description, cover_image_url, category, category_label, duration, level, benefits, steps, is_premium, featured, tag, participants, status, created_at, updated_at";
+  "id, slug, title, description, objective, long_description, cover_image_url, category, category_label, duration, level, benefits, steps, content, is_premium, featured, tag, participants, seo_title, seo_description, seo_keywords, og_image_url, status, created_at, updated_at";
 
 export async function fetchProtocolsFromSupabase(): Promise<Protocol[]> {
   const supabase = await createClient();

@@ -88,7 +88,7 @@ export function Footer() {
         <div className="flex flex-wrap items-center justify-center gap-6">
           <FooterLink href={routes.privacidade}>Privacidade</FooterLink>
           <FooterLink href={routes.termos}>Termos de uso</FooterLink>
-          <FooterLink href={`${routes.privacidade}#cookies`}>Cookies</FooterLink>
+          <FooterLink href={routes.cookies}>Cookies</FooterLink>
           <FooterLink href="mailto:contato@saudeebem.com.br">Contato</FooterLink>
         </div>
         <p className="text-xs text-off-white/40">

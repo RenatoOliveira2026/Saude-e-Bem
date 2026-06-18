@@ -1,5 +1,6 @@
 "use client";
 
+import { LeadCaptureForm } from "@/components/leads/LeadCaptureForm";
 import { Badge } from "@/components/ui/Badge";
 import { Button } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
@@ -14,6 +15,7 @@ import {
   clubVipList,
 } from "@/lib/data/club";
 import { cn } from "@/lib/cn";
+import { routes } from "@/lib/routes";
 import { useState } from "react";
 
 export function ClubStats() {
@@ -89,7 +91,7 @@ export function ClubVipList() {
         ))}
       </div>
       <div className="mt-10 text-center">
-        <Button href="#lista-espera" variant="gold" size="md">
+        <Button href={`${routes.lancamento}#lista-vip`} variant="gold" size="md">
           Entrar na lista VIP
         </Button>
       </div>
@@ -250,21 +252,11 @@ export function ClubFaq() {
 }
 
 export function ClubWaitlist() {
-  const [email, setEmail] = useState("");
-  const [submitted, setSubmitted] = useState(false);
-
-  function handleSubmit(e: React.FormEvent) {
-    e.preventDefault();
-    if (!email.trim()) return;
-    setSubmitted(true);
-    setEmail("");
-  }
-
   return (
     <Section background="forest" spacing="compact" id="lista-espera">
       <div className="mx-auto max-w-xl text-center">
         <Badge variant="gold" className="mb-4">
-          Lista de espera
+          Lista VIP
         </Badge>
         <h2 className="font-heading text-2xl text-off-white md:text-3xl">
           Garanta acesso antecipado
@@ -273,32 +265,16 @@ export function ClubWaitlist() {
           Seja notificado no lançamento e receba condições exclusivas de
           fundador.
         </p>
-        {submitted ? (
-          <p className="mt-8 rounded-xl bg-off-white/10 px-6 py-4 text-sm text-off-white">
-            Você está na lista! Em breve entraremos em contato.
-          </p>
-        ) : (
-          <form
-            onSubmit={handleSubmit}
-            className="mt-8 flex flex-col gap-3 sm:flex-row"
-          >
-            <label htmlFor="club-email" className="sr-only">
-              E-mail
-            </label>
-            <input
-              id="club-email"
-              type="email"
-              required
-              placeholder="seu@email.com"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              className="h-12 flex-1 rounded-full border border-off-white/20 bg-off-white/10 px-5 text-sm text-off-white placeholder:text-off-white/40 focus:border-gold focus:outline-none focus:ring-2 focus:ring-gold/30"
-            />
-            <Button type="submit" variant="gold" size="md" className="shrink-0">
-              Quero participar
-            </Button>
-          </form>
-        )}
+        <div className="mt-8 sm:mx-auto sm:max-w-md">
+          <LeadCaptureForm
+            source="lista-vip-lancamento"
+            variant="forest"
+            submitLabel="Quero entrar na lista VIP"
+            defaultInterest="bem-estar-geral"
+            hideInterestSelect
+            showWhatsAppFields
+          />
+        </div>
       </div>
     </Section>
   );

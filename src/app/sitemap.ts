@@ -33,6 +33,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     routes.assinar,
     routes.privacidade,
     routes.termos,
+    routes.cookies,
   ];
 
   const [

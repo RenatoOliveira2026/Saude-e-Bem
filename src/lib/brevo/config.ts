@@ -31,3 +31,11 @@ export function getBrevoLeadsListId(): number | undefined {
   const id = Number(raw);
   return Number.isFinite(id) ? id : undefined;
 }
+
+/** Lista Brevo para assinantes Premium (opcional). */
+export function getBrevoPremiumListId(): number | undefined {
+  const raw = process.env.BREVO_PREMIUM_LIST_ID?.trim();
+  if (!raw) return undefined;
+  const id = Number(raw);
+  return Number.isFinite(id) ? id : undefined;
+}

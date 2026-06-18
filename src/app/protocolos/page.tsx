@@ -4,6 +4,7 @@ import {
   PageCta,
 } from "@/components/pages";
 import { GlobalNewsletterSection } from "@/components/newsletter/NewsletterCaptureSection";
+import { LaunchFunnelCta } from "@/components/launch";
 import { ProtocolLibraryListing } from "@/components/protocol-library";
 import { PageHero } from "@/components/layout/PageHero";
 import { Button } from "@/components/ui/Button";
@@ -85,6 +86,7 @@ export default async function ProtocolosPage() {
         secondaryLabel={user ? "Meu painel" : "Entrar"}
         secondaryHref={user ? routes.protocolosPainel : routes.entrar}
       />
+      <LaunchFunnelCta />
       <CrossLinks />
     </>
   );

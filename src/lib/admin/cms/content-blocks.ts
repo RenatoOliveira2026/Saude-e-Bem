@@ -1,9 +1,15 @@
+export interface FaqItem {
+  question: string;
+  answer: string;
+}
+
 export type ContentBlock =
   | { type: "paragraph"; text: string; html?: string }
   | { type: "heading"; text: string; level: 1 | 2 | 3 }
   | { type: "image"; url: string; alt?: string }
   | { type: "list"; items: string[]; ordered?: boolean }
   | { type: "blockquote"; text: string }
+  | { type: "faq"; items: FaqItem[] }
   | { type: "divider" };
 
 function normalizeHeadingLevel(level: unknown): 1 | 2 | 3 {
@@ -50,6 +56,21 @@ export function parseContentBlocks(raw: unknown): ContentBlock[] {
       });
     } else if (block.type === "blockquote" && typeof block.text === "string") {
       blocks.push({ type: "blockquote", text: block.text });
+    } else if (block.type === "faq" && Array.isArray(block.items)) {
+      const items = block.items
+        .filter(
+          (item): item is FaqItem =>
+            typeof item === "object" &&
+            item !== null &&
+            typeof (item as FaqItem).question === "string" &&
+            typeof (item as FaqItem).answer === "string",
+        )
+        .map((item) => ({
+          question: item.question.trim(),
+          answer: item.answer.trim(),
+        }))
+        .filter((item) => item.question && item.answer);
+      if (items.length) blocks.push({ type: "faq", items });
     } else if (block.type === "divider") {
       blocks.push({ type: "divider" });
     } else if (block.type === "paragraph") {
@@ -104,6 +125,16 @@ export function blocksToStorage(blocks: ContentBlock[]): ContentBlock[] {
         const text = block.text.trim();
         if (!text) return null;
         return { type: "blockquote" as const, text };
+      }
+      if (block.type === "faq") {
+        const items = block.items
+          .map((item) => ({
+            question: item.question.trim(),
+            answer: item.answer.trim(),
+          }))
+          .filter((item) => item.question && item.answer);
+        if (!items.length) return null;
+        return { type: "faq" as const, items };
       }
       if (block.type === "divider") {
         return { type: "divider" as const };

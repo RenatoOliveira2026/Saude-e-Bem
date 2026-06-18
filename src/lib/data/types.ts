@@ -1,5 +1,5 @@
 import type { IconName } from "@/components/icons";
-import type { ContentBlock } from "@/lib/admin/cms/content-blocks";
+import type { ContentBlock, FaqItem } from "@/lib/admin/cms/content-blocks";
 import type { BaseEntity } from "./base";
 
 export type { ContentBlock };

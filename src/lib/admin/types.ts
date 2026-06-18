@@ -26,6 +26,13 @@ export interface AdminUserRow {
   id: string;
   email: string;
   name: string | null;
+  full_name: string | null;
+  cpf: string | null;
+  celular: string | null;
+  cep: string | null;
+  cidade: string | null;
+  estado: string | null;
+  billing_complete: boolean;
   goal: string | null;
   created_at: string;
 }

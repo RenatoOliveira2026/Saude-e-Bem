@@ -32,7 +32,7 @@ export interface LeadScoreInput {
 export function computeLeadScore(input: LeadScoreInput): LeadScoreId {
   const { source, hasContentContext } = input;
 
-  if (source === "assinar") return "muito_quente";
+  if (source === "assinar" || source === "lista-vip-lancamento") return "muito_quente";
   if (source.startsWith("lp-")) return "quente";
   if (source === "artigo" || source === "protocolo") return "quente";
   if (source === "biblioteca" && hasContentContext) return "quente";

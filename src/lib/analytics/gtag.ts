@@ -135,3 +135,88 @@ export function sendGa4WhatsAppClick(params: Ga4WhatsAppClickParams): void {
     button_type: params.buttonType,
   });
 }
+
+export interface Ga4LaunchEventParams {
+  sourcePage: string;
+  ctaLabel?: string;
+  destination?: string;
+}
+
+/** Lead capturado na página de lançamento — Fase 7.0 */
+export function sendGa4LaunchLead(params: Ga4LaunchEventParams & { source?: string }): void {
+  if (typeof window === "undefined") return;
+
+  const measurementId = getGa4MeasurementId();
+  if (!measurementId || !window.gtag) return;
+
+  window.gtag("event", "launch_lead", {
+    send_to: measurementId,
+    event_timestamp: Date.now(),
+    source_page: params.sourcePage,
+    lead_source: params.source ?? "lista-vip-lancamento",
+  });
+}
+
+/** Download do guia 30 dias — Fase 7.0 */
+export function sendGa4GuideDownload(params: Ga4NewsletterEventParams): void {
+  if (typeof window === "undefined") return;
+
+  const measurementId = getGa4MeasurementId();
+  if (!measurementId || !window.gtag) return;
+
+  window.gtag("event", "guide_download", {
+    send_to: measurementId,
+    event_timestamp: Date.now(),
+    source_page: params.sourcePage,
+    page_source: params.source,
+    device_category: params.deviceCategory ?? getGa4DeviceCategory(),
+    is_existing_subscriber: params.existing ?? false,
+  });
+}
+
+/** Clique em CTA do Clube — Fase 7.0 */
+export function sendGa4ClubCtaClick(params: Ga4LaunchEventParams): void {
+  if (typeof window === "undefined") return;
+
+  const measurementId = getGa4MeasurementId();
+  if (!measurementId || !window.gtag) return;
+
+  window.gtag("event", "club_cta_click", {
+    send_to: measurementId,
+    event_timestamp: Date.now(),
+    source_page: params.sourcePage,
+    cta_label: params.ctaLabel,
+    destination: params.destination,
+  });
+}
+
+/** Clique em CTA do Marketplace — Fase 7.0 */
+export function sendGa4MarketplaceCtaClick(params: Ga4LaunchEventParams): void {
+  if (typeof window === "undefined") return;
+
+  const measurementId = getGa4MeasurementId();
+  if (!measurementId || !window.gtag) return;
+
+  window.gtag("event", "marketplace_cta_click", {
+    send_to: measurementId,
+    event_timestamp: Date.now(),
+    source_page: params.sourcePage,
+    cta_label: params.ctaLabel,
+    destination: params.destination,
+  });
+}
+
+/** Inscrição na lista VIP — Fase 7.0 */
+export function sendGa4VipListSignup(params: Ga4LaunchEventParams & { existing?: boolean }): void {
+  if (typeof window === "undefined") return;
+
+  const measurementId = getGa4MeasurementId();
+  if (!measurementId || !window.gtag) return;
+
+  window.gtag("event", "vip_list_signup", {
+    send_to: measurementId,
+    event_timestamp: Date.now(),
+    source_page: params.sourcePage,
+    is_existing_lead: params.existing ?? false,
+  });
+}

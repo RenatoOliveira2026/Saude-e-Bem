@@ -23,6 +23,7 @@ export const LEAD_SOURCE_LABELS: Record<LeadSource, string> = {
   "lp-sono": "LP Sono",
   artigo: "Artigo",
   protocolo: "Protocolo",
+  "lista-vip-lancamento": "Lista VIP — Lançamento",
 };
 
 export function isLeadSource(value: string): value is LeadSource {

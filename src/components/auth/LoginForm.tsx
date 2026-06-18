@@ -8,6 +8,7 @@ import {
 import { Button } from "@/components/ui/Button";
 import { Input } from "@/components/ui/Input";
 import { signIn, type AuthActionState } from "@/lib/auth/actions";
+import { getAuthUrlErrorMessage } from "@/lib/auth/url-errors";
 import { routes } from "@/lib/routes";
 import { useActionState } from "react";
 import { useSearchParams } from "next/navigation";
@@ -54,6 +55,7 @@ function AuthErrorHints({ state }: { state: AuthActionState }) {
 export function LoginForm() {
   const searchParams = useSearchParams();
   const redirect = searchParams.get("redirect") ?? routes.minhaJornada;
+  const urlError = getAuthUrlErrorMessage(searchParams.get("error"));
   const [state, formAction, pending] = useActionState(signIn, initialState);
 
   return (
@@ -67,6 +69,14 @@ export function LoginForm() {
         </>
       }
     >
+      {urlError && (
+        <div className="space-y-2">
+          <AuthMessage type="error" message={urlError} />
+          <p className="text-sm text-muted">
+            <AuthLink href={routes.recuperarSenha}>Recuperar senha</AuthLink>
+          </p>
+        </div>
+      )}
       {state.error && (
         <div className="space-y-2">
           <AuthMessage type="error" message={state.error} />

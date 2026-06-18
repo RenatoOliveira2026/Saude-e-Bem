@@ -1,4 +1,5 @@
 import { GlobalNewsletterSection } from "@/components/newsletter/NewsletterCaptureSection";
+import { LaunchFunnelCta } from "@/components/launch";
 import { CrossLinks, PageCta } from "@/components/pages";
 import { IntelligentLibraryListing } from "@/components/intelligent-library";
 import { PageHero } from "@/components/layout/PageHero";
@@ -47,6 +48,7 @@ export default async function BibliotecaPage() {
         secondaryLabel="Conhecer o Clube"
         secondaryHref={routes.clubePremium}
       />
+      <LaunchFunnelCta />
       <CrossLinks />
     </>
   );

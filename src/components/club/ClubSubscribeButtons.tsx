@@ -3,6 +3,7 @@
 import { ClubCheckoutErrorAlert } from "@/components/club/ClubCheckoutErrorAlert";
 import { Button } from "@/components/ui/Button";
 import { cn } from "@/lib/cn";
+import { billingProfileRedirectUrl } from "@/lib/billing/guards";
 import { routes } from "@/lib/routes";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
@@ -14,20 +15,55 @@ type CheckoutFeedback =
   | { kind: "active_subscription" }
   | { kind: "error"; message: string };
 
+async function ensureBillingProfile(
+  router: ReturnType<typeof useRouter>,
+  returnPath: string,
+): Promise<boolean> {
+  const statusRes = await fetch(
+    `/api/billing/profile-status?next=${encodeURIComponent(returnPath)}`,
+  );
+  if (!statusRes.ok) return true;
+
+  const status = (await statusRes.json()) as {
+    complete?: boolean;
+    redirectUrl?: string;
+  };
+
+  if (!status.complete) {
+    router.push(status.redirectUrl ?? billingProfileRedirectUrl(returnPath));
+    return false;
+  }
+
+  return true;
+}
+
 async function requestCheckout(plan: SubscribePlan) {
   const res = await fetch("/api/payments/create-subscription", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ plan }),
   });
-  const data = (await res.json()) as { checkoutUrl?: string; error?: string };
+  const data = (await res.json()) as {
+    checkoutUrl?: string;
+    error?: string;
+    code?: string;
+    redirectUrl?: string;
+  };
   return { res, data };
 }
 
 function resolveCheckoutFeedback(
   res: Response,
-  data: { checkoutUrl?: string; error?: string },
+  data: { checkoutUrl?: string; error?: string; code?: string; redirectUrl?: string },
+  router: ReturnType<typeof useRouter>,
 ): CheckoutFeedback {
+  if (res.status === 428 && data.code === "profile_incomplete") {
+    router.push(
+      data.redirectUrl ??
+        billingProfileRedirectUrl(routes.clube),
+    );
+    return { kind: "none" };
+  }
   if (res.status === 409) {
     return { kind: "active_subscription" };
   }
@@ -65,13 +101,18 @@ export function ClubSubscribePlanButton({
     setLoading(true);
     setFeedback({ kind: "none" });
     try {
-      const { res, data } = await requestCheckout(plan);
-      if (res.status === 401) {
-        router.push(`${routes.entrar}?next=${encodeURIComponent(routes.clube)}`);
+      if (!(await ensureBillingProfile(router, routes.clube))) {
+        setLoading(false);
         return;
       }
 
-      const result = resolveCheckoutFeedback(res, data);
+      const { res, data } = await requestCheckout(plan);
+      if (res.status === 401) {
+        router.push(`${routes.entrar}?redirect=${encodeURIComponent(routes.clube)}`);
+        return;
+      }
+
+      const result = resolveCheckoutFeedback(res, data, router);
       if (result.kind === "none" && data.checkoutUrl) {
         window.location.href = data.checkoutUrl;
         return;
@@ -133,13 +174,18 @@ export function ClubSubscribeButtons({
     setLoading(plan);
     setFeedback({ kind: "none" });
     try {
-      const { res, data } = await requestCheckout(plan);
-      if (res.status === 401) {
-        router.push(`${routes.entrar}?next=${encodeURIComponent(routes.clube)}`);
+      if (!(await ensureBillingProfile(router, routes.clube))) {
+        setLoading(null);
         return;
       }
 
-      const result = resolveCheckoutFeedback(res, data);
+      const { res, data } = await requestCheckout(plan);
+      if (res.status === 401) {
+        router.push(`${routes.entrar}?redirect=${encodeURIComponent(routes.clube)}`);
+        return;
+      }
+
+      const result = resolveCheckoutFeedback(res, data, router);
       if (result.kind === "none" && data.checkoutUrl) {
         window.location.href = data.checkoutUrl;
         return;

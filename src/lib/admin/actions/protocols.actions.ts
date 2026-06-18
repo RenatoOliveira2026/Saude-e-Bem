@@ -5,6 +5,7 @@ import {
   adminDeleteProtocol,
   adminInsertProtocol,
   adminUpdateProtocol,
+  type ProtocolAdminInput,
 } from "@/lib/admin/services/protocols.service";
 import type { AdminActionState } from "@/lib/admin/types";
 import {
@@ -53,7 +54,7 @@ function parseProtocolForm(formData: FormData) {
     objective: getString(formData, "objective"),
     long_description:
       longFromBlocks || getString(formData, "long_description"),
-    content: blocksToStorage(blocks),
+    content: blocksToStorage(blocks) as unknown as ProtocolAdminInput["content"],
     category,
     category_label: categoryLabel,
     duration: getString(formData, "duration"),

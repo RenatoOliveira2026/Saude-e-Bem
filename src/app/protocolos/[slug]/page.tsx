@@ -1,3 +1,4 @@
+import { ContentBlockRenderer } from "@/components/content/ContentBlockRenderer";
 import { RelatedAffiliatesSection } from "@/components/affiliates";
 import { ContentMemberActions } from "@/components/club/ContentMemberActions";
 import { PremiumContentGuard } from "@/components/club/PremiumContentGuard";
@@ -82,6 +83,11 @@ export default async function ProtocoloDetailPage({ params }: PageProps) {
   const related = all
     .filter((p) => p.slug !== slug && p.category === protocol.category)
     .slice(0, 3);
+  const richBlocks =
+    protocol.contentBlocks?.filter(
+      (b) => b.type !== "paragraph" || b.text.trim().length > 0,
+    ) ?? [];
+  const hasRichContent = richBlocks.length > 0;
 
   return (
     <>
@@ -190,6 +196,17 @@ export default async function ProtocoloDetailPage({ params }: PageProps) {
           </div>
         </Container>
       </Section>
+
+      {hasRichContent && (
+        <Section background="default">
+          <Container size="md">
+            <h2 className="font-heading text-2xl text-forest">Guia completo</h2>
+            <div className="prose-content mt-8">
+              <ContentBlockRenderer blocks={richBlocks} />
+            </div>
+          </Container>
+        </Section>
+      )}
 
       <Section background="default">
         <Container size="md">

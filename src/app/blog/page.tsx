@@ -1,4 +1,5 @@
 import { GlobalNewsletterSection } from "@/components/newsletter/NewsletterCaptureSection";
+import { LaunchFunnelCta } from "@/components/launch";
 import { BlogListing, ContentEmptyState, CrossLinks, PageCta } from "@/components/pages";
 import { PageHero } from "@/components/layout/PageHero";
 import {
@@ -53,6 +54,7 @@ export default async function BlogPage() {
         secondaryHref={routes.ferramentas}
         background="gold"
       />
+      <LaunchFunnelCta />
       <CrossLinks />
     </>
   );

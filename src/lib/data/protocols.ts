@@ -1,4 +1,8 @@
 import { withBase } from "./base";
+import {
+  mapPremiumProtocolToMock,
+  PREMIUM_PROTOCOLS_71B,
+} from "@/lib/content-engine/seed/premium-protocols-71b";
 import type { Protocol } from "./types";
 
 export { protocolLibraryFilterCategories as protocolCategories } from "@/lib/protocol-library/constants";
@@ -141,5 +145,14 @@ const rawProtocols: Omit<Protocol, "status" | "createdAt" | "updatedAt">[] = [
   },
 ];
 
-export const protocols: Protocol[] = rawProtocols.map((p) => withBase(p));
+const premiumProtocols = PREMIUM_PROTOCOLS_71B.map((p, index) => {
+  const mapped = mapPremiumProtocolToMock(p, index);
+  const { status, ...rest } = mapped;
+  void status;
+  return rest;
+});
+
+const allRawProtocols = [...rawProtocols, ...premiumProtocols];
+
+export const protocols: Protocol[] = allRawProtocols.map((p) => withBase(p));
 export const featuredProtocol = protocols.find((p) => p.featured)!;

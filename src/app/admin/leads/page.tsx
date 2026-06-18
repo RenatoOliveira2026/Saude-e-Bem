@@ -40,6 +40,7 @@ const SOURCE_FILTERS: { value: LeadSource | "all"; label: string }[] = [
   { value: "lp-sono", label: "LP Sono" },
   { value: "lp-longevidade", label: "LP Longevidade" },
   { value: "assinar", label: "Assinatura" },
+  { value: "lista-vip-lancamento", label: "Lista VIP Lançamento" },
 ];
 
 const SCORE_FILTERS: { value: LeadScoreId | "all"; label: string }[] = [

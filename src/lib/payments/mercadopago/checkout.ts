@@ -10,6 +10,8 @@ import {
 import { createMercadoPagoPreference } from "./client";
 import { createMercadoPagoPreapproval } from "./preapproval";
 import { recordFinancialEvent } from "../services/financial-events.service";
+import { buildMercadoPagoPayer } from "@/lib/billing/profile";
+import type { Profile } from "@/lib/supabase/types";
 import type { CheckoutRequest, CheckoutResult } from "../types";
 
 function buildExternalReference(userId: string): string {
@@ -20,6 +22,7 @@ export async function createPremiumCheckout(input: {
   userId: string;
   email: string;
   name?: string | null;
+  profile?: Profile | null;
   request: CheckoutRequest;
 }): Promise<CheckoutResult> {
   const admin = createPaymentsAdminClient();
@@ -143,12 +146,18 @@ export async function createPremiumCheckout(input: {
     message = preference.message;
   }
 
+  const payer =
+    input.profile && input.email
+      ? buildMercadoPagoPayer(input.profile, input.email)
+      : null;
+
   async function createCheckoutProPreference() {
     const preference = await createMercadoPagoPreference({
       externalReference,
       paymentMethod,
       payerEmail: input.email,
       payerName: input.name,
+      payer,
       plan,
       userId: input.userId,
     });

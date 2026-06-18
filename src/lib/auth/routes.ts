@@ -3,6 +3,7 @@ export const privateRoutes = [
   "/minha-saude",
   "/perfil",
   "/assinar",
+  "/completar-cadastro",
   "/minha-assinatura",
   "/clube/dashboard",
   "/clube/favoritos",

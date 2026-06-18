@@ -9,6 +9,7 @@ import { Section } from "@/components/ui/Section";
 import { Badge } from "@/components/ui/Badge";
 import { Icon } from "@/components/icons";
 import type { LibraryItem } from "@/lib/intelligent-library";
+import { getLibraryItemHref } from "@/lib/intelligent-library/library-links";
 import { resolveLibraryAssetUrl } from "@/lib/intelligent-library";
 import { routes } from "@/lib/routes";
 import { bookJsonLd, breadcrumbJsonLd } from "@/lib/seo/json-ld";
@@ -36,6 +37,8 @@ export function IntelligentLibraryDetail({
   const isLocked = item.isPremium && !canAccessPremium;
   const summary = item.longDescription ?? item.description;
   const path = routes.bibliotecaItem(item.slug);
+  const protocolHref =
+    item.type === "protocolo" ? getLibraryItemHref(item) : undefined;
 
   return (
     <>
@@ -81,17 +84,23 @@ export function IntelligentLibraryDetail({
         cta={
           isLocked
             ? {
-                label: "Assinar agora",
-                href: routes.assinar,
+                label: item.type === "protocolo" ? "Ver protocolo" : "Assinar agora",
+                href: item.type === "protocolo" ? (protocolHref ?? routes.assinar) : routes.assinar,
                 variant: "gold",
               }
-            : item.isPremium
-              ? undefined
-              : {
-                  label: "Acessar conteúdo",
-                  href: assetUrl ?? "#conteudo",
+            : item.type === "protocolo"
+              ? {
+                  label: "Ver protocolo completo",
+                  href: protocolHref ?? routes.protocolos,
                   variant: "primary",
                 }
+              : item.isPremium
+                ? undefined
+                : {
+                    label: "Acessar conteúdo",
+                    href: assetUrl ?? "#conteudo",
+                    variant: "primary",
+                  }
         }
       />
 
@@ -112,7 +121,17 @@ export function IntelligentLibraryDetail({
             <h2 className="mt-8 font-heading text-2xl text-forest">Sobre este material</h2>
             <p className="mt-4 text-muted leading-relaxed text-pretty">{summary}</p>
 
-            {!item.isPremium && (
+            {item.type === "protocolo" && (
+              <div className="mt-8 rounded-2xl border border-sage/30 bg-sage-muted/30 p-6">
+                <p className="font-heading text-lg text-forest">Protocolo estruturado</p>
+                <p className="mt-2 text-sm text-muted text-pretty">
+                  Este material é um protocolo premium com passo a passo diário, checklist e
+                  benefícios. Acesse a página completa para iniciar sua jornada.
+                </p>
+              </div>
+            )}
+
+            {!item.isPremium && item.type !== "protocolo" && (
               <div className="mt-8 rounded-2xl border border-sage/30 bg-sage-muted/30 p-6">
                 <p className="font-heading text-lg text-forest">Conteúdo gratuito</p>
                 <p className="mt-2 text-sm text-muted text-pretty">
@@ -150,7 +169,7 @@ export function IntelligentLibraryDetail({
           title="Materiais relacionados"
           links={related.map((r) => ({
             label: r.title,
-            href: routes.bibliotecaItem(r.slug),
+            href: getLibraryItemHref(r),
             description: `${typeLabels[r.type]} · ${r.estimatedReadTime}`,
           }))}
         />

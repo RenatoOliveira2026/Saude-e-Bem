@@ -62,6 +62,21 @@ export function breadcrumbJsonLd(items: { name: string; path?: string }[]): Json
   };
 }
 
+export function faqJsonLd(items: { question: string; answer: string }[]): JsonLd {
+  return {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: items.map((item) => ({
+      "@type": "Question",
+      name: item.question,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: item.answer,
+      },
+    })),
+  };
+}
+
 export function articleJsonLd(input: {
   title: string;
   description: string;

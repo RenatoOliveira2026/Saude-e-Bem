@@ -11,7 +11,8 @@ export type LeadSource =
   | "lp-longevidade"
   | "lp-sono"
   | "artigo"
-  | "protocolo";
+  | "protocolo"
+  | "lista-vip-lancamento";
 
 export type LeadInterestId =
   | "hidratacao"

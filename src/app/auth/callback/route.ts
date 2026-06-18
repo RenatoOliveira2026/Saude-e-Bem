@@ -40,6 +40,12 @@ export async function GET(request: Request) {
       const safePath = safeRedirectPath(next);
       return NextResponse.redirect(`${origin}${safePath}`);
     }
+
+    console.error("[auth/callback] exchangeCodeForSession failed:", error.message);
+  }
+
+  if (tokenHash && type) {
+    console.error("[auth/callback] verifyOtp recovery failed or unsupported type:", type);
   }
 
   return NextResponse.redirect(`${origin}${routes.entrar}?error=auth_callback_failed`);

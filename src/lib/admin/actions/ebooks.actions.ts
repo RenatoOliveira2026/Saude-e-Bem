@@ -5,6 +5,7 @@ import {
   adminDeleteEbook,
   adminInsertEbook,
   adminUpdateEbook,
+  type EbookAdminInput,
 } from "@/lib/admin/services/ebooks.service";
 import type { AdminActionState } from "@/lib/admin/types";
 import {
@@ -48,7 +49,7 @@ function parseEbookForm(formData: FormData) {
     description: getString(formData, "description"),
     long_description:
       longFromBlocks || getString(formData, "long_description"),
-    content: blocksToStorage(blocks),
+    content: blocksToStorage(blocks) as unknown as EbookAdminInput["content"],
     category: getString(formData, "category"),
     category_label: getString(formData, "category_label"),
     icon: getString(formData, "icon") as IconName,

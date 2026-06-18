@@ -8,6 +8,7 @@ import { cancelMercadoPagoPreapproval } from "../mercadopago/preapproval";
 import { getPlanById, PREMIUM_MONTHLY_PLAN } from "../plans";
 import { recordFinancialEvent } from "./financial-events.service";
 import { notifyPremiumViaWhatsApp } from "@/lib/whatsapp/hooks";
+import { syncPremiumSubscriberToBrevo } from "@/lib/brevo/premium-sync";
 import type { Payment } from "../types";
 
 function addDays(date: Date, days: number): Date {
@@ -127,6 +128,12 @@ export async function activateSubscriptionFromPayment(
     provider: "mercadopago",
     externalId: payment.externalReference,
   });
+
+  void syncPremiumSubscriberToBrevo(admin, {
+    userId: payment.userId,
+    planId: plan.id,
+    status: "active",
+  });
 }
 
 /** Cancela ou rejeita assinatura após pagamento recusado/cancelado/reembolsado. */
@@ -186,6 +193,14 @@ export async function cancelSubscriptionFromPayment(
   });
 
   await syncUserMembershipCancelled(admin, payment.userId, "canceled");
+
+  const planId =
+    typeof payment.metadata?.plan === "string" ? payment.metadata.plan : PREMIUM_MONTHLY_PLAN.id;
+  void syncPremiumSubscriberToBrevo(admin, {
+    userId: payment.userId,
+    planId,
+    status: "canceled",
+  });
 }
 
 /** Ativa assinatura a partir de preapproval autorizado (renovação automática). */
@@ -248,6 +263,12 @@ export async function activateSubscriptionFromPreapproval(
     externalId: input.preapprovalId,
   });
 
+  void syncPremiumSubscriberToBrevo(admin, {
+    userId: input.userId,
+    planId: plan.id,
+    status: "active",
+  });
+
   await recordFinancialEvent(admin, {
     userId: input.userId,
     eventType: "preapproval_authorized",
@@ -296,6 +317,11 @@ export async function cancelUserSubscription(
       .eq("id", subscription.id);
 
     await syncUserMembershipCancelled(admin, userId, "canceled");
+    void syncPremiumSubscriberToBrevo(admin, {
+      userId,
+      planId: PREMIUM_MONTHLY_PLAN.id,
+      status: "canceled",
+    });
     return { ok: true, message: "Assinatura cancelada imediatamente." };
   }
 

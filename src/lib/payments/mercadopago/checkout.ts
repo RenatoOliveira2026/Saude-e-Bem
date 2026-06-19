@@ -98,6 +98,51 @@ export async function createPremiumCheckout(input: {
     },
   });
 
+  const payer =
+    input.profile && input.email
+      ? buildMercadoPagoPayer(input.profile, input.email)
+      : null;
+
+  async function createCheckoutProPreference() {
+    const preference = await createMercadoPagoPreference({
+      externalReference,
+      paymentMethod,
+      payerEmail: input.email,
+      payerName: input.name,
+      payer,
+      plan,
+      userId: input.userId,
+    });
+
+    await admin!
+      .from("payments")
+      .update({
+        preference_id: preference.id,
+        metadata: {
+          plan: plan.id,
+          payment_method: paymentMethod,
+          period_days: plan.periodDays,
+          checkout_mode: "checkout_pro",
+          stub: preference.stub,
+        },
+      })
+      .eq("id", paymentId);
+
+    const url =
+      shouldUseSandboxCheckout() && preference.sandboxInitPoint
+        ? preference.sandboxInitPoint
+        : preference.initPoint;
+
+    return {
+      checkoutUrl: url,
+      preferenceId: preference.id,
+      stub: preference.stub,
+      message: preference.stub
+        ? "Modo stub — configure MERCADOPAGO_ACCESS_TOKEN para checkout real."
+        : undefined,
+    };
+  }
+
   let checkoutUrl: string;
   let preferenceId: string | null = null;
   let stub = false;
@@ -144,51 +189,6 @@ export async function createPremiumCheckout(input: {
     preferenceId = preference.preferenceId;
     stub = preference.stub;
     message = preference.message;
-  }
-
-  const payer =
-    input.profile && input.email
-      ? buildMercadoPagoPayer(input.profile, input.email)
-      : null;
-
-  async function createCheckoutProPreference() {
-    const preference = await createMercadoPagoPreference({
-      externalReference,
-      paymentMethod,
-      payerEmail: input.email,
-      payerName: input.name,
-      payer,
-      plan,
-      userId: input.userId,
-    });
-
-    await admin!
-      .from("payments")
-      .update({
-        preference_id: preference.id,
-        metadata: {
-          plan: plan.id,
-          payment_method: paymentMethod,
-          period_days: plan.periodDays,
-          checkout_mode: "checkout_pro",
-          stub: preference.stub,
-        },
-      })
-      .eq("id", paymentId);
-
-    const url =
-      shouldUseSandboxCheckout() && preference.sandboxInitPoint
-        ? preference.sandboxInitPoint
-        : preference.initPoint;
-
-    return {
-      checkoutUrl: url,
-      preferenceId: preference.id,
-      stub: preference.stub,
-      message: preference.stub
-        ? "Modo stub — configure MERCADOPAGO_ACCESS_TOKEN para checkout real."
-        : undefined,
-    };
   }
 
   return {

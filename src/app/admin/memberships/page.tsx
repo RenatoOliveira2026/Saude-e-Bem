@@ -11,6 +11,7 @@ import {
   fetchUserMembershipsForAdmin,
   formatMembershipPrice,
   getMembershipAdminStats,
+  getMembershipOriginLabel,
   getMembershipProviderLabel,
 } from "@/lib/membership";
 import { requireAdminPermission } from "@/lib/admin/session";
@@ -98,6 +99,7 @@ export default async function AdminMembershipsPage() {
               "Usuário",
               "Plano",
               "Status",
+              "Origem",
               "Início",
               "Expiração",
               "Provedor",
@@ -124,6 +126,9 @@ export default async function AdminMembershipsPage() {
                 <AdminTableCell>{member.planName}</AdminTableCell>
                 <AdminTableCell>
                   <AdminMembershipStatusBadge status={member.status} />
+                </AdminTableCell>
+                <AdminTableCell className="text-sm text-muted">
+                  {getMembershipOriginLabel(member.membershipOrigin)}
                 </AdminTableCell>
                 <AdminTableCell className="text-muted">
                   {new Date(member.startedAt).toLocaleDateString("pt-BR")}

@@ -192,6 +192,7 @@ type UserMembershipRow = {
   expires_at: string | null;
   provider: string | null;
   external_id: string | null;
+  membership_origin: string | null;
   created_at: string;
 };
 

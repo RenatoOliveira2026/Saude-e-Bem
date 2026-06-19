@@ -1,4 +1,5 @@
 import { mapBillingPlanToMembershipSlug } from "@/lib/membership/providers";
+import type { MembershipOrigin } from "@/lib/payments/membership-origin";
 import type { BillingPlan } from "@/lib/payments/plans";
 import type { SupabaseClient } from "@supabase/supabase-js";
 import type { Database } from "@/lib/supabase/types";
@@ -52,6 +53,7 @@ export async function syncUserMembershipFromSubscription(
     expiresAt: string | null;
     provider?: string | null;
     externalId?: string | null;
+    membershipOrigin?: MembershipOrigin | string | null;
   },
 ): Promise<void> {
   const planId = await resolvePlanId(admin, input.plan.id);
@@ -81,6 +83,7 @@ export async function syncUserMembershipFromSubscription(
         expires_at: input.expiresAt,
         provider: input.provider ?? "mercadopago",
         external_id: input.externalId,
+        membership_origin: input.membershipOrigin ?? null,
       })
       .eq("id", existing.id);
     return;
@@ -94,6 +97,7 @@ export async function syncUserMembershipFromSubscription(
     expires_at: input.expiresAt,
     provider: input.provider ?? "mercadopago",
     external_id: input.externalId,
+    membership_origin: input.membershipOrigin ?? null,
   });
 }
 

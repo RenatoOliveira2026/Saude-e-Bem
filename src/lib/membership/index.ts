@@ -12,6 +12,7 @@ export {
   getMembershipProviderLabel,
   mapBillingPlanToMembershipSlug,
 } from "./providers";
+export { getMembershipOriginLabel } from "@/lib/payments/membership-origin";
 export { fetchActiveMembershipPlans, fetchMembershipPlanBySlug } from "./services/plans.service";
 export {
   fetchMembershipPlansForAdmin,

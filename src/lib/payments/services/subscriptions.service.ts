@@ -6,6 +6,12 @@ import {
 } from "@/lib/membership/services/sync-membership.service";
 import { cancelMercadoPagoPreapproval } from "../mercadopago/preapproval";
 import { getPlanById, PREMIUM_MONTHLY_PLAN } from "../plans";
+import {
+  parseMembershipOrigin,
+  resolveAccessPeriodDays,
+  resolveMembershipOrigin,
+  type MembershipOrigin,
+} from "../membership-origin";
 import { recordFinancialEvent } from "./financial-events.service";
 import { notifyPremiumViaWhatsApp } from "@/lib/whatsapp/hooks";
 import { syncPremiumSubscriberToBrevo } from "@/lib/brevo/premium-sync";
@@ -31,6 +37,20 @@ function resolvePeriodStart(existingEnd: string | null | undefined): Date {
   return end > now ? end : now;
 }
 
+function resolveMembershipOriginFromPayment(payment: Payment): MembershipOrigin {
+  const fromMeta = parseMembershipOrigin(payment.metadata?.membership_origin);
+  if (fromMeta) return fromMeta;
+
+  const plan = resolvePlanFromPayment(payment);
+  const checkoutMode =
+    payment.metadata?.checkout_mode === "preapproval" ? "preapproval" : "checkout_pro";
+  return resolveMembershipOrigin(
+    payment.paymentMethod ?? "unknown",
+    plan.id,
+    checkoutMode,
+  );
+}
+
 /** Ativa ou renova assinatura premium após pagamento aprovado. */
 export async function activateSubscriptionFromPayment(
   admin: SupabaseClient<Database>,
@@ -38,6 +58,15 @@ export async function activateSubscriptionFromPayment(
 ): Promise<void> {
   const plan = resolvePlanFromPayment(payment);
   const now = new Date();
+  const membershipOrigin = resolveMembershipOriginFromPayment(payment);
+  const accessDays = resolveAccessPeriodDays(
+    plan,
+    payment.paymentMethod === "pix" ||
+      payment.paymentMethod === "ticket" ||
+      payment.paymentMethod === "credit_card"
+      ? payment.paymentMethod
+      : "unknown",
+  );
 
   const { data: existing } = await admin
     .from("subscriptions")
@@ -50,8 +79,9 @@ export async function activateSubscriptionFromPayment(
     .maybeSingle();
 
   const periodStart = resolvePeriodStart(existing?.current_period_end);
-  const periodEnd = addDays(periodStart, plan.periodDays);
+  const periodEnd = addDays(periodStart, accessDays);
   const autoRenew =
+    membershipOrigin === "recorrente_cartao" &&
     plan.billingInterval === "month" &&
     payment.paymentMethod === "credit_card";
 
@@ -69,6 +99,8 @@ export async function activateSubscriptionFromPayment(
       last_payment_id: payment.id,
       last_external_reference: payment.externalReference,
       billing_plan: plan.id,
+      membership_origin: membershipOrigin,
+      access_period_days: accessDays,
       renewed_at: now.toISOString(),
     },
   };
@@ -114,7 +146,7 @@ export async function activateSubscriptionFromPayment(
     description: `${plan.name} válido até ${periodEnd.toISOString()}`,
     amountCents: payment.amountCents,
     currency: payment.currency,
-    metadata: { billing_plan_id: plan.id, auto_renew: autoRenew },
+    metadata: { billing_plan_id: plan.id, auto_renew: autoRenew, membership_origin: membershipOrigin },
   });
 
   void notifyPremiumViaWhatsApp(admin, payment, plan);
@@ -127,6 +159,7 @@ export async function activateSubscriptionFromPayment(
     expiresAt: periodEnd.toISOString(),
     provider: "mercadopago",
     externalId: payment.externalReference,
+    membershipOrigin,
   });
 
   void syncPremiumSubscriberToBrevo(admin, {
@@ -241,6 +274,8 @@ export async function activateSubscriptionFromPreapproval(
     metadata: {
       preapproval_id: input.preapprovalId,
       external_reference: input.externalReference,
+      plan: plan.id,
+      membership_origin: "recorrente_cartao",
     },
   };
 
@@ -261,6 +296,7 @@ export async function activateSubscriptionFromPreapproval(
     expiresAt: periodEnd.toISOString(),
     provider: "mercadopago",
     externalId: input.preapprovalId,
+    membershipOrigin: "recorrente_cartao",
   });
 
   void syncPremiumSubscriberToBrevo(admin, {

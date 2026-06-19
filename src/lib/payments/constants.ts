@@ -25,7 +25,8 @@ export const paymentMethodOptions: Array<{
   {
     id: "pix",
     label: "PIX",
-    description: "Aprovação instantânea após pagamento.",
+    description:
+      "Pagamento único. Libera o Premium por 30 dias (mensal) ou 365 dias (anual).",
     mercadoPagoType: "bank_transfer",
   },
   {
@@ -37,7 +38,8 @@ export const paymentMethodOptions: Array<{
   {
     id: "ticket",
     label: "Boleto",
-    description: "Compensação em até 3 dias úteis.",
+    description:
+      "Pagamento único. Compensação em até 3 dias úteis; acesso por 30 ou 365 dias.",
     mercadoPagoType: "ticket",
   },
 ];

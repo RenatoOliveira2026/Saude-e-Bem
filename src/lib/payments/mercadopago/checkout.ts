@@ -10,6 +10,12 @@ import {
 import { createMercadoPagoPreference } from "./client";
 import { createMercadoPagoPreapproval } from "./preapproval";
 import { recordFinancialEvent } from "../services/financial-events.service";
+import {
+  resolveAccessPeriodDays,
+  resolveMembershipOrigin,
+  shouldUseRecurringCheckout,
+  type CheckoutMode,
+} from "../membership-origin";
 import { buildMercadoPagoPayer } from "@/lib/billing/profile";
 import type { Profile } from "@/lib/supabase/types";
 import type { CheckoutRequest, CheckoutResult } from "../types";
@@ -51,9 +57,16 @@ export async function createPremiumCheckout(input: {
   const paymentMethod = input.request.paymentMethod;
   const plan = getCheckoutPlan(input.request.plan);
   const usePreapproval =
-    isMercadoPagoConfigured() &&
-    plan.billingInterval === "month" &&
-    paymentMethod === "credit_card";
+    isMercadoPagoConfigured() && shouldUseRecurringCheckout(paymentMethod, plan);
+  const checkoutMode: CheckoutMode = usePreapproval
+    ? "preapproval"
+    : "checkout_pro";
+  const membershipOrigin = resolveMembershipOrigin(
+    paymentMethod,
+    plan.id,
+    checkoutMode,
+  );
+  const accessPeriodDays = resolveAccessPeriodDays(plan, paymentMethod);
 
   const { data: paymentRow, error: insertError } = await admin
     .from("payments")
@@ -70,8 +83,10 @@ export async function createPremiumCheckout(input: {
       metadata: {
         plan: plan.id,
         payment_method: paymentMethod,
-        period_days: plan.periodDays,
-        checkout_mode: usePreapproval ? "preapproval" : "checkout_pro",
+        period_days: accessPeriodDays,
+        access_period_days: accessPeriodDays,
+        membership_origin: membershipOrigin,
+        checkout_mode: checkoutMode,
       },
     })
     .select("id")
@@ -93,7 +108,8 @@ export async function createPremiumCheckout(input: {
     currency: plan.currency,
     metadata: {
       external_reference: externalReference,
-      checkout_mode: usePreapproval ? "preapproval" : "checkout_pro",
+      checkout_mode: checkoutMode,
+      membership_origin: membershipOrigin,
       plan: plan.id,
     },
   });
@@ -121,7 +137,9 @@ export async function createPremiumCheckout(input: {
         metadata: {
           plan: plan.id,
           payment_method: paymentMethod,
-          period_days: plan.periodDays,
+          period_days: accessPeriodDays,
+          access_period_days: accessPeriodDays,
+          membership_origin: membershipOrigin,
           checkout_mode: "checkout_pro",
           stub: preference.stub,
         },
@@ -167,7 +185,9 @@ export async function createPremiumCheckout(input: {
           metadata: {
             plan: plan.id,
             payment_method: paymentMethod,
-            period_days: plan.periodDays,
+            period_days: accessPeriodDays,
+            access_period_days: accessPeriodDays,
+            membership_origin: membershipOrigin,
             checkout_mode: "preapproval",
             preapproval_id: preapproval.id,
           },

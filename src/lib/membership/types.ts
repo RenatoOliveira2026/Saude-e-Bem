@@ -44,6 +44,7 @@ export interface UserMembershipRecord {
   expiresAt: string | null;
   provider: string | null;
   externalId: string | null;
+  membershipOrigin: string | null;
   createdAt: string;
   userEmail?: string | null;
   userName?: string | null;

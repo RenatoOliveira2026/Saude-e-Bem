@@ -13,6 +13,7 @@ type UserMembershipRow = {
   expires_at: string | null;
   provider: string | null;
   external_id: string | null;
+  membership_origin: string | null;
   created_at: string;
   membership_plans?: { name: string; slug: string } | { name: string; slug: string }[] | null;
 };
@@ -41,6 +42,7 @@ function mapUserMembershipRow(
     expiresAt: row.expires_at,
     provider: row.provider,
     externalId: row.external_id,
+    membershipOrigin: row.membership_origin,
     createdAt: row.created_at,
     userEmail: profile?.email ?? null,
     userName: profile?.name ?? null,
@@ -65,7 +67,7 @@ export async function fetchUserMembershipsForAdmin(): Promise<UserMembershipReco
   const { data: membershipRows, error } = await supabase
     .from("user_memberships")
     .select(
-      "id, user_id, plan_id, status, started_at, expires_at, provider, external_id, created_at",
+      "id, user_id, plan_id, status, started_at, expires_at, provider, external_id, membership_origin, created_at",
     )
     .order("created_at", { ascending: false })
     .limit(100);
@@ -96,7 +98,7 @@ export async function fetchUserMembershipsForAdmin(): Promise<UserMembershipReco
   const { data: subs, error: subsError } = await supabase
     .from("subscriptions")
     .select(
-      "id, user_id, status, billing_plan_id, provider, current_period_start, current_period_end, created_at",
+      "id, user_id, status, billing_plan_id, provider, current_period_start, current_period_end, metadata, created_at",
     )
     .order("created_at", { ascending: false })
     .limit(100);
@@ -114,6 +116,10 @@ export async function fetchUserMembershipsForAdmin(): Promise<UserMembershipReco
     const slug = mapBillingPlanToMembershipSlug(sub.billing_plan_id) ?? "gratuito";
     const plan = planBySlug.get(slug);
     const profile = profileMap.get(sub.user_id);
+    const metadata =
+      sub.metadata && typeof sub.metadata === "object"
+        ? (sub.metadata as Record<string, unknown>)
+        : {};
     return {
       id: sub.id,
       userId: sub.user_id,
@@ -125,6 +131,10 @@ export async function fetchUserMembershipsForAdmin(): Promise<UserMembershipReco
       expiresAt: sub.current_period_end,
       provider: sub.provider,
       externalId: null,
+      membershipOrigin:
+        typeof metadata.membership_origin === "string"
+          ? metadata.membership_origin
+          : null,
       createdAt: sub.created_at,
       userEmail: profile?.email ?? null,
       userName: profile?.name ?? null,

@@ -10,11 +10,6 @@ import { useState } from "react";
 
 type SubscribePlan = "premium_monthly" | "premium_annual";
 
-type CheckoutFeedback =
-  | { kind: "none" }
-  | { kind: "active_subscription" }
-  | { kind: "error"; message: string };
-
 async function ensureBillingProfile(
   router: ReturnType<typeof useRouter>,
   returnPath: string,
@@ -37,43 +32,8 @@ async function ensureBillingProfile(
   return true;
 }
 
-async function requestCheckout(plan: SubscribePlan) {
-  const res = await fetch("/api/payments/create-subscription", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ plan }),
-  });
-  const data = (await res.json()) as {
-    checkoutUrl?: string;
-    error?: string;
-    code?: string;
-    redirectUrl?: string;
-  };
-  return { res, data };
-}
-
-function resolveCheckoutFeedback(
-  res: Response,
-  data: { checkoutUrl?: string; error?: string; code?: string; redirectUrl?: string },
-  router: ReturnType<typeof useRouter>,
-): CheckoutFeedback {
-  if (res.status === 428 && data.code === "profile_incomplete") {
-    router.push(
-      data.redirectUrl ??
-        billingProfileRedirectUrl(routes.clube),
-    );
-    return { kind: "none" };
-  }
-  if (res.status === 409) {
-    return { kind: "active_subscription" };
-  }
-  if (!res.ok || !data.checkoutUrl) {
-    return {
-      kind: "error",
-      message: data.error ?? "Não foi possível iniciar o checkout.",
-    };
-  }
-  return { kind: "none" };
+function assinarHref(plan: SubscribePlan): string {
+  return `${routes.assinar}?plano=${encodeURIComponent(plan)}`;
 }
 
 interface ClubSubscribePlanButtonProps {
@@ -95,36 +55,17 @@ export function ClubSubscribePlanButton({
 }: ClubSubscribePlanButtonProps) {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
-  const [feedback, setFeedback] = useState<CheckoutFeedback>({ kind: "none" });
 
   async function handleClick() {
     setLoading(true);
-    setFeedback({ kind: "none" });
     try {
-      if (!(await ensureBillingProfile(router, routes.clube))) {
+      const returnPath = assinarHref(plan);
+      if (!(await ensureBillingProfile(router, returnPath))) {
         setLoading(false);
         return;
       }
-
-      const { res, data } = await requestCheckout(plan);
-      if (res.status === 401) {
-        router.push(`${routes.entrar}?redirect=${encodeURIComponent(routes.clube)}`);
-        return;
-      }
-
-      const result = resolveCheckoutFeedback(res, data, router);
-      if (result.kind === "none" && data.checkoutUrl) {
-        window.location.href = data.checkoutUrl;
-        return;
-      }
-
-      setFeedback(result);
-      setLoading(false);
-    } catch {
-      setFeedback({
-        kind: "error",
-        message: "Não foi possível iniciar o checkout.",
-      });
+      router.push(returnPath);
+    } finally {
       setLoading(false);
     }
   }
@@ -141,14 +82,6 @@ export function ClubSubscribePlanButton({
       >
         {loading ? "Redirecionando…" : children}
       </Button>
-      {feedback.kind === "active_subscription" && (
-        <ClubCheckoutErrorAlert className="mt-4 text-left sm:text-center" />
-      )}
-      {feedback.kind === "error" && (
-        <p className="mt-3 text-center text-sm text-red-600" role="alert">
-          {feedback.message}
-        </p>
-      )}
     </div>
   );
 }
@@ -168,36 +101,20 @@ export function ClubSubscribeButtons({
 }: ClubSubscribeButtonsProps) {
   const router = useRouter();
   const [loading, setLoading] = useState<SubscribePlan | null>(null);
-  const [feedback, setFeedback] = useState<CheckoutFeedback>({ kind: "none" });
+  const [feedback, setFeedback] = useState<string | null>(null);
 
   async function startCheckout(plan: SubscribePlan) {
     setLoading(plan);
-    setFeedback({ kind: "none" });
+    setFeedback(null);
     try {
-      if (!(await ensureBillingProfile(router, routes.clube))) {
+      const returnPath = assinarHref(plan);
+      if (!(await ensureBillingProfile(router, returnPath))) {
         setLoading(null);
         return;
       }
-
-      const { res, data } = await requestCheckout(plan);
-      if (res.status === 401) {
-        router.push(`${routes.entrar}?redirect=${encodeURIComponent(routes.clube)}`);
-        return;
-      }
-
-      const result = resolveCheckoutFeedback(res, data, router);
-      if (result.kind === "none" && data.checkoutUrl) {
-        window.location.href = data.checkoutUrl;
-        return;
-      }
-
-      setFeedback(result);
-      setLoading(null);
+      router.push(returnPath);
     } catch {
-      setFeedback({
-        kind: "error",
-        message: "Erro ao assinar.",
-      });
+      setFeedback("Não foi possível abrir a página de assinatura.");
       setLoading(null);
     }
   }
@@ -224,10 +141,7 @@ export function ClubSubscribeButtons({
           {loading === "premium_annual" ? "Redirecionando…" : annualLabel}
         </Button>
       </div>
-      {feedback.kind === "active_subscription" && (
-        <ClubCheckoutErrorAlert tone={tone} className="mt-4" />
-      )}
-      {feedback.kind === "error" && (
+      {feedback && (
         <p
           className={cn(
             "mt-4 text-center text-sm",
@@ -235,7 +149,7 @@ export function ClubSubscribeButtons({
           )}
           role="alert"
         >
-          {feedback.message}
+          {feedback}
         </p>
       )}
     </div>

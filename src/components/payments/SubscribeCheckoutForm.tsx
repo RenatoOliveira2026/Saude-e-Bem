@@ -211,9 +211,14 @@ export function SubscribeCheckoutForm({
         <p className="text-sm font-medium text-forest">Como deseja pagar?</p>
         {(selectedMethod === "pix" || selectedMethod === "ticket") && (
           <p className="rounded-lg border border-sage/40 bg-sage-muted/25 px-4 py-3 text-sm text-forest">
-            {selectedMethod === "pix"
-              ? "PIX libera acesso por 30 dias no plano mensal ou 365 dias no anual. Para renovação automática, use cartão."
-              : "Boleto libera acesso após a compensação, pelo mesmo período do plano escolhido. Para renovação automática, use cartão."}
+            {selectedMethod === "pix" ? (
+              <>
+                <strong className="font-semibold">PIX em ativação.</strong> Para
+                assinatura recorrente, utilize cartão de crédito.
+              </>
+            ) : (
+              "Boleto libera acesso após a compensação, pelo mesmo período do plano escolhido. Para renovação automática, use cartão."
+            )}
           </p>
         )}
         {paymentMethodOptions.map((option) => (

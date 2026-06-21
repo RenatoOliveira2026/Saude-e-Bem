@@ -27,11 +27,18 @@ export async function fetchPublishedMarketplaceProductsWithFallback(
 }
 
 export async function fetchMarketplaceProductSlugsFromDb(): Promise<string[]> {
-  const supabase = await createClient();
-  const { data, error } = await supabase
-    .from("marketplace_products")
-    .select("slug")
-    .eq("status", "published");
-  if (error) throw error;
-  return (data ?? []).map((row) => row.slug);
+  try {
+    const supabase = await createClient();
+    const { data, error } = await supabase
+      .from("marketplace_products")
+      .select("slug")
+      .eq("status", "published");
+    if (error) {
+      console.warn("[marketplace_products.public] slugs", error.message);
+      return [];
+    }
+    return (data ?? []).map((row) => row.slug);
+  } catch {
+    return [];
+  }
 }

@@ -11,6 +11,24 @@ import { getContentEngineLibraryCatalog } from "@/lib/content-engine/mappers";
 import { getContentEngineMarketplaceCatalog } from "@/lib/content-engine/mappers";
 import type { MetadataRoute } from "next";
 
+const STATIC_SITEMAP_PATHS = [
+  routes.home,
+  routes.blog,
+  routes.biblioteca,
+  routes.marketplace,
+  routes.protocolos,
+  routes.ferramentas,
+  routes.recomendados,
+  routes.clube,
+  routes.assinar,
+  routes.lancamento,
+  routes.guia30Dias,
+  routes.checklistHabitos,
+  routes.privacidade,
+  routes.termos,
+  routes.cookies,
+] as const;
+
 function url(path: string, lastModified = new Date()): MetadataRoute.Sitemap[number] {
   return {
     url: `${getSiteUrl()}${path}`,
@@ -20,56 +38,52 @@ function url(path: string, lastModified = new Date()): MetadataRoute.Sitemap[num
   };
 }
 
+function staticSitemapEntries(): MetadataRoute.Sitemap {
+  return STATIC_SITEMAP_PATHS.map((path) => url(path));
+}
+
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const staticRoutes = [
-    routes.home,
-    routes.blog,
-    routes.biblioteca,
-    routes.marketplace,
-    routes.protocolos,
-    routes.ferramentas,
-    routes.recomendados,
-    routes.clube,
-    routes.assinar,
-    routes.privacidade,
-    routes.termos,
-    routes.cookies,
-  ];
+  const staticEntries = staticSitemapEntries();
 
-  const [
-    articleSlugs,
-    librarySlugs,
-    marketplaceSlugs,
-    protocolSlugs,
-    toolSlugs,
-    affiliateSlugs,
-  ] = await Promise.all([
-    getBlogSlugs().catch(() => [] as string[]),
-    fetchLibraryItemSlugsFromDb().catch(() =>
-      getContentEngineLibraryCatalog().map((i) => i.slug),
-    ),
-    fetchMarketplaceProductSlugsFromDb().catch(() =>
-      getContentEngineMarketplaceCatalog().map((i) => i.slug),
-    ),
-    getProtocolSlugs().catch(() => [] as string[]),
-    getToolSlugs().catch(() => [] as string[]),
-    fetchActiveAffiliateSlugs().catch(() => [] as string[]),
-  ]);
+  try {
+    const [
+      articleSlugs,
+      librarySlugs,
+      marketplaceSlugs,
+      protocolSlugs,
+      toolSlugs,
+      affiliateSlugs,
+    ] = await Promise.all([
+      getBlogSlugs().catch(() => [] as string[]),
+      fetchLibraryItemSlugsFromDb().catch(() =>
+        getContentEngineLibraryCatalog().map((i) => i.slug),
+      ),
+      fetchMarketplaceProductSlugsFromDb().catch(() =>
+        getContentEngineMarketplaceCatalog().map((i) => i.slug),
+      ),
+      getProtocolSlugs().catch(() => [] as string[]),
+      getToolSlugs().catch(() => [] as string[]),
+      fetchActiveAffiliateSlugs().catch(() => [] as string[]),
+    ]);
 
-  const validArticles = filterValidPublicSlugs(articleSlugs);
-  const validLibrary = filterValidPublicSlugs(librarySlugs);
-  const validMarketplace = filterValidPublicSlugs(marketplaceSlugs);
-  const validProtocols = filterValidPublicSlugs(protocolSlugs);
-  const validTools = filterValidPublicSlugs(toolSlugs);
-  const validAffiliates = filterValidPublicSlugs(affiliateSlugs);
+    const validArticles = filterValidPublicSlugs(articleSlugs);
+    const validLibrary = filterValidPublicSlugs(librarySlugs);
+    const validMarketplace = filterValidPublicSlugs(marketplaceSlugs);
+    const validProtocols = filterValidPublicSlugs(protocolSlugs);
+    const validTools = filterValidPublicSlugs(toolSlugs);
+    const validAffiliates = filterValidPublicSlugs(affiliateSlugs);
 
-  return [
-    ...staticRoutes.map((path) => url(path)),
-    ...validArticles.map((slug) => url(routes.artigo(slug))),
-    ...validLibrary.map((slug) => url(routes.bibliotecaItem(slug))),
-    ...validMarketplace.map((slug) => url(routes.marketplaceItem(slug))),
-    ...validProtocols.map((slug) => url(routes.protocolo(slug))),
-    ...validTools.map((slug) => url(routes.ferramenta(slug))),
-    ...validAffiliates.map((slug) => url(routes.recomendado(slug))),
-  ];
+    return [
+      ...staticEntries,
+      ...validArticles.map((slug) => url(routes.artigo(slug))),
+      ...validLibrary.map((slug) => url(routes.bibliotecaItem(slug))),
+      ...validMarketplace.map((slug) => url(routes.marketplaceItem(slug))),
+      ...validProtocols.map((slug) => url(routes.protocolo(slug))),
+      ...validTools.map((slug) => url(routes.ferramenta(slug))),
+      ...validAffiliates.map((slug) => url(routes.recomendado(slug))),
+    ];
+  } catch (error) {
+    console.error("[sitemap] Falha ao gerar URLs dinâmicas — retornando rotas estáticas.", error);
+    return staticEntries;
+  }
 }

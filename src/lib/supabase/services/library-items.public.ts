@@ -26,11 +26,18 @@ export async function fetchPublishedLibraryItemsWithFallback(
 }
 
 export async function fetchLibraryItemSlugsFromDb(): Promise<string[]> {
-  const supabase = await createClient();
-  const { data, error } = await supabase
-    .from("library_items")
-    .select("slug")
-    .eq("status", "published");
-  if (error) throw error;
-  return (data ?? []).map((row) => row.slug);
+  try {
+    const supabase = await createClient();
+    const { data, error } = await supabase
+      .from("library_items")
+      .select("slug")
+      .eq("status", "published");
+    if (error) {
+      console.warn("[library_items.public] slugs", error.message);
+      return [];
+    }
+    return (data ?? []).map((row) => row.slug);
+  } catch {
+    return [];
+  }
 }

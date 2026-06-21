@@ -18,7 +18,8 @@
     "generate:brand-icons": "node scripts/generate-brand-icons.mjs",
     "audit:seo": "node scripts/audit-seo.mjs",
     "audit:go-live": "node --use-system-ca scripts/audit-phase-57-go-live.mjs",
-    "validate:billing": "node scripts/validate-billing-profile.mjs"
+    "validate:billing": "node scripts/validate-billing-profile.mjs",
+    "reconcile:payments": "node scripts/reconcile-pending-payments.mjs"
   },
   "dependencies": {
     "@supabase/ssr": "^0.10.3",

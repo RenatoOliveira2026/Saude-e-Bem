@@ -16,8 +16,6 @@ export function CheckoutReturnSync({
   const [syncMessage, setSyncMessage] = useState<string | null>(null);
 
   useEffect(() => {
-    if (status !== "success") return;
-
     let cancelled = false;
 
     async function syncPayment() {
@@ -36,7 +34,9 @@ export function CheckoutReturnSync({
           router.refresh();
         } else if (response.status === 202) {
           setSyncMessage(
-            "Pagamento ainda em processamento — aguardando confirmação do Mercado Pago.",
+            status === "pending"
+              ? "PIX/boleto em processamento — aguardando confirmação do Mercado Pago."
+              : "Pagamento ainda em processamento — aguardando confirmação do Mercado Pago.",
           );
         }
       } catch {

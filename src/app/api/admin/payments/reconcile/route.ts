@@ -5,15 +5,19 @@ import { NextResponse } from "next/server";
 
 function isAuthorized(request: Request): boolean {
   const cronSecret = getPaymentsCronSecret();
-  if (cronSecret) {
-    const authHeader = request.headers.get("authorization");
-    const bearer = authHeader?.startsWith("Bearer ")
-      ? authHeader.slice(7)
-      : null;
-    const querySecret = new URL(request.url).searchParams.get("secret");
-    if (bearer === cronSecret || querySecret === cronSecret) {
-      return true;
-    }
+  const authHeader = request.headers.get("authorization");
+  const bearer = authHeader?.startsWith("Bearer ")
+    ? authHeader.slice(7)
+    : null;
+  const querySecret = new URL(request.url).searchParams.get("secret");
+
+  if (cronSecret && (bearer === cronSecret || querySecret === cronSecret)) {
+    return true;
+  }
+
+  const serviceRole = process.env.SUPABASE_SERVICE_ROLE_KEY?.trim();
+  if (serviceRole && bearer === serviceRole) {
+    return true;
   }
 
   return false;

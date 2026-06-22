@@ -13,6 +13,7 @@ import {
   type MembershipOrigin,
 } from "../membership-origin";
 import { recordFinancialEvent } from "./financial-events.service";
+import { cancelOrphanPendingPaymentsForPlan } from "./payments.service";
 import { notifyPremiumViaWhatsApp } from "@/lib/whatsapp/hooks";
 import { syncPremiumSubscriberToBrevo } from "@/lib/brevo/premium-sync";
 import type { Payment } from "../types";
@@ -166,6 +167,12 @@ export async function activateSubscriptionFromPayment(
     userId: payment.userId,
     planId: plan.id,
     status: "active",
+  });
+
+  await cancelOrphanPendingPaymentsForPlan(admin, {
+    userId: payment.userId,
+    billingPlanId: plan.id,
+    excludePaymentId: payment.id,
   });
 }
 

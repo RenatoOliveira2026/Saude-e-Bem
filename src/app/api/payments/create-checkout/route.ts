@@ -50,7 +50,7 @@ export async function POST(request: Request) {
     assertProductionCheckoutReady();
     const admin = createPaymentsAdminClient();
     if (admin) {
-      await assertUserCanSubscribe(admin, user.id);
+      await assertUserCanSubscribe(admin, user.id, plan);
     }
     const profile = await getUserProfile(user.id);
     assertBillingProfileComplete(profile.profile);

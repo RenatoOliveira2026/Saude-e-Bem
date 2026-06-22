@@ -42,9 +42,7 @@ export function PaymentHistoryList({ payments }: PaymentHistoryListProps) {
                 </p>
               </div>
               <Badge
-                variant={
-                  payment.status === "approved" ? "gold" : "default"
-                }
+                variant={payment.status === "approved" ? "gold" : "default"}
               >
                 {paymentStatusLabels[payment.status]}
               </Badge>

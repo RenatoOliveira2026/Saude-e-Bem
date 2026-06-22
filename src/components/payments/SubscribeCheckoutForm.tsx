@@ -213,8 +213,9 @@ export function SubscribeCheckoutForm({
           <p className="rounded-lg border border-sage/40 bg-sage-muted/25 px-4 py-3 text-sm text-forest">
             {selectedMethod === "pix" ? (
               <>
-                <strong className="font-semibold">PIX em ativação.</strong> Para
-                assinatura recorrente, utilize cartão de crédito.
+                <strong className="font-semibold">Pagamento único via PIX.</strong>{" "}
+                O acesso Premium é liberado após a confirmação. Para renovação
+                automática, utilize cartão de crédito.
               </>
             ) : (
               "Boleto libera acesso após a compensação, pelo mesmo período do plano escolhido. Para renovação automática, use cartão."

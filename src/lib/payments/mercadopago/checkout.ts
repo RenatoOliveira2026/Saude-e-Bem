@@ -51,7 +51,7 @@ export async function createPremiumCheckout(input: {
   }
 
   const { assertUserCanSubscribe } = await import("../guards");
-  await assertUserCanSubscribe(admin, input.userId);
+  await assertUserCanSubscribe(admin, input.userId, input.request.plan);
 
   const externalReference = buildExternalReference(input.userId);
   const paymentMethod = input.request.paymentMethod;

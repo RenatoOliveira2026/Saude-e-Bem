@@ -44,6 +44,13 @@ export const paymentMethodOptions: Array<{
   },
 ];
 
+/** Status visíveis no histórico do usuário (Fase 8.1 — oculta checkouts órfãos pending). */
+export const PAYMENT_HISTORY_VISIBLE_STATUSES: PaymentStatus[] = [
+  "approved",
+  "authorized",
+  "cancelled",
+];
+
 export const paymentStatusLabels: Record<PaymentStatus, string> = {
   pending: "Pendente",
   approved: "Aprovado",

@@ -16,13 +16,19 @@ function arg(name) {
 }
 
 async function main() {
-  const serviceRole = process.env.SUPABASE_SERVICE_ROLE_KEY?.trim();
+  const authToken =
+    process.env.PAYMENTS_CRON_SECRET?.trim() ||
+    process.env.SUPABASE_SERVICE_ROLE_KEY?.trim();
   const baseUrl = (
-    process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.saudeebem.com.br"
+    process.env.RECONCILE_BASE_URL ??
+    process.env.PRODUCTION_SITE_URL ??
+    "https://www.saudeebem.com.br"
   ).replace(/\/+$/, "");
 
-  if (!serviceRole) {
-    throw new Error("SUPABASE_SERVICE_ROLE_KEY ausente no .env.local");
+  if (!authToken) {
+    throw new Error(
+      "PAYMENTS_CRON_SECRET ou SUPABASE_SERVICE_ROLE_KEY ausente no .env.local",
+    );
   }
 
   const externalReference = arg("reference");
@@ -32,7 +38,7 @@ async function main() {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      Authorization: `Bearer ${serviceRole}`,
+      Authorization: `Bearer ${authToken}`,
     },
     body: JSON.stringify({
       limit,

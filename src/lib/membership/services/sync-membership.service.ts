@@ -57,7 +57,16 @@ export async function syncUserMembershipFromSubscription(
   },
 ): Promise<void> {
   const planId = await resolvePlanId(admin, input.plan.id);
-  if (!planId) return;
+  if (!planId) {
+    console.error(
+      "[membership/sync] Plano não encontrado em membership_plans:",
+      input.plan.id,
+      mapBillingPlanToMembershipSlug(input.plan.id),
+    );
+    throw new Error(
+      `Plano de membership não encontrado para billing_plan_id=${input.plan.id}`,
+    );
+  }
 
   const membershipStatus = mapSubscriptionStatus(input.subscriptionStatus);
 

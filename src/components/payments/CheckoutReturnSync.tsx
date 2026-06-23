@@ -38,6 +38,16 @@ export function CheckoutReturnSync({
               ? "PIX/boleto em processamento — aguardando confirmação do Mercado Pago."
               : "Pagamento ainda em processamento — aguardando confirmação do Mercado Pago.",
           );
+          // Retry após alguns segundos (webhook pode atrasar)
+          window.setTimeout(() => {
+            void fetch("/api/payments/sync", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({ externalReference }),
+            }).then((retry) => {
+              if (retry.ok) router.refresh();
+            });
+          }, 8000);
         }
       } catch {
         if (!cancelled) {

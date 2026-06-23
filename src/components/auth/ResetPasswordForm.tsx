@@ -30,6 +30,22 @@ export function ResetPasswordForm() {
 
     async function bootstrapRecoverySession() {
       const supabase = createClient();
+      const searchParams = new URLSearchParams(window.location.search);
+      const pkceCode = searchParams.get("code");
+
+      if (pkceCode) {
+        const { error } = await supabase.auth.exchangeCodeForSession(pkceCode);
+        if (cancelled) return;
+
+        if (error) {
+          setSessionError(error.message);
+          setSessionState("invalid");
+          return;
+        }
+
+        window.history.replaceState({}, "", window.location.pathname);
+      }
+
       const params = parseRecoveryLinkParams(
         window.location.search,
         window.location.hash,

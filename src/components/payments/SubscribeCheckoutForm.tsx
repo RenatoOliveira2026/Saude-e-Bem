@@ -104,9 +104,15 @@ export function SubscribeCheckoutForm({
         setInfo(data.message);
       }
 
-      if (data.checkoutUrl) {
-        window.location.href = data.checkoutUrl;
+      if (!data.checkoutUrl) {
+        setError(
+          data.message ??
+            "Não foi possível abrir o checkout. Tente novamente ou contate o suporte.",
+        );
+        return;
       }
+
+      window.location.href = data.checkoutUrl;
     } catch {
       setError("Falha de rede. Verifique sua conexão e tente novamente.");
     } finally {

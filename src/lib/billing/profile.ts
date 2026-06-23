@@ -1,5 +1,5 @@
 import type { Profile } from "@/lib/supabase/types";
-import { formatCep, isValidBrazilianState, isValidCelular, isValidCep, isValidCpf, stripDigits } from "./validators";
+import { isValidBrazilianState, isValidCelular, isValidCep, isValidCpf, stripDigits } from "./validators";
 
 export type BillingProfileInput = {
   fullName: string;
@@ -162,7 +162,7 @@ export function buildMercadoPagoPayer(
     },
     phone: parseBrazilianPhone(profile.celular!),
     address: {
-      zip_code: formatCep(profile.cep!),
+      zip_code: stripDigits(profile.cep!),
       street_name: profile.endereco!.trim(),
       street_number: profile.numero!.trim(),
       neighborhood: profile.bairro!.trim(),

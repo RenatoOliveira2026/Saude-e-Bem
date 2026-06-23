@@ -73,7 +73,15 @@ export function LoginForm() {
         <div className="space-y-2">
           <AuthMessage type="error" message={urlError} />
           <p className="text-sm text-muted">
-            <AuthLink href={routes.recuperarSenha}>Recuperar senha</AuthLink>
+            {searchParams.get("error") === "email_confirm_wrong_browser" ? (
+              <>
+                Dica: use o link no mesmo navegador do cadastro, ou{" "}
+                <AuthLink href={routes.entrar}>entre com sua senha</AuthLink> se
+                já confirmou antes.
+              </>
+            ) : (
+              <AuthLink href={routes.recuperarSenha}>Recuperar senha</AuthLink>
+            )}
           </p>
         </div>
       )}

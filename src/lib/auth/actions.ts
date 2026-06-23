@@ -8,7 +8,7 @@ import {
   logSupabaseConfig,
 } from "@/lib/supabase/config";
 import { routes } from "@/lib/routes";
-import { buildAuthCallbackUrl } from "@/lib/auth/callback-url";
+import { buildAuthVerifyUrl } from "@/lib/auth/callback-url";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { isRedirectError } from "next/dist/client/components/redirect-error";
@@ -66,7 +66,7 @@ export async function signUp(
       password,
       options: {
         data: { name, goal: goal || null },
-        emailRedirectTo: buildAuthCallbackUrl(routes.minhaJornada),
+        emailRedirectTo: buildAuthVerifyUrl(routes.minhaJornada),
       },
     });
 
@@ -166,7 +166,7 @@ export async function resetPassword(
   try {
     const supabase = await createClient();
     const { error } = await supabase.auth.resetPasswordForEmail(email, {
-      redirectTo: buildAuthCallbackUrl(routes.redefinirSenha),
+      redirectTo: buildAuthVerifyUrl(routes.redefinirSenha),
     });
 
     if (error) {

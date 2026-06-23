@@ -1,9 +1,5 @@
 import type { MercadoPagoWebhookPayload } from "../types";
 
-/**
- * Notificações IPN do `notification_url` (Checkout Pro) podem chegar sem `x-signature`.
- * Webhooks do painel MP incluem HMAC — use {@link verifyMercadoPagoWebhookSignature}.
- */
 export function isMercadoPagoIpnNotification(input: {
   method: string;
   headers: Headers;
@@ -13,8 +9,6 @@ export function isMercadoPagoIpnNotification(input: {
   queryId: string | null;
   payload: MercadoPagoWebhookPayload;
 }): boolean {
-  if (input.headers.get("x-signature")) return false;
-
   if (input.method === "GET" && input.queryTopic && input.queryId) {
     return (
       input.queryTopic.includes("payment") ||

@@ -9,6 +9,10 @@
       "schedule": "0 6 * * *"
     },
     {
+      "path": "/api/payments/cron/reconcile-pending",
+      "schedule": "*/10 * * * *"
+    },
+    {
       "path": "/api/cron/whatsapp-automation",
       "schedule": "0 7 * * *"
     },

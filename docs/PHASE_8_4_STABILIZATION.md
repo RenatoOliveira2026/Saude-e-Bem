@@ -8,6 +8,15 @@
 | Commit no GitHub (`master`) antes desta fase | `ce3c368` (Fase 8.1) |
 | Production antes do deploy 8.4 | `ce3c368` |
 
+## Deploy 8.4
+
+| Item | Valor |
+|------|-------|
+| Commit | `9699203` |
+| GitHub | `master` atualizado (`ce3c368..9699203`) |
+| Production | **Ready** — `dpl_9yK4WXWVwXkbFhqvPfPyEGHhfkhW` |
+| URL | https://www.saudeebem.com.br |
+
 ---
 
 ## A) Confirmação de e-mail

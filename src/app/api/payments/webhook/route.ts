@@ -1,12 +1,8 @@
 import {
   processMercadoPagoWebhook,
-  verifyMercadoPagoWebhookSignature,
 } from "@/lib/payments/mercadopago/webhook";
-import {
-  isMercadoPagoIpnNotification,
-  resolveIpnQueryParams,
-} from "@/lib/payments/mercadopago/ipn";
-import { isMercadoPagoConfigured } from "@/lib/payments/config";
+import { authorizeMercadoPagoWebhook } from "@/lib/payments/mercadopago/webhook-auth";
+import { resolveIpnQueryParams } from "@/lib/payments/mercadopago/ipn";
 import type { MercadoPagoWebhookPayload } from "@/lib/payments/types";
 import { NextResponse } from "next/server";
 
@@ -26,26 +22,28 @@ async function handleMercadoPagoNotification(request: Request) {
     }
   }
 
-  const signatureOk = verifyMercadoPagoWebhookSignature({
+  const auth = authorizeMercadoPagoWebhook({
+    method: request.method,
     headers: request.headers,
-    queryDataId: queryDataId ?? queryId,
+    queryType,
+    queryDataId,
+    queryTopic,
+    queryId,
+    payload,
     rawBody,
   });
 
-  const ipnOk =
-    isMercadoPagoConfigured() &&
-    isMercadoPagoIpnNotification({
+  if (!auth.authorized) {
+    console.error("[payments/webhook] 401:", auth.reason, {
       method: request.method,
-      headers: request.headers,
-      queryType,
-      queryDataId,
-      queryTopic,
-      queryId,
-      payload,
+      topic: queryTopic ?? queryType ?? payload.type,
+      id: queryId ?? queryDataId ?? payload.data?.id,
+      hasSignature: Boolean(request.headers.get("x-signature")),
     });
-
-  if (!signatureOk && !ipnOk) {
-    return NextResponse.json({ error: "Assinatura inválida." }, { status: 401 });
+    return NextResponse.json(
+      { error: "Assinatura inválida.", reason: auth.reason },
+      { status: 401 },
+    );
   }
 
   const effectiveType =
@@ -66,7 +64,7 @@ async function handleMercadoPagoNotification(request: Request) {
       queryType: effectiveType,
       queryDataId: effectiveDataId,
     });
-    return NextResponse.json(result);
+    return NextResponse.json({ ...result, auth: auth.reason });
   } catch (error) {
     const message =
       error instanceof Error ? error.message : "Erro ao processar webhook.";

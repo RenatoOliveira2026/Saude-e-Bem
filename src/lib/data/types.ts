@@ -2,6 +2,8 @@ import type { IconName } from "@/components/icons";
 import type { ContentBlock, FaqItem } from "@/lib/admin/cms/content-blocks";
 import type { BaseEntity } from "./base";
 
+import type { ContentIntelligence } from "@/lib/content/intelligence";
+
 export type { ContentBlock };
 
 /** Categorias legadas (seed) + taxonomia Fase 4.2 */

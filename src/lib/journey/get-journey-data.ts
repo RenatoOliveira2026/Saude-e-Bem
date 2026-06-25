@@ -1,9 +1,16 @@
 import { getSessionProfile } from "@/lib/auth/session";
+import { fetchContinueReading } from "@/lib/club/services/intelligent-recommendations.service";
 import { getFeaturedProtocol, getProtocols } from "@/lib/data/repositories/protocols.repository";
 import {
   getFeaturedLibraryResource,
   getLibraryResources,
 } from "@/lib/data/repositories/library.repository";
+import {
+  PREMIUM_TRAILS,
+  buildAllTrailsProgress,
+  fetchUserActivitySnapshot,
+  pickRecommendedTrail,
+} from "@/lib/premium";
 import { routes } from "@/lib/routes";
 import {
   formatMemberSince,
@@ -13,8 +20,9 @@ import {
   goalLabels,
   goalToLibraryCategory,
   goalToProtocolCategory,
+  goalToTrailObjective,
 } from "./constants";
-import type { JourneyChecklistItem, JourneyData } from "./types";
+import type { JourneyChecklistItem, JourneyData, JourneyProgressStats } from "./types";
 
 export async function getJourneyData(): Promise<JourneyData> {
   const { user, profile: profileData } = await getSessionProfile();
@@ -35,13 +43,21 @@ export async function getJourneyData(): Promise<JourneyData> {
   const memberSince = formatMemberSince(memberSinceRaw);
   const daysOnJourney = getDaysOnJourney(memberSinceRaw);
 
-  const [allProtocols, allLibrary, featuredProtocol, featuredLibrary] =
-    await Promise.all([
-      getProtocols(),
-      getLibraryResources(),
-      getFeaturedProtocol(),
-      getFeaturedLibraryResource(),
-    ]);
+  const [
+    allProtocols,
+    allLibrary,
+    featuredProtocol,
+    featuredLibrary,
+    activity,
+    continueReading,
+  ] = await Promise.all([
+    getProtocols(),
+    getLibraryResources(),
+    getFeaturedProtocol(),
+    getFeaturedLibraryResource(),
+    fetchUserActivitySnapshot(user.id),
+    fetchContinueReading(user.id, 4).catch(() => []),
+  ]);
 
   const recommendedProtocols = getRecommendedProtocols(
     allProtocols,
@@ -55,10 +71,18 @@ export async function getJourneyData(): Promise<JourneyData> {
     featuredLibrary,
   );
 
+  const trails = buildAllTrailsProgress(PREMIUM_TRAILS, activity);
+  const trailObjective = goalKey ? goalToTrailObjective[goalKey as keyof typeof goalToTrailObjective] : null;
+  const activeTrail = pickRecommendedTrail(trails, trailObjective ?? null);
+
+  const progress = computeProgressStats(trails, activity, profileComplete);
+
   const checklist = buildChecklist({
     profileComplete,
     recommendedProtocols,
     librarySuggestions,
+    activity,
+    activeTrail,
   });
 
   return {
@@ -76,6 +100,46 @@ export async function getJourneyData(): Promise<JourneyData> {
     recommendedProtocols,
     librarySuggestions,
     checklist,
+    trails,
+    activeTrail,
+    progress,
+    continueReading,
+  };
+}
+
+function computeProgressStats(
+  trails: ReturnType<typeof buildAllTrailsProgress>,
+  activity: Awaited<ReturnType<typeof fetchUserActivitySnapshot>>,
+  profileComplete: boolean,
+): JourneyProgressStats {
+  const trailsStarted = trails.filter((t) => t.completedCount > 0).length;
+  const trailsCompleted = trails.filter((t) => t.percentComplete >= 100).length;
+
+  let materialsCompleted = 0;
+  for (const set of Object.values(activity.accessed)) {
+    if (set) materialsCompleted += set.size;
+  }
+  materialsCompleted += activity.downloadedLibrarySlugs.size;
+
+  const protocolsStarted = activity.protocolSlugsInProgress.size;
+  const protocolsCompleted = activity.protocolSlugsCompleted.size;
+
+  const totalTrailSteps = trails.reduce((sum, t) => sum + t.totalSteps, 0);
+  const completedTrailSteps = trails.reduce((sum, t) => sum + t.completedCount, 0);
+  const overallPercent =
+    totalTrailSteps > 0
+      ? Math.round((completedTrailSteps / totalTrailSteps) * 100)
+      : profileComplete
+        ? 5
+        : 0;
+
+  return {
+    trailsStarted,
+    trailsCompleted,
+    materialsCompleted,
+    protocolsStarted,
+    protocolsCompleted,
+    overallPercent,
   };
 }
 
@@ -86,9 +150,7 @@ function getRecommendedProtocols(
 ) {
   if (goalKey && goalToProtocolCategory[goalKey]) {
     const category = goalToProtocolCategory[goalKey];
-    const matched = protocols.filter(
-      (p) => p.category === category && !p.isPremium,
-    );
+    const matched = protocols.filter((p) => p.category === category);
     if (matched.length > 0) return matched.slice(0, 3);
   }
 
@@ -117,15 +179,30 @@ function buildChecklist({
   profileComplete,
   recommendedProtocols,
   librarySuggestions,
+  activity,
+  activeTrail,
 }: {
   profileComplete: boolean;
   recommendedProtocols: Awaited<ReturnType<typeof getProtocols>>;
   librarySuggestions: Awaited<ReturnType<typeof getLibraryResources>>;
+  activity: Awaited<ReturnType<typeof fetchUserActivitySnapshot>>;
+  activeTrail: ReturnType<typeof pickRecommendedTrail>;
 }): JourneyChecklistItem[] {
   const firstProtocol = recommendedProtocols[0];
   const firstGuide = librarySuggestions[0];
 
-  return [
+  const protocolStarted =
+    firstProtocol &&
+    (activity.protocolSlugsInProgress.has(firstProtocol.slug) ||
+      activity.protocolSlugsCompleted.has(firstProtocol.slug) ||
+      activity.accessed.protocol?.has(firstProtocol.slug));
+
+  const guideDownloaded =
+    firstGuide &&
+    (activity.downloadedLibrarySlugs.has(firstGuide.slug) ||
+      activity.accessed.library?.has(firstGuide.slug));
+
+  const items: JourneyChecklistItem[] = [
     {
       id: "complete-profile",
       label: "Completar perfil",
@@ -144,7 +221,7 @@ function buildChecklist({
         ? routes.protocolo(firstProtocol.slug)
         : routes.protocolos,
       icon: "sparkle",
-      completed: false,
+      completed: Boolean(protocolStarted),
     },
     {
       id: "download-guide",
@@ -156,7 +233,23 @@ function buildChecklist({
         ? routes.bibliotecaItem(firstGuide.slug)
         : routes.biblioteca,
       icon: "download",
-      completed: false,
+      completed: Boolean(guideDownloaded),
     },
   ];
+
+  if (activeTrail) {
+    const nextStep = activeTrail.stepsProgress.find((s) => !s.completed);
+    items.push({
+      id: "trail-continue",
+      label: `Trilha: ${activeTrail.title}`,
+      description: nextStep
+        ? `Próximo passo: ${nextStep.label}`
+        : `Trilha concluída — ${activeTrail.percentComplete}%`,
+      href: nextStep?.href ?? routes.clubeTrilhas,
+      icon: activeTrail.icon,
+      completed: activeTrail.percentComplete >= 100,
+    });
+  }
+
+  return items;
 }

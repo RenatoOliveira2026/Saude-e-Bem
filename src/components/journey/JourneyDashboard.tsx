@@ -7,9 +7,12 @@ import { categoryIcons, Icon, IconBox } from "@/components/icons";
 import type { JourneyData } from "@/lib/journey/types";
 import { routes } from "@/lib/routes";
 import Link from "next/link";
+import { ContinueReadingSection } from "@/components/club/ContinueReadingSection";
 import { JourneyClubCta } from "./JourneyClubCta";
 import { JourneyEmptyState } from "./JourneyEmptyState";
+import { JourneyProgressSection } from "./JourneyProgressSection";
 import { JourneySectionHeader } from "./JourneySectionHeader";
+import { JourneyTrailsSection } from "./JourneyTrailsSection";
 
 interface JourneyDashboardProps {
   data: JourneyData;
@@ -65,14 +68,36 @@ export function JourneyDashboard({ data }: JourneyDashboardProps) {
         </Container>
       </Section>
 
-      {/* 2. Objetivo principal */}
+      {/* 2. Progresso premium */}
       <Section background="white">
+        <Container>
+          <JourneyProgressSection progress={data.progress} />
+        </Container>
+      </Section>
+
+      {/* 3. Objetivo principal */}
+      <Section background="default">
         <Container>
           <GoalCard data={data} />
         </Container>
       </Section>
 
-      {/* 3. Protocolos recomendados */}
+      {/* 4. Trilhas premium */}
+      <Section background="white">
+        <Container>
+          <JourneyTrailsSection trails={data.trails} activeTrail={data.activeTrail} />
+        </Container>
+      </Section>
+
+      {data.continueReading.length > 0 && (
+        <Section background="sage" spacing="compact">
+          <Container>
+            <ContinueReadingSection items={data.continueReading} />
+          </Container>
+        </Section>
+      )}
+
+      {/* 5. Protocolos recomendados */}
       <Section background="default">
         <Container>
           <JourneySectionHeader
@@ -134,7 +159,7 @@ export function JourneyDashboard({ data }: JourneyDashboardProps) {
         </Container>
       </Section>
 
-      {/* 4. Biblioteca recomendada */}
+      {/* 6. Biblioteca recomendada */}
       <Section background="white">
         <Container>
           <JourneySectionHeader
@@ -195,7 +220,7 @@ export function JourneyDashboard({ data }: JourneyDashboardProps) {
         </Container>
       </Section>
 
-      {/* 5. Próximos passos — checklist */}
+      {/* 7. Próximos passos — checklist */}
       <Section background="default">
         <Container>
           <JourneySectionHeader
@@ -264,7 +289,7 @@ export function JourneyDashboard({ data }: JourneyDashboardProps) {
         </Container>
       </Section>
 
-      {/* 6. CTA Clube */}
+      {/* 8. CTA Clube */}
       <JourneyClubCta />
     </>
   );

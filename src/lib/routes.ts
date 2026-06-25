@@ -26,6 +26,8 @@ export const routes = {
   clubeHistorico: "/clube/historico",
   clubeRecomendacoes: "/clube/recomendacoes",
   clubeRecomendacoesIa: "/clube/recomendacoes-ia",
+  clubeTrilhas: "/clube/trilhas",
+  clubeBeneficios: "/clube/beneficios",
   clubePerfil: "/clube/perfil",
   clubePremium: "/clube/premium",
   assinar: "/assinar",

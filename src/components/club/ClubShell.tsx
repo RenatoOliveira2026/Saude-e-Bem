@@ -7,6 +7,8 @@ import Link from "next/link";
 
 const navItems: Array<{ label: string; href: string; icon: IconName }> = [
   { label: "Dashboard", href: routes.clubeDashboard, icon: "chart" },
+  { label: "Trilhas Premium", href: routes.clubeTrilhas, icon: "plan" },
+  { label: "Benefícios", href: routes.clubeBeneficios, icon: "sparkle" },
   { label: "Favoritos", href: routes.clubeFavoritos, icon: "star" },
   { label: "Downloads", href: routes.clubeDownloads, icon: "download" },
   { label: "Protocolos salvos", href: routes.clubeProtocolosSalvos, icon: "plan" },

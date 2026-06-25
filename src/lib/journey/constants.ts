@@ -1,4 +1,5 @@
 import type { ContentCategory } from "@/lib/data/types";
+import type { ContentObjective } from "@/lib/content/intelligence";
 
 /** Objetivos oficiais da plataforma */
 export const JOURNEY_GOALS = [
@@ -63,6 +64,15 @@ export const goalToLibraryCategory: Record<string, string> = {
   intestinal: "Intestinal",
   emagrecimento: "Hábitos",
   longevidade: "Hábitos",
+};
+
+/** Mapeia objetivo do perfil para trilha premium (Fase 9.4). */
+export const goalToTrailObjective: Partial<Record<JourneyGoalValue, ContentObjective>> = {
+  energia: "energia",
+  sono: "sono",
+  intestinal: "alimentacao",
+  emagrecimento: "emagrecimento",
+  longevidade: "longevidade",
 };
 
 export function formatMemberSince(dateString: string): string {

@@ -189,3 +189,41 @@ Estimativa conservadora com base em benchmarks de e-commerce SaaS e no diagnóst
 ```bash
 npm run build  # ✓ exit 0 (2026-06-01)
 ```
+
+---
+
+## 9. Deploy em produção (2026-06-25)
+
+| Item | Valor |
+|------|--------|
+| **Commit** | `e45cbcb` — `feat(conversion): Fase 9.3 — melhorias P0 de conversão` |
+| **Push** | `origin/master` (`9f5f611..e45cbcb`) |
+| **Build pré-push** | ✓ `npm run build` exit 0 |
+| **TypeScript** | ✓ sem erros no build |
+| **Lint** | 5 erros pré-existentes (fora do escopo 9.3); nenhum nos arquivos alterados |
+| **Deploy Vercel** | ✓ **Production** `dpl_BooZNCPmVh9WYFJMVoyCURy3Q1z9` |
+| **URL produção** | https://www.saudeebem.com.br |
+| **Alias** | `saude-e-jq0tcfcmx-quim-link.vercel.app` → `www.saudeebem.com.br` |
+
+### Validação pós-deploy (produção)
+
+| Área | Resultado |
+|------|-----------|
+| Home — sem “Em breve: Clube”, CTAs Assinar/Conhecer benefícios | ✓ |
+| `/clube` — FAQ, trust, comparação, planos, sem lista VIP | ✓ |
+| `/assinar` — redireciona não logado → `/entrar?redirect=/assinar` | ✓ (comportamento existente) |
+| `/cadastro?redirect=/assinar` — hidden `redirect` no form | ✓ |
+| `/blog`, `/protocolos`, `/biblioteca` | ✓ HTTP 200 |
+| `/auth/verify`, `/recuperar-senha`, `/completar-cadastro` | ✓ HTTP 200 |
+| SEO — JSON-LD FAQ (`/clube`), HowTo+Breadcrumb (`/protocolos/*`) | ✓ |
+| `robots.txt`, `sitemap.xml` | ✓ HTTP 200 |
+| Footer — Perfil de Saúde → `/minha-saude`, Assinar Premium | ✓ |
+| Fases 8.x (auth verify, webhook, reconcile cron) | ✓ sem alteração de código |
+
+### Pendente validação manual (requer login/pagamento)
+
+- Geração PIX / boleto / cartão em checkout real
+- Painel “Acesso imediato ao Premium” em `/assinar` (visível após login)
+- E2E confirmação de e-mail → retorno `/assinar` (mesmo navegador)
+
+**Status:** Fase 9.3 oficialmente concluída em produção.

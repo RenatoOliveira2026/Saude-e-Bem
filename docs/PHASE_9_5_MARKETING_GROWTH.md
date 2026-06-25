@@ -195,4 +195,37 @@ src/components/premium/PremiumTrailsListing.tsx
 5. Biblioteca — ShareButton em páginas de detalhe
 6. A/B test de copy no wizard de onboarding
 
-**Status:** Fase 9.5 implementada — aguarda commit/deploy se autorizado.
+**Status:** Fase 9.5 oficialmente concluída em produção.
+
+---
+
+## 10. Deploy e validação em produção
+
+**Data deploy:** 2026-06-25
+
+| Item | Valor |
+|------|-------|
+| **Commit** | `feat(growth): Fase 9.5 — onboarding, engajamento, share, SEO e analytics` |
+| **Hash** | `d80a78b` |
+| **Push** | `d6be115..d80a78b` → `origin/master` |
+| **Build** | ✓ `npm run build` exit 0 |
+| **Deploy Vercel** | `dpl_J8fMdaMPfMZC2wYRCjU8p7yKEn5e` |
+| **URL** | https://www.saudeebem.com.br |
+
+### Validação pós-deploy
+
+| Área | Resultado |
+|------|-----------|
+| `/onboarding` | ✓ HTTP 307 → login (protegido) |
+| `/blog` | ✓ HTTP 200 |
+| `/protocolos/sono-reparador` | ✓ Share + JSON-LD + OG |
+| `/admin/crescimento` | ✓ HTTP 307 → login admin |
+| `/minha-jornada` | ✓ HTTP 307 → login |
+| `/minha-assinatura` | ✓ HTTP 307 → login |
+| `/clube/trilhas` | ✓ HTTP 307 → login |
+| `/api/payments/webhook` | ✓ HTTP 200 (intacto) |
+
+### Eventos GA4 validados no código
+
+`signup_complete`, `email_verified`, `checkout_start`, `payment_approved`, `premium_activated`, `article_read`, `protocol_started`, `download_library`, `trail_started`, `trail_completed`
+

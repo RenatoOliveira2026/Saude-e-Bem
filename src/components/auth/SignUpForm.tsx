@@ -1,5 +1,6 @@
 "use client";
 
+import { SignupCompleteTracker } from "@/components/analytics/SignupCompleteTracker";
 import {
   AuthLayout,
   AuthLink,
@@ -48,6 +49,7 @@ function SignUpFormFields() {
         </div>
       )}
       {state.success && <AuthMessage type="success" message={state.success} />}
+      <SignupCompleteTracker active={Boolean(state.success)} />
 
       {!state.success && !emailExists && (
         <form action={formAction} className="space-y-5">

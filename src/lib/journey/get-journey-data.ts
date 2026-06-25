@@ -5,6 +5,9 @@ import {
   getFeaturedLibraryResource,
   getLibraryResources,
 } from "@/lib/data/repositories/library.repository";
+import { CONTENT_INTELLIGENCE_REGISTRY } from "@/lib/content/intelligence";
+import { buildEngagementSnapshot } from "@/lib/engagement";
+import { computeLoyaltySnapshot } from "@/lib/loyalty";
 import {
   PREMIUM_TRAILS,
   buildAllTrailsProgress,
@@ -85,6 +88,26 @@ export async function getJourneyData(): Promise<JourneyData> {
     activeTrail,
   });
 
+  const newContentCount = Object.values(CONTENT_INTELLIGENCE_REGISTRY).filter(
+    (i) => i.isNew,
+  ).length;
+
+  const engagement = buildEngagementSnapshot({
+    continueItems: continueReading,
+    trails,
+    recommendedProtocols,
+    librarySuggestions,
+    newContentCount,
+    progress,
+  });
+
+  const loyalty = computeLoyaltySnapshot({
+    profileComplete,
+    activity,
+    trails,
+    progress,
+  });
+
   return {
     user,
     profileData,
@@ -104,6 +127,8 @@ export async function getJourneyData(): Promise<JourneyData> {
     activeTrail,
     progress,
     continueReading,
+    engagement,
+    loyalty,
   };
 }
 

@@ -1,3 +1,4 @@
+import { CheckoutStartTracker } from "@/components/analytics/CheckoutStartTracker";
 import { BillingProfileStatus } from "@/components/billing/BillingProfileStatus";
 import { PageHero } from "@/components/layout/PageHero";
 import { SubscribeCheckoutForm } from "@/components/payments";
@@ -55,6 +56,7 @@ export default async function AssinarPage({ searchParams }: PageProps) {
 
   return (
     <>
+      {user && <CheckoutStartTracker />}
       <JsonLdScript
         data={[
           webPageJsonLd({

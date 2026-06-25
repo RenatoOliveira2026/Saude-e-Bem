@@ -7,7 +7,10 @@ import { categoryIcons, Icon, IconBox } from "@/components/icons";
 import type { JourneyData } from "@/lib/journey/types";
 import { routes } from "@/lib/routes";
 import Link from "next/link";
+import { TrailAnalyticsTracker } from "@/components/analytics/TrailAnalyticsTracker";
 import { ContinueReadingSection } from "@/components/club/ContinueReadingSection";
+import { EngagementPanel } from "@/components/engagement/EngagementPanel";
+import { LoyaltyPanel } from "@/components/loyalty/LoyaltyPanel";
 import { JourneyClubCta } from "./JourneyClubCta";
 import { JourneyEmptyState } from "./JourneyEmptyState";
 import { JourneyProgressSection } from "./JourneyProgressSection";
@@ -23,6 +26,7 @@ export function JourneyDashboard({ data }: JourneyDashboardProps) {
 
   return (
     <>
+      <TrailAnalyticsTracker trails={data.trails} />
       {/* 1. Saudação personalizada */}
       <Section background="default" spacing="compact">
         <Container>
@@ -56,6 +60,9 @@ export function JourneyDashboard({ data }: JourneyDashboardProps) {
                 <span>Membro desde {data.memberSince}</span>
               </div>
               <div className="mt-8 flex flex-wrap gap-3">
+                <Button href={routes.onboarding} variant="gold" size="sm">
+                  Guia de boas-vindas
+                </Button>
                 <Button href={routes.perfil} variant="outline" size="sm">
                   Editar perfil
                 </Button>
@@ -96,6 +103,20 @@ export function JourneyDashboard({ data }: JourneyDashboardProps) {
           </Container>
         </Section>
       )}
+
+      {/* Engajamento — Fase 9.5 */}
+      <Section background="white">
+        <Container>
+          <EngagementPanel engagement={data.engagement} />
+        </Container>
+      </Section>
+
+      {/* Fidelização — Fase 9.5 */}
+      <Section background="default">
+        <Container>
+          <LoyaltyPanel loyalty={data.loyalty} />
+        </Container>
+      </Section>
 
       {/* 5. Protocolos recomendados */}
       <Section background="default">

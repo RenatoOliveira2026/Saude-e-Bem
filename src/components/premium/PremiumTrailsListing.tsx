@@ -4,7 +4,9 @@ import { Badge } from "@/components/ui/Badge";
 import { Button } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
 import { Icon } from "@/components/icons";
+import { ShareButton } from "@/components/share";
 import type { TrailProgress } from "@/lib/premium/trail-progress";
+import { routes } from "@/lib/routes";
 import Link from "next/link";
 
 interface PremiumTrailsListingProps {
@@ -52,6 +54,15 @@ export function PremiumTrailsListing({ trails }: PremiumTrailsListingProps) {
               style={{ width: `${trail.percentComplete}%` }}
             />
           </div>
+
+          <ShareButton
+            className="mt-4"
+            title={trail.title}
+            description={trail.subtitle}
+            path={`${routes.clubeTrilhas}#${trail.slug}`}
+            contentType="trail"
+            slug={trail.slug}
+          />
 
           <ol className="mt-6 space-y-3">
             {trail.stepsProgress.map((step, index) => (

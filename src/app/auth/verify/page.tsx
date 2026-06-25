@@ -5,6 +5,7 @@ import {
   parseHashParams,
   waitForSession,
 } from "@/lib/auth/verify-session-client";
+import { sendGa4EmailVerified } from "@/lib/analytics/growth-events";
 import { routes } from "@/lib/routes";
 import { createClient } from "@/lib/supabase/client";
 import { useRouter } from "next/navigation";
@@ -58,6 +59,7 @@ export default function AuthVerifyPage() {
       }
 
       window.history.replaceState({}, "", "/auth/verify");
+      sendGa4EmailVerified({ source: "auth_verify" });
       window.location.href = result.redirectPath;
     }
 

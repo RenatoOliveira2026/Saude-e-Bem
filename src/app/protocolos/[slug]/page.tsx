@@ -8,6 +8,8 @@ import { SmartConversionCta } from "@/components/conversion/SmartConversionCta";
 import { CrossLinks } from "@/components/pages";
 import { Breadcrumbs } from "@/components/layout/Breadcrumbs";
 import { DetailHero, RelatedNav } from "@/components/layout/DetailPage";
+import { RelatedContentLinks } from "@/components/seo/RelatedContentLinks";
+import { ShareButton } from "@/components/share";
 import { Container } from "@/components/ui/Container";
 import { Section } from "@/components/ui/Section";
 import { Icon } from "@/components/icons";
@@ -16,11 +18,13 @@ import {
   getProtocolSlugs,
   getProtocols,
 } from "@/lib/data/repositories/protocols.repository";
+import { ProtocolStartedTracker } from "@/components/analytics/ProtocolStartedTracker";
 import { trackEvent } from "@/lib/analytics/track-event";
 import { routes } from "@/lib/routes";
 import { buildContentMetadata } from "@/lib/seo/metadata";
 import { assertValidPublicSlug } from "@/lib/seo/slug";
 import { breadcrumbJsonLd, howToJsonLd } from "@/lib/seo/json-ld";
+import { getInternalLinksForContent } from "@/lib/seo/internal-links";
 import { JsonLdScript } from "@/components/seo/JsonLd";
 import { fetchAffiliatesForContentCategory } from "@/lib/supabase/services/affiliates.public";
 import type { Metadata } from "next";
@@ -90,9 +94,11 @@ export default async function ProtocoloDetailPage({ params }: PageProps) {
       (b) => b.type !== "paragraph" || b.text.trim().length > 0,
     ) ?? [];
   const hasRichContent = richBlocks.length > 0;
+  const internalLinks = getInternalLinksForContent("protocol", slug, protocol.category);
 
   return (
     <>
+      <ProtocolStartedTracker slug={slug} title={protocol.title} />
       <JsonLdScript
         data={[
           breadcrumbJsonLd([
@@ -150,6 +156,14 @@ export default async function ProtocoloDetailPage({ params }: PageProps) {
             contentType="protocol"
             contentId={protocol.id}
             showSaveProtocol
+          />
+          <ShareButton
+            className="mt-4"
+            title={protocol.title}
+            description={protocol.description}
+            path={routes.protocolo(slug)}
+            contentType="protocol"
+            slug={slug}
           />
         </Container>
       </Section>
@@ -236,6 +250,14 @@ export default async function ProtocoloDetailPage({ params }: PageProps) {
           />
         </Container>
       </Section>
+
+      {internalLinks.length > 0 && (
+        <Section background="default" spacing="compact">
+          <Container size="md">
+            <RelatedContentLinks links={internalLinks} />
+          </Container>
+        </Section>
+      )}
 
       {related.length > 0 && (
         <RelatedNav

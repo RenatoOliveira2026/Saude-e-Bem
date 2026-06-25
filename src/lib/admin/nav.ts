@@ -107,6 +107,12 @@ export const adminNavItems: AdminNavItem[] = [
     roles: ["super_admin", "admin"],
   },
   {
+    label: "Crescimento",
+    href: adminRoutes.crescimento,
+    icon: "activity",
+    roles: ["super_admin", "admin"],
+  },
+  {
     label: "Usuários",
     href: adminRoutes.usuarios,
     icon: "users",

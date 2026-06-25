@@ -2,6 +2,8 @@ import type { IconName } from "@/components/icons";
 import type { LibraryResource, Protocol } from "@/lib/data/types";
 import type { ContinueReadingItem } from "@/lib/club/types";
 import type { TrailProgress } from "@/lib/premium/trail-progress";
+import type { EngagementSnapshot } from "@/lib/engagement";
+import type { LoyaltySnapshot } from "@/lib/loyalty";
 import type { UserProfileData } from "@/lib/supabase/types";
 import type { User } from "@supabase/supabase-js";
 
@@ -43,4 +45,7 @@ export interface JourneyData {
   activeTrail: TrailProgress | null;
   progress: JourneyProgressStats;
   continueReading: ContinueReadingItem[];
+  /** Fase 9.5 — engajamento e fidelização */
+  engagement: EngagementSnapshot;
+  loyalty: LoyaltySnapshot;
 }

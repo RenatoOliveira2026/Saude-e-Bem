@@ -1,4 +1,5 @@
 import { PageHero } from "@/components/layout/PageHero";
+import { PremiumActivatedTracker } from "@/components/analytics/PremiumActivatedTracker";
 import {
   CheckoutReturnSync,
   StubCheckoutPanel,
@@ -41,6 +42,11 @@ export default async function MinhaAssinaturaPage({ searchParams }: PageProps) {
 
   return (
     <>
+      <PremiumActivatedTracker
+        isPremium={data.membership.isPremium}
+        planSlug={data.membership.subscription?.billingPlanId ?? data.membership.profilePlan}
+        checkoutSuccess={checkoutStatus === "success"}
+      />
       <PageHero
         badge="Conta"
         title="Minha assinatura"

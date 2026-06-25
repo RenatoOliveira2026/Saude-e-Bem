@@ -1,6 +1,7 @@
 "use client";
 
 import { trackAnalyticsFromClientAction } from "@/lib/analytics/actions";
+import { sendGa4DownloadLibrary } from "@/lib/analytics/growth-events";
 import Link from "next/link";
 import type { ComponentProps } from "react";
 
@@ -28,6 +29,11 @@ export function TrackedDownloadLink({
           contentId,
           contentTitle,
           metadata: { slug: contentId },
+        });
+        sendGa4DownloadLibrary({
+          contentSlug: contentId,
+          contentTitle,
+          source: sourcePage,
         });
         onClick?.(event);
       }}

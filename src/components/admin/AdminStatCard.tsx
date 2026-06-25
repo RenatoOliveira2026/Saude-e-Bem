@@ -3,7 +3,7 @@ import type { IconName } from "@/components/icons";
 
 interface AdminStatCardProps {
   label: string;
-  value: number;
+  value: number | string;
   icon: IconName;
   accent?: "sage" | "gold" | "forest";
 }
@@ -26,7 +26,7 @@ export function AdminStatCard({
         <div>
           <p className="text-sm font-medium text-muted">{label}</p>
           <p className="mt-2 font-heading text-3xl font-semibold text-forest">
-            {value.toLocaleString("pt-BR")}
+            {typeof value === "number" ? value.toLocaleString("pt-BR") : value}
           </p>
         </div>
         <div

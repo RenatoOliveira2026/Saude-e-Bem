@@ -183,3 +183,44 @@ export function productJsonLd(input: {
   }
   return data;
 }
+
+export function personJsonLd(input: {
+  name: string;
+  description?: string;
+  url?: string;
+  imageUrl?: string;
+  jobTitle?: string;
+}): JsonLd {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    name: input.name,
+    ...(input.description ? { description: input.description } : {}),
+    ...(input.url ? { url: absoluteUrl(input.url) } : {}),
+    ...(input.imageUrl ? { image: absoluteUrl(input.imageUrl) } : {}),
+    ...(input.jobTitle ? { jobTitle: input.jobTitle } : {}),
+  };
+}
+
+/** Trilha premium como LearningResource (Fase 9.5). */
+export function learningResourceJsonLd(input: {
+  title: string;
+  description: string;
+  path: string;
+  durationLabel?: string;
+  isPremium?: boolean;
+}): JsonLd {
+  return {
+    "@context": "https://schema.org",
+    "@type": "LearningResource",
+    name: input.title,
+    description: input.description,
+    url: absoluteUrl(input.path),
+    learningResourceType: "course module",
+    educationalLevel: "beginner",
+    inLanguage: "pt-BR",
+    provider: { "@type": "Organization", name: SITE_NAME },
+    ...(input.durationLabel ? { timeRequired: input.durationLabel } : {}),
+    isAccessibleForFree: !input.isPremium,
+  };
+}

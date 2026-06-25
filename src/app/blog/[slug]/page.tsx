@@ -1,3 +1,4 @@
+import { ArticleReadTracker } from "@/components/analytics/ArticleReadTracker";
 import { RelatedAffiliatesSection } from "@/components/affiliates";
 import { ContentMemberActions } from "@/components/club/ContentMemberActions";
 import { PremiumContentGuard } from "@/components/club/PremiumContentGuard";
@@ -7,7 +8,9 @@ import { CrossLinks } from "@/components/pages";
 import { PublicArticleBody } from "@/components/content/PublicArticleBody";
 import { Breadcrumbs } from "@/components/layout/Breadcrumbs";
 import { DetailHero, RelatedNav } from "@/components/layout/DetailPage";
+import { RelatedContentLinks } from "@/components/seo/RelatedContentLinks";
 import { JsonLdScript } from "@/components/seo/JsonLd";
+import { ShareButton } from "@/components/share";
 import { Container } from "@/components/ui/Container";
 import { Section } from "@/components/ui/Section";
 import {
@@ -19,7 +22,8 @@ import { trackEvent } from "@/lib/analytics/track-event";
 import { extractFaqFromBlocks } from "@/lib/blog/article-faq";
 import { resolveArticleCoverUrl } from "@/lib/blog/resolve-article-cover";
 import { routes } from "@/lib/routes";
-import { articleJsonLd, breadcrumbJsonLd, faqJsonLd } from "@/lib/seo/json-ld";
+import { articleJsonLd, breadcrumbJsonLd, faqJsonLd, personJsonLd } from "@/lib/seo/json-ld";
+import { getInternalLinksForContent } from "@/lib/seo/internal-links";
 import { buildContentMetadata } from "@/lib/seo/metadata";
 import { assertValidPublicSlug } from "@/lib/seo/slug";
 import { fetchAffiliatesForContentCategory } from "@/lib/supabase/services/affiliates.public";
@@ -92,6 +96,7 @@ export default async function ArtigoDetailPage({ params }: PageProps) {
     .slice(0, 3);
 
   const faqItems = extractFaqFromBlocks(article.contentBlocks);
+  const internalLinks = getInternalLinksForContent("article", slug, article.category);
   const jsonLd = [
     breadcrumbJsonLd([
       { name: "Início", path: routes.home },
@@ -107,11 +112,17 @@ export default async function ArtigoDetailPage({ params }: PageProps) {
       publishedAt: article.publishedAt,
       isPremium: article.isPremium,
     }),
+    personJsonLd({
+      name: article.author,
+      description: article.authorRole,
+      jobTitle: article.authorRole,
+    }),
     ...(faqItems.length > 0 ? [faqJsonLd(faqItems)] : []),
   ];
 
   return (
     <>
+      <ArticleReadTracker slug={slug} title={article.title} />
       <JsonLdScript data={jsonLd} />
       <Breadcrumbs
         items={[
@@ -134,6 +145,14 @@ export default async function ArtigoDetailPage({ params }: PageProps) {
       <Section background="sage" spacing="compact">
         <Container size="md">
           <ContentMemberActions contentType="article" contentId={article.id} />
+          <ShareButton
+            className="mt-4"
+            title={article.title}
+            description={article.excerpt}
+            path={routes.artigo(slug)}
+            contentType="article"
+            slug={slug}
+          />
         </Container>
       </Section>
 
@@ -155,6 +174,14 @@ export default async function ArtigoDetailPage({ params }: PageProps) {
           </article>
         </Container>
       </Section>
+
+      {internalLinks.length > 0 && (
+        <Section background="default" spacing="compact">
+          <Container size="sm">
+            <RelatedContentLinks links={internalLinks} />
+          </Container>
+        </Section>
+      )}
 
       {related.length > 0 && (
         <RelatedNav

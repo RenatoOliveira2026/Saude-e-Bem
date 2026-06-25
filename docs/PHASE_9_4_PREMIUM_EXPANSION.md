@@ -200,8 +200,8 @@ Rotas existentes enriquecidas:
 - [x] Minha Jornada exibe progresso e trilha recomendada
 - [x] Biblioteca com filtros objetivo/dificuldade/tempo + Novidades
 - [x] Registry de inteligência sem implementação de IA
-- [ ] Validar slugs de trilha contra conteúdo publicado em produção (manual)
-- [ ] Deploy produção (quando autorizado)
+- [x] Deploy produção — ver §10
+- [x] Validação HTTP produção — ver §10
 
 ---
 
@@ -209,3 +209,51 @@ Rotas existentes enriquecidas:
 
 - `computeProgressStats`: parâmetro `profileComplete` ausente — corrigido para evitar erro TS no build.
 - Imports e tipos em `benefits-hub.ts` e `library-enrichment.ts` alinhados aos serviços existentes.
+
+---
+
+## 10. Deploy e validação em produção
+
+**Data deploy:** 2026-06-25
+
+| Item | Valor |
+|------|-------|
+| **Commit** | `feat(premium): Fase 9.4 — trilhas, jornada, biblioteca e benefícios` |
+| **Hash** | `1d59afc` (`1d59afcd9fec12eb1d5baeae5518bb1c5cfee4af`) |
+| **Push** | `origin/master` (`6418376..1d59afc`) |
+| **Build pré-push** | ✓ `npm run build` exit 0 |
+| **TypeScript** | ✓ sem erros no build |
+| **Migrations** | ✓ nenhuma criada nesta fase |
+| **Variáveis novas** | ✓ nenhuma obrigatória |
+| **Mercado Pago / webhook** | ✓ arquivos intactos (`/api/payments/webhook` → HTTP 200) |
+| **Supabase / Auth** | ✓ sem alterações |
+| **Deploy Vercel** | ✓ **Production** `dpl_pkTYiNeRoExJod5yPtYk1zeotMvt` |
+| **URL produção** | https://www.saudeebem.com.br |
+| **Alias** | `saude-e-b4e79ers6-quim-link.vercel.app` → `www.saudeebem.com.br` |
+
+### Validação pós-deploy (produção)
+
+| Área | Rota | Resultado |
+|------|------|-----------|
+| **Público** | `/` Home | ✓ HTTP 200 |
+| **Público** | `/clube` | ✓ HTTP 200 · Premium disponível |
+| **Público** | `/biblioteca` | ✓ HTTP 200 · Novidades, Objetivo, Dificuldade, Tempo |
+| **Público** | `/protocolos` | ✓ HTTP 200 |
+| **Público** | `/clube/trilhas` | ✓ HTTP 307 → `/entrar` (proteção membros) |
+| **Público** | `/clube/beneficios` | ✓ HTTP 307 → `/entrar` (proteção membros) |
+| **Premium** | `/minha-jornada` | ✓ HTTP 307 → `/entrar?redirect=/minha-jornada` |
+| **Premium** | `/minha-assinatura` | ✓ HTTP 307 → `/entrar?redirect=/minha-assinatura` |
+| **Premium** | `/clube/historico` (continuação) | ✓ HTTP 307 → `/entrar?redirect=/clube/historico` |
+| **Premium** | `/clube/trilhas` | ✓ HTTP 307 → `/entrar` |
+| **Premium** | `/clube/beneficios` | ✓ HTTP 307 → `/entrar` |
+| **Infra** | `/api/payments/webhook` | ✓ HTTP 200 (intacto) |
+| **Infra** | `/robots.txt` | ✓ HTTP 200 |
+
+### Pendente validação manual (requer login Premium)
+
+- Painel de progresso e trilha ativa em `/minha-jornada`
+- Listagem completa de 8 trilhas em `/clube/trilhas`
+- Hub de benefícios (4 blocos) em `/clube/beneficios`
+- Continuar lendo na jornada com sessão autenticada
+
+**Status:** Fase 9.4 oficialmente concluída em produção.

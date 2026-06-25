@@ -87,8 +87,8 @@ export function ClubBenefitsSplit() {
               </li>
             ))}
           </ul>
-          <Button href={routes.clubePremium} variant="gold" className="mt-8 w-full justify-center">
-            Ver planos premium
+          <Button href={routes.assinar} variant="gold" className="mt-8 w-full justify-center">
+            Assinar Premium
           </Button>
         </Card>
       </div>

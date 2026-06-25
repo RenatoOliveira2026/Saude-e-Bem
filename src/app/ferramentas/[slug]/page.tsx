@@ -16,6 +16,8 @@ import {
 import { routes } from "@/lib/routes";
 import { buildContentMetadata } from "@/lib/seo/metadata";
 import { assertValidPublicSlug } from "@/lib/seo/slug";
+import { breadcrumbJsonLd, webApplicationJsonLd } from "@/lib/seo/json-ld";
+import { JsonLdScript } from "@/components/seo/JsonLd";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
@@ -56,6 +58,20 @@ export default async function FerramentaDetailPage({ params }: PageProps) {
   if (tool.isPremium) {
     return (
       <>
+        <JsonLdScript
+          data={[
+            breadcrumbJsonLd([
+              { name: "Início", path: routes.home },
+              { name: "Ferramentas", path: routes.ferramentas },
+              { name: tool.title },
+            ]),
+            webApplicationJsonLd({
+              title: tool.title,
+              description: tool.description,
+              path: routes.ferramenta(slug),
+            }),
+          ]}
+        />
         <Breadcrumbs
           items={[
             { label: "Início", href: routes.home },
@@ -105,6 +121,20 @@ export default async function FerramentaDetailPage({ params }: PageProps) {
 
   return (
     <>
+      <JsonLdScript
+        data={[
+          breadcrumbJsonLd([
+            { name: "Início", path: routes.home },
+            { name: "Ferramentas", path: routes.ferramentas },
+            { name: tool.title },
+          ]),
+          webApplicationJsonLd({
+            title: tool.title,
+            description: tool.description,
+            path: routes.ferramenta(slug),
+          }),
+        ]}
+      />
       <Breadcrumbs
         items={[
           { label: "Início", href: routes.home },
@@ -171,8 +201,8 @@ export default async function FerramentaDetailPage({ params }: PageProps) {
         description="Protocolos personalizados baseados no seu perfil de saúde."
         primaryLabel="Ver protocolos"
         primaryHref={routes.protocolos}
-        secondaryLabel="Clube Saúde & Bem"
-        secondaryHref={routes.clube}
+        secondaryLabel="Assinar Premium"
+        secondaryHref={routes.assinar}
       />
       <CrossLinks />
     </>

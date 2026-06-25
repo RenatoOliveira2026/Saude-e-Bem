@@ -16,20 +16,20 @@ export function JourneyClubCta() {
           <div className="relative flex flex-col items-start justify-between gap-8 md:flex-row md:items-center">
             <div className="max-w-lg">
               <p className="font-heading text-xs font-semibold uppercase tracking-widest text-gold">
-                Exclusivo
+                Premium disponível
               </p>
               <h2 className="mt-3 font-heading text-2xl text-off-white md:text-3xl">
                 Clube Saúde & Bem
               </h2>
               <p className="mt-4 text-sm leading-relaxed text-off-white/70">
-                Desbloqueie protocolos premium, comunidade privada, ferramentas
-                avançadas e acompanhamento contínuo para acelerar sua jornada.
+                Desbloqueie protocolos premium, ferramentas avançadas e biblioteca
+                ampliada com acesso imediato após a confirmação do pagamento.
               </p>
               <ul className="mt-6 space-y-2">
                 {[
                   "Protocolos exclusivos atualizados mensalmente",
-                  "Comunidade fechada com especialistas",
-                  "Biblioteca ampliada e suporte prioritário",
+                  "Ferramentas avançadas e biblioteca ampliada",
+                  "Checkout seguro via Mercado Pago",
                 ].map((item) => (
                   <li
                     key={item}
@@ -42,16 +42,16 @@ export function JourneyClubCta() {
               </ul>
             </div>
             <div className="flex w-full flex-col gap-3 sm:w-auto sm:min-w-[200px]">
-              <Button href={routes.clube} variant="gold" size="lg">
-                Conhecer o Clube
+              <Button href={routes.assinar} variant="gold" size="lg">
+                Assinar Premium
               </Button>
               <Button
-                href={`${routes.clube}#lista-espera`}
+                href={`${routes.clube}#planos`}
                 variant="outline"
                 size="md"
                 className="border-off-white/30 text-off-white hover:bg-off-white/10"
               >
-                Entrar na lista VIP
+                Conhecer benefícios
               </Button>
             </div>
           </div>

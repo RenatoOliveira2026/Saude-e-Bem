@@ -31,7 +31,7 @@ export function ProtocolsPremiumSection({ protocols }: ProtocolsPremiumSectionPr
       />
 
       {protocols.length === 0 ? (
-        <HomeEmptyNote message="Novos protocolos serão publicados em breve. Enquanto isso, explore artigos e ferramentas gratuitas." />
+        <HomeEmptyNote message="Explore artigos e ferramentas gratuitas enquanto novos protocolos são publicados." />
       ) : (
         <div className="grid gap-6 md:grid-cols-2">
           {protocols.map((protocol) => (

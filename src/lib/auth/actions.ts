@@ -9,6 +9,7 @@ import {
 } from "@/lib/supabase/config";
 import { routes } from "@/lib/routes";
 import { buildAuthVerifyUrl } from "@/lib/auth/callback-url";
+import { safePostAuthRedirect } from "@/lib/auth/safe-redirect";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { isRedirectError } from "next/dist/client/components/redirect-error";
@@ -21,10 +22,7 @@ export type AuthActionState = {
 
 function getRedirectPath(formData: FormData): string {
   const redirectTo = formData.get("redirect")?.toString();
-  if (redirectTo?.startsWith("/") && !redirectTo.startsWith("//")) {
-    return redirectTo;
-  }
-  return routes.minhaJornada;
+  return safePostAuthRedirect(redirectTo, routes.minhaJornada);
 }
 
 function rethrowIfRedirect(err: unknown): void {
@@ -46,6 +44,7 @@ export async function signUp(
   const email = formData.get("email")?.toString().trim();
   const password = formData.get("password")?.toString();
   const goal = formData.get("goal")?.toString().trim();
+  const postAuthPath = getRedirectPath(formData);
 
   if (!name || !email || !password) {
     return { error: "Preencha nome, e-mail e senha." };
@@ -66,7 +65,7 @@ export async function signUp(
       password,
       options: {
         data: { name, goal: goal || null },
-        emailRedirectTo: buildAuthVerifyUrl(routes.minhaJornada),
+        emailRedirectTo: buildAuthVerifyUrl(postAuthPath),
       },
     });
 
@@ -98,13 +97,14 @@ export async function signUp(
   }
 
   if (hasSession) {
-    redirect(routes.minhaJornada);
+    redirect(postAuthPath);
   }
 
-  return {
-    success:
-      "Conta criada! Verifique seu e-mail para confirmar o cadastro e acessar sua jornada.",
-  };
+  const successMessage = postAuthPath.startsWith(routes.assinar)
+    ? "Conta criada! Confirme seu e-mail para concluir a assinatura Premium."
+    : "Conta criada! Verifique seu e-mail para confirmar o cadastro e acessar sua jornada.";
+
+  return { success: successMessage };
 }
 
 export async function signIn(

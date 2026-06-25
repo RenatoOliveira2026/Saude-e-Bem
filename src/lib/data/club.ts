@@ -92,14 +92,24 @@ export const clubTestimonials = [
 
 export const clubFaqs = [
   {
-    question: "Quando o Clube será lançado?",
+    question: "Como funciona a assinatura Premium?",
     answer:
-      "Estamos na fase final de preparação. Membros da lista de espera terão acesso antecipado e condições especiais de lançamento.",
+      "Escolha o plano mensal ou anual, pague com PIX, cartão ou boleto via Mercado Pago e receba acesso imediato ao Clube após a confirmação do pagamento.",
+  },
+  {
+    question: "O pagamento é seguro?",
+    answer:
+      "Sim. O checkout é processado pelo Mercado Pago, com criptografia e proteção antifraude. Não armazenamos dados do seu cartão em nossos servidores.",
   },
   {
     question: "Posso cancelar a qualquer momento?",
     answer:
       "Sim. No plano mensal, o cancelamento é livre e sem multas. No plano anual, você mantém acesso até o fim do período contratado.",
+  },
+  {
+    question: "Quando meu Premium é ativado?",
+    answer:
+      "No cartão, a ativação é imediata. No PIX, em poucos minutos após a confirmação. No boleto, após a compensação bancária — acompanhe em Minha Assinatura.",
   },
   {
     question: "Os protocolos substituem acompanhamento médico?",
@@ -114,7 +124,7 @@ export const clubFaqs = [
 ] as const;
 
 export const clubStats = [
-  { value: "2.400+", label: "Na lista de espera", icon: "users" as IconName },
+  { value: "2.400+", label: "Membros na comunidade", icon: "users" as IconName },
   { value: "50+", label: "Protocolos premium", icon: "sparkle" as IconName },
   { value: "12", label: "Especialistas parceiros", icon: "star" as IconName },
 ] as const;

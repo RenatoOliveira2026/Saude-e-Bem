@@ -35,7 +35,7 @@ export function NewsletterSection() {
               Obrigado por se inscrever!
             </p>
             <p className="mt-1 text-sm text-muted">
-              Em breve você receberá nossos melhores conteúdos.
+              Você receberá nossos melhores conteúdos no seu e-mail.
             </p>
           </div>
         ) : (

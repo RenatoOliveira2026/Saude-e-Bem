@@ -3,8 +3,6 @@ import {
   ClubFaq,
   ClubStats,
   ClubTestimonials,
-  ClubVipList,
-  ClubWaitlist,
   CrossLinks,
 } from "@/components/pages";
 import {
@@ -15,23 +13,24 @@ import {
   ClubPlanComparison,
 } from "@/components/club/ClubPublicSections";
 import { ClubPremiumProtocolsSection } from "@/components/club/ClubPremiumProtocolsSection";
-import { LaunchFunnelCta } from "@/components/launch";
+import { ClubTrustSection } from "@/components/club/ClubTrustSection";
 import { PageHero } from "@/components/layout/PageHero";
 import { JsonLdScript } from "@/components/seo/JsonLd";
+import { clubFaqs } from "@/lib/data/club";
 import { fetchActiveMembershipPlans } from "@/lib/membership";
 import { routes } from "@/lib/routes";
-import { webPageJsonLd } from "@/lib/seo/json-ld";
+import { faqJsonLd, webPageJsonLd } from "@/lib/seo/json-ld";
 import { buildContentMetadata } from "@/lib/seo/metadata";
 
-const CLUBE_TITLE = "Clube Saúde & Bem — Área Premium";
+const CLUBE_TITLE = "Clube Saúde & Bem — Assinatura Premium";
 const CLUBE_DESCRIPTION =
-  "Comunidade premium com protocolos exclusivos, ferramentas avançadas, biblioteca ampliada e acompanhamento contínuo para sua jornada de saúde e longevidade.";
+  "Assine o Clube Saúde & Bem Premium: protocolos exclusivos, ferramentas avançadas, biblioteca ampliada e checkout seguro via Mercado Pago. Compare plano gratuito e premium.";
 
 export const metadata = buildContentMetadata({
   title: CLUBE_TITLE,
   description: CLUBE_DESCRIPTION,
   path: routes.clube,
-  keywords: "clube, premium, assinatura, saúde, bem-estar, longevidade",
+  keywords: "clube, premium, assinatura, saúde, bem-estar, longevidade, mercado pago",
 });
 
 export default async function ClubePage() {
@@ -40,16 +39,19 @@ export default async function ClubePage() {
   return (
     <>
       <JsonLdScript
-        data={webPageJsonLd({
-          title: CLUBE_TITLE,
-          description: CLUBE_DESCRIPTION,
-          path: routes.clube,
-        })}
+        data={[
+          webPageJsonLd({
+            title: CLUBE_TITLE,
+            description: CLUBE_DESCRIPTION,
+            path: routes.clube,
+          }),
+          faqJsonLd([...clubFaqs]),
+        ]}
       />
       <PageHero
-        badge="Clube Premium"
+        badge="Premium disponível"
         title="Clube Saúde & Bem"
-        description="O próximo nível da sua jornada de saúde. Acesso premium a protocolos avançados, ferramentas exclusivas, biblioteca ampliada e área de membros dedicada."
+        description="Assinatura ativa — protocolos avançados, ferramentas exclusivas, biblioteca ampliada e área de membros com checkout seguro via Mercado Pago."
       />
       <ClubIntroSection />
       <ClubStats />
@@ -58,12 +60,10 @@ export default async function ClubePage() {
       <ClubBenefitsGrid />
       <ClubPlanComparison />
       <ClubMembershipPlans plans={plans} />
-      <ClubVipList />
       <ClubTestimonials />
+      <ClubTrustSection />
       <ClubFaq />
       <ClubCtaBand />
-      <ClubWaitlist />
-      <LaunchFunnelCta background="gold" />
       <CrossLinks />
     </>
   );

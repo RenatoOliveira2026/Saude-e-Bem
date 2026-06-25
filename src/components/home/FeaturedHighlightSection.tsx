@@ -138,7 +138,7 @@ export function FeaturedHighlightSection({
 export function FeaturedHighlightEmpty() {
   return (
     <Section background="default" id="destaques" spacing="compact">
-      <HomeEmptyNote message="Em breve, novos conteúdos em destaque. Explore protocolos e a biblioteca gratuita." />
+      <HomeEmptyNote message="Explore protocolos e a biblioteca gratuita enquanto preparamos novos destaques." />
     </Section>
   );
 }

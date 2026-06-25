@@ -20,6 +20,8 @@ import { trackEvent } from "@/lib/analytics/track-event";
 import { routes } from "@/lib/routes";
 import { buildContentMetadata } from "@/lib/seo/metadata";
 import { assertValidPublicSlug } from "@/lib/seo/slug";
+import { breadcrumbJsonLd, howToJsonLd } from "@/lib/seo/json-ld";
+import { JsonLdScript } from "@/components/seo/JsonLd";
 import { fetchAffiliatesForContentCategory } from "@/lib/supabase/services/affiliates.public";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
@@ -91,6 +93,24 @@ export default async function ProtocoloDetailPage({ params }: PageProps) {
 
   return (
     <>
+      <JsonLdScript
+        data={[
+          breadcrumbJsonLd([
+            { name: "Início", path: routes.home },
+            { name: "Protocolos", path: routes.protocolos },
+            { name: protocol.title },
+          ]),
+          howToJsonLd({
+            title: protocol.title,
+            description: protocol.seoDescription ?? protocol.description,
+            path: routes.protocolo(slug),
+            steps: protocol.steps.map((step) => ({
+              title: step.title,
+              description: step.description,
+            })),
+          }),
+        ]}
+      />
       <Breadcrumbs
         items={[
           { label: "Início", href: routes.home },

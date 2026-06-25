@@ -140,6 +140,7 @@ export const footerNav = {
   ],
   comunidade: [
     { label: "Clube Saúde & Bem", href: routes.clube },
+    { label: "Assinar Premium", href: routes.assinar },
     { label: "Sobre", href: routes.clube },
     { label: "Contato", href: "mailto:contato@saudeebem.com.br" },
   ],

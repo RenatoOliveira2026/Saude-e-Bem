@@ -118,6 +118,43 @@ export function bookJsonLd(input: {
   };
 }
 
+export function howToJsonLd(input: {
+  title: string;
+  description: string;
+  path: string;
+  steps: { title: string; description: string }[];
+}): JsonLd {
+  return {
+    "@context": "https://schema.org",
+    "@type": "HowTo",
+    name: input.title,
+    description: input.description,
+    url: absoluteUrl(input.path),
+    step: input.steps.map((step, index) => ({
+      "@type": "HowToStep",
+      position: index + 1,
+      name: step.title,
+      text: step.description,
+    })),
+  };
+}
+
+export function webApplicationJsonLd(input: {
+  title: string;
+  description: string;
+  path: string;
+}): JsonLd {
+  return {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    name: input.title,
+    description: input.description,
+    url: absoluteUrl(input.path),
+    applicationCategory: "HealthApplication",
+    operatingSystem: "Web",
+  };
+}
+
 export function productJsonLd(input: {
   title: string;
   description: string;

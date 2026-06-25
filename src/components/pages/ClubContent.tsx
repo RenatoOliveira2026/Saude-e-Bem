@@ -176,7 +176,7 @@ export function ClubTestimonials() {
     <Section background="white">
       <div className="mx-auto mb-12 max-w-2xl text-center">
         <h2 className="font-heading text-3xl text-forest">
-          O que dizem os beta testers
+          O que dizem nossos membros
         </h2>
       </div>
       <div className="grid gap-6 md:grid-cols-3">

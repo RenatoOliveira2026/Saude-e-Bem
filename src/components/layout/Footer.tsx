@@ -6,7 +6,7 @@ import Link from "next/link";
 
 const footerSections = {
   recursos: [
-    { label: "Perfil de Saúde", href: routes.ferramentas },
+    { label: "Perfil de Saúde", href: routes.minhaSaude },
     { label: "Protocolos", href: routes.protocolos },
     { label: "Ferramentas", href: routes.ferramentas },
     { label: "Biblioteca", href: routes.biblioteca },
@@ -15,6 +15,7 @@ const footerSections = {
     { label: "Blog", href: routes.blog },
     { label: "Artigos", href: routes.blog },
     { label: "Clube Saúde & Bem", href: routes.clube },
+    { label: "Assinar Premium", href: routes.assinar },
   ],
 } as const;
 

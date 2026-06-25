@@ -10,11 +10,18 @@ import { Input, Select } from "@/components/ui/Input";
 import { signUp, type AuthActionState } from "@/lib/auth/actions";
 import { goalSelectOptions } from "@/lib/journey/constants";
 import { routes } from "@/lib/routes";
-import { useActionState } from "react";
+import { useSearchParams } from "next/navigation";
+import { Suspense, useActionState } from "react";
 
 const initialState: AuthActionState = {};
 
-export function SignUpForm() {
+function SignUpFormFields() {
+  const searchParams = useSearchParams();
+  const redirect = searchParams.get("redirect") ?? "";
+  const entrarHref = redirect
+    ? `${routes.entrar}?redirect=${encodeURIComponent(redirect)}`
+    : routes.entrar;
+
   const [state, formAction, pending] = useActionState(signUp, initialState);
   const emailExists = state.errorCode === "email_exists";
 
@@ -24,7 +31,7 @@ export function SignUpForm() {
       description="Comece sua jornada personalizada com protocolos, ferramentas e conteúdo curado."
       footer={
         <>
-          Já tem conta? <AuthLink href={routes.entrar}>Entrar</AuthLink>
+          Já tem conta? <AuthLink href={entrarHref}>Entrar</AuthLink>
         </>
       }
     >
@@ -33,7 +40,7 @@ export function SignUpForm() {
           <AuthMessage type="error" message={state.error} />
           {emailExists && (
             <p className="text-sm text-muted">
-              <AuthLink href={routes.entrar}>Ir para o login</AuthLink>
+              <AuthLink href={entrarHref}>Ir para o login</AuthLink>
               {" · "}
               <AuthLink href={routes.recuperarSenha}>Redefinir senha</AuthLink>
             </p>
@@ -44,6 +51,7 @@ export function SignUpForm() {
 
       {!state.success && !emailExists && (
         <form action={formAction} className="space-y-5">
+          {redirect ? <input type="hidden" name="redirect" value={redirect} /> : null}
           <Input
             label="Nome completo"
             name="name"
@@ -85,7 +93,7 @@ export function SignUpForm() {
 
       {emailExists && (
         <div className="flex flex-col gap-3 pt-2">
-          <Button href={routes.entrar} variant="primary" size="md" className="w-full justify-center">
+          <Button href={entrarHref} variant="primary" size="md" className="w-full justify-center">
             Entrar com este e-mail
           </Button>
           <Button
@@ -99,5 +107,19 @@ export function SignUpForm() {
         </div>
       )}
     </AuthLayout>
+  );
+}
+
+export function SignUpForm() {
+  return (
+    <Suspense
+      fallback={
+        <AuthLayout title="Criar conta" description="Carregando formulário…">
+          <p className="text-sm text-muted">Aguarde…</p>
+        </AuthLayout>
+      }
+    >
+      <SignUpFormFields />
+    </Suspense>
   );
 }

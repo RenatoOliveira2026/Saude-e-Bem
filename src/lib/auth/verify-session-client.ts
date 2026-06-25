@@ -1,3 +1,4 @@
+import { safePostAuthRedirect } from "@/lib/auth/safe-redirect";
 import type { EmailOtpType } from "@supabase/supabase-js";
 import type { SupabaseClient } from "@supabase/supabase-js";
 
@@ -13,10 +14,7 @@ export function safeAuthRedirectPath(
   path: string | null,
   fallback: string,
 ): string {
-  if (path?.startsWith("/") && !path.startsWith("//")) {
-    return path;
-  }
-  return fallback;
+  return safePostAuthRedirect(path ?? undefined, fallback);
 }
 
 export function parseHashParams(hash: string): URLSearchParams {

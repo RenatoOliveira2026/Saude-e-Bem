@@ -30,7 +30,7 @@ export function LibraryPremiumSection({ resources }: LibraryPremiumSectionProps)
       />
 
       {resources.length === 0 ? (
-        <HomeEmptyNote message="Materiais gratuitos em preparação. Volte em breve ou leia artigos no blog." />
+        <HomeEmptyNote message="Explore artigos no blog ou visite a biblioteca de materiais gratuitos." />
       ) : (
         <div className="grid gap-5 sm:grid-cols-2">
           {resources.map((resource) => (

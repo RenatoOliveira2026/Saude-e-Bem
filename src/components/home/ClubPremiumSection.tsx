@@ -12,23 +12,28 @@ export function ClubPremiumSection() {
         <div className="grid gap-10 lg:grid-cols-2 lg:items-center lg:gap-16">
           <div>
             <Badge variant="gold" className="mb-5">
-              Em breve
+              Premium disponível
             </Badge>
             <h2 className="font-heading text-3xl text-off-white text-balance md:text-4xl">
-              Em breve: Clube Saúde & Bem
+              Clube Saúde & Bem Premium
             </h2>
             <p className="mt-4 max-w-lg text-lg leading-relaxed text-off-white/75">
-              O próximo nível da sua jornada — comunidade, conteúdo premium e
-              ferramentas avançadas em um só lugar.
+              Protocolos exclusivos, ferramentas avançadas, biblioteca ampliada e
+              área de membros — assine agora com checkout seguro via Mercado Pago.
             </p>
-            <Button
-              href={`${routes.lancamento}#lista-vip`}
-              variant="gold"
-              size="lg"
-              className="mt-8"
-            >
-              Entrar na lista VIP
-            </Button>
+            <div className="mt-8 flex flex-wrap gap-3">
+              <Button href={routes.assinar} variant="gold" size="lg">
+                Assinar Premium
+              </Button>
+              <Button
+                href={`${routes.clube}#planos`}
+                variant="outline"
+                size="lg"
+                className="border-off-white/30 text-off-white hover:bg-off-white/10"
+              >
+                Conhecer benefícios
+              </Button>
+            </div>
           </div>
 
           <ul className="grid gap-4 sm:grid-cols-2">

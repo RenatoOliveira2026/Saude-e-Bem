@@ -190,4 +190,32 @@ flowchart TB
 
 ## 8. Deploy
 
+| Campo | Valor |
+|-------|-------|
+| **Commit** | `4d93b6e` — `feat(recommendations): Fase 10.0 — motor de recomendação inteligente` |
+| **Deploy ID** | `dpl_CGZoWFtcrxrAWgEvMRcUz41EN1Fp` |
+| **URL deploy** | https://saude-e-lamod7fa9-quim-link.vercel.app |
+| **Produção** | https://www.saudeebem.com.br |
+
+### Validação pré-push
+
+| Check | Resultado |
+|-------|-----------|
+| `npm run build` | ✓ OK |
+| Áreas restritas (MP, Auth, Webhook, Supabase schema, Premium) | ✓ Nenhum arquivo alterado |
+| `/minha-jornada` usuário logado (local) | ✓ 11/11 `validate-phase-100.mjs` |
+| `/admin/recomendacoes` não-admin | ✓ Redirect 307 |
+| `recommendation_click` | ✓ `RecommendationLink` → `sendGa4RecommendationClick` |
+| Webhook intacto | ✓ HTTP 200 |
+
+### Validação pós-deploy (produção)
+
+| Check | Resultado |
+|-------|-----------|
+| `validate-phase-100.mjs` produção | ✓ 11/11 PASS |
+| `/minha-jornada` — seção inteligente | ✓ Presente |
+| Cards e links de recomendação | ✓ Renderizados |
+| Usuário gratuito | ✓ Sem erro |
+| `/admin/recomendacoes` anônimo | ✓ Redirect login |
+
 Seguir fluxo das fases anteriores: commit, push, Vercel com `NODE_OPTIONS=--use-system-ca` se necessário.

@@ -11,6 +11,7 @@ import { TrailAnalyticsTracker } from "@/components/analytics/TrailAnalyticsTrac
 import { ContinueReadingSection } from "@/components/club/ContinueReadingSection";
 import { EngagementPanel } from "@/components/engagement/EngagementPanel";
 import { LoyaltyPanel } from "@/components/loyalty/LoyaltyPanel";
+import { IntelligentJourneySection } from "./IntelligentJourneySection";
 import { JourneyClubCta } from "./JourneyClubCta";
 import { JourneyEmptyState } from "./JourneyEmptyState";
 import { JourneyProgressSection } from "./JourneyProgressSection";
@@ -86,6 +87,13 @@ export function JourneyDashboard({ data }: JourneyDashboardProps) {
       <Section background="default">
         <Container>
           <GoalCard data={data} />
+        </Container>
+      </Section>
+
+      {/* 3b. Motor de recomendação — Fase 10.0 */}
+      <Section background="sage" spacing="compact">
+        <Container>
+          <IntelligentJourneySection panel={data.intelligentPanel} />
         </Container>
       </Section>
 

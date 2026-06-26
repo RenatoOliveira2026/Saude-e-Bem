@@ -113,6 +113,12 @@ export const adminNavItems: AdminNavItem[] = [
     roles: ["super_admin", "admin"],
   },
   {
+    label: "Recomendações",
+    href: adminRoutes.recomendacoes,
+    icon: "sparkle",
+    roles: ["super_admin", "admin"],
+  },
+  {
     label: "Usuários",
     href: adminRoutes.usuarios,
     icon: "users",

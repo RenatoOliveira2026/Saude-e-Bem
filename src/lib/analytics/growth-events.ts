@@ -15,7 +15,8 @@ export type GrowthFunnelEvent =
   | "trail_started"
   | "trail_completed"
   | "onboarding_complete"
-  | "content_shared";
+  | "content_shared"
+  | "recommendation_click";
 
 export interface GrowthEventParams {
   source?: string;
@@ -105,6 +106,10 @@ export function sendGa4ContentShared(params?: GrowthEventParams): void {
   sendGrowthEvent("content_shared", params);
 }
 
+export function sendGa4RecommendationClick(params?: GrowthEventParams): void {
+  sendGrowthEvent("recommendation_click", params);
+}
+
 /** Catálogo documentado para admin / GTM */
 export const GROWTH_FUNNEL_EVENTS: {
   event: GrowthFunnelEvent;
@@ -123,4 +128,9 @@ export const GROWTH_FUNNEL_EVENTS: {
   { event: "trail_completed", label: "Trilha concluída", description: "100% de uma trilha" },
   { event: "onboarding_complete", label: "Onboarding", description: "Wizard concluído" },
   { event: "content_shared", label: "Compartilhamento", description: "ShareButton" },
+  {
+    event: "recommendation_click",
+    label: "Clique em recomendação",
+    description: "Motor Fase 10.0 — Minha Jornada",
+  },
 ];

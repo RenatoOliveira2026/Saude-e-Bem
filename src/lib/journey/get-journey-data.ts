@@ -1,4 +1,5 @@
 import { getSessionProfile } from "@/lib/auth/session";
+import { getClubMembership } from "@/lib/club/access";
 import { fetchContinueReading } from "@/lib/club/services/intelligent-recommendations.service";
 import { getFeaturedProtocol, getProtocols } from "@/lib/data/repositories/protocols.repository";
 import {
@@ -15,6 +16,8 @@ import {
   pickRecommendedTrail,
 } from "@/lib/premium";
 import { routes } from "@/lib/routes";
+import { buildIntelligentJourneyPanel } from "@/lib/recommendation-engine/journey-panel";
+import { loadRecommendationCatalog } from "@/lib/recommendation-engine/catalog";
 import {
   formatMemberSince,
   getDaysOnJourney,
@@ -53,6 +56,8 @@ export async function getJourneyData(): Promise<JourneyData> {
     featuredLibrary,
     activity,
     continueReading,
+    membership,
+    catalog,
   ] = await Promise.all([
     getProtocols(),
     getLibraryResources(),
@@ -60,6 +65,8 @@ export async function getJourneyData(): Promise<JourneyData> {
     getFeaturedLibraryResource(),
     fetchUserActivitySnapshot(user.id),
     fetchContinueReading(user.id, 4).catch(() => []),
+    getClubMembership(user.id),
+    loadRecommendationCatalog(),
   ]);
 
   const recommendedProtocols = getRecommendedProtocols(
@@ -108,6 +115,16 @@ export async function getJourneyData(): Promise<JourneyData> {
     progress,
   });
 
+  const intelligentPanel = await buildIntelligentJourneyPanel({
+    userId: user.id,
+    goalKey,
+    isPremium: membership.isPremium,
+    activity,
+    trails,
+    activeTrail,
+    catalog,
+  });
+
   return {
     user,
     profileData,
@@ -129,6 +146,7 @@ export async function getJourneyData(): Promise<JourneyData> {
     continueReading,
     engagement,
     loyalty,
+    intelligentPanel,
   };
 }
 

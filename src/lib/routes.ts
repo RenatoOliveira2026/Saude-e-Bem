@@ -84,6 +84,7 @@ export const adminRoutes = {
   leadsSubscribersExport: "/api/admin/newsletter/export",
   analytics: "/admin/analytics",
   crescimento: "/admin/crescimento",
+  recomendacoes: "/admin/recomendacoes",
   conteudos: "/admin/conteudos",
   bibliotecaItens: "/admin/biblioteca-itens",
   bibliotecaItemNovo: "/admin/biblioteca-itens/novo",

@@ -4,6 +4,7 @@ import type { ContinueReadingItem } from "@/lib/club/types";
 import type { TrailProgress } from "@/lib/premium/trail-progress";
 import type { EngagementSnapshot } from "@/lib/engagement";
 import type { LoyaltySnapshot } from "@/lib/loyalty";
+import type { IntelligentJourneyPanel } from "@/lib/recommendation-engine/types";
 import type { UserProfileData } from "@/lib/supabase/types";
 import type { User } from "@supabase/supabase-js";
 
@@ -48,4 +49,6 @@ export interface JourneyData {
   /** Fase 9.5 — engajamento e fidelização */
   engagement: EngagementSnapshot;
   loyalty: LoyaltySnapshot;
+  /** Fase 10.0 — motor de recomendação inteligente */
+  intelligentPanel: IntelligentJourneyPanel;
 }

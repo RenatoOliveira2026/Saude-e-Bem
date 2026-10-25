@@ -1,9 +1,10 @@
 import { routes } from "@/lib/routes";
 
+// Apenas afirmações verificáveis: sem números de público ou resultados inventados.
 export const heroStats = [
-  { value: "12k+", label: "Pessoas impactadas" },
-  { value: "50+", label: "Protocolos validados" },
-  { value: "100%", label: "Base científica" },
+  { value: "Grátis", label: "Artigos e ferramentas para começar" },
+  { value: "A+", label: "Letra ajustável para leitura confortável" },
+  { value: "Zero", label: "Promessas milagrosas" },
 ] as const;
 
 export const healthProfiles = [
@@ -202,16 +203,14 @@ export const featuredArticles = [
 ] as const;
 
 export const clubBenefits = [
-  "Protocolos exclusivos atualizados mensalmente",
-  "Comunidade privada com especialistas",
-  "Lives e masterclasses ao vivo",
+  "Protocolos exclusivos com passo a passo",
   "Ferramentas avançadas de acompanhamento",
   "Biblioteca premium ampliada",
-  "Suporte prioritário da equipe",
+  "Navegação sem anúncios",
 ] as const;
 
 export const trustSignals = [
-  "Conteúdo revisado por especialistas",
+  "Política editorial transparente",
   "Baseado em evidências científicas",
   "Sem promessas milagrosas",
 ] as const;

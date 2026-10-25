@@ -47,7 +47,7 @@ export default function LancamentoPage() {
             </h1>
             <p className="mt-6 text-lg leading-relaxed text-off-white/75 text-pretty">
               Sua plataforma de saúde, longevidade e bem-estar — conteúdo confiável,
-              protocolos práticos, biblioteca curada e comunidade premium para
+              protocolos práticos, biblioteca curada e ferramentas de acompanhamento para
               transformar conhecimento em ação.
             </p>
             <div className="mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row">
@@ -145,7 +145,7 @@ export default function LancamentoPage() {
               </h2>
               <p className="mt-4 text-muted leading-relaxed">
                 Protocolos avançados, biblioteca ampliada, ferramentas exclusivas e
-                comunidade para quem quer acelerar resultados com acompanhamento contínuo.
+                navegação sem anúncios para quem quer evoluir com acompanhamento contínuo.
               </p>
               <Button href={routes.clube} variant="gold" size="md" className="mt-6">
                 Conhecer o Clube

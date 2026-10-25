@@ -31,7 +31,7 @@ export function Footer() {
               <LogoFooter />
               <p className="mt-6 max-w-sm text-sm leading-relaxed text-off-white/70">
                 Plataforma premium de saúde, bem-estar e longevidade. Ciência
-                aplicada, protocolos práticos e uma comunidade dedicada à sua
+                aplicada, protocolos práticos e leitura confortável para a sua
                 vitalidade consciente.
               </p>
               <div className="mt-8 flex items-center gap-3">
@@ -58,7 +58,7 @@ export function Footer() {
             {[
               {
                 title: "Base científica",
-                text: "Conteúdo fundamentado em evidências e revisado por especialistas.",
+                text: "Conteúdo baseado em evidências, com política editorial transparente.",
               },
               {
                 title: "Abordagem integrada",
@@ -91,6 +91,7 @@ export function Footer() {
           <FooterLink href={routes.termos}>Termos de uso</FooterLink>
           <FooterLink href={routes.cookies}>Cookies</FooterLink>
           <FooterLink href={routes.politicaEditorial}>Política editorial</FooterLink>
+          <FooterLink href={routes.anuncie}>Anuncie</FooterLink>
           <FooterLink href="mailto:contato@saudeebem.com.br">Contato</FooterLink>
         </div>
         <p className="text-xs text-off-white/40">

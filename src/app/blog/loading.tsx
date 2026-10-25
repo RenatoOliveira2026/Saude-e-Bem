@@ -7,7 +7,7 @@ export default function BlogLoading() {
       <PageHero
         badge="Blog"
         title="Artigos & insights de saúde"
-        description="Conteúdo escrito por especialistas para informar, inspirar e traduzir ciência em ações práticas."
+        description="Conteúdo da equipe Saúde & Bem para informar, inspirar e traduzir ciência em ações práticas."
       />
       <ContentListingLoading variant="blog" />
     </>

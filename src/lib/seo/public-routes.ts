@@ -25,6 +25,8 @@ export const KNOWN_ROOT_SEGMENTS = new Set([
   "perfil",
   "privacidade",
   "politica-editorial",
+  "anuncie",
+  "ads.txt",
   "cookies",
   "protocolos",
   "recomendados",

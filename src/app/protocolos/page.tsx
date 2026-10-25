@@ -80,7 +80,7 @@ export default async function ProtocolosPage() {
       <GlobalNewsletterSection source="protocolos" />
       <PageCta
         title="Protocolos premium no Clube Saúde & Bem"
-        description="Desbloqueie rotinas avançadas, acompanhamento e comunidade exclusiva para acelerar sua jornada."
+        description="Desbloqueie rotinas avançadas, biblioteca ampliada e ferramentas de acompanhamento."
         primaryLabel="Conhecer o Clube"
         primaryHref={routes.clube}
         secondaryLabel={user ? "Meu painel" : "Entrar"}

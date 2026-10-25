@@ -10,7 +10,7 @@ export const LAUNCH_BENEFITS: {
     icon: "vitality",
     title: "Conteúdo baseado em evidências",
     description:
-      "Artigos, protocolos e materiais curados por especialistas — sem promessas vazias.",
+      "Artigos, protocolos e materiais baseados em evidências — sem promessas vazias.",
   },
   {
     icon: "sparkle",

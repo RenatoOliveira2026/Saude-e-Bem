@@ -1,3 +1,4 @@
+import { AdPlacement } from "@/components/ads/AdPlacement";
 import { ArticleReadTracker } from "@/components/analytics/ArticleReadTracker";
 import { RelatedAffiliatesSection } from "@/components/affiliates";
 import { ContentMemberActions } from "@/components/club/ContentMemberActions";
@@ -201,6 +202,7 @@ export default async function ArtigoDetailPage({ params }: PageProps) {
             </Link>
             .
           </aside>
+          <AdPlacement placement="article" />
         </Container>
       </Section>
 

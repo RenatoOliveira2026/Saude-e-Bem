@@ -127,8 +127,8 @@ export function HeroSection() {
               className="absolute -bottom-4 -left-4 hidden rounded-xl border border-border bg-surface px-4 py-3 shadow-card md:block"
               aria-hidden="true"
             >
-              <p className="font-heading text-2xl font-bold text-forest">+15</p>
-              <p className="text-xs text-muted">Anos de qualidade de vida</p>
+              <p className="font-heading text-2xl font-bold text-forest">Grátis</p>
+              <p className="text-xs text-muted">Avaliação inicial de hábitos</p>
             </div>
           </div>
         </div>

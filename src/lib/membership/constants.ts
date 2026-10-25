@@ -37,7 +37,7 @@ export const FALLBACK_MEMBERSHIP_PLANS: MembershipPlanRecord[] = [
       "Biblioteca ampliada",
       "Ferramentas avançadas",
       "Área de membros do Clube",
-      "Suporte prioritário",
+      "Navegação sem anúncios",
     ],
     isActive: true,
     createdAt: new Date(0).toISOString(),
@@ -51,7 +51,6 @@ export const FALLBACK_MEMBERSHIP_PLANS: MembershipPlanRecord[] = [
     billingCycle: "annual",
     features: [
       "Tudo do Premium Mensal",
-      "Lives exclusivas gravadas",
       "Acesso antecipado a novidades",
       PREMIUM_ANNUAL_PLAN.savingsLabel ?? "Melhor custo-benefício",
     ],
@@ -69,8 +68,7 @@ export const CLUB_PLAN_COMPARISON: PlanComparisonRow[] = [
   { feature: "Biblioteca gratuita", free: true, premium: true },
   { feature: "Biblioteca premium", free: false, premium: true },
   { feature: "Área de membros do Clube", free: "Parcial", premium: true },
-  { feature: "Suporte prioritário", free: false, premium: true },
-  { feature: "Lives e masterclasses", free: false, premium: true },
+  { feature: "Navegação sem anúncios", free: false, premium: true },
 ];
 
 export const FREE_PLAN_BENEFITS = [
@@ -86,7 +84,7 @@ export const PREMIUM_PLAN_BENEFITS = [
   "Ferramentas premium e trackers",
   "Biblioteca ampliada com e-books premium",
   "Dashboard completo na área de membros",
-  "Suporte prioritário e comunidade",
+  "Navegação sem anúncios",
 ];
 
 export function formatMembershipPrice(plan: MembershipPlanRecord): string {

@@ -5,17 +5,7 @@ export const clubBenefits = [
   {
     icon: "sparkle" as IconName,
     title: "Protocolos exclusivos",
-    description: "Acesso a rotinas avançadas atualizadas mensalmente pela equipe.",
-  },
-  {
-    icon: "community" as IconName,
-    title: "Comunidade privada",
-    description: "Grupo fechado com especialistas, membros e suporte contínuo.",
-  },
-  {
-    icon: "live" as IconName,
-    title: "Lives & masterclasses",
-    description: "Encontros ao vivo mensais com profissionais convidados.",
+    description: "Rotinas avançadas com passo a passo, preparadas pela equipe.",
   },
   {
     icon: "tracker" as IconName,
@@ -28,9 +18,9 @@ export const clubBenefits = [
     description: "Guias, estudos e planos exclusivos para membros.",
   },
   {
-    icon: "support" as IconName,
-    title: "Suporte prioritário",
-    description: "Canal direto com a equipe Saúde & Bem para suas dúvidas.",
+    icon: "lock" as IconName,
+    title: "Navegação sem anúncios",
+    description: "Leia artigos e protocolos sem publicidade enquanto for membro.",
   },
 ] as const;
 
@@ -38,12 +28,12 @@ export const clubPlans: ClubPlan[] = [
   {
     id: "mensal",
     name: "Plano Mensal",
-    price: "R$ 29,90",
+    price: "R$ 19,90",
     period: "/mês",
     description: "Flexibilidade total para experimentar a experiência premium.",
     features: [
       "Todos os protocolos premium",
-      "Comunidade privada",
+      "Navegação sem anúncios",
       "Ferramentas avançadas",
       "Biblioteca ampliada",
     ],
@@ -51,44 +41,29 @@ export const clubPlans: ClubPlan[] = [
   {
     id: "anual",
     name: "Plano Anual",
-    price: "R$ 297,00",
+    price: "R$ 197,00",
     period: "/ano",
     description: "Melhor custo-benefício para quem leva longevidade a sério.",
     features: [
       "Tudo do plano mensal",
-      "Lives exclusivas gravadas",
-      "Suporte prioritário",
       "Acesso antecipado a novidades",
     ],
     highlighted: true,
     badge: "Mais Escolhido",
-    savingsLabel: "Economize R$ 61,80 por ano",
+    savingsLabel: "Economize R$ 41,80 por ano vs. mensal",
   },
 ];
 
-export const clubTestimonials = [
-  {
-    name: "Patricia M.",
-    role: "Empresária, 52 anos",
-    quote:
-      "Em 90 dias seguindo os protocolos do clube, minha energia e qualidade de sono mudaram completamente. Finalmente algo baseado em ciência.",
-    avatar: "PM",
-  },
-  {
-    name: "Roberto S.",
-    role: "Médico, 45 anos",
-    quote:
-      "Recomendo aos meus pacientes. A curadoria de conteúdo é impecável e a comunidade agrega muito valor.",
-    avatar: "RS",
-  },
-  {
-    name: "Luciana F.",
-    role: "Coach de bem-estar, 38 anos",
-    quote:
-      "As ferramentas de acompanhamento e os protocolos premium elevaram minha prática pessoal e profissional.",
-    avatar: "LF",
-  },
-] as const;
+/**
+ * Depoimentos só podem ser de membros reais, com autorização por escrito.
+ * Enquanto não houver, a seção não é exibida.
+ */
+export const clubTestimonials: ReadonlyArray<{
+  name: string;
+  role: string;
+  quote: string;
+  avatar: string;
+}> = [];
 
 export const clubFaqs = [
   {
@@ -124,9 +99,10 @@ export const clubFaqs = [
 ] as const;
 
 export const clubStats = [
-  { value: "2.400+", label: "Membros na comunidade", icon: "users" as IconName },
-  { value: "50+", label: "Protocolos premium", icon: "sparkle" as IconName },
-  { value: "12", label: "Especialistas parceiros", icon: "star" as IconName },
+  // Apenas afirmações verificáveis: sem contagem de membros ou parceiros inventada.
+  { value: "Premium", label: "Protocolos com passo a passo", icon: "sparkle" as IconName },
+  { value: "Exclusiva", label: "Biblioteca ampliada para membros", icon: "library" as IconName },
+  { value: "Avançadas", label: "Ferramentas de acompanhamento", icon: "tracker" as IconName },
 ] as const;
 
 export const clubVipList = [
@@ -143,27 +119,9 @@ export const clubVipList = [
       "Preço especial de lançamento e benefícios exclusivos reservados apenas para quem entrou na lista VIP.",
   },
   {
-    icon: "community" as IconName,
-    title: "Comunidade fundadora",
-    description:
-      "Grupo fechado com outros membros VIP, encontros de boas-vindas e canal direto com a equipe Saúde & Bem.",
-  },
-  {
     icon: "library" as IconName,
     title: "Materiais exclusivos",
     description:
-      "Guias, planos e masterclasses liberados antes do lançamento público do Clube.",
-  },
-  {
-    icon: "live" as IconName,
-    title: "Lives de pré-lançamento",
-    description:
-      "Convite para encontros ao vivo sobre longevidade, protocolos e novidades da plataforma.",
-  },
-  {
-    icon: "support" as IconName,
-    title: "Prioridade no suporte",
-    description:
-      "Atendimento preferencial e onboarding personalizado quando o Clube for aberto.",
+      "Guias e planos liberados antes do lançamento público do Clube.",
   },
 ] as const;

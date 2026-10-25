@@ -65,6 +65,16 @@ export default function PoliticaEditorialPage() {
         </p>
       </LegalSection>
 
+      <LegalSection title="Imagens">
+        <p>
+          As fotos que ilustram os artigos são do banco de imagens{" "}
+          <a href="https://unsplash.com" target="_blank" rel="noopener noreferrer">
+            Unsplash
+          </a>
+          , de uso livre. Elas têm função ilustrativa e não retratam pacientes nem casos reais.
+        </p>
+      </LegalSection>
+
       <LegalSection title="Correções e contato">
         <p>
           Encontrou um erro ou informação desatualizada? Escreva para{" "}

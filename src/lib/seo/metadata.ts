@@ -29,7 +29,8 @@ export function buildContentMetadata({
   const ogImage = imageUrl ? absoluteUrl(imageUrl) : absoluteUrl(DEFAULT_OG_IMAGE);
 
   return {
-    title: pageTitle,
+    // "absolute" evita que o template do layout repita o nome do site.
+    title: { absolute: pageTitle },
     description,
     ...(keywords ? { keywords: keywords.split(",").map((k) => k.trim()).filter(Boolean) } : {}),
     alternates: { canonical },

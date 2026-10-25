@@ -83,6 +83,9 @@ export function articleJsonLd(input: {
   path: string;
   imageUrl?: string;
   author: string;
+  /** Quando true, o autor é uma organização (equipe editorial), não uma pessoa. */
+  authorIsOrganization?: boolean;
+  authorUrl?: string;
   publishedAt?: string;
   isPremium?: boolean;
 }): JsonLd {
@@ -93,7 +96,11 @@ export function articleJsonLd(input: {
     description: input.description,
     url: absoluteUrl(input.path),
     image: input.imageUrl ? absoluteUrl(input.imageUrl) : absoluteUrl("/logo-saude-bem.png"),
-    author: { "@type": "Person", name: input.author },
+    author: {
+      "@type": input.authorIsOrganization ? "Organization" : "Person",
+      name: input.author,
+      ...(input.authorUrl ? { url: absoluteUrl(input.authorUrl) } : {}),
+    },
     publisher: { "@type": "Organization", name: SITE_NAME, logo: absoluteUrl("/logo-saude-bem.png") },
     ...(input.publishedAt ? { datePublished: input.publishedAt } : {}),
     isAccessibleForFree: !input.isPremium,

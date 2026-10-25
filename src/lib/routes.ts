@@ -44,6 +44,7 @@ export const routes = {
   privacidade: "/privacidade",
   termos: "/termos",
   cookies: "/cookies",
+  politicaEditorial: "/politica-editorial",
   protocolo: (slug: string) => `/protocolos/${slug}`,
   ferramenta: (slug: string) => `/ferramentas/${slug}`,
   bibliotecaItem: (slug: string) => `/biblioteca/${slug}`,

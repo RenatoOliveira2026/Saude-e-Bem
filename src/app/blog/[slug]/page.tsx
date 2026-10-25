@@ -22,6 +22,8 @@ import { trackEvent } from "@/lib/analytics/track-event";
 import { extractFaqFromBlocks } from "@/lib/blog/article-faq";
 import { resolveArticleCoverUrl } from "@/lib/blog/resolve-article-cover";
 import { routes } from "@/lib/routes";
+import { isEditorialAuthor } from "@/lib/content/editorial";
+import Link from "next/link";
 import { articleJsonLd, breadcrumbJsonLd, faqJsonLd, personJsonLd } from "@/lib/seo/json-ld";
 import { getInternalLinksForContent } from "@/lib/seo/internal-links";
 import { buildContentMetadata } from "@/lib/seo/metadata";
@@ -96,6 +98,7 @@ export default async function ArtigoDetailPage({ params }: PageProps) {
     .slice(0, 3);
 
   const faqItems = extractFaqFromBlocks(article.contentBlocks);
+  const editorialAuthor = isEditorialAuthor(article.author);
   const internalLinks = getInternalLinksForContent("article", slug, article.category);
   const jsonLd = [
     breadcrumbJsonLd([
@@ -109,14 +112,20 @@ export default async function ArtigoDetailPage({ params }: PageProps) {
       path: routes.artigo(slug),
       imageUrl: resolveArticleCoverUrl(article),
       author: article.author,
+      authorIsOrganization: editorialAuthor,
+      authorUrl: editorialAuthor ? routes.politicaEditorial : undefined,
       publishedAt: article.publishedAt,
       isPremium: article.isPremium,
     }),
-    personJsonLd({
-      name: article.author,
-      description: article.authorRole,
-      jobTitle: article.authorRole,
-    }),
+    ...(editorialAuthor
+      ? []
+      : [
+          personJsonLd({
+            name: article.author,
+            description: article.authorRole,
+            jobTitle: article.authorRole,
+          }),
+        ]),
     ...(faqItems.length > 0 ? [faqJsonLd(faqItems)] : []),
   ];
 
@@ -164,7 +173,14 @@ export default async function ArtigoDetailPage({ params }: PageProps) {
       <Section background="white">
         <Container size="sm">
           <p className="text-sm text-muted">
-            {article.author} · {article.authorRole} · {article.publishedAt}
+            {editorialAuthor ? (
+              <Link href={routes.politicaEditorial} className="underline underline-offset-2">
+                {article.author}
+              </Link>
+            ) : (
+              article.author
+            )}{" "}
+            · {article.authorRole} · {article.publishedAt}
           </p>
           <article className="mt-8">
             <PublicArticleBody
@@ -172,6 +188,19 @@ export default async function ArtigoDetailPage({ params }: PageProps) {
               fallbackParagraphs={article.content}
             />
           </article>
+          <aside
+            className="mt-10 rounded-xl border border-border bg-sage-muted/40 p-4 text-sm leading-relaxed text-muted"
+            aria-label="Aviso sobre o conteúdo"
+          >
+            <strong>Conteúdo informativo.</strong> Este artigo tem caráter educacional e não
+            substitui consulta, diagnóstico ou tratamento com profissional de saúde. Em caso de
+            sintomas ou dúvidas sobre sua saúde, procure um médico ou nutricionista. Saiba como
+            produzimos nossos conteúdos na{" "}
+            <Link href={routes.politicaEditorial} className="underline underline-offset-2">
+              política editorial
+            </Link>
+            .
+          </aside>
         </Container>
       </Section>
 

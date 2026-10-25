@@ -90,6 +90,7 @@ export function Footer() {
           <FooterLink href={routes.privacidade}>Privacidade</FooterLink>
           <FooterLink href={routes.termos}>Termos de uso</FooterLink>
           <FooterLink href={routes.cookies}>Cookies</FooterLink>
+          <FooterLink href={routes.politicaEditorial}>Política editorial</FooterLink>
           <FooterLink href="mailto:contato@saudeebem.com.br">Contato</FooterLink>
         </div>
         <p className="text-xs text-off-white/40">

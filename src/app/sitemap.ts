@@ -27,6 +27,7 @@ const STATIC_SITEMAP_PATHS = [
   routes.privacidade,
   routes.termos,
   routes.cookies,
+  routes.politicaEditorial,
 ] as const;
 
 function url(path: string, lastModified = new Date()): MetadataRoute.Sitemap[number] {

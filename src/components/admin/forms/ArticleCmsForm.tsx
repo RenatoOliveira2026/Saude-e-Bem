@@ -128,7 +128,7 @@ export function ArticleCmsForm({ article }: ArticleCmsFormProps) {
             options={categoryOptions}
           />
           <Input label="Autor" name="author" value={author} onChange={(e) => setAuthor(e.target.value)} />
-          <Input label="Cargo" name="author_role" defaultValue={article?.authorRole ?? "Medicina Preventiva"} />
+          <Input label="Cargo" name="author_role" defaultValue={article?.authorRole ?? "Equipe editorial"} />
           <Input label="Tempo de leitura" name="read_time" value={readTime} onChange={(e) => setReadTime(e.target.value)} />
           <Input label="Data publicação" name="published_at" defaultValue={article?.publishedAt ?? ""} placeholder="28 Mai 2026" />
         </div>

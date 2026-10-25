@@ -9,8 +9,8 @@ export const CATEGORY_COVERS = {
 };
 
 const AUTHORS = [
-  { author: "Dra. Marina Alves", author_role: "Medicina Preventiva" },
-  { author: "Dr. Rafael Costa", author_role: "Nutrição Clínica" },
+  { author: "Equipe Saúde & Bem", author_role: "Equipe editorial" },
+  { author: "Equipe Saúde & Bem", author_role: "Equipe editorial" },
 ];
 
 export function buildArticleBlocks(def) {

@@ -5,11 +5,7 @@ import { LogoHeader } from "@/components/brand/Logo";
 import { FontSizeControl } from "@/components/layout/FontSizeControl";
 import { Button } from "@/components/ui/Button";
 import { cn } from "@/lib/cn";
-import {
-  authNavLoggedIn,
-  mainNav,
-  routes,
-} from "@/lib/routes";
+import { authNavLoggedIn, mainNav, routes } from "@/lib/routes";
 import type { User } from "@supabase/supabase-js";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -53,113 +49,120 @@ export function Header({ user }: HeaderProps) {
   }
 
   return (
-    <header
-      className={cn(
-        "sticky top-0 z-50 w-full transition-all duration-300",
-        scrolled
-          ? "border-b border-forest/10 bg-surface/95 shadow-soft backdrop-blur-md"
-          : "bg-off-white/90 backdrop-blur-sm",
-      )}
-    >
-      <div
+    <>
+      <header
         className={cn(
-          "brand-accent-bar transition-opacity duration-300",
-          scrolled ? "opacity-100" : "opacity-80",
+          "sticky top-0 z-50 w-full transition-all duration-300",
+          scrolled
+            ? "border-b border-forest/10 bg-surface/95 shadow-soft backdrop-blur-md"
+            : "bg-off-white/90 backdrop-blur-sm",
         )}
-        aria-hidden
-      />
-      <div className="mx-auto flex min-h-16 max-w-[var(--container-max)] items-center justify-between gap-4 px-[var(--container-px)] md:min-h-[4.5rem] lg:min-h-20">
-        <LogoHeader className="shrink-0" />
-
-        <nav
-          className="hidden items-center gap-1 xl:flex"
-          aria-label="Navegação principal"
-        >
-          {mainNav.map((item) => (
-            <Link
-              key={item.href}
-              href={item.href}
-              className={cn(
-                "whitespace-nowrap rounded-full px-3 py-2 font-heading text-sm font-medium transition-colors duration-200",
-                isActive(item.href)
-                  ? "bg-sage-muted text-forest"
-                  : "text-graphite hover:bg-sage-muted/60 hover:text-forest",
-              )}
-            >
-              {item.label}
-            </Link>
-          ))}
-        </nav>
-
-        <div className="ml-auto hidden sm:block xl:ml-0">
-          <FontSizeControl />
-        </div>
-
-        <div className="hidden items-center gap-2 xl:flex">
-          {isLoggedIn ? (
-            <>
-              {authNavLoggedIn.map((item) => (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  className={cn(
-                    "rounded-full px-3 py-2 font-heading text-sm font-medium transition-colors",
-                    isActive(item.href)
-                      ? "bg-sage-muted text-forest"
-                      : "text-graphite hover:bg-sage-muted/60 hover:text-forest",
-                  )}
-                >
-                  {item.label}
-                </Link>
-              ))}
-              <LogoutButton variant="outline" size="sm" />
-            </>
-          ) : (
-            <>
-              <Button href={routes.entrar} variant="ghost" size="sm">
-                Entrar
-              </Button>
-              <Button href={routes.cadastro} variant="gold" size="sm">
-                Cadastrar
-              </Button>
-            </>
+      >
+        <div
+          className={cn(
+            "brand-accent-bar transition-opacity duration-300",
+            scrolled ? "opacity-100" : "opacity-80",
           )}
-        </div>
+          aria-hidden
+        />
+        <div className="mx-auto flex min-h-16 max-w-[var(--container-max)] items-center justify-between gap-4 px-[var(--container-px)] md:min-h-[4.5rem] lg:min-h-20">
+          <LogoHeader className="shrink-0" />
 
-        <button
-          type="button"
-          className="relative z-50 flex h-11 items-center justify-center gap-2 rounded-full border border-border-strong bg-surface px-4 xl:hidden"
-          onClick={() => setMenuOpen((open) => !open)}
-          aria-expanded={menuOpen}
-          aria-controls="mobile-menu"
-          aria-label={menuOpen ? "Fechar menu" : "Abrir menu"}
-        >
-          <span className="font-heading text-sm font-semibold text-forest" aria-hidden>
-            {menuOpen ? "Fechar" : "Menu"}
-          </span>
-          <div className="flex w-5 flex-col gap-1.5">
-            <span
-              className={cn(
-                "block h-0.5 w-full bg-forest transition-all duration-300",
-                menuOpen && "translate-y-2 rotate-45",
-              )}
-            />
-            <span
-              className={cn(
-                "block h-0.5 w-full bg-forest transition-all duration-300",
-                menuOpen && "opacity-0",
-              )}
-            />
-            <span
-              className={cn(
-                "block h-0.5 w-full bg-forest transition-all duration-300",
-                menuOpen && "-translate-y-2 -rotate-45",
-              )}
-            />
+          <nav
+            className="hidden items-center gap-1 xl:flex"
+            aria-label="Navegação principal"
+          >
+            {mainNav.map((item) => (
+              <Link
+                key={item.href}
+                href={item.href}
+                className={cn(
+                  "whitespace-nowrap rounded-full px-3 py-2 font-heading text-sm font-medium transition-colors duration-200",
+                  isActive(item.href)
+                    ? "bg-sage-muted text-forest"
+                    : "text-graphite hover:bg-sage-muted/60 hover:text-forest",
+                )}
+              >
+                {item.label}
+              </Link>
+            ))}
+          </nav>
+
+          <div className="ml-auto hidden sm:block xl:ml-0">
+            <FontSizeControl />
           </div>
-        </button>
-      </div>
 
+          <div className="hidden items-center gap-2 xl:flex">
+            {isLoggedIn ? (
+              <>
+                {authNavLoggedIn.map((item) => (
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    className={cn(
+                      "rounded-full px-3 py-2 font-heading text-sm font-medium transition-colors",
+                      isActive(item.href)
+                        ? "bg-sage-muted text-forest"
+                        : "text-graphite hover:bg-sage-muted/60 hover:text-forest",
+                    )}
+                  >
+                    {item.label}
+                  </Link>
+                ))}
+                <LogoutButton variant="outline" size="sm" />
+              </>
+            ) : (
+              <>
+                <Button href={routes.entrar} variant="ghost" size="sm">
+                  Entrar
+                </Button>
+                <Button href={routes.cadastro} variant="gold" size="sm">
+                  Cadastrar
+                </Button>
+              </>
+            )}
+          </div>
+
+          <button
+            type="button"
+            className="relative z-50 flex h-11 items-center justify-center gap-2 rounded-full border border-border-strong bg-surface px-4 xl:hidden"
+            onClick={() => setMenuOpen((open) => !open)}
+            aria-expanded={menuOpen}
+            aria-controls="mobile-menu"
+            aria-label={menuOpen ? "Fechar menu" : "Abrir menu"}
+          >
+            <span
+              className="font-heading text-sm font-semibold text-forest"
+              aria-hidden
+            >
+              {menuOpen ? "Fechar" : "Menu"}
+            </span>
+            <div className="flex w-5 flex-col gap-1.5">
+              <span
+                className={cn(
+                  "block h-0.5 w-full bg-forest transition-all duration-300",
+                  menuOpen && "translate-y-2 rotate-45",
+                )}
+              />
+              <span
+                className={cn(
+                  "block h-0.5 w-full bg-forest transition-all duration-300",
+                  menuOpen && "opacity-0",
+                )}
+              />
+              <span
+                className={cn(
+                  "block h-0.5 w-full bg-forest transition-all duration-300",
+                  menuOpen && "-translate-y-2 -rotate-45",
+                )}
+              />
+            </div>
+          </button>
+        </div>
+      </header>
+
+      {/* Fora do <header>: o backdrop-blur do cabeçalho prendia este menu "fixed"
+          ao tamanho do cabeçalho no celular, e a página ficava travada. */}
       <div
         id="mobile-menu"
         className={cn(
@@ -173,7 +176,9 @@ export function Header({ user }: HeaderProps) {
         <div className="flex h-full flex-col overflow-y-auto px-[var(--container-px)] pt-24 pb-10">
           <LogoHeader inverted className="mb-6" />
           <div className="mb-6 flex items-center justify-between gap-3 px-4">
-            <span className="font-heading text-sm text-off-white/80">Tamanho da letra</span>
+            <span className="font-heading text-sm text-off-white/80">
+              Tamanho da letra
+            </span>
             <FontSizeControl inverted />
           </div>
 
@@ -246,6 +251,6 @@ export function Header({ user }: HeaderProps) {
           </nav>
         </div>
       </div>
-    </header>
+    </>
   );
 }

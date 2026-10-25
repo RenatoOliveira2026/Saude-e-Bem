@@ -22,7 +22,10 @@ export function PublicArticleBody({
 }: PublicArticleBodyProps) {
   const nonEmptyBlocks = blocks.filter(
     (b) =>
-      (b.type === "paragraph" && b.text.trim()) ||
+      // Parágrafos com HTML (links internos) têm o texto vazio e só o campo html.
+      (b.type === "paragraph" && (b.text.trim() || b.html?.trim())) ||
+      (b.type === "blockquote" && b.text.trim()) ||
+      b.type === "divider" ||
       (b.type === "heading" && b.text.trim()) ||
       (b.type === "image" && b.url) ||
       (b.type === "list" && b.items.length > 0) ||

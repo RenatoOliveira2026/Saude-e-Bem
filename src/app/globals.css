@@ -3,21 +3,22 @@
 /* ─── Design Tokens (Fase 4.1 — identidade oficial) ─────────── */
 :root {
   /* Brand palette */
-  --color-sage: #4f8f3a;
+  /* Escurecido para contraste AA (texto e botões) — público 60+ */
+  --color-sage: #3d7a2a;
   --color-forest: #2e6b1f;
   --color-gold: #e97d4b;
   --color-off-white: #f8faf7;
   --color-graphite: #1f2937;
 
   /* Extended palette */
-  --color-sage-light: #6ba85a;
+  --color-sage-light: #4f8f3a;
   --color-sage-muted: #e8f3e4;
   --color-forest-light: #3a8528;
   --color-gold-light: #f0a07a;
   --color-gold-muted: #fceee6;
   --color-white: #ffffff;
   --color-muted: #4b5563;
-  --color-muted-light: #6b7280;
+  --color-muted-light: #575f6b;
   --color-border: rgba(46, 107, 31, 0.1);
   --color-border-strong: rgba(46, 107, 31, 0.18);
 
@@ -103,8 +104,32 @@
   border-color: var(--color-border);
 }
 
+/* Tamanho de letra: base 18px (público 60+), ajustável pelo controle "A+" */
 html {
   scroll-behavior: smooth;
+  font-size: 112.5%;
+}
+
+html[data-font-scale="large"] {
+  font-size: 125%;
+}
+
+html[data-font-scale="xlarge"] {
+  font-size: 137.5%;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }
 
 body {
@@ -136,7 +161,7 @@ h6 {
 }
 
 :focus-visible {
-  outline: 2px solid var(--color-gold);
+  outline: 3px solid var(--color-gold);
   outline-offset: 3px;
 }
 

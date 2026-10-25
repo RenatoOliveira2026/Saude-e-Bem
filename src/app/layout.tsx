@@ -15,6 +15,7 @@ import { getMetadataBaseUrl } from "@/lib/seo/site-url";
 import type { Metadata, Viewport } from "next";
 import { Montserrat, Open_Sans } from "next/font/google";
 import "./globals.css";
+import { FONT_SCALE_INIT_SCRIPT } from "@/components/layout/FontSizeControl";
 
 const montserrat = Montserrat({
   variable: "--font-montserrat",
@@ -84,7 +85,11 @@ export default function RootLayout({
     <html
       lang="pt-BR"
       className={`${montserrat.variable} ${openSans.variable} h-full scroll-smooth antialiased`}
+      suppressHydrationWarning
     >
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: FONT_SCALE_INIT_SCRIPT }} />
+      </head>
       <body className="flex min-h-full flex-col bg-off-white font-body text-graphite">
         <GoogleAnalytics />
         <GoogleTagManager />

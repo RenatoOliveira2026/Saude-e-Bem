@@ -1,5 +1,6 @@
 "use client";
 
+import { AffiliateDisclosure } from "@/components/affiliates/AffiliateDisclosure";
 import { MarketplaceCard } from "@/components/marketplace/MarketplaceCard";
 import { CategoryFilter } from "@/components/pages/CategoryFilter";
 import { Container } from "@/components/ui/Container";
@@ -27,6 +28,7 @@ export function MarketplaceListing({ items }: MarketplaceListingProps) {
     () => filterMarketplaceItems(items, active),
     [active, items],
   );
+  const hasAffiliateItems = items.some((item) => item.fulfillment === "affiliate");
 
   return (
     <Section background="white" container={false} spacing="compact">
@@ -60,6 +62,12 @@ export function MarketplaceListing({ items }: MarketplaceListingProps) {
             />
           ))}
         </div>
+      )}
+
+      {hasAffiliateItems && (
+        <Container>
+          <AffiliateDisclosure className="mt-8" />
+        </Container>
       )}
     </Section>
   );

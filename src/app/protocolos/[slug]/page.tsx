@@ -91,7 +91,7 @@ export default async function ProtocoloDetailPage({ params }: PageProps) {
     .slice(0, 3);
   const richBlocks =
     protocol.contentBlocks?.filter(
-      (b) => b.type !== "paragraph" || b.text.trim().length > 0,
+      (b) => b.type !== "paragraph" || b.text.trim().length > 0 || Boolean(b.html?.trim()),
     ) ?? [];
   const hasRichContent = richBlocks.length > 0;
   const internalLinks = getInternalLinksForContent("protocol", slug, protocol.category);

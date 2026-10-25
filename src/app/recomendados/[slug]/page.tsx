@@ -3,7 +3,6 @@ import { Breadcrumbs } from "@/components/layout/Breadcrumbs";
 import { JsonLdScript } from "@/components/seo/JsonLd";
 import {
   fetchActiveAffiliateBySlug,
-  fetchActiveAffiliateSlugs,
   fetchRelatedAffiliateProducts,
 } from "@/lib/supabase/services/affiliates.public";
 import { breadcrumbJsonLd, productJsonLd } from "@/lib/seo/json-ld";
@@ -17,12 +16,9 @@ interface PageProps {
   params: Promise<{ slug: string }>;
 }
 
-export const revalidate = 3600;
-
-export async function generateStaticParams() {
-  const slugs = await fetchActiveAffiliateSlugs();
-  return slugs.map((slug) => ({ slug }));
-}
+// A consulta ao Supabase lê a sessão (cookies). Como a página era pré-gerada como
+// estática, a renderização sob demanda falhava em produção com DYNAMIC_SERVER_USAGE.
+export const dynamic = "force-dynamic";
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params;

@@ -2,6 +2,7 @@
 
 import { LogoutButton } from "@/components/auth/LogoutButton";
 import { LogoHeader } from "@/components/brand/Logo";
+import { FontSizeControl } from "@/components/layout/FontSizeControl";
 import { Button } from "@/components/ui/Button";
 import { cn } from "@/lib/cn";
 import {
@@ -31,9 +32,12 @@ export function Header({ user }: HeaderProps) {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  useEffect(() => {
+  // Fecha o menu ao trocar de página (ajuste durante a renderização, sem efeito).
+  const [lastPathname, setLastPathname] = useState(pathname);
+  if (pathname !== lastPathname) {
+    setLastPathname(pathname);
     setMenuOpen(false);
-  }, [pathname]);
+  }
 
   useEffect(() => {
     document.body.style.overflow = menuOpen ? "hidden" : "";
@@ -87,7 +91,11 @@ export function Header({ user }: HeaderProps) {
           ))}
         </nav>
 
-        <div className="hidden items-center gap-2 lg:flex">
+        <div className="ml-auto hidden sm:block xl:ml-0">
+          <FontSizeControl />
+        </div>
+
+        <div className="hidden items-center gap-2 xl:flex">
           {isLoggedIn ? (
             <>
               {authNavLoggedIn.map((item) => (
@@ -120,13 +128,15 @@ export function Header({ user }: HeaderProps) {
 
         <button
           type="button"
-          className="relative z-50 flex h-10 w-10 items-center justify-center rounded-full border border-border-strong bg-surface lg:hidden"
+          className="relative z-50 flex h-11 items-center justify-center gap-2 rounded-full border border-border-strong bg-surface px-4 xl:hidden"
           onClick={() => setMenuOpen((open) => !open)}
           aria-expanded={menuOpen}
           aria-controls="mobile-menu"
           aria-label={menuOpen ? "Fechar menu" : "Abrir menu"}
         >
-          <span className="sr-only">{menuOpen ? "Fechar" : "Menu"}</span>
+          <span className="font-heading text-sm font-semibold text-forest" aria-hidden>
+            {menuOpen ? "Fechar" : "Menu"}
+          </span>
           <div className="flex w-5 flex-col gap-1.5">
             <span
               className={cn(
@@ -153,7 +163,7 @@ export function Header({ user }: HeaderProps) {
       <div
         id="mobile-menu"
         className={cn(
-          "fixed inset-0 top-0 z-40 bg-forest transition-all duration-300 lg:hidden",
+          "fixed inset-0 top-0 z-40 bg-forest transition-all duration-300 xl:hidden",
           menuOpen
             ? "visible opacity-100"
             : "pointer-events-none invisible opacity-0",
@@ -161,10 +171,14 @@ export function Header({ user }: HeaderProps) {
         aria-hidden={!menuOpen}
       >
         <div className="flex h-full flex-col overflow-y-auto px-[var(--container-px)] pt-24 pb-10">
-          <LogoHeader inverted className="mb-8" />
+          <LogoHeader inverted className="mb-6" />
+          <div className="mb-6 flex items-center justify-between gap-3 px-4">
+            <span className="font-heading text-sm text-off-white/80">Tamanho da letra</span>
+            <FontSizeControl inverted />
+          </div>
 
           <nav className="flex flex-col gap-1" aria-label="Menu mobile">
-            <p className="mb-2 px-4 font-heading text-xs font-semibold uppercase tracking-widest text-off-white/50">
+            <p className="mb-2 px-4 font-heading text-xs font-semibold uppercase tracking-widest text-off-white/75">
               Plataforma
             </p>
             {mainNav.map((item) => (
@@ -182,7 +196,7 @@ export function Header({ user }: HeaderProps) {
               </Link>
             ))}
 
-            <p className="mb-2 mt-6 px-4 font-heading text-xs font-semibold uppercase tracking-widest text-off-white/50">
+            <p className="mb-2 mt-6 px-4 font-heading text-xs font-semibold uppercase tracking-widest text-off-white/75">
               Conta
             </p>
             {isLoggedIn ? (

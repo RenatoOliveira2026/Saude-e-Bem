@@ -1,5 +1,6 @@
 import { trackEvent } from "@/lib/analytics/track-event";
 import { resolveAffiliateUrl } from "@/lib/affiliates/mappers";
+import { isPlaceholderAffiliateUrl } from "@/lib/affiliates/placeholder";
 import { isValidPublicSlug, notFoundSeoHeaders } from "@/lib/seo/slug";
 import { recordAffiliateClick } from "@/lib/supabase/services/affiliates.clicks";
 import { createClient } from "@/lib/supabase/server";
@@ -39,7 +40,7 @@ export async function GET(request: Request, context: RouteContext) {
   }
 
   const destination = resolveAffiliateUrl(data);
-  if (!destination) {
+  if (!destination || isPlaceholderAffiliateUrl(destination)) {
     return new NextResponse(null, {
       status: 404,
       headers: notFoundSeoHeaders(),

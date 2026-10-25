@@ -108,7 +108,7 @@ export type RouteKey = keyof typeof routes;
 
 export const mainNav = [
   { label: "Início", href: routes.home },
-  { label: "Blog", href: routes.blog },
+  { label: "Artigos", href: routes.blog },
   { label: "Protocolos", href: routes.protocolos },
   { label: "Ferramentas", href: routes.ferramentas },
   { label: "Biblioteca", href: routes.biblioteca },

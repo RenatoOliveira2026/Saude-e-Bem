@@ -10,6 +10,7 @@ import type {
   PublicAffiliateProduct,
   PublicAffiliateSummary,
 } from "@/lib/affiliates/types";
+import { hasRealAffiliateDestination } from "@/lib/affiliates/placeholder";
 import { createClient } from "@/lib/supabase/server";
 import type { AffiliateLinkRow } from "@/lib/supabase/types";
 
@@ -44,7 +45,7 @@ async function fetchActiveRows(
       console.warn("[affiliates.public]", error.message);
       return [];
     }
-    return (data ?? []) as AffiliateLinkRow[];
+    return ((data ?? []) as AffiliateLinkRow[]).filter(hasRealAffiliateDestination);
   } catch {
     return [];
   }
@@ -78,6 +79,7 @@ export async function fetchActiveAffiliateBySlug(
       if (error) console.warn("[affiliates.public] slug", error.message);
       return null;
     }
+    if (!hasRealAffiliateDestination(data as AffiliateLinkRow)) return null;
     return mapPublicProduct(data as AffiliateLinkRow);
   } catch {
     return null;
@@ -89,11 +91,13 @@ export async function fetchActiveAffiliateSlugs(): Promise<string[]> {
     const supabase = await createClient();
     const { data, error } = await supabase
       .from("affiliate_links")
-      .select("slug")
+      .select("slug, url, affiliate_url")
       .eq("active", true);
 
     if (error) return [];
-    return (data ?? []).map((row) => row.slug as string);
+    return (data ?? [])
+      .filter(hasRealAffiliateDestination)
+      .map((row) => row.slug as string);
   } catch {
     return [];
   }

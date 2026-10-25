@@ -7,7 +7,7 @@ const variantStyles = {
     "bg-forest text-off-white shadow-soft hover:bg-forest-light active:scale-[0.98]",
   secondary:
     "bg-sage text-off-white shadow-soft hover:bg-sage-light active:scale-[0.98]",
-  gold: "bg-gold text-forest shadow-soft hover:bg-gold-light active:scale-[0.98]",
+  gold: "bg-gold text-graphite shadow-soft hover:bg-gold-light active:scale-[0.98]",
   outline:
     "border border-border-strong bg-transparent text-forest hover:bg-sage-muted active:scale-[0.98]",
   ghost:
@@ -16,7 +16,7 @@ const variantStyles = {
 } as const;
 
 const sizeStyles = {
-  sm: "h-9 px-4 text-sm gap-1.5",
+  sm: "h-10 px-4 text-sm gap-1.5",
   md: "h-11 px-6 text-sm gap-2",
   lg: "h-12 px-8 text-base gap-2.5",
 } as const;

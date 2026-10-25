@@ -161,7 +161,7 @@ export default async function BibliotecaDetailPage({ params }: PageProps) {
                 },
                 {
                   icon: "download",
-                  label: `${resource.downloads.toLocaleString("pt-BR")} downloads`,
+                  label: "Gratuito",
                 },
               ]
         }

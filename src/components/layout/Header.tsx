@@ -80,7 +80,7 @@ export function Header({ user }: HeaderProps) {
               key={item.href}
               href={item.href}
               className={cn(
-                "rounded-full px-3 py-2 font-heading text-sm font-medium transition-colors duration-200",
+                "whitespace-nowrap rounded-full px-3 py-2 font-heading text-sm font-medium transition-colors duration-200",
                 isActive(item.href)
                   ? "bg-sage-muted text-forest"
                   : "text-graphite hover:bg-sage-muted/60 hover:text-forest",

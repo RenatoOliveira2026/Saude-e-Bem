@@ -114,7 +114,7 @@ export const mainNav = [
   { label: "Ferramentas", href: routes.ferramentas },
   { label: "Biblioteca", href: routes.biblioteca },
   { label: "Marketplace", href: routes.marketplace },
-  { label: "Clube Saúde & Bem", href: routes.clube },
+  { label: "Clube", href: routes.clube },
 ] as const;
 
 export const authNavLoggedOut = [
@@ -146,7 +146,7 @@ export const footerNav = {
     { label: "Cadastrar", href: routes.cadastro },
   ],
   comunidade: [
-    { label: "Clube Saúde & Bem", href: routes.clube },
+    { label: "Clube", href: routes.clube },
     { label: "Assinar Premium", href: routes.assinar },
     { label: "Sobre", href: routes.clube },
     { label: "Contato", href: "mailto:contato@saudeebem.com.br" },

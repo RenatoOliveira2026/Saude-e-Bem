@@ -63,8 +63,7 @@ export function FeaturedLibraryBanner({
         </div>
         <div className="flex flex-col items-start gap-4 lg:items-end">
           <p className="text-sm text-muted">
-            {resource.format} · {resource.pages} páginas ·{" "}
-            {resource.downloads.toLocaleString("pt-BR")} downloads
+            {resource.format} · {resource.pages} páginas
           </p>
           <Button href={routes.bibliotecaItem(resource.slug)} size="lg">
             Baixar gratuito

@@ -14,7 +14,7 @@ const premiumFeatures = [
   "Biblioteca ampliada com guias premium",
   "Artigos aprofundados para membros",
   "Ferramentas e acompanhamento contínuo",
-  "Comunidade privada (em breve)",
+  "Navegação sem anúncios",
 ];
 
 export function ClubPremiumPage() {

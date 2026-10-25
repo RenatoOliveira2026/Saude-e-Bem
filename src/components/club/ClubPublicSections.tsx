@@ -75,7 +75,7 @@ export function ClubBenefitsSplit() {
           </Badge>
           <h3 className="font-heading text-xl text-forest">Desbloqueie o ecossistema</h3>
           <p className="mt-2 text-sm text-muted">
-            Protocolos exclusivos, ferramentas avançadas e suporte prioritário.
+            Protocolos exclusivos, ferramentas avançadas e navegação sem anúncios.
           </p>
           <ul className="mt-6 space-y-2.5">
             {PREMIUM_PLAN_BENEFITS.map((item) => (

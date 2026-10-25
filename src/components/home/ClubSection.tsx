@@ -27,7 +27,7 @@ export function ClubSection() {
           </SectionTitle>
           <SectionDescription className="text-left text-off-white/70">
             O próximo nível da sua jornada. Acesso premium a protocolos
-            avançados, comunidade dedicada e acompanhamento contínuo.
+            avançados, biblioteca ampliada e ferramentas de acompanhamento.
           </SectionDescription>
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">
             <Button href={routes.clube} variant="gold" size="lg">

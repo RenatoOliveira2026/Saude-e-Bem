@@ -172,6 +172,8 @@ export function ClubPricing() {
 }
 
 export function ClubTestimonials() {
+  if (clubTestimonials.length === 0) return null;
+
   return (
     <Section background="white">
       <div className="mx-auto mb-12 max-w-2xl text-center">

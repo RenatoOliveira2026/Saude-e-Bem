@@ -16,6 +16,7 @@ import type { Metadata, Viewport } from "next";
 import { Montserrat, Open_Sans } from "next/font/google";
 import "./globals.css";
 import { FONT_SCALE_INIT_SCRIPT } from "@/components/layout/FontSizeControl";
+import { AdSenseScript } from "@/components/ads/AdSenseScript";
 
 const montserrat = Montserrat({
   variable: "--font-montserrat",
@@ -93,6 +94,7 @@ export default function RootLayout({
       <body className="flex min-h-full flex-col bg-off-white font-body text-graphite">
         <GoogleAnalytics />
         <GoogleTagManager />
+        <AdSenseScript />
         <JsonLdScript data={[organizationJsonLd(), websiteJsonLd()]} />
         <PageViewTracker />
         <PwaProvider />

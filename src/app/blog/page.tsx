@@ -1,3 +1,5 @@
+import { AdPlacement } from "@/components/ads/AdPlacement";
+import { Container } from "@/components/ui/Container";
 import { GlobalNewsletterSection } from "@/components/newsletter/NewsletterCaptureSection";
 import { LaunchFunnelCta } from "@/components/launch";
 import { BlogListing, ContentEmptyState, CrossLinks, PageCta } from "@/components/pages";
@@ -31,7 +33,7 @@ export default async function BlogPage() {
       <PageHero
         badge="Blog"
         title="Artigos & insights de saúde"
-        description="Conteúdo escrito por especialistas para informar, inspirar e traduzir ciência em ações práticas — sem alarmismo, com profundidade."
+        description="Conteúdo da equipe Saúde & Bem para informar, inspirar e traduzir ciência em ações práticas — sem alarmismo, com profundidade."
       />
       {isEmpty ? (
         <ContentEmptyState
@@ -44,6 +46,9 @@ export default async function BlogPage() {
       ) : (
         <BlogListing articles={articles} featured={featured} />
       )}
+      <Container size="md">
+        <AdPlacement placement="listing" />
+      </Container>
       <GlobalNewsletterSection source="blog" />
       <PageCta
         title="Coloque em prática"

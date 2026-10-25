@@ -599,11 +599,11 @@
   },
   {
     "slug": "como-criar-habitos-saudaveis",
-    "title": "Como criar hábitos saudáveis",
-    "excerpt": "Ciência comportamental aplicada: como instalar hábitos que duram com gatilhos, rotinas mínimas e recompensas realistas.",
+    "title": "Como criar hábitos saudáveis que duram, em qualquer idade",
+    "excerpt": "Por que as boas intenções não viram rotina e 4 técnicas simples, com base na ciência do comportamento, para mudar de vez.",
     "category": "longevidade",
     "category_label": "Hábitos",
-    "read_time": "9 min",
+    "read_time": "4 min",
     "published_at": "04 Jun 2026",
     "intro": [
       "Hábitos saudáveis não nascem da força de vontade isolada — nascem de sistemas. Quando o ambiente e a rotina facilitam a ação certa, a consistência deixa de depender de motivação diária.",
@@ -653,109 +653,121 @@
     "content": [
       {
         "type": "image",
-        "url": "/blog/categories/longevidade.svg",
-        "alt": "Capa: Como criar hábitos saudáveis"
+        "url": "https://images.unsplash.com/photo-1554331292-735256644d5f?auto=format&fit=crop&w=1600&q=80",
+        "alt": "Foto ilustrativa: Como criar hábitos saudáveis que duram, em qualquer idade (Unsplash)"
+      },
+      {
+        "type": "paragraph",
+        "text": "Quase todo mundo sabe o que faz bem: caminhar, comer mais verduras, dormir melhor, beber água. A dificuldade está em transformar a intenção em rotina. A boa notícia é que existem técnicas simples, estudadas pela ciência do comportamento, que aumentam muito as chances de sucesso, em qualquer idade."
       },
       {
         "type": "heading",
         "level": 2,
-        "text": "Introdução"
+        "text": "Quanto tempo leva para criar um hábito"
       },
       {
         "type": "paragraph",
-        "text": "Hábitos saudáveis não nascem da força de vontade isolada — nascem de sistemas. Quando o ambiente e a rotina facilitam a ação certa, a consistência deixa de depender de motivação diária."
-      },
-      {
-        "type": "paragraph",
-        "text": "Começar pequeno e ancorar novos comportamentos em hábitos existentes aumenta drasticamente a taxa de sucesso."
+        "text": "Um estudo conhecido acompanhou pessoas criando hábitos simples, como beber água no almoço ou caminhar depois do jantar. Em média, levou cerca de 2 meses para o hábito ficar automático, com grande variação entre as pessoas. E falhar um dia de vez em quando não atrapalhou o resultado. O que importa é voltar."
       },
       {
         "type": "heading",
         "level": 2,
-        "text": "Benefícios"
+        "text": "Técnica 1: comece pequeno demais"
+      },
+      {
+        "type": "paragraph",
+        "text": "Metas grandes dependem de motivação, e a motivação oscila. Comece com uma versão tão pequena que pareça fácil demais:"
       },
       {
         "type": "list",
         "items": [
-          "Resultados cumulativos sem extremismos",
-          "Menor fadiga de decisão no dia a dia",
-          "Maior autoconfiança e senso de controle",
-          "Base sólida para metas maiores de saúde"
+          "Em vez de caminhar 1 hora, calce o tênis e caminhe 5 minutos.",
+          "Em vez de mudar toda a alimentação, inclua uma fruta no café da manhã.",
+          "Em vez de meditar 30 minutos, faça 5 respirações lentas antes do almoço."
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": "Quando o passo pequeno estiver firme, aumente aos poucos."
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "Técnica 2: encaixe na rotina"
+      },
+      {
+        "type": "paragraph",
+        "text": "Ligue o hábito novo a algo que você já faz todo dia, usando a frase: \"Depois de [algo que já faço], eu vou [hábito novo]\"."
+      },
+      {
+        "type": "list",
+        "items": [
+          "Depois de escovar os dentes de manhã, vou beber um copo de água.",
+          "Depois do almoço, vou caminhar 10 minutos.",
+          "Depois de sentar para ver o jornal, vou levantar e sentar da cadeira 5 vezes."
         ]
       },
       {
         "type": "heading",
         "level": 2,
-        "text": "Como aplicar"
+        "text": "Técnica 3: facilite o caminho"
       },
       {
-        "type": "list",
-        "items": [
-          "Escolha um hábito mínimo viável (ex.: 10 minutos de movimento).",
-          "Use habit stacking: após o café, beba um copo de água.",
-          "Deixe gatilhos visíveis — garrafa na mesa, tênis à porta.",
-          "Registre streaks simples em calendário ou app.",
-          "Revise semanalmente o que funcionou e ajuste um detalhe por vez."
-        ],
-        "ordered": true
+        "type": "paragraph",
+        "text": "O ambiente decide muito por nós. Deixe a fruteira à vista, a garrafa de água ao lado da poltrona e o tênis separado na noite anterior. E deixe mais difícil o que atrapalha: doces guardados em lugar alto, controle da TV longe do sofá."
       },
       {
         "type": "heading",
         "level": 2,
-        "text": "Erros comuns"
+        "text": "Técnica 4: registre e comemore"
       },
       {
-        "type": "list",
-        "items": [
-          "Tentar mudar tudo na mesma semana",
-          "Definir metas vagas sem horário ou gatilho",
-          "Punir-se por falhas pontuais em vez de retomar",
-          "Comparar ritmo com influenciadores ou terceiros"
-        ]
+        "type": "paragraph",
+        "text": "Marque um X no calendário a cada dia cumprido. Ver a sequência crescer motiva a continuar. Conte o progresso para alguém de confiança e comemore depois de um mês."
+      },
+      {
+        "type": "blockquote",
+        "text": "Se falhar um dia, não desista. A regra é simples: nunca falhar dois dias seguidos."
       },
       {
         "type": "heading",
         "level": 2,
-        "text": "Perguntas frequentes"
+        "text": "Junte-se a alguém"
+      },
+      {
+        "type": "paragraph",
+        "text": "Hábitos feitos em companhia duram mais. Combine caminhadas com um vizinho, entre num grupo de dança ou hidroginástica, ou peça a um familiar para lembrar e comemorar com você."
+      },
+      {
+        "type": "paragraph",
+        "text": "",
+        "html": "<p>O passo a passo completo, com painel semanal para imprimir, está no <a href=\"/biblioteca/guia-habitos-saudaveis\">Guia Hábitos Saudáveis</a>, gratuito. Para escolher por onde começar, faça o <a href=\"/ferramentas/quiz-saude-bem\">quiz Saúde & Bem</a>.</p>"
       },
       {
         "type": "faq",
         "items": [
           {
-            "question": "Quanto tempo leva para formar um hábito?",
-            "answer": "Varia de 18 a 250 dias conforme complexidade. Consistência importa mais que velocidade."
+            "question": "É verdade que um hábito se forma em 21 dias?",
+            "answer": "Esse número é um mito popular. Estudos mostram que, em média, leva cerca de 2 meses, com variação de semanas a meses conforme a pessoa e o hábito."
           },
           {
-            "question": "E se eu falhar um dia?",
-            "answer": "Retome no dia seguinte. Um dia perdido não apaga progresso — duas semanas abandonadas sim."
+            "question": "Posso mudar vários hábitos ao mesmo tempo?",
+            "answer": "Pode, mas as chances de sucesso são maiores com um de cada vez. Quando o primeiro estiver firme, use-o como gatilho para o próximo."
           },
           {
-            "question": "Preciso de aplicativo?",
-            "answer": "Não. Calendário de parede ou checklist no celular funcionam. Apps ajudam quem gosta de métricas."
+            "question": "O que fazer quando a motivação acaba?",
+            "answer": "Diminua o tamanho do hábito em vez de parar. Um hábito pequeno cabe até nos dias sem vontade."
           }
         ]
       },
       {
-        "type": "heading",
-        "level": 2,
-        "text": "Conclusão"
-      },
-      {
         "type": "paragraph",
-        "text": "Hábitos saudáveis são construídos em camadas. Escolha um, domine-o e só então adicione o próximo."
-      },
-      {
-        "type": "heading",
-        "level": 2,
-        "text": "Continue no Clube Saúde & Bem"
-      },
-      {
-        "type": "paragraph",
-        "html": "<p>Quer protocolos premium, biblioteca ampliada e acompanhamento contínuo? O <strong>Clube Saúde &amp; Bem</strong> reúne ferramentas avançadas e conteúdo exclusivo para acelerar sua jornada.</p><p><a href=\"/clube\">Conhecer o Clube Premium</a> · <a href=\"/assinar\">Ver planos</a></p>"
+        "text": "",
+        "html": "<p>Conteúdo informativo da Equipe Saúde & Bem, baseado em Lally e colaboradores (European Journal of Social Psychology, 2010).</p>"
       }
     ],
-    "seo_title": "Como criar hábitos saudáveis | Guia Saúde & Bem",
-    "seo_description": "Ciência comportamental aplicada: como instalar hábitos que duram com gatilhos, rotinas mínimas e recompensas realistas.",
+    "seo_title": "Como criar hábitos saudáveis que duram, em qualquer idade",
+    "seo_description": "Como criar hábitos saudáveis que duram: começar pequeno, ligar à rotina, facilitar o ambiente e registrar o progresso, com exemplos para 50+.",
     "seo_keywords": "como, criar, habitos, saudaveis, longevidade, saúde, bem-estar, saúde e bem",
     "og_image_url": "/blog/categories/longevidade.svg",
     "cover_image_url": "/blog/categories/longevidade.svg"
@@ -1127,11 +1139,11 @@
   },
   {
     "slug": "como-aumentar-energia-naturalmente",
-    "title": "Como aumentar a energia naturalmente",
-    "excerpt": "Sono, alimentação, hidratação e movimento: estratégias para energia estável sem depender só de café e estimulantes.",
+    "title": "Cansaço depois dos 50: como ter mais energia no dia a dia",
+    "excerpt": "As causas mais comuns do cansaço, os hábitos que devolvem a disposição e os sinais de que é hora de investigar com o médico.",
     "category": "longevidade",
     "category_label": "Energia",
-    "read_time": "8 min",
+    "read_time": "5 min",
     "published_at": "07 Jun 2026",
     "intro": [
       "Fadiga frequente raramente se resolve apenas com mais cafeína. Energia sustentável vem da interação entre sono reparador, nutrição equilibrada, hidratação e atividade física regular.",
@@ -1181,109 +1193,137 @@
     "content": [
       {
         "type": "image",
-        "url": "/blog/categories/longevidade.svg",
-        "alt": "Capa: Como aumentar a energia naturalmente"
-      },
-      {
-        "type": "heading",
-        "level": 2,
-        "text": "Introdução"
+        "url": "https://images.unsplash.com/photo-1731338493464-db479f155a3a?auto=format&fit=crop&w=1600&q=80",
+        "alt": "Foto ilustrativa: Cansaço depois dos 50: como ter mais energia no dia a dia (Unsplash)"
       },
       {
         "type": "paragraph",
-        "text": "Fadiga frequente raramente se resolve apenas com mais cafeína. Energia sustentável vem da interação entre sono reparador, nutrição equilibrada, hidratação e atividade física regular."
+        "text": "Sentir-se cansado o tempo todo não precisa ser aceito como \"coisa da idade\". Na maioria das vezes, o cansaço tem causas que podem ser corrigidas, seja nos hábitos, seja com tratamento médico."
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "Primeiro: cansaço também pode ser sinal de doença"
       },
       {
         "type": "paragraph",
-        "text": "Identificar gatilhos de queda de energia — almoço pesado, desidratação, sedentarismo — permite correções práticas."
-      },
-      {
-        "type": "heading",
-        "level": 2,
-        "text": "Benefícios"
+        "text": "Anemia, alterações da tireoide, diabetes, depressão, apneia do sono, falta de vitamina B12 e efeitos de remédios são causas comuns e tratáveis. Procure o médico se o cansaço:"
       },
       {
         "type": "list",
         "items": [
-          "Menos picos e quedas ao longo do dia",
-          "Melhor desempenho cognitivo",
-          "Redução de dependência de estimulantes",
-          "Humor e motivação mais estáveis"
+          "Surgiu sem motivo e está piorando.",
+          "Dura mais de 2 a 3 semanas mesmo com descanso.",
+          "Vem com perda de peso, falta de ar, palidez, muita sede ou tristeza persistente.",
+          "Começou depois de um remédio novo."
         ]
       },
       {
-        "type": "heading",
-        "level": 2,
-        "text": "Como aplicar"
-      },
-      {
-        "type": "list",
-        "items": [
-          "Priorize 7–8 horas de sono com horário regular.",
-          "Exponha-se à luz natural pela manhã por 10–15 minutos.",
-          "Faça café da manhã com proteína e fibras.",
-          "Caminhe 10 minutos após refeições principais.",
-          "Beba água ao acordar e entre refeições."
-        ],
-        "ordered": true
+        "type": "paragraph",
+        "text": "Exames simples, como hemograma, glicemia, função da tireoide e vitamina B12, costumam esclarecer boa parte dos casos."
       },
       {
         "type": "heading",
         "level": 2,
-        "text": "Erros comuns"
-      },
-      {
-        "type": "list",
-        "items": [
-          "Substituir refeições por apenas café",
-          "Pular o café da manhã sem estratégia nutricional",
-          "Trabalhar sentado por horas sem pausas",
-          "Ignorar anemia ou tireoide em fadiga persistente"
-        ]
+        "text": "Os hábitos que mais devolvem a energia"
       },
       {
         "type": "heading",
-        "level": 2,
-        "text": "Perguntas frequentes"
+        "level": 3,
+        "text": "Sono de qualidade"
+      },
+      {
+        "type": "paragraph",
+        "text": "É a causa mais comum de cansaço. Horário fixo para acordar, luz da manhã e menos cafeína à tarde fazem grande diferença."
+      },
+      {
+        "type": "heading",
+        "level": 3,
+        "text": "Luz natural pela manhã"
+      },
+      {
+        "type": "paragraph",
+        "text": "Abrir as janelas e passar alguns minutos ao ar livre logo cedo deixa o corpo alerta durante o dia e com sono na hora certa à noite."
+      },
+      {
+        "type": "heading",
+        "level": 3,
+        "text": "Proteína em todas as refeições"
+      },
+      {
+        "type": "paragraph",
+        "text": "Com a idade, perdemos músculo com mais facilidade, e a fraqueza muscular é sentida como cansaço. Ovo, iogurte, queijo branco, feijão, frango, peixe ou carne no café, no almoço e no jantar ajudam a preservar a força."
+      },
+      {
+        "type": "heading",
+        "level": 3,
+        "text": "Água ao longo do dia"
+      },
+      {
+        "type": "paragraph",
+        "text": "A sede diminui com a idade e a desidratação leve causa cansaço e dor de cabeça. Beba mesmo sem vontade."
+      },
+      {
+        "type": "heading",
+        "level": 3,
+        "text": "Movimento"
+      },
+      {
+        "type": "paragraph",
+        "text": "Parece contraditório, mas quem se mexe mais tem mais energia. Comece com 10 minutos de caminhada depois de uma refeição e aumente aos poucos."
+      },
+      {
+        "type": "heading",
+        "level": 3,
+        "text": "Menos açúcar e refeições pesadas"
+      },
+      {
+        "type": "paragraph",
+        "text": "Doces e refrigerantes dão um pico rápido de energia, seguido de queda. Refeições muito grandes causam a moleza depois do almoço."
+      },
+      {
+        "type": "heading",
+        "level": 3,
+        "text": "Pausas e convívio"
+      },
+      {
+        "type": "paragraph",
+        "text": "Preocupação constante e solidão também cansam. Pausas curtas ao longo do dia e conversar com alguém todos os dias ajudam a energia mental."
+      },
+      {
+        "type": "paragraph",
+        "text": "",
+        "html": "<p>Mais detalhes em <a href=\"/blog/habitos-matinais-saudaveis\">rotina da manhã para ter mais disposição</a> e <a href=\"/blog/hidratacao-inteligente\">hidratação depois dos 60</a>.</p>"
+      },
+      {
+        "type": "blockquote",
+        "text": "Evite suplementos e energéticos \"para cansaço\" sem orientação. Eles podem mascarar uma doença que precisa ser tratada e interagir com remédios."
       },
       {
         "type": "faq",
         "items": [
           {
-            "question": "Café é prejudicial?",
-            "answer": "Moderado e até o meio da manhã pode ajudar. Excesso ou uso tardio prejudica sono e energia do dia seguinte."
+            "question": "Cansaço é normal na terceira idade?",
+            "answer": "Um pouco menos de fôlego pode acontecer, mas cansaço constante que atrapalha o dia não é normal e merece investigação."
           },
           {
-            "question": "Vitaminas energéticas funcionam?",
-            "answer": "Só corrigem deficiência comprovada. Exames orientam suplementação segura."
+            "question": "Café ajuda a ter energia?",
+            "answer": "Com moderação e até o almoço, pode ajudar. Em excesso ou à tarde, atrapalha o sono e acaba piorando o cansaço do dia seguinte."
           },
           {
-            "question": "Cochilo ajuda na energia?",
-            "answer": "Cochilos curtos (power nap) de 15–20 minutos podem restaurar alerta sem prejudicar a noite."
+            "question": "Vitamina B12 dá energia?",
+            "answer": "Ela só ajuda quem tem falta, o que é mais comum em pessoas mais velhas e em quem usa alguns remédios por muito tempo. O médico confirma com exame."
           }
         ]
       },
       {
-        "type": "heading",
-        "level": 2,
-        "text": "Conclusão"
-      },
-      {
         "type": "paragraph",
-        "text": "Energia natural é resultado de rotina integrada. Ajuste sono e alimentação antes de buscar atalhos."
-      },
-      {
-        "type": "heading",
-        "level": 2,
-        "text": "Continue no Clube Saúde & Bem"
-      },
-      {
-        "type": "paragraph",
-        "html": "<p>Quer protocolos premium, biblioteca ampliada e acompanhamento contínuo? O <strong>Clube Saúde &amp; Bem</strong> reúne ferramentas avançadas e conteúdo exclusivo para acelerar sua jornada.</p><p><a href=\"/clube\">Conhecer o Clube Premium</a> · <a href=\"/assinar\">Ver planos</a></p>"
+        "text": "",
+        "html": "<p>Conteúdo informativo da Equipe Saúde & Bem. Plano de 14 dias para mais disposição no <a href=\"/biblioteca/guia-energia-natural\">Guia Energia Natural</a>, gratuito.</p>"
       }
     ],
-    "seo_title": "Como aumentar a energia naturalmente | Guia Saúde & Bem",
-    "seo_description": "Sono, alimentação, hidratação e movimento: estratégias para energia estável sem depender só de café e estimulantes.",
+    "seo_title": "Cansaço depois dos 50: como ter mais energia no dia a dia",
+    "seo_description": "Cansaço depois dos 50: causas comuns, hábitos que aumentam a energia (sono, luz, proteína, água e movimento) e quando fazer exames.",
     "seo_keywords": "como, aumentar, energia, naturalmente, longevidade, saúde, bem-estar, saúde e bem",
     "og_image_url": "/blog/categories/longevidade.svg",
     "cover_image_url": "/blog/categories/longevidade.svg"
@@ -1613,11 +1653,11 @@
   },
   {
     "slug": "como-melhorar-produtividade",
-    "title": "Como melhorar a produtividade",
-    "excerpt": "Produtividade sustentável une sono, foco, pausas estratégicas e organização — sem glorificar exaustão.",
+    "title": "Memória e foco depois dos 50: hábitos que mantêm a mente afiada",
+    "excerpt": "O que é esquecimento normal, o que merece atenção e os hábitos com evidência para manter a memória e a concentração.",
     "category": "longevidade",
     "category_label": "Produtividade",
-    "read_time": "8 min",
+    "read_time": "5 min",
     "published_at": "10 Jun 2026",
     "intro": [
       "Produtividade real não é fazer mais a qualquer custo — é entregar o que importa com energia preservada. Sono ruim, alimentação desequilibrada e multitarefa constante sabotam resultados.",
@@ -1667,109 +1707,134 @@
     "content": [
       {
         "type": "image",
-        "url": "/blog/categories/longevidade.svg",
-        "alt": "Capa: Como melhorar a produtividade"
-      },
-      {
-        "type": "heading",
-        "level": 2,
-        "text": "Introdução"
+        "url": "https://images.unsplash.com/photo-1758612898691-afe3e1d08a0a?auto=format&fit=crop&w=1600&q=80",
+        "alt": "Foto ilustrativa: Memória e foco depois dos 50: hábitos que mantêm a mente afiada (Unsplash)"
       },
       {
         "type": "paragraph",
-        "text": "Produtividade real não é fazer mais a qualquer custo — é entregar o que importa com energia preservada. Sono ruim, alimentação desequilibrada e multitarefa constante sabotam resultados."
+        "text": "Esquecer onde deixou os óculos ou o nome de um conhecido acontece com todo mundo, e um pouco mais com o passar dos anos. A boa notícia é que o cérebro continua capaz de aprender em qualquer idade, e vários hábitos ajudam a manter a memória e o foco."
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "Esquecimento normal ou sinal de alerta?"
       },
       {
         "type": "paragraph",
-        "text": "Estruturar o dia em blocos de foco e recuperação aumenta qualidade do trabalho e bem-estar."
-      },
-      {
-        "type": "heading",
-        "level": 2,
-        "text": "Benefícios"
+        "text": "É comum, com a idade, demorar mais para lembrar um nome que depois volta à memória, ou perder objetos de vez em quando. Merecem avaliação médica:"
       },
       {
         "type": "list",
         "items": [
-          "Mais entregas relevantes com menos retrabalho",
-          "Menor sensação de sobrecarga",
-          "Melhor equilíbrio entre trabalho e descanso",
-          "Clareza de prioridades"
+          "Esquecer acontecimentos recentes inteiros e repetir as mesmas perguntas.",
+          "Perder-se em lugares conhecidos.",
+          "Dificuldade crescente com tarefas antes simples, como pagar contas ou seguir uma receita.",
+          "Mudanças de comportamento ou de personalidade notadas pela família."
         ]
       },
       {
-        "type": "heading",
-        "level": 2,
-        "text": "Como aplicar"
-      },
-      {
-        "type": "list",
-        "items": [
-          "Defina três prioridades máximas por dia.",
-          "Use blocos de 45–90 minutos de foco sem notificações.",
-          "Faça pausas de 5 minutos a cada hora — movimento e água.",
-          "Proteja o primeiro bloco da manhã para tarefa mais importante.",
-          "Encerre o dia com revisão de 5 minutos para o dia seguinte."
-        ],
-        "ordered": true
+        "type": "paragraph",
+        "text": "Várias causas de esquecimento são tratáveis, como falta de vitamina B12, alterações da tireoide, depressão, sono ruim e efeitos de remédios."
       },
       {
         "type": "heading",
         "level": 2,
-        "text": "Erros comuns"
+        "text": "Hábitos que protegem o cérebro"
+      },
+      {
+        "type": "heading",
+        "level": 3,
+        "text": "Movimento"
+      },
+      {
+        "type": "paragraph",
+        "text": "A atividade física aumenta o fluxo de sangue para o cérebro e está associada a menor risco de declínio da memória."
+      },
+      {
+        "type": "heading",
+        "level": 3,
+        "text": "Pressão, glicose e colesterol controlados"
+      },
+      {
+        "type": "paragraph",
+        "text": "O que faz bem ao coração faz bem ao cérebro. Manter essas medidas sob controle protege os vasos que irrigam o cérebro."
+      },
+      {
+        "type": "heading",
+        "level": 3,
+        "text": "Sono"
+      },
+      {
+        "type": "paragraph",
+        "text": "É durante o sono que a memória é consolidada. Ronco com pausas na respiração e sono muito ruim podem atrapalhar a concentração."
+      },
+      {
+        "type": "heading",
+        "level": 3,
+        "text": "Audição e visão em dia"
+      },
+      {
+        "type": "paragraph",
+        "text": "A perda de audição sem tratamento está entre os fatores de risco para o declínio cognitivo. Faça avaliações e use aparelhos ou óculos quando indicados."
+      },
+      {
+        "type": "heading",
+        "level": 3,
+        "text": "Mente ativa e convívio"
+      },
+      {
+        "type": "paragraph",
+        "text": "Aprender coisas novas, ler, fazer trabalhos manuais, jogar e, principalmente, conversar e conviver mantêm o cérebro estimulado."
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "Estratégias práticas para o dia a dia"
       },
       {
         "type": "list",
         "items": [
-          "Confundir ocupação com produtividade",
-          "Trabalhar até exaustão como badge de honra",
-          "Não delegar ou dizer não",
-          "Ignorar sono em nome de 'mais horas'"
+          "Tenha um lugar fixo para chaves, óculos e documentos.",
+          "Use agenda, calendário na parede ou lembretes no celular.",
+          "Organize os remédios numa caixa por dia da semana.",
+          "Faça uma coisa de cada vez: dividir a atenção atrapalha a memória.",
+          "Repita em voz alta o nome de quem acabou de conhecer."
         ]
       },
       {
-        "type": "heading",
-        "level": 2,
-        "text": "Perguntas frequentes"
+        "type": "blockquote",
+        "text": "Desconfie de suplementos que prometem \"turbinar a memória\". Nenhum deles tem eficácia comprovada para prevenir a perda de memória."
+      },
+      {
+        "type": "paragraph",
+        "text": "",
+        "html": "<p>Para cuidar dos hábitos que mais protegem o cérebro, veja <a href=\"/blog/exercicios-para-iniciantes\">exercícios para iniciantes</a> e <a href=\"/blog/como-melhorar-qualidade-do-sono\">qualidade do sono depois dos 50</a>.</p>"
       },
       {
         "type": "faq",
         "items": [
           {
-            "question": "Técnica Pomodoro funciona?",
-            "answer": "Sim para muitas pessoas. Ajuste intervalos ao seu tipo de tarefa e energia."
+            "question": "Palavras cruzadas previnem a perda de memória?",
+            "answer": "Atividades que desafiam a mente ajudam, principalmente as que envolvem aprender algo novo e conviver com outras pessoas. Elas funcionam melhor junto com atividade física e controle da saúde."
           },
           {
-            "question": "Multitarefa é eficiente?",
-            "answer": "Estudos mostram queda de qualidade. Monotarefa com blocos é superior na maioria dos casos."
+            "question": "Ansiedade atrapalha a memória?",
+            "answer": "Sim. Ansiedade, estresse e depressão dificultam a concentração e podem parecer problemas de memória. Tratar essas condições costuma melhorar o foco."
           },
           {
-            "question": "Produtividade e saúde mental?",
-            "answer": "Estão ligadas. Pausas e limites protegem desempenho a longo prazo."
+            "question": "Quando devo procurar o médico?",
+            "answer": "Quando os esquecimentos atrapalham o dia a dia, estão piorando ou são percebidos pela família. Quanto antes a avaliação, melhores as opções."
           }
         ]
       },
       {
-        "type": "heading",
-        "level": 2,
-        "text": "Conclusão"
-      },
-      {
         "type": "paragraph",
-        "text": "Produtividade sustentável protege sua saúde enquanto entrega resultados. Menos urgência artificial, mais intenção."
-      },
-      {
-        "type": "heading",
-        "level": 2,
-        "text": "Continue no Clube Saúde & Bem"
-      },
-      {
-        "type": "paragraph",
-        "html": "<p>Quer protocolos premium, biblioteca ampliada e acompanhamento contínuo? O <strong>Clube Saúde &amp; Bem</strong> reúne ferramentas avançadas e conteúdo exclusivo para acelerar sua jornada.</p><p><a href=\"/clube\">Conhecer o Clube Premium</a> · <a href=\"/assinar\">Ver planos</a></p>"
+        "text": "",
+        "html": "<p>Conteúdo informativo da Equipe Saúde & Bem, com base no relatório da Comissão Lancet sobre prevenção de demência (2024).</p>"
       }
     ],
-    "seo_title": "Como melhorar a produtividade | Guia Saúde & Bem",
-    "seo_description": "Produtividade sustentável une sono, foco, pausas estratégicas e organização — sem glorificar exaustão.",
+    "seo_title": "Memória e foco depois dos 50: hábitos que mantêm a mente afiada",
+    "seo_description": "Memória e concentração depois dos 50: esquecimento normal ou não, hábitos que protegem o cérebro, estratégias práticas e quando procurar o médico.",
     "seo_keywords": "como, melhorar, produtividade, longevidade, saúde, bem-estar, saúde e bem",
     "og_image_url": "/blog/categories/longevidade.svg",
     "cover_image_url": "/blog/categories/longevidade.svg"
@@ -1969,11 +2034,11 @@
   },
   {
     "slug": "saude-mental-rotina",
-    "title": "Saúde mental e rotina",
-    "excerpt": "Como estruturar o dia para proteger saúde mental: sono, limites digitais, conexão social e autocuidado prático.",
+    "title": "Saúde mental depois dos 50: rotina, convívio e sinais de depressão",
+    "excerpt": "Como a rotina e o convívio protegem a saúde mental, a diferença entre tristeza e depressão e onde buscar ajuda.",
     "category": "longevidade",
     "category_label": "Saúde mental",
-    "read_time": "9 min",
+    "read_time": "5 min",
     "published_at": "12 Jun 2026",
     "intro": [
       "Saúde mental floresce quando rotina oferece previsibilidade, descanso e conexão. Caos constante e sono irregular aumentam vulnerabilidade a ansiedade e esgotamento.",
@@ -2023,109 +2088,108 @@
     "content": [
       {
         "type": "image",
-        "url": "/blog/categories/longevidade.svg",
-        "alt": "Capa: Saúde mental e rotina"
+        "url": "https://images.unsplash.com/photo-1764173039543-f9f197744e1b?auto=format&fit=crop&w=1600&q=80",
+        "alt": "Foto ilustrativa: Saúde mental depois dos 50: rotina, convívio e sinais de depressão (Unsplash)"
+      },
+      {
+        "type": "paragraph",
+        "text": "Mudanças comuns depois dos 50, como aposentadoria, filhos que saem de casa, perdas e problemas de saúde, mexem com as emoções. Sentir tristeza nesses momentos é natural. O que protege a saúde mental é ter uma rotina com sentido, pessoas por perto e atenção aos sinais de que algo não vai bem."
       },
       {
         "type": "heading",
         "level": 2,
-        "text": "Introdução"
-      },
-      {
-        "type": "paragraph",
-        "text": "Saúde mental floresce quando rotina oferece previsibilidade, descanso e conexão. Caos constante e sono irregular aumentam vulnerabilidade a ansiedade e esgotamento."
-      },
-      {
-        "type": "paragraph",
-        "text": "Pequenos rituais diários funcionam como âncoras emocionais."
-      },
-      {
-        "type": "heading",
-        "level": 2,
-        "text": "Benefícios"
+        "text": "Uma rotina que protege"
       },
       {
         "type": "list",
         "items": [
-          "Maior sensação de estabilidade",
-          "Melhor regulação emocional",
-          "Sono e energia mais consistentes",
-          "Relações mais presentes"
+          "Horários regulares para acordar, comer e dormir dão estrutura ao dia.",
+          "Atividade física regular melhora o humor e o sono.",
+          "Ter algo para fazer de manhã e algo para esperar na semana dá sentido aos dias.",
+          "Tempo ao ar livre e luz natural ajudam o humor."
         ]
       },
       {
         "type": "heading",
         "level": 2,
-        "text": "Como aplicar"
+        "text": "Solidão: um risco para a saúde"
+      },
+      {
+        "type": "paragraph",
+        "text": "A solidão e o isolamento social estão associados a mais depressão, declínio da memória e doenças do coração. Algumas formas de manter o convívio:"
       },
       {
         "type": "list",
         "items": [
-          "Mantenha horário de sono e despertar estável.",
-          "Inclua contato social real semanal — presencial ou chamada.",
-          "Limite notícias e redes em blocos definidos.",
-          "Pratique gratidão ou journaling 3 minutos/dia.",
-          "Movimente-se — exercício é antidepressivo moderado com evidência."
-        ],
-        "ordered": true
-      },
-      {
-        "type": "heading",
-        "level": 2,
-        "text": "Erros comuns"
-      },
-      {
-        "type": "list",
-        "items": [
-          "Isolamento prolongado",
-          "Automedicação com álcool ou substâncias",
-          "Ignorar sintomas persistentes por vergonha",
-          "Rotina 100% produtividade sem lazer"
+          "Ligar ou visitar alguém todos os dias.",
+          "Participar de grupos de convivência, igrejas, associações ou clubes.",
+          "Fazer trabalho voluntário.",
+          "Aprender algo em grupo: dança, coral, artesanato, informática.",
+          "Usar videochamadas para falar com quem mora longe."
         ]
       },
       {
         "type": "heading",
         "level": 2,
-        "text": "Perguntas frequentes"
+        "text": "Tristeza ou depressão?"
+      },
+      {
+        "type": "paragraph",
+        "text": "A tristeza passa e não impede a pessoa de viver. A depressão é uma doença, com tratamento, e pode aparecer de forma diferente em pessoas mais velhas, às vezes mais como cansaço, dores e falta de interesse do que como choro. Fique atento se, por mais de 2 semanas, houver:"
+      },
+      {
+        "type": "list",
+        "items": [
+          "Desânimo e perda de interesse por coisas que antes davam prazer.",
+          "Alterações do sono ou do apetite.",
+          "Cansaço constante e sensação de inutilidade.",
+          "Isolamento, irritação ou dificuldade de concentração.",
+          "Pensamentos de morte."
+        ]
+      },
+      {
+        "type": "blockquote",
+        "text": "Se você ou alguém próximo tiver pensamentos de tirar a própria vida, ligue para o CVV no 188 (gratuito, 24 horas) ou procure um pronto-atendimento. Falar sobre isso salva vidas."
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "Onde buscar ajuda"
+      },
+      {
+        "type": "paragraph",
+        "text": "No SUS, a unidade básica de saúde é a porta de entrada: o médico pode avaliar, tratar e encaminhar para psicólogo ou para o CAPS quando necessário. Depressão tem tratamento eficaz, com psicoterapia e, quando indicado, medicamentos. Não é fraqueza nem \"coisa da idade\"."
+      },
+      {
+        "type": "paragraph",
+        "text": "",
+        "html": "<p>Técnicas para o dia a dia em <a href=\"/blog/controle-ansiedade\">ansiedade depois dos 50</a> e <a href=\"/blog/como-reduzir-estresse-naturalmente\">como reduzir o estresse</a>.</p>"
       },
       {
         "type": "faq",
         "items": [
           {
-            "question": "Rotina engessa?",
-            "answer": "Boa rotina tem flexibilidade planejada. Estrutura reduz ansiedade, não elimina espontaneidade."
+            "question": "Depressão é normal na velhice?",
+            "answer": "Não. Ela é mais comum em algumas situações, como doenças e perdas, mas não faz parte do envelhecimento normal e deve ser tratada."
           },
           {
-            "question": "Terapia é necessária?",
-            "answer": "Não para todos, mas é recurso valioso preventivo e terapêutico. Não há requisito de crise."
+            "question": "Como ajudar um familiar que está se isolando?",
+            "answer": "Mantenha contato frequente, convide para atividades sem pressionar e incentive a consulta médica. Ouvir sem julgar já ajuda muito."
           },
           {
-            "question": "Apps de meditação ajudam?",
-            "answer": "Podem facilitar início. O importante é prática regular, com ou sem app."
+            "question": "Atividade física ajuda na depressão?",
+            "answer": "Sim, ajuda no tratamento e na prevenção, junto com o acompanhamento profissional."
           }
         ]
       },
       {
-        "type": "heading",
-        "level": 2,
-        "text": "Conclusão"
-      },
-      {
         "type": "paragraph",
-        "text": "Cuidar da saúde mental na rotina é ato de manutenção — como escovar os dentes, feito diariamente."
-      },
-      {
-        "type": "heading",
-        "level": 2,
-        "text": "Continue no Clube Saúde & Bem"
-      },
-      {
-        "type": "paragraph",
-        "html": "<p>Quer protocolos premium, biblioteca ampliada e acompanhamento contínuo? O <strong>Clube Saúde &amp; Bem</strong> reúne ferramentas avançadas e conteúdo exclusivo para acelerar sua jornada.</p><p><a href=\"/clube\">Conhecer o Clube Premium</a> · <a href=\"/assinar\">Ver planos</a></p>"
+        "text": "",
+        "html": "<p>Conteúdo informativo da Equipe Saúde & Bem. Não substitui avaliação profissional. Para montar uma rotina com sentido, baixe o <a href=\"/biblioteca/guia-habitos-saudaveis\">Guia Hábitos Saudáveis</a>.</p>"
       }
     ],
-    "seo_title": "Saúde mental e rotina | Guia Saúde & Bem",
-    "seo_description": "Como estruturar o dia para proteger saúde mental: sono, limites digitais, conexão social e autocuidado prático.",
+    "seo_title": "Saúde mental depois dos 50: rotina, convívio e sinais de depressão",
+    "seo_description": "Saúde mental depois dos 50: rotina que protege, combate à solidão, diferença entre tristeza e depressão, sinais de alerta e onde buscar ajuda no SUS.",
     "seo_keywords": "saude, mental, rotina, longevidade, saúde, bem-estar, saúde e bem",
     "og_image_url": "/blog/categories/longevidade.svg",
     "cover_image_url": "/blog/categories/longevidade.svg"
@@ -2846,11 +2910,11 @@
   },
   {
     "slug": "como-criar-rotina-sustentavel",
-    "title": "Como criar uma rotina sustentável",
-    "excerpt": "Monte uma rotina de saúde que cabe na vida real — blocos flexíveis, prioridades claras e revisão semanal.",
+    "title": "Como organizar uma semana saudável depois dos 50",
+    "excerpt": "Um modelo de semana equilibrada, com movimento, alimentação, descanso, convívio e cuidados de saúde, para adaptar à sua vida.",
     "category": "longevidade",
     "category_label": "Rotina",
-    "read_time": "8 min",
+    "read_time": "4 min",
     "published_at": "17 Jun 2026",
     "intro": [
       "Rotina sustentável é aquela que você mantém por meses, não por três dias de motivação. Ela respeita trabalho, família e imprevistos sem desmoronar.",
@@ -2900,109 +2964,113 @@
     "content": [
       {
         "type": "image",
-        "url": "/blog/categories/longevidade.svg",
-        "alt": "Capa: Como criar uma rotina sustentável"
+        "url": "https://images.unsplash.com/photo-1632772998001-cc9bf6f7c852?auto=format&fit=crop&w=1600&q=80",
+        "alt": "Foto ilustrativa: Como organizar uma semana saudável depois dos 50 (Unsplash)"
+      },
+      {
+        "type": "paragraph",
+        "text": "Com a aposentadoria ou com os filhos já criados, muitas pessoas descobrem que a semana perdeu a estrutura de antes. Organizar os dias não é encher a agenda: é garantir espaço para o que mantém a saúde, sem esquecer o descanso e o prazer."
       },
       {
         "type": "heading",
         "level": 2,
-        "text": "Introdução"
-      },
-      {
-        "type": "paragraph",
-        "text": "Rotina sustentável é aquela que você mantém por meses, não por três dias de motivação. Ela respeita trabalho, família e imprevistos sem desmoronar."
-      },
-      {
-        "type": "paragraph",
-        "text": "Flexibilidade planejada é tão importante quanto disciplina."
-      },
-      {
-        "type": "heading",
-        "level": 2,
-        "text": "Benefícios"
+        "text": "Os blocos de uma semana equilibrada"
       },
       {
         "type": "list",
         "items": [
-          "Consistência sem burnout",
-          "Progresso mensurável em saúde",
-          "Menos culpa por dias imperfeitos",
-          "Integração natural de sono, movimento e alimentação"
+          "Movimento: caminhada na maioria dos dias e força em 2 a 3 dias.",
+          "Refeições em horários regulares, com comida feita em casa sempre que possível.",
+          "Sono: horário fixo para acordar todos os dias.",
+          "Convívio: pelo menos um encontro ou atividade em grupo por semana.",
+          "Mente ativa: leitura, um curso, um hobby.",
+          "Cuidados de saúde: remédios, consultas e exames organizados.",
+          "Descanso e lazer, sem culpa."
         ]
       },
       {
         "type": "heading",
         "level": 2,
-        "text": "Como aplicar"
+        "text": "Um modelo para adaptar"
+      },
+      {
+        "type": "paragraph",
+        "text": "Use como ponto de partida e troque o que não combinar com a sua vida:"
       },
       {
         "type": "list",
         "items": [
-          "Liste não negociáveis: sono, uma refeição equilibrada, 20 min movimento.",
-          "Use blocos de tempo em vez de listas infinitas.",
-          "Planeje domingo 15 minutos da semana seguinte.",
-          "Tenha plano B para dias caóticos (caminhada 10 min, marmita simples).",
-          "Revise sexta: o que funcionou? Ajuste um item só."
-        ],
-        "ordered": true
-      },
-      {
-        "type": "heading",
-        "level": 2,
-        "text": "Erros comuns"
-      },
-      {
-        "type": "list",
-        "items": [
-          "Copiar rotina de influenciador sem adaptar",
-          "Zero margem para imprevistos",
-          "Medir sucesso só por peso na balança",
-          "Abandonar tudo após um dia ruim"
+          "Segunda: caminhada de manhã, feira ou mercado, preparar refeições da semana.",
+          "Terça: exercícios de força em casa, tarde livre para hobby.",
+          "Quarta: caminhada, atividade em grupo ou voluntariado.",
+          "Quinta: exercícios de força, conferir remédios e agenda de consultas.",
+          "Sexta: caminhada, ligar para amigos e familiares, combinar o fim de semana.",
+          "Sábado: passeio ao ar livre, encontro com a família ou amigos.",
+          "Domingo: descanso, alongamento leve e planejamento da semana seguinte."
         ]
       },
       {
         "type": "heading",
         "level": 2,
-        "text": "Perguntas frequentes"
+        "text": "Remédios e consultas sem esquecimento"
+      },
+      {
+        "type": "list",
+        "items": [
+          "Caixa organizadora de remédios por dia e horário.",
+          "Lista atualizada de todos os remédios, com doses, para levar às consultas.",
+          "Calendário na parede ou no celular com consultas, exames e vacinas.",
+          "Um dia fixo da semana para conferir se falta algum remédio."
+        ]
+      },
+      {
+        "type": "blockquote",
+        "text": "Leve a lista de remédios a todas as consultas, inclusive vitaminas, chás e remédios naturais. Assim o médico evita interações perigosas."
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "Dicas para a rotina durar"
+      },
+      {
+        "type": "list",
+        "items": [
+          "Comece com poucos compromissos e acrescente aos poucos.",
+          "Deixe folgas: imprevistos acontecem.",
+          "Revise a semana no domingo: o que funcionou, o que mudar.",
+          "Se um dia não sair como planejado, recomece no dia seguinte."
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": "",
+        "html": "<p>Para transformar cada item da semana em hábito, veja <a href=\"/blog/como-criar-habitos-saudaveis\">como criar hábitos saudáveis que duram</a> e use o painel do <a href=\"/biblioteca/guia-habitos-saudaveis\">Guia Hábitos Saudáveis</a>.</p>"
       },
       {
         "type": "faq",
         "items": [
           {
-            "question": "Rotina é para pessoas sem flexibilidade?",
-            "answer": "Pelo contrário — rotina bem desenhada cria espaço mental para o imprevisível."
+            "question": "Preciso me exercitar todos os dias?",
+            "answer": "A caminhada pode ser feita na maioria dos dias. Os exercícios de força funcionam melhor em 2 a 3 dias não seguidos. Descansar também faz parte."
           },
           {
-            "question": "Quantos hábitos simultâneos?",
-            "answer": "Um a três focos por mês costuma ser sustentável."
+            "question": "E se eu não gostar de rotinas rígidas?",
+            "answer": "A ideia não é ter horário para tudo, e sim garantir que os blocos importantes aconteçam ao longo da semana, do jeito que for mais confortável."
           },
           {
-            "question": "Fins de semana contam?",
-            "answer": "Sim, mas podem ter versão mais leve do mesmo esqueleto horário."
+            "question": "Como incluir a família na rotina?",
+            "answer": "Combine atividades que façam bem a todos, como caminhadas, refeições em conjunto e passeios no fim de semana."
           }
         ]
       },
       {
-        "type": "heading",
-        "level": 2,
-        "text": "Conclusão"
-      },
-      {
         "type": "paragraph",
-        "text": "Rotina sustentável é contrato consigo mesmo — realista, revisável e gentil."
-      },
-      {
-        "type": "heading",
-        "level": 2,
-        "text": "Continue no Clube Saúde & Bem"
-      },
-      {
-        "type": "paragraph",
-        "html": "<p>Quer protocolos premium, biblioteca ampliada e acompanhamento contínuo? O <strong>Clube Saúde &amp; Bem</strong> reúne ferramentas avançadas e conteúdo exclusivo para acelerar sua jornada.</p><p><a href=\"/clube\">Conhecer o Clube Premium</a> · <a href=\"/assinar\">Ver planos</a></p>"
+        "text": "",
+        "html": "<p>Conteúdo informativo da Equipe Saúde & Bem, baseado nas diretrizes de atividade física da Organização Mundial da Saúde e no Guia Alimentar para a População Brasileira.</p>"
       }
     ],
-    "seo_title": "Como criar uma rotina sustentável | Guia Saúde & Bem",
-    "seo_description": "Monte uma rotina de saúde que cabe na vida real — blocos flexíveis, prioridades claras e revisão semanal.",
+    "seo_title": "Como organizar uma semana saudável depois dos 50",
+    "seo_description": "Como organizar uma semana saudável depois dos 50: modelo de rotina com atividade física, refeições, sono, convívio, remédios e consultas.",
     "seo_keywords": "como, criar, rotina, sustentavel, longevidade, saúde, bem-estar, saúde e bem",
     "og_image_url": "/blog/categories/longevidade.svg",
     "cover_image_url": "/blog/categories/longevidade.svg"

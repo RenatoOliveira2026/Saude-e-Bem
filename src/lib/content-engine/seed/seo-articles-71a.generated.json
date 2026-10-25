@@ -1,11 +1,11 @@
 [
   {
     "slug": "como-melhorar-qualidade-do-sono",
-    "title": "Como melhorar a qualidade do sono",
-    "excerpt": "Guia prático para noites mais reparadoras: rotina, ambiente e hábitos baseados em evidências — sem promessas milagrosas.",
+    "title": "Como melhorar a qualidade do sono depois dos 50",
+    "excerpt": "Por que o sono muda com a idade, os hábitos que mais ajudam e os sinais de que é hora de procurar o médico.",
     "category": "sono",
     "category_label": "Sono",
-    "read_time": "9 min",
+    "read_time": "5 min",
     "featured": true,
     "published_at": "01 Jun 2026",
     "intro": [
@@ -55,120 +55,185 @@
     "content": [
       {
         "type": "image",
-        "url": "/blog/categories/sono.svg",
-        "alt": "Capa: Como melhorar a qualidade do sono"
-      },
-      {
-        "type": "heading",
-        "level": 2,
-        "text": "Introdução"
+        "url": "https://images.unsplash.com/photo-1616486029423-aaa4789e8c9a?auto=format&fit=crop&w=1600&q=80",
+        "alt": "Foto ilustrativa: Como melhorar a qualidade do sono depois dos 50 (Unsplash)"
       },
       {
         "type": "paragraph",
-        "text": "Dormir bem não é luxo — é fundamento para energia, humor, imunidade e saúde metabólica. A qualidade do sono depende menos de truques isolados e mais de consistência em horários, ambiente e rituais de desaceleração."
+        "text": "Muita gente percebe que, com o passar dos anos, o sono fica diferente: mais leve, com despertares de madrugada e aquela sensação de que a noite não rendeu. Parte dessa mudança é natural. A outra parte, e é a boa notícia, depende de hábitos que podem ser ajustados."
       },
       {
         "type": "paragraph",
-        "text": "Pequenos ajustes sustentados por duas a três semanas costumam gerar diferença perceptível na disposição matinal e na capacidade de concentração ao longo do dia."
+        "text": "Neste artigo você vai entender o que muda no sono com a idade, quais hábitos têm mais efeito e quais sinais pedem uma conversa com o médico."
       },
       {
         "type": "heading",
         "level": 2,
-        "text": "Benefícios"
+        "text": "O que muda no sono com a idade"
+      },
+      {
+        "type": "paragraph",
+        "text": "Adultos costumam precisar de 7 a 9 horas de sono, e a partir dos 65 anos de 7 a 8 horas. A necessidade não cai tanto quanto se imagina. O que muda é o jeito de dormir:"
       },
       {
         "type": "list",
         "items": [
-          "Mais energia e foco durante o dia",
-          "Melhor regulação hormonal e apetite",
-          "Recuperação muscular e imunológica otimizada",
-          "Humor mais estável e menor irritabilidade"
+          "O sono profundo diminui e os despertares ficam mais frequentes.",
+          "O relógio biológico adianta: o sono chega mais cedo e o despertar também.",
+          "Fatores externos pesam mais: vontade de urinar, dores, refluxo e medicamentos."
         ]
       },
       {
-        "type": "heading",
-        "level": 2,
-        "text": "Como aplicar"
-      },
-      {
-        "type": "list",
-        "items": [
-          "Defina horário fixo para deitar e acordar, inclusive nos fins de semana.",
-          "Reduza luz azul e telas 60 minutos antes de dormir.",
-          "Mantenha o quarto escuro, silencioso e entre 18–21 °C.",
-          "Evite cafeína após 14h e refeições pesadas até 2h antes de deitar.",
-          "Crie ritual noturno de 15 minutos: respiração, leitura leve ou alongamento."
-        ],
-        "ordered": true
+        "type": "blockquote",
+        "text": "Acordar uma ou duas vezes e voltar a dormir com facilidade é normal. O alerta é quando o cansaço atrapalha o seu dia."
       },
       {
         "type": "heading",
         "level": 2,
-        "text": "Erros comuns"
+        "text": "Os 7 hábitos que mais ajudam"
+      },
+      {
+        "type": "heading",
+        "level": 3,
+        "text": "1. Acorde sempre no mesmo horário"
+      },
+      {
+        "type": "paragraph",
+        "text": "É o ajuste mais poderoso, inclusive aos sábados e domingos. Quando o horário de acordar fica fixo, o horário de sentir sono à noite se acerta sozinho em poucas semanas."
+      },
+      {
+        "type": "heading",
+        "level": 3,
+        "text": "2. Tome luz natural pela manhã"
+      },
+      {
+        "type": "paragraph",
+        "text": "Abrir as janelas ao acordar e passar 15 a 30 minutos ao ar livre pela manhã avisa o corpo de que o dia começou. Para quem acorda cedo demais, a luz do fim da tarde também ajuda a empurrar o sono um pouco para mais tarde."
+      },
+      {
+        "type": "heading",
+        "level": 3,
+        "text": "3. Movimente-se durante o dia"
+      },
+      {
+        "type": "paragraph",
+        "text": "Uma caminhada diária melhora a qualidade do sono. Prefira atividades até o fim da tarde; exercícios intensos perto da hora de deitar deixam algumas pessoas agitadas."
+      },
+      {
+        "type": "heading",
+        "level": 3,
+        "text": "4. Cochilo, só curto e cedo"
+      },
+      {
+        "type": "paragraph",
+        "text": "Se o cochilo faz parte da sua rotina, limite a 20 ou 30 minutos e faça antes das 15h. Cochilos longos ou no fim da tarde roubam o sono da noite."
+      },
+      {
+        "type": "heading",
+        "level": 3,
+        "text": "5. Café e chá preto até o almoço"
+      },
+      {
+        "type": "paragraph",
+        "text": "A cafeína continua agindo por muitas horas. Café, chá preto, mate, chá verde e refrigerantes do tipo cola, se forem consumidos, devem ficar para a primeira metade do dia."
+      },
+      {
+        "type": "heading",
+        "level": 3,
+        "text": "6. Jantar leve e água distribuída"
+      },
+      {
+        "type": "paragraph",
+        "text": "Faça a última refeição maior 2 a 3 horas antes de deitar. Beba bastante água durante o dia e diminua nas 2 horas antes de dormir, para não acordar tantas vezes para ir ao banheiro."
+      },
+      {
+        "type": "heading",
+        "level": 3,
+        "text": "7. Uma rotina para desacelerar"
+      },
+      {
+        "type": "paragraph",
+        "text": "Uma hora antes de deitar, diminua as luzes, deixe o celular e a TV de lado e faça algo calmo: banho morno, leitura leve, música tranquila ou oração. Repetida toda noite, essa rotina vira um sinal de que é hora de dormir."
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "O quarto ideal"
       },
       {
         "type": "list",
         "items": [
-          "Usar a cama para trabalhar ou rolar redes sociais",
-          "Dormir compensando apenas nos fins de semana",
-          "Depender de álcool para induzir sono",
-          "Ignorar ronco intenso ou pausas na respiração noturna"
+          "Escuro: cortinas que bloqueiam a luz e aparelhos com luz coberta.",
+          "Silencioso ou com um som constante e suave, como um ventilador.",
+          "Temperatura agradável, levemente fresca.",
+          "Sem TV ligada para dormir e com o celular longe da cama.",
+          "Luz noturna fraca no caminho do banheiro, para evitar quedas."
         ]
       },
       {
+        "type": "paragraph",
+        "text": "",
+        "html": "<p>Quer o passo a passo completo, com checklist do quarto, plano de 7 dias e diário do sono para imprimir? Baixe grátis o <a href=\"/biblioteca/guia-sono-saudavel\">Guia Sono Saudável</a>.</p>"
+      },
+      {
         "type": "heading",
         "level": 2,
-        "text": "Perguntas frequentes"
+        "text": "E os remédios para dormir?"
+      },
+      {
+        "type": "paragraph",
+        "text": "Alguns medicamentos para dormir aumentam o risco de quedas, confusão e dependência em pessoas mais velhas. Nunca comece nem pare um remédio para dormir por conta própria, e converse com o médico também sobre melatonina e suplementos. Existe um tratamento eficaz para a insônia sem remédios, a terapia cognitivo-comportamental para insônia: vale perguntar ao seu médico sobre ela."
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "Quando procurar o médico"
+      },
+      {
+        "type": "list",
+        "items": [
+          "Ronco alto com pausas na respiração ou sono forte durante o dia.",
+          "Pernas inquietas ao deitar.",
+          "Levantar muitas vezes à noite para urinar.",
+          "Insônia que dura mais de 3 semanas ou vem com tristeza e desânimo."
+        ]
       },
       {
         "type": "faq",
         "items": [
           {
-            "question": "Quantas horas de sono são ideais?",
-            "answer": "A maioria dos adultos se beneficia de 7 a 9 horas por noite. O indicador principal é acordar com disposição, sem depender excessivamente de cafeína."
+            "question": "Quantas horas devo dormir depois dos 60?",
+            "answer": "A maioria das pessoas precisa de 7 a 8 horas. Mais importante que o número exato é acordar razoavelmente disposto e conseguir fazer as atividades do dia."
           },
           {
-            "question": "Cochilos durante o dia atrapalham?",
-            "answer": "Cochilos curtos (20 minutos) antes das 15h podem ajudar. Cochilos longos ou tardios fragmentam o sono noturno."
+            "question": "Acordar de madrugada é normal?",
+            "answer": "Acordar uma ou duas vezes e voltar a dormir com facilidade é comum. Se você fica acordado por muito tempo quase todas as noites, vale rever os hábitos e conversar com o médico."
           },
           {
-            "question": "Quando procurar ajuda profissional?",
-            "answer": "Se insônia, sonolência diurna ou ronco persistirem por mais de três semanas, consulte um médico para investigar causas tratáveis."
+            "question": "Ler no celular antes de dormir atrapalha?",
+            "answer": "A luz e o conteúdo da tela mantêm o cérebro alerta. Prefira um livro de papel ou reduza o brilho e pare de usar o aparelho uma hora antes de deitar."
           }
         ]
       },
       {
-        "type": "heading",
-        "level": 2,
-        "text": "Conclusão"
-      },
-      {
         "type": "paragraph",
-        "text": "Melhorar o sono é um processo gradual. Escolha um ou dois hábitos, pratique com consistência e ajuste conforme sua rotina real — resultados duradouros vêm da repetição, não da perfeição."
-      },
-      {
-        "type": "heading",
-        "level": 2,
-        "text": "Continue no Clube Saúde & Bem"
-      },
-      {
-        "type": "paragraph",
-        "html": "<p>Quer protocolos premium, biblioteca ampliada e acompanhamento contínuo? O <strong>Clube Saúde &amp; Bem</strong> reúne ferramentas avançadas e conteúdo exclusivo para acelerar sua jornada.</p><p><a href=\"/clube\">Conhecer o Clube Premium</a> · <a href=\"/assinar\">Ver planos</a></p>"
+        "text": "",
+        "html": "<p>Conteúdo informativo da Equipe Saúde & Bem, baseado nas recomendações da American Academy of Sleep Medicine e do American College of Physicians. Veja também: <a href=\"/blog/dormir-melhor-sem-medicamentos\">como dormir melhor sem medicamentos</a>.</p>"
       }
     ],
-    "seo_title": "Como melhorar a qualidade do sono | Guia Saúde & Bem",
-    "seo_description": "Guia prático para noites mais reparadoras: rotina, ambiente e hábitos baseados em evidências — sem promessas milagrosas.",
+    "seo_title": "Como melhorar a qualidade do sono depois dos 50",
+    "seo_description": "Dormir melhor depois dos 50: por que o sono muda com a idade, 7 hábitos que funcionam, o quarto ideal e quando procurar o médico.",
     "seo_keywords": "como, melhorar, qualidade, do, sono, sono, saúde, bem-estar, saúde e bem",
     "og_image_url": "/blog/categories/sono.svg",
     "cover_image_url": "/blog/categories/sono.svg"
   },
   {
     "slug": "beneficios-caminhada-diaria",
-    "title": "Benefícios da caminhada diária",
-    "excerpt": "Por que 20 a 30 minutos de caminhada por dia impactam coração, humor, metabolismo e longevidade — com evidência científica.",
+    "title": "Caminhada diária: benefícios e como começar com segurança",
+    "excerpt": "Quanto caminhar, em que ritmo e como começar do zero, com dicas de segurança para quem tem mais de 50 anos.",
     "category": "emagrecimento",
     "category_label": "Atividade física",
-    "read_time": "7 min",
+    "read_time": "4 min",
     "featured": true,
     "published_at": "02 Jun 2026",
     "intro": [
@@ -218,109 +283,132 @@
     "content": [
       {
         "type": "image",
-        "url": "/blog/categories/emagrecimento.svg",
-        "alt": "Capa: Benefícios da caminhada diária"
+        "url": "https://images.unsplash.com/photo-1790699297352-a4a28cc05f9f?auto=format&fit=crop&w=1600&q=80",
+        "alt": "Foto ilustrativa: Caminhada diária: benefícios e como começar com segurança (Unsplash)"
+      },
+      {
+        "type": "paragraph",
+        "text": "A caminhada é a atividade física mais acessível que existe: não exige academia, equipamento caro nem experiência. Para quem tem mais de 50 anos, ela é também uma das mais completas, porque cuida do coração, dos músculos, do humor e do sono ao mesmo tempo."
       },
       {
         "type": "heading",
         "level": 2,
-        "text": "Introdução"
-      },
-      {
-        "type": "paragraph",
-        "text": "A caminhada é um dos exercícios mais acessíveis e subestimados da medicina preventiva. Não exige equipamento caro, é escalável para qualquer idade e gera benefícios mensuráveis em poucas semanas."
-      },
-      {
-        "type": "paragraph",
-        "text": "Integrar caminhadas à rotina é uma das formas mais sustentáveis de cuidar da saúde cardiovascular, do peso corporal e do bem-estar mental."
-      },
-      {
-        "type": "heading",
-        "level": 2,
-        "text": "Benefícios"
+        "text": "O que a caminhada faz pelo corpo"
       },
       {
         "type": "list",
         "items": [
-          "Melhora da saúde cardiovascular e pressão arterial",
-          "Controle de peso e sensibilidade à insulina",
-          "Redução de estresse e ansiedade leve",
-          "Fortalecimento de ossos e articulações com baixo impacto"
+          "Fortalece o coração e ajuda a controlar a pressão arterial.",
+          "Melhora o controle da glicose, importante para prevenir e tratar o diabetes.",
+          "Mantém as pernas fortes, o que reduz o risco de quedas.",
+          "Melhora o humor, o sono e a disposição.",
+          "Ajuda a manter o peso, junto com a alimentação."
         ]
       },
       {
         "type": "heading",
         "level": 2,
-        "text": "Como aplicar"
+        "text": "Quanto caminhar"
+      },
+      {
+        "type": "paragraph",
+        "text": "A Organização Mundial da Saúde recomenda de 150 a 300 minutos por semana de atividade moderada para adultos e idosos. Em números práticos, são cerca de 30 minutos, 5 dias por semana."
+      },
+      {
+        "type": "paragraph",
+        "text": "Não precisa ser tudo de uma vez: três caminhadas de 10 minutos ao longo do dia também contam. E, para quem está parado, qualquer quantidade já é melhor do que nenhuma."
+      },
+      {
+        "type": "blockquote",
+        "text": "Teste da conversa: no ritmo certo, você consegue falar frases inteiras, mas não consegue cantar."
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "Plano de 4 semanas para começar do zero"
       },
       {
         "type": "list",
         "items": [
-          "Comece com 15 minutos em ritmo confortável e aumente gradualmente.",
-          "Meta inicial: 6.000 a 8.000 passos/dia; evolução para 8.000–10.000 conforme condicionamento.",
-          "Prefira horários fixos — manhã ou fim de tarde — para criar hábito.",
-          "Use tênis confortável e hidrate-se antes e depois.",
-          "Combine com música, podcast ou caminhada em dupla para manter consistência."
+          "Semana 1: 10 minutos por dia, em ritmo confortável, 5 dias.",
+          "Semana 2: 15 minutos por dia, 5 dias.",
+          "Semana 3: 20 minutos por dia, acelerando um pouco nos 5 minutos do meio.",
+          "Semana 4: 30 minutos por dia, no ritmo do teste da conversa."
         ],
         "ordered": true
       },
       {
+        "type": "paragraph",
+        "text": "Se uma semana ficou pesada, repita-a antes de avançar. Constância vale mais do que velocidade."
+      },
+      {
         "type": "heading",
         "level": 2,
-        "text": "Erros comuns"
+        "text": "Dicas de segurança"
       },
       {
         "type": "list",
         "items": [
-          "Começar com volume ou intensidade excessivos",
-          "Caminhar apenas no fim de semana",
-          "Ignorar dor persistente em joelhos ou tornozelos",
-          "Substituir alimentação equilibrada apenas por caminhada"
+          "Use tênis confortável, com solado firme e antiderrapante.",
+          "Prefira lugares planos, bem iluminados e com calçada regular.",
+          "Evite os horários mais quentes e leve água.",
+          "Leve o celular e um documento com o nome dos seus remédios.",
+          "Aqueça com 3 a 5 minutos de passos lentos e termine desacelerando."
         ]
       },
       {
         "type": "heading",
         "level": 2,
-        "text": "Perguntas frequentes"
+        "text": "Quando conversar com o médico antes"
+      },
+      {
+        "type": "paragraph",
+        "text": "Se você tem doença do coração, pressão alta descontrolada, diabetes, dores nas articulações ou está parado há muito tempo, converse com o médico sobre a intensidade ideal. Durante a caminhada, pare e procure ajuda se sentir dor no peito, falta de ar forte, tontura ou palpitação."
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "Para não desistir"
+      },
+      {
+        "type": "list",
+        "items": [
+          "Caminhe sempre no mesmo horário, ligado a algo da rotina, como depois do café.",
+          "Chame alguém: caminhadas em dupla ou em grupo duram mais.",
+          "Anote os dias cumpridos no calendário.",
+          "Em dias de chuva, caminhe dentro de casa ou em um shopping."
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": "",
+        "html": "<p>Combine a caminhada com exercícios de força e equilíbrio: veja os <a href=\"/blog/exercicios-para-iniciantes\">exercícios para iniciantes</a>. Para manter o hábito, baixe o <a href=\"/biblioteca/guia-habitos-saudaveis\">Guia Hábitos Saudáveis</a>.</p>"
       },
       {
         "type": "faq",
         "items": [
           {
-            "question": "Caminhada queima gordura?",
-            "answer": "Sim, especialmente em ritmo moderado prolongado. O maior benefício vem da consistência diária combinada com alimentação adequada."
+            "question": "Caminhar todos os dias faz mal?",
+            "answer": "Para a maioria das pessoas, não. Caminhadas em ritmo moderado podem ser feitas diariamente. Se sentir dores nas articulações, alterne dias mais leves."
           },
           {
-            "question": "Qual ritmo é considerado moderado?",
-            "answer": "Você deve conseguir conversar com leve esforço. Se não conseguir falar, o ritmo está alto demais para manutenção diária."
+            "question": "Qual o melhor horário para caminhar?",
+            "answer": "O melhor horário é aquele que você consegue manter. A manhã tem a vantagem da luz natural, que ajuda o sono, mas evite o calor forte e o horário logo depois de refeições grandes."
           },
           {
-            "question": "Chuva ou falta de tempo: o que fazer?",
-            "answer": "Caminhada indoor, subir escadas ou pausas ativas de 10 minutos somam ao longo do dia e mantêm o hábito."
+            "question": "Caminhada emagrece?",
+            "answer": "Ajuda, principalmente junto com uma alimentação equilibrada. O maior benefício, porém, é para a saúde do coração, dos músculos e do humor, mesmo sem perda de peso."
           }
         ]
       },
       {
-        "type": "heading",
-        "level": 2,
-        "text": "Conclusão"
-      },
-      {
         "type": "paragraph",
-        "text": "A caminhada diária é investimento de alto retorno com baixo risco. Comece pequeno, seja constante e ajuste o volume conforme sua evolução."
-      },
-      {
-        "type": "heading",
-        "level": 2,
-        "text": "Continue no Clube Saúde & Bem"
-      },
-      {
-        "type": "paragraph",
-        "html": "<p>Quer protocolos premium, biblioteca ampliada e acompanhamento contínuo? O <strong>Clube Saúde &amp; Bem</strong> reúne ferramentas avançadas e conteúdo exclusivo para acelerar sua jornada.</p><p><a href=\"/clube\">Conhecer o Clube Premium</a> · <a href=\"/assinar\">Ver planos</a></p>"
+        "text": "",
+        "html": "<p>Conteúdo informativo da Equipe Saúde & Bem, baseado nas diretrizes da Organização Mundial da Saúde (2020) e no Guia de Atividade Física para a População Brasileira (2021).</p>"
       }
     ],
-    "seo_title": "Benefícios da caminhada diária | Guia Saúde & Bem",
-    "seo_description": "Por que 20 a 30 minutos de caminhada por dia impactam coração, humor, metabolismo e longevidade — com evidência científica.",
+    "seo_title": "Caminhada diária: benefícios e como começar com segurança",
+    "seo_description": "Benefícios da caminhada diária depois dos 50, quanto caminhar por semana, como saber o ritmo certo e um plano de 4 semanas para começar.",
     "seo_keywords": "beneficios, caminhada, diaria, emagrecimento, saúde, bem-estar, saúde e bem",
     "og_image_url": "/blog/categories/emagrecimento.svg",
     "cover_image_url": "/blog/categories/emagrecimento.svg"
@@ -653,11 +741,11 @@
   },
   {
     "slug": "alimentacao-saudavel-iniciantes",
-    "title": "Alimentação saudável para iniciantes",
-    "excerpt": "Por onde começar uma alimentação equilibrada: prato inteligente, proteínas, fibras e redução de ultraprocessados sem dietas restritivas.",
+    "title": "Alimentação saudável depois dos 50: por onde começar",
+    "excerpt": "Como montar o prato, garantir proteína, fibras e água e fugir dos ultraprocessados, sem dietas da moda.",
     "category": "emagrecimento",
     "category_label": "Nutrição",
-    "read_time": "10 min",
+    "read_time": "4 min",
     "published_at": "05 Jun 2026",
     "intro": [
       "Alimentação saudável para iniciantes não significa eliminar tudo que você gosta — significa melhorar a qualidade do que está no prato na maior parte do tempo.",
@@ -707,109 +795,125 @@
     "content": [
       {
         "type": "image",
-        "url": "/blog/categories/emagrecimento.svg",
-        "alt": "Capa: Alimentação saudável para iniciantes"
+        "url": "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&w=1600&q=80",
+        "alt": "Foto ilustrativa: Alimentação saudável depois dos 50: por onde começar (Unsplash)"
+      },
+      {
+        "type": "paragraph",
+        "text": "Comer bem depois dos 50 não tem nada a ver com dietas da moda nem com cortar grupos inteiros de alimentos. Tem a ver com comida de verdade, preparada em casa, e com alguns cuidados que ganham importância com a idade: proteína para os músculos, fibras para o intestino, água e menos sal."
       },
       {
         "type": "heading",
         "level": 2,
-        "text": "Introdução"
+        "text": "A regra mais simples de todas"
       },
       {
         "type": "paragraph",
-        "text": "Alimentação saudável para iniciantes não significa eliminar tudo que você gosta — significa melhorar a qualidade do que está no prato na maior parte do tempo."
-      },
-      {
-        "type": "paragraph",
-        "text": "Foco em vegetais, proteínas magras, gorduras boas e carboidratos integrais cria base sólida sem contagem obsessiva de calorias."
+        "text": "O Guia Alimentar para a População Brasileira, do Ministério da Saúde, resume assim: faça de alimentos in natura ou minimamente processados a base da sua alimentação. Arroz, feijão, legumes, verduras, frutas, ovos, carnes, peixes e leite são exemplos. Ultraprocessados, como biscoitos recheados, salgadinhos, refrigerantes, embutidos e refeições prontas, devem ser exceção."
       },
       {
         "type": "heading",
         "level": 2,
-        "text": "Benefícios"
+        "text": "Monte o prato assim"
       },
       {
         "type": "list",
         "items": [
-          "Mais saciedade e energia estável",
-          "Melhora de marcadores metabólicos",
-          "Digestão mais confortável",
-          "Relação mais leve com a comida"
+          "Metade do prato: verduras e legumes variados.",
+          "Um quarto: proteína, como feijão, ovo, frango, peixe ou carne.",
+          "Um quarto: arroz, batata, mandioca, milho ou massa.",
+          "Sobremesa: uma fruta."
         ]
       },
       {
         "type": "heading",
         "level": 2,
-        "text": "Como aplicar"
+        "text": "Proteína em todas as refeições"
+      },
+      {
+        "type": "paragraph",
+        "text": "Com a idade, o corpo perde músculo com mais facilidade, e músculo é o que garante força para levantar da cadeira, subir escadas e evitar quedas. Por isso, inclua uma fonte de proteína no café da manhã, no almoço e no jantar: ovo, iogurte natural, queijo branco, feijão, lentilha, frango, peixe ou carne."
+      },
+      {
+        "type": "blockquote",
+        "text": "Quem tem doença nos rins deve combinar a quantidade de proteína com o médico ou nutricionista."
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "Fibras e água: a dupla do intestino"
+      },
+      {
+        "type": "paragraph",
+        "text": "A prisão de ventre fica mais comum com a idade. Feijões, frutas com casca ou bagaço, verduras, aveia e pães integrais trazem fibras. Aumente aos poucos e sempre junto com mais água: fibra sem água pode piorar o intestino."
+      },
+      {
+        "type": "paragraph",
+        "text": "A sede diminui com a idade, então beba mesmo sem vontade: um copo ao acordar, um em cada refeição e outros ao longo do dia. Urina amarelo-clara é sinal de boa hidratação."
+      },
+      {
+        "type": "paragraph",
+        "text": "",
+        "html": "<p>Calcule quanto de água e de proteína você precisa por dia nas ferramentas gratuitas <a href=\"/ferramentas/consumo-agua\">consumo de água</a> e <a href=\"/ferramentas/proteina-diaria\">proteína diária</a>.</p>"
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "Menos sal, mais sabor"
+      },
+      {
+        "type": "paragraph",
+        "text": "O excesso de sal pesa na pressão arterial. Tempere com alho, cebola, cheiro-verde, limão, orégano e outras ervas, e desconfie dos caldos prontos e temperos industrializados, que concentram muito sódio."
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "Comece com uma mudança por semana"
       },
       {
         "type": "list",
         "items": [
-          "Use o método do prato: metade vegetais, um quarto proteína, um quarto carboidrato integral.",
-          "Inclua proteína em todas as refeições principais.",
-          "Planeje duas refeições da semana com antecedência.",
-          "Substitua gradualmente ultraprocessados por versões simples.",
-          "Beba água como bebida principal ao longo do dia."
+          "Semana 1: uma fruta no café da manhã.",
+          "Semana 2: feijão ou lentilha todos os dias.",
+          "Semana 3: metade do prato com verduras e legumes no almoço.",
+          "Semana 4: troque o refrigerante ou suco adoçado por água."
         ],
         "ordered": true
       },
       {
         "type": "heading",
         "level": 2,
-        "text": "Erros comuns"
+        "text": "Quando procurar ajuda"
       },
       {
-        "type": "list",
-        "items": [
-          "Pular refeições e compensar à noite",
-          "Eliminar grupos alimentares sem orientação",
-          "Confiar em rótulos 'fit' sem ler ingredientes",
-          "Esperar perfeição — 80% de aderência já gera resultado"
-        ]
-      },
-      {
-        "type": "heading",
-        "level": 2,
-        "text": "Perguntas frequentes"
+        "type": "paragraph",
+        "text": "Perda de peso sem explicação, falta de apetite, dificuldade para mastigar ou engolir e diarreia ou prisão de ventre persistentes merecem avaliação médica. Quem tem diabetes, doença nos rins ou do coração se beneficia de um plano feito por nutricionista."
       },
       {
         "type": "faq",
         "items": [
           {
-            "question": "Preciso contar calorias?",
-            "answer": "Não necessariamente no início. Qualidade e porções conscientes já melhoram muito o padrão alimentar."
+            "question": "Preciso cortar o carboidrato?",
+            "answer": "Não. Arroz, feijão, batata e pães fazem parte de uma alimentação saudável. Prefira as versões integrais e mantenha as porções em um quarto do prato."
           },
           {
-            "question": "Carboidrato é vilão?",
-            "answer": "Não. Carboidratos integrais e em porção adequada são aliados de energia e fibras."
+            "question": "Suplementos são necessários depois dos 50?",
+            "answer": "Na maioria dos casos, uma alimentação variada é suficiente. Algumas pessoas precisam de vitamina B12, vitamina D ou cálcio, mas isso deve ser avaliado pelo médico, com exames."
           },
           {
-            "question": "Quando consultar nutricionista?",
-            "answer": "Se houver condição clínica, histórico de transtorno alimentar ou dúvidas sobre suplementação."
+            "question": "Ovo faz mal ao colesterol?",
+            "answer": "Para a maioria das pessoas, ovos podem fazer parte da alimentação do dia a dia. Quem tem colesterol alto ou diabetes deve conversar com o médico sobre a quantidade."
           }
         ]
       },
       {
-        "type": "heading",
-        "level": 2,
-        "text": "Conclusão"
-      },
-      {
         "type": "paragraph",
-        "text": "Alimentação saudável é habilidade que se aprende. Comece pelo próximo prato, não pela dieta perfeita."
-      },
-      {
-        "type": "heading",
-        "level": 2,
-        "text": "Continue no Clube Saúde & Bem"
-      },
-      {
-        "type": "paragraph",
-        "html": "<p>Quer protocolos premium, biblioteca ampliada e acompanhamento contínuo? O <strong>Clube Saúde &amp; Bem</strong> reúne ferramentas avançadas e conteúdo exclusivo para acelerar sua jornada.</p><p><a href=\"/clube\">Conhecer o Clube Premium</a> · <a href=\"/assinar\">Ver planos</a></p>"
+        "text": "",
+        "html": "<p>Conteúdo informativo da Equipe Saúde & Bem, baseado no Guia Alimentar para a População Brasileira (Ministério da Saúde, 2014). Para mais disposição no dia a dia, veja o <a href=\"/biblioteca/guia-energia-natural\">Guia Energia Natural</a>.</p>"
       }
     ],
-    "seo_title": "Alimentação saudável para iniciantes | Guia Saúde & Bem",
-    "seo_description": "Por onde começar uma alimentação equilibrada: prato inteligente, proteínas, fibras e redução de ultraprocessados sem dietas restritivas.",
+    "seo_title": "Alimentação saudável depois dos 50: por onde começar",
+    "seo_description": "Alimentação saudável depois dos 50: como montar o prato, por que a proteína importa mais com a idade, fibras, água e o que evitar.",
     "seo_keywords": "alimentacao, saudavel, iniciantes, emagrecimento, saúde, bem-estar, saúde e bem",
     "og_image_url": "/blog/categories/emagrecimento.svg",
     "cover_image_url": "/blog/categories/emagrecimento.svg"
@@ -2120,11 +2224,11 @@
   },
   {
     "slug": "como-melhorar-imunidade",
-    "title": "Como melhorar a imunidade",
-    "excerpt": "Sono, nutrição, exercício e gestão de estresse: pilares com evidência para sistema imune resiliente — sem 'imunidade mágica'.",
+    "title": "Como fortalecer a imunidade depois dos 50 (sem promessas milagrosas)",
+    "excerpt": "Vacinas em dia, sono, alimentação e movimento: o que de fato ajuda o sistema de defesa do corpo com o passar dos anos.",
     "category": "longevidade",
     "category_label": "Imunidade",
-    "read_time": "9 min",
+    "read_time": "4 min",
     "published_at": "14 Jun 2026",
     "intro": [
       "Imunidade forte não vem de um único superalimento — vem de hábitos integrados que reduzem inflamação crônica e suportam células de defesa.",
@@ -2174,109 +2278,134 @@
     "content": [
       {
         "type": "image",
-        "url": "/blog/categories/longevidade.svg",
-        "alt": "Capa: Como melhorar a imunidade"
+        "url": "https://images.unsplash.com/photo-1546548970-71785318a17b?auto=format&fit=crop&w=1600&q=80",
+        "alt": "Foto ilustrativa: Como fortalecer a imunidade depois dos 50 (sem promessas milagrosas) (Unsplash)"
+      },
+      {
+        "type": "paragraph",
+        "text": "Com o passar dos anos, o sistema imunológico responde de forma mais lenta, o que deixa infecções como gripe, pneumonia e herpes-zóster mais frequentes e mais sérias. Não existe alimento ou suplemento que \"turbine\" a imunidade da noite para o dia. Existem, sim, atitudes comprovadas que ajudam o corpo a se defender melhor."
       },
       {
         "type": "heading",
         "level": 2,
-        "text": "Introdução"
+        "text": "1. Vacinas em dia: a medida mais eficaz"
       },
       {
         "type": "paragraph",
-        "text": "Imunidade forte não vem de um único superalimento — vem de hábitos integrados que reduzem inflamação crônica e suportam células de defesa."
-      },
-      {
-        "type": "paragraph",
-        "text": "Sono, micronutrientes via alimentação variada e movimento moderado são os pilares com melhor evidência."
-      },
-      {
-        "type": "heading",
-        "level": 2,
-        "text": "Benefícios"
+        "text": "Para adultos mais velhos, as vacinas são a proteção mais importante contra infecções graves. Algumas que costumam ser indicadas:"
       },
       {
         "type": "list",
         "items": [
-          "Menor susceptibilidade a infecções respiratórias frequentes",
-          "Recuperação mais rápida quando adoece",
-          "Saúde metabólica e inflamatória equilibrada",
-          "Melhor resposta a vacinas — associada a estilo de vida"
+          "Gripe (influenza): todos os anos, na campanha de vacinação.",
+          "Covid-19: conforme o calendário vigente do Ministério da Saúde.",
+          "Pneumonia (pneumocócica).",
+          "Difteria e tétano (dT): reforço a cada 10 anos.",
+          "Herpes-zóster, que causa a cobreiro.",
+          "Hepatite B, para quem não completou o esquema."
+        ]
+      },
+      {
+        "type": "blockquote",
+        "text": "As indicações e a oferta no SUS variam com a idade e o estado de saúde. Leve a sua caderneta de vacinação à unidade de saúde e pergunte quais estão faltando."
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "2. Sono suficiente"
+      },
+      {
+        "type": "paragraph",
+        "text": "",
+        "html": "<p>Dormir mal por muitas noites seguidas diminui a capacidade de defesa do corpo e até a resposta às vacinas. Veja como melhorar em <a href=\"/blog/como-melhorar-qualidade-do-sono\">qualidade do sono depois dos 50</a>.</p>"
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "3. Alimentação variada"
+      },
+      {
+        "type": "paragraph",
+        "text": "Não é um alimento específico que fortalece a imunidade, e sim o conjunto. Frutas, verduras e legumes de várias cores, feijões, ovos, peixes e carnes trazem as vitaminas e minerais de que as células de defesa precisam. A proteína merece atenção especial: com pouca proteína, o corpo se defende pior."
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "4. Movimento regular"
+      },
+      {
+        "type": "paragraph",
+        "text": "Atividade física moderada, como caminhar 30 minutos na maioria dos dias, está associada a menos infecções respiratórias. Exercícios extremos e sem descanso, ao contrário, não ajudam."
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "5. Controle das doenças crônicas"
+      },
+      {
+        "type": "paragraph",
+        "text": "Diabetes descontrolado, por exemplo, enfraquece a defesa do organismo e aumenta o risco de infecções. Seguir o tratamento e fazer as consultas de rotina também é cuidar da imunidade."
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "6. Hábitos que atrapalham"
+      },
+      {
+        "type": "list",
+        "items": [
+          "Fumar: prejudica a defesa dos pulmões. Nunca é tarde para parar.",
+          "Excesso de álcool.",
+          "Estresse constante e isolamento social."
         ]
       },
       {
         "type": "heading",
         "level": 2,
-        "text": "Como aplicar"
+        "text": "E os suplementos?"
       },
       {
-        "type": "list",
-        "items": [
-          "Durma 7–9 horas com regularidade.",
-          "Coma arco-íris de vegetais e frutas diariamente.",
-          "Pratique exercício moderado 150 min/semana.",
-          "Higienize mãos e mantenha vacinação em dia.",
-          "Gerencie estresse crônico com pausas e movimento."
-        ],
-        "ordered": true
+        "type": "paragraph",
+        "text": "Vitamina C em altas doses, zinco e outros suplementos vendidos para \"aumentar a imunidade\" não mostraram benefício consistente para quem já tem uma alimentação adequada. A vitamina D só deve ser suplementada quando o médico identificar falta, com exame. Suplementos também podem interagir com remédios: converse com o médico antes de usar."
       },
       {
         "type": "heading",
         "level": 2,
-        "text": "Erros comuns"
+        "text": "Quando procurar atendimento"
       },
       {
         "type": "list",
         "items": [
-          "Megadoses de vitamina C ou zinco sem necessidade",
-          "Excesso de exercício intenso sem recuperação",
-          "Privação de sono em nome de produtividade",
-          "Acreditar em 'detox' ou produtos milagrosos"
+          "Febre que dura mais de 3 dias ou falta de ar.",
+          "Confusão mental ou sonolência fora do comum, que em pessoas mais velhas podem ser sinal de infecção.",
+          "Infecções que se repetem com frequência."
         ]
-      },
-      {
-        "type": "heading",
-        "level": 2,
-        "text": "Perguntas frequentes"
       },
       {
         "type": "faq",
         "items": [
           {
-            "question": "Suplementos imunidade funcionam?",
-            "answer": "Corrigem deficiências específicas. Para pessoa saudável, alimentação costuma bastar."
+            "question": "Existe alimento que aumenta a imunidade?",
+            "answer": "Nenhum alimento sozinho faz isso. O que ajuda é uma alimentação variada e equilibrada, com frutas, verduras, legumes, feijões e boas fontes de proteína."
           },
           {
-            "question": "Exercício intenso imunidade?",
-            "answer": "Moderado fortalece; excesso sem descanso pode temporariamente suprimir defesas."
+            "question": "Quem tem mais de 60 anos precisa tomar vacina todo ano?",
+            "answer": "A vacina da gripe é anual. Outras têm esquemas próprios. Confira a sua caderneta na unidade de saúde para saber o que está em dia."
           },
           {
-            "question": "Idosos precisam de cuidados extras?",
-            "answer": "Sim — sono, proteína adequada e vacinação são ainda mais relevantes."
+            "question": "Chá de gengibre ou limão protege contra gripe?",
+            "answer": "Eles podem fazer parte de uma rotina agradável e ajudam na hidratação, mas não substituem a vacina nem previnem a gripe."
           }
         ]
       },
       {
-        "type": "heading",
-        "level": 2,
-        "text": "Conclusão"
-      },
-      {
         "type": "paragraph",
-        "text": "Imunidade resiliente é estilo de vida, não pílula. Consistência nos pilares básicos é a melhor estratégia."
-      },
-      {
-        "type": "heading",
-        "level": 2,
-        "text": "Continue no Clube Saúde & Bem"
-      },
-      {
-        "type": "paragraph",
-        "html": "<p>Quer protocolos premium, biblioteca ampliada e acompanhamento contínuo? O <strong>Clube Saúde &amp; Bem</strong> reúne ferramentas avançadas e conteúdo exclusivo para acelerar sua jornada.</p><p><a href=\"/clube\">Conhecer o Clube Premium</a> · <a href=\"/assinar\">Ver planos</a></p>"
+        "text": "",
+        "html": "<p>Conteúdo informativo da Equipe Saúde & Bem, baseado no Programa Nacional de Imunizações e nas recomendações da Sociedade Brasileira de Imunizações. Para mais disposição, baixe o <a href=\"/biblioteca/guia-energia-natural\">Guia Energia Natural</a>.</p>"
       }
     ],
-    "seo_title": "Como melhorar a imunidade | Guia Saúde & Bem",
-    "seo_description": "Sono, nutrição, exercício e gestão de estresse: pilares com evidência para sistema imune resiliente — sem 'imunidade mágica'.",
+    "seo_title": "Como fortalecer a imunidade depois dos 50 (sem promessas milagrosas)",
+    "seo_description": "Como fortalecer a imunidade depois dos 50: vacinas recomendadas, sono, alimentação, atividade física e os mitos sobre suplementos.",
     "seo_keywords": "como, melhorar, imunidade, longevidade, saúde, bem-estar, saúde e bem",
     "og_image_url": "/blog/categories/longevidade.svg",
     "cover_image_url": "/blog/categories/longevidade.svg"
@@ -2772,11 +2901,11 @@
   },
   {
     "slug": "exercicios-para-iniciantes",
-    "title": "Exercícios para iniciantes",
-    "excerpt": "Por onde começar treinar com segurança: caminhada, força básica e progressão gradual sem academia obrigatória.",
+    "title": "Exercícios para iniciantes depois dos 50: força, equilíbrio e fôlego",
+    "excerpt": "Uma rotina simples, para fazer em casa com uma cadeira, que fortalece as pernas, melhora o equilíbrio e reduz o risco de quedas.",
     "category": "emagrecimento",
     "category_label": "Exercícios",
-    "read_time": "9 min",
+    "read_time": "4 min",
     "published_at": "18 Jun 2026",
     "intro": [
       "Começar a se exercitar pode intimidar, mas iniciantes se beneficiam enormemente de movimentos simples e progressão lenta. O melhor exercício é o que você repete.",
@@ -2826,109 +2955,150 @@
     "content": [
       {
         "type": "image",
-        "url": "/blog/categories/emagrecimento.svg",
-        "alt": "Capa: Exercícios para iniciantes"
+        "url": "https://images.unsplash.com/photo-1764173040044-9835cc696a39?auto=format&fit=crop&w=1600&q=80",
+        "alt": "Foto ilustrativa: Exercícios para iniciantes depois dos 50: força, equilíbrio e fôlego (Unsplash)"
+      },
+      {
+        "type": "paragraph",
+        "text": "Nunca é tarde para começar a se exercitar. Pessoas que começam depois dos 60 ganham força, equilíbrio e disposição em poucas semanas. E não é preciso academia: uma cadeira firme e um pouco de espaço em casa bastam."
       },
       {
         "type": "heading",
         "level": 2,
-        "text": "Introdução"
-      },
-      {
-        "type": "paragraph",
-        "text": "Começar a se exercitar pode intimidar, mas iniciantes se beneficiam enormemente de movimentos simples e progressão lenta. O melhor exercício é o que você repete."
-      },
-      {
-        "type": "paragraph",
-        "text": "Combinação de aeróbico leve e força com peso corporal constrói base sólida."
-      },
-      {
-        "type": "heading",
-        "level": 2,
-        "text": "Benefícios"
+        "text": "Os três tipos de exercício que importam"
       },
       {
         "type": "list",
         "items": [
-          "Melhora cardiovascular e muscular",
-          "Mais energia e disposição",
-          "Suporte à saúde óssea e metabólica",
-          "Autoestima e hábito de autocuidado"
+          "Fôlego: caminhada, dança, bicicleta ou hidroginástica, para o coração.",
+          "Força: exercícios para pernas, braços e tronco, ao menos 2 vezes por semana.",
+          "Equilíbrio: recomendado pela OMS para quem tem mais de 65 anos, porque previne quedas."
         ]
       },
       {
+        "type": "blockquote",
+        "text": "Converse com o médico antes de começar se tiver doença do coração, pressão alta descontrolada, diabetes ou dores nas articulações. Pare se sentir dor no peito, falta de ar forte ou tontura."
+      },
+      {
         "type": "heading",
         "level": 2,
-        "text": "Como aplicar"
+        "text": "Rotina de 15 minutos com uma cadeira"
+      },
+      {
+        "type": "paragraph",
+        "text": "Faça 2 a 3 vezes por semana, em dias alternados. Use uma cadeira firme, sem rodinhas, encostada na parede. Movimentos lentos, respirando normalmente, sem prender o ar."
+      },
+      {
+        "type": "heading",
+        "level": 3,
+        "text": "Aquecimento (3 minutos)"
+      },
+      {
+        "type": "paragraph",
+        "text": "Marche no lugar, segurando no encosto da cadeira, balançando os braços. Depois faça círculos com os ombros e com os tornozelos."
+      },
+      {
+        "type": "heading",
+        "level": 3,
+        "text": "1. Sentar e levantar"
+      },
+      {
+        "type": "paragraph",
+        "text": "Sente na beirada da cadeira, pés afastados na largura do quadril. Levante sem usar as mãos, se conseguir, e sente devagar. Faça 8 a 10 vezes. É o exercício mais importante para a independência no dia a dia."
+      },
+      {
+        "type": "heading",
+        "level": 3,
+        "text": "2. Flexão na parede"
+      },
+      {
+        "type": "paragraph",
+        "text": "Em pé, de frente para a parede, apoie as mãos na altura dos ombros. Dobre os cotovelos aproximando o peito da parede e volte. Faça 8 a 10 vezes."
+      },
+      {
+        "type": "heading",
+        "level": 3,
+        "text": "3. Ponta dos pés"
+      },
+      {
+        "type": "paragraph",
+        "text": "Segurando no encosto da cadeira, suba na ponta dos pés e desça devagar. Faça 10 vezes. Fortalece as panturrilhas, que ajudam no equilíbrio."
+      },
+      {
+        "type": "heading",
+        "level": 3,
+        "text": "4. Elevação lateral da perna"
+      },
+      {
+        "type": "paragraph",
+        "text": "Segurando na cadeira, afaste uma perna para o lado, sem inclinar o tronco, e volte. Faça 8 vezes de cada lado."
+      },
+      {
+        "type": "heading",
+        "level": 3,
+        "text": "5. Equilíbrio em um pé"
+      },
+      {
+        "type": "paragraph",
+        "text": "Segurando firme no encosto, levante um pé do chão e fique 10 segundos. Troque de lado. Repita 3 vezes. Com o tempo, segure com apenas um dedo."
+      },
+      {
+        "type": "heading",
+        "level": 3,
+        "text": "Alongamento final (3 minutos)"
+      },
+      {
+        "type": "paragraph",
+        "text": "Sentado, estique uma perna à frente com o calcanhar no chão e incline o tronco levemente, até sentir alongar atrás da coxa. Segure 20 segundos de cada lado. Depois entrelace as mãos e estique os braços para o alto."
+      },
+      {
+        "type": "paragraph",
+        "text": "",
+        "html": "<p>Para um alongamento mais completo, veja o artigo de <a href=\"/blog/alongamento-diario\">alongamento diário</a>. E some a rotina à <a href=\"/blog/beneficios-caminhada-diaria\">caminhada diária</a> para cuidar também do fôlego.</p>"
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "Como evoluir"
       },
       {
         "type": "list",
         "items": [
-          "Semana 1–2: caminhada 20 min, 4x/semana.",
-          "Adicione 2x/semana circuito: agachamento, flexão na parede, prancha 20s.",
-          "Aumente 10% volume a cada duas semanas.",
-          "Aqueça 5 min e alongue ao final.",
-          "Hidrate e durma bem para recuperar."
+          "Semanas 1 e 2: uma série de cada exercício.",
+          "Semanas 3 e 4: duas séries, com 1 minuto de descanso entre elas.",
+          "A partir do segundo mês: três séries, ou use garrafas de água como peso nos braços."
         ],
         "ordered": true
       },
       {
-        "type": "heading",
-        "level": 2,
-        "text": "Erros comuns"
-      },
-      {
-        "type": "list",
-        "items": [
-          "Começar com HIIT intenso sem base",
-          "Treinar todos os dias sem descanso inicial",
-          "Ignorar dor articular aguda",
-          "Comparar-se com praticantes avançados"
-        ]
-      },
-      {
-        "type": "heading",
-        "level": 2,
-        "text": "Perguntas frequentes"
+        "type": "paragraph",
+        "text": "Um leve cansaço muscular no dia seguinte é normal. Dor nas articulações não é: diminua a amplitude do movimento ou converse com um fisioterapeuta."
       },
       {
         "type": "faq",
         "items": [
           {
+            "question": "Com que idade é tarde para começar?",
+            "answer": "Não existe idade limite. Estudos mostram ganhos de força e equilíbrio mesmo em pessoas com mais de 80 anos, com exercícios adaptados."
+          },
+          {
+            "question": "Posso fazer todos os dias?",
+            "answer": "Os exercícios de força funcionam melhor com um dia de descanso entre as sessões. A caminhada e o equilíbrio podem ser feitos diariamente."
+          },
+          {
             "question": "Preciso de academia?",
-            "answer": "Não. Peso corporal e caminhada são excelentes pontos de partida."
-          },
-          {
-            "question": "Quanto tempo ver resultados?",
-            "answer": "Energia em 2–3 semanas; mudanças corporais visíveis em 6–8 semanas com consistência."
-          },
-          {
-            "question": "Dor muscular normal?",
-            "answer": "Leve delayed onset muscle soreness é comum. Dor aguda ou articular não é — pare e avalie."
+            "answer": "Não. A rotina deste artigo pode ser feita em casa. Uma academia ou um grupo com professor ajuda quem quer progredir com mais segurança."
           }
         ]
       },
       {
-        "type": "heading",
-        "level": 2,
-        "text": "Conclusão"
-      },
-      {
         "type": "paragraph",
-        "text": "Exercício para iniciantes é sobre começar e continuar — intensidade vem depois."
-      },
-      {
-        "type": "heading",
-        "level": 2,
-        "text": "Continue no Clube Saúde & Bem"
-      },
-      {
-        "type": "paragraph",
-        "html": "<p>Quer protocolos premium, biblioteca ampliada e acompanhamento contínuo? O <strong>Clube Saúde &amp; Bem</strong> reúne ferramentas avançadas e conteúdo exclusivo para acelerar sua jornada.</p><p><a href=\"/clube\">Conhecer o Clube Premium</a> · <a href=\"/assinar\">Ver planos</a></p>"
+        "text": "",
+        "html": "<p>Conteúdo informativo da Equipe Saúde & Bem, baseado nas diretrizes de atividade física da Organização Mundial da Saúde (2020). Para transformar a rotina em hábito, baixe o <a href=\"/biblioteca/guia-habitos-saudaveis\">Guia Hábitos Saudáveis</a>.</p>"
       }
     ],
-    "seo_title": "Exercícios para iniciantes | Guia Saúde & Bem",
-    "seo_description": "Por onde começar treinar com segurança: caminhada, força básica e progressão gradual sem academia obrigatória.",
+    "seo_title": "Exercícios para iniciantes depois dos 50: força, equilíbrio e fôlego",
+    "seo_description": "Exercícios para iniciantes depois dos 50 e 60 anos: rotina em casa com cadeira para força, equilíbrio e alongamento, com cuidados de segurança.",
     "seo_keywords": "exercicios, para, iniciantes, emagrecimento, saúde, bem-estar, saúde e bem",
     "og_image_url": "/blog/categories/emagrecimento.svg",
     "cover_image_url": "/blog/categories/emagrecimento.svg"

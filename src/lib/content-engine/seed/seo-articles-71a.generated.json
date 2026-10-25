@@ -920,11 +920,11 @@
   },
   {
     "slug": "saude-intestinal-bem-estar",
-    "title": "Saúde intestinal e bem-estar",
-    "excerpt": "Microbiota, fibras, hidratação e sono: como o intestino influencia energia, humor e imunidade — e o que fazer na prática.",
+    "title": "Intestino preso depois dos 50: causas e o que ajuda",
+    "excerpt": "Por que o intestino fica mais lento com a idade e as mudanças simples de alimentação, água e rotina que trazem alívio.",
     "category": "longevidade",
     "category_label": "Saúde intestinal",
-    "read_time": "9 min",
+    "read_time": "5 min",
     "published_at": "06 Jun 2026",
     "intro": [
       "O intestino é muito mais que digestão — comunica-se com cérebro, sistema imune e metabolismo. Desequilíbrios intestinais podem se manifestar como fadiga, inchaço ou alterações de humor.",
@@ -974,109 +974,132 @@
     "content": [
       {
         "type": "image",
-        "url": "/blog/categories/longevidade.svg",
-        "alt": "Capa: Saúde intestinal e bem-estar"
+        "url": "https://images.unsplash.com/photo-1530259152377-3a014e1092e0?auto=format&fit=crop&w=1600&q=80",
+        "alt": "Foto ilustrativa: Intestino preso depois dos 50: causas e o que ajuda (Unsplash)"
+      },
+      {
+        "type": "paragraph",
+        "text": "A prisão de ventre é uma das queixas mais comuns depois dos 50. O intestino fica naturalmente um pouco mais lento, bebemos menos água, nos movimentamos menos e muitos remédios de uso diário interferem. A boa notícia: na maioria das vezes, ajustes no dia a dia resolvem."
       },
       {
         "type": "heading",
         "level": 2,
-        "text": "Introdução"
+        "text": "O que é normal"
       },
       {
         "type": "paragraph",
-        "text": "O intestino é muito mais que digestão — comunica-se com cérebro, sistema imune e metabolismo. Desequilíbrios intestinais podem se manifestar como fadiga, inchaço ou alterações de humor."
-      },
-      {
-        "type": "paragraph",
-        "text": "Hábitos alimentares e de estilo de vida sustentam a diversidade da microbiota sem necessidade de protocolos extremos."
+        "text": "O normal varia de 3 evacuações por dia a 3 por semana. Mais importante que a frequência é evacuar sem muito esforço, com fezes macias e sensação de esvaziamento completo."
       },
       {
         "type": "heading",
         "level": 2,
-        "text": "Benefícios"
+        "text": "1. Fibras, aos poucos"
+      },
+      {
+        "type": "paragraph",
+        "text": "As fibras dão volume e maciez às fezes e alimentam as bactérias boas do intestino. Boas fontes:"
       },
       {
         "type": "list",
         "items": [
-          "Digestão mais confortável e regular",
-          "Suporte à barreira imunológica",
-          "Possível melhora de humor e foco",
-          "Melhor absorção de nutrientes"
+          "Feijão, lentilha e grão-de-bico: uma concha por dia já ajuda.",
+          "Frutas com casca ou bagaço: mamão, ameixa, laranja, pera, kiwi.",
+          "Verduras e legumes: metade do prato no almoço e no jantar.",
+          "Aveia e pães integrais."
+        ]
+      },
+      {
+        "type": "blockquote",
+        "text": "Aumente as fibras devagar, ao longo de 2 a 3 semanas, e sempre junto com mais água. Fibra demais de uma vez, sem líquido, causa gases e pode piorar a prisão de ventre."
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "2. Água ao longo do dia"
+      },
+      {
+        "type": "paragraph",
+        "text": "Sem água, as fibras não funcionam. Como a sede diminui com a idade, beba mesmo sem vontade. Um copo de água morna ao acordar ajuda algumas pessoas a estimular o intestino. Quem tem restrição de líquidos por doença do coração ou dos rins deve seguir a orientação do médico."
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "3. Movimento"
+      },
+      {
+        "type": "paragraph",
+        "text": "A atividade física estimula os movimentos do intestino. Uma caminhada de 20 a 30 minutos por dia faz diferença. Para quem passa muito tempo sentado, levantar e andar um pouco a cada hora também ajuda."
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "4. O jeito de ir ao banheiro"
+      },
+      {
+        "type": "list",
+        "items": [
+          "Respeite a vontade: segurar repetidamente deixa o intestino \"preguiçoso\".",
+          "Aproveite o período depois do café da manhã, quando o intestino fica mais ativo.",
+          "Apoie os pés em um banquinho, com os joelhos acima do quadril: a evacuação fica mais fácil.",
+          "Sem pressa e sem força excessiva."
         ]
       },
       {
         "type": "heading",
         "level": 2,
-        "text": "Como aplicar"
+        "text": "Remédios que podem prender o intestino"
       },
       {
-        "type": "list",
-        "items": [
-          "Consuma 25–30 g de fibras/dia via vegetais, leguminosas e grãos integrais.",
-          "Inclua alimentos fermentados com moderação (iogurte, kefir, chucrute).",
-          "Mastigue bem e evite refeições em estado de estresse agudo.",
-          "Durma adequadamente — o ritmo circadiano afeta o intestino.",
-          "Hidrate-se e movimente-se diariamente."
-        ],
-        "ordered": true
+        "type": "paragraph",
+        "text": "Alguns analgésicos mais fortes, suplementos de ferro e de cálcio, certos remédios para pressão, para alergia e antidepressivos podem deixar o intestino preso. Não pare nenhum por conta própria: converse com o médico, que pode ajustar a dose ou o horário."
+      },
+      {
+        "type": "paragraph",
+        "text": "Evite usar laxantes e chás laxativos por conta própria de forma contínua. O uso prolongado sem orientação pode piorar o funcionamento do intestino."
       },
       {
         "type": "heading",
         "level": 2,
-        "text": "Erros comuns"
+        "text": "Sinais de alerta"
       },
       {
         "type": "list",
         "items": [
-          "Suplementar probióticos sem estratégia individualizada",
-          "Dietas restritivas prolongadas sem supervisão",
-          "Ignorar sintomas persistentes (dor, sangue, perda de peso)",
-          "Excesso de adoçantes artificiais em busca de 'zero'"
+          "Sangue nas fezes ou fezes muito escuras.",
+          "Mudança no hábito intestinal que dura mais de 3 semanas.",
+          "Perda de peso sem explicação ou anemia.",
+          "Dor abdominal forte, barriga muito inchada ou vômitos."
         ]
       },
       {
-        "type": "heading",
-        "level": 2,
-        "text": "Perguntas frequentes"
+        "type": "paragraph",
+        "text": "Nesses casos, procure o médico. E lembre-se do rastreamento do câncer de intestino, recomendado a partir dos 45 a 50 anos: pergunte qual exame é indicado para você."
       },
       {
         "type": "faq",
         "items": [
           {
-            "question": "Probiótico resolve tudo?",
-            "answer": "Não. Alimentação com fibras e diversidade vegetal é a base. Probióticos podem complementar casos específicos."
+            "question": "Mamão e ameixa resolvem?",
+            "answer": "Ajudam muitas pessoas, porque têm fibras e água. Funcionam melhor como parte de uma alimentação com outras fibras, água e movimento."
           },
           {
-            "question": "Intolerâncias são comuns?",
-            "answer": "Sim, mas autodiagnóstico pode eliminar alimentos importantes. Teste com profissional quando possível."
+            "question": "Iogurte ajuda o intestino?",
+            "answer": "Iogurte natural e outros fermentados podem fazer parte da rotina. Os efeitos variam de pessoa para pessoa."
           },
           {
-            "question": "Quanto tempo para sentir diferença?",
-            "answer": "Mudanças digestivas leves podem aparecer em 2–4 semanas de hábitos consistentes."
+            "question": "Posso tomar laxante todo dia?",
+            "answer": "Não sem orientação. O uso contínuo deve ser acompanhado pelo médico, que escolhe o tipo mais seguro para o seu caso."
           }
         ]
       },
       {
-        "type": "heading",
-        "level": 2,
-        "text": "Conclusão"
-      },
-      {
         "type": "paragraph",
-        "text": "Saúde intestinal se constrói com variedade alimentar, sono e movimento — pilares simples com impacto profundo."
-      },
-      {
-        "type": "heading",
-        "level": 2,
-        "text": "Continue no Clube Saúde & Bem"
-      },
-      {
-        "type": "paragraph",
-        "html": "<p>Quer protocolos premium, biblioteca ampliada e acompanhamento contínuo? O <strong>Clube Saúde &amp; Bem</strong> reúne ferramentas avançadas e conteúdo exclusivo para acelerar sua jornada.</p><p><a href=\"/clube\">Conhecer o Clube Premium</a> · <a href=\"/assinar\">Ver planos</a></p>"
+        "text": "",
+        "html": "<p>Conteúdo informativo da Equipe Saúde & Bem. Plano de 21 dias, cardápio exemplo e diário do intestino no <a href=\"/biblioteca/guia-saude-intestinal\">Guia Saúde Intestinal</a>, gratuito.</p>"
       }
     ],
-    "seo_title": "Saúde intestinal e bem-estar | Guia Saúde & Bem",
-    "seo_description": "Microbiota, fibras, hidratação e sono: como o intestino influencia energia, humor e imunidade — e o que fazer na prática.",
+    "seo_title": "Intestino preso depois dos 50: causas e o que ajuda",
+    "seo_description": "Intestino preso depois dos 50: por que acontece, fibras, água, movimento, posição no banheiro, remédios que prendem e sinais de alerta.",
     "seo_keywords": "saude, intestinal, bem, estar, longevidade, saúde, bem-estar, saúde e bem",
     "og_image_url": "/blog/categories/longevidade.svg",
     "cover_image_url": "/blog/categories/longevidade.svg"
@@ -1246,11 +1269,11 @@
   },
   {
     "slug": "hidratacao-inteligente",
-    "title": "Hidratação inteligente",
-    "excerpt": "Como beber água de forma estratégica ao longo do dia — metas, sinais corporais e ajustes para treino e calor.",
+    "title": "Hidratação depois dos 60: por que a sede engana e como beber água",
+    "excerpt": "Com a idade, a sede diminui e o risco de desidratação aumenta. Veja os sinais, quanto beber e truques para lembrar.",
     "category": "hidratacao",
     "category_label": "Hidratação",
-    "read_time": "7 min",
+    "read_time": "4 min",
     "published_at": "08 Jun 2026",
     "intro": [
       "Hidratação inteligente vai além de 'beber quando sentir sede'. Distribuir água ao longo do dia mantém funções cognitivas, digestivas e cardiovasculares estáveis.",
@@ -1300,109 +1323,108 @@
     "content": [
       {
         "type": "image",
-        "url": "/blog/categories/hidratacao.svg",
-        "alt": "Capa: Hidratação inteligente"
+        "url": "https://images.unsplash.com/photo-1517093911940-08cb5b3952e7?auto=format&fit=crop&w=1600&q=80",
+        "alt": "Foto ilustrativa: Hidratação depois dos 60: por que a sede engana e como beber água (Unsplash)"
+      },
+      {
+        "type": "paragraph",
+        "text": "Depois dos 60, o corpo tem menos reserva de água e o aviso da sede fica mais fraco. Por isso, muitas pessoas passam o dia bebendo pouco sem perceber. A desidratação, mesmo leve, causa cansaço, dor de cabeça, prisão de ventre e tontura, e aumenta o risco de quedas e de confusão mental."
       },
       {
         "type": "heading",
         "level": 2,
-        "text": "Introdução"
-      },
-      {
-        "type": "paragraph",
-        "text": "Hidratação inteligente vai além de 'beber quando sentir sede'. Distribuir água ao longo do dia mantém funções cognitivas, digestivas e cardiovasculares estáveis."
-      },
-      {
-        "type": "paragraph",
-        "text": "Clima, atividade física e alimentação influenciam a necessidade diária — personalize com sinais simples do corpo."
-      },
-      {
-        "type": "heading",
-        "level": 2,
-        "text": "Benefícios"
+        "text": "Sinais de que falta água"
       },
       {
         "type": "list",
         "items": [
-          "Melhor foco e clareza mental",
-          "Pele e digestão mais equilibradas",
-          "Desempenho físico otimizado",
-          "Menos dores de cabeça relacionadas à desidratação"
+          "Urina escura ou em pouca quantidade.",
+          "Boca e lábios secos.",
+          "Cansaço, dor de cabeça e dificuldade de concentração.",
+          "Tontura ao levantar.",
+          "Intestino preso."
+        ]
+      },
+      {
+        "type": "blockquote",
+        "text": "Confusão mental repentina, sonolência fora do comum ou desmaio em pessoa idosa, principalmente no calor ou com diarreia e vômitos, pedem atendimento médico."
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "Quanto beber"
+      },
+      {
+        "type": "paragraph",
+        "text": "As referências europeias de nutrição indicam, para adultos e idosos, cerca de 2 litros de água por dia para mulheres e 2,5 litros para homens, contando a água dos alimentos, que costuma ser de 20% a 30% do total. Na prática, para a maioria das pessoas, isso significa algo em torno de 6 a 8 copos de líquidos por dia, mais em dias quentes ou com atividade física."
+      },
+      {
+        "type": "paragraph",
+        "text": "",
+        "html": "<p>Calcule uma meta personalizada pelo seu peso na ferramenta gratuita <a href=\"/ferramentas/consumo-agua\">consumo de água</a>.</p>"
+      },
+      {
+        "type": "blockquote",
+        "text": "Quem tem insuficiência cardíaca, doença nos rins ou usa diuréticos deve seguir a quantidade orientada pelo médico: nesses casos, beber demais também faz mal."
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "Truques para lembrar de beber"
+      },
+      {
+        "type": "list",
+        "items": [
+          "Um copo de água ao acordar e outro em cada refeição.",
+          "Garrafa ou jarra sempre à vista, na mesa ou ao lado da poltrona.",
+          "Ligue a água a hábitos: depois de tomar os remédios, depois de cada ida ao banheiro.",
+          "Use uma garrafa marcada com os horários, ou um alarme no celular.",
+          "Varie o sabor: água com rodelas de laranja, limão ou folhas de hortelã."
         ]
       },
       {
         "type": "heading",
         "level": 2,
-        "text": "Como aplicar"
+        "text": "O que também conta como água"
       },
       {
-        "type": "list",
-        "items": [
-          "Beba um copo de água ao acordar.",
-          "Use meta base de ~35 ml/kg, ajustando para calor e treino.",
-          "Leve garrafa visível na mesa de trabalho.",
-          "Inclua frutas e sopas na conta hídrica diária.",
-          "Observe cor da urina: amarelo claro é referência útil."
-        ],
-        "ordered": true
+        "type": "paragraph",
+        "text": "Chás sem açúcar, leite, sopas e frutas como melancia, melão e laranja ajudam na hidratação. Café também conta, com moderação. Refrigerantes e sucos adoçados não são boas escolhas: trazem muito açúcar."
       },
       {
         "type": "heading",
         "level": 2,
-        "text": "Erros comuns"
+        "text": "E o medo de levantar à noite?"
       },
       {
-        "type": "list",
-        "items": [
-          "Beber grande volume de uma vez só",
-          "Substituir água por refrigerantes ou sucos açucarados",
-          "Esperar sede intensa como único sinal",
-          "Ignorar reposição após suor intenso"
-        ]
-      },
-      {
-        "type": "heading",
-        "level": 2,
-        "text": "Perguntas frequentes"
+        "type": "paragraph",
+        "text": "Muitas pessoas bebem pouco para não precisar ir ao banheiro de madrugada. A solução não é cortar a água, e sim concentrá-la durante o dia e reduzir nas 2 horas antes de dormir. Se você levanta muitas vezes toda noite, converse com o médico: pode haver uma causa tratável."
       },
       {
         "type": "faq",
         "items": [
           {
-            "question": "Água com gás conta?",
-            "answer": "Sim, hidrata. Em refluxo ou gases, prefira água sem gás."
+            "question": "Preciso esperar ter sede para beber?",
+            "answer": "Não. Depois dos 60, a sede é um aviso tardio. Beba em horários combinados ao longo do dia."
           },
           {
-            "question": "Quanto beber no treino?",
-            "answer": "150–250 ml a cada 15–20 minutos em atividade moderada; mais em calor extremo."
+            "question": "Água com gás hidrata?",
+            "answer": "Sim, hidrata como a água comum. Se causar gases ou desconforto, prefira a sem gás."
           },
           {
-            "question": "Pode beber água durante as refeições?",
-            "answer": "Sim, com moderação. Não prejudica digestão na maioria das pessoas."
+            "question": "Como saber se estou bebendo o suficiente?",
+            "answer": "Urina amarelo-clara e sem cheiro forte é um bom sinal. Urina escura indica que você precisa beber mais."
           }
         ]
       },
       {
-        "type": "heading",
-        "level": 2,
-        "text": "Conclusão"
-      },
-      {
         "type": "paragraph",
-        "text": "Hidratação inteligente é hábito distribuído, não maratona de litros. Pequenos goles frequentes vencem."
-      },
-      {
-        "type": "heading",
-        "level": 2,
-        "text": "Continue no Clube Saúde & Bem"
-      },
-      {
-        "type": "paragraph",
-        "html": "<p>Quer protocolos premium, biblioteca ampliada e acompanhamento contínuo? O <strong>Clube Saúde &amp; Bem</strong> reúne ferramentas avançadas e conteúdo exclusivo para acelerar sua jornada.</p><p><a href=\"/clube\">Conhecer o Clube Premium</a> · <a href=\"/assinar\">Ver planos</a></p>"
+        "text": "",
+        "html": "<p>Conteúdo informativo da Equipe Saúde & Bem, com valores de referência da Autoridade Europeia de Segurança Alimentar (EFSA, 2010). Veja também <a href=\"/blog/agua-energia-cognicao\">água, energia e cognição</a>.</p>"
       }
     ],
-    "seo_title": "Hidratação inteligente | Guia Saúde & Bem",
-    "seo_description": "Como beber água de forma estratégica ao longo do dia — metas, sinais corporais e ajustes para treino e calor.",
+    "seo_title": "Hidratação depois dos 60: por que a sede engana e como beber água",
+    "seo_description": "Hidratação de idosos: por que a sede diminui depois dos 60, sinais de desidratação, quanto beber por dia e dicas práticas para lembrar.",
     "seo_keywords": "hidratacao, inteligente, hidratacao, saúde, bem-estar, saúde e bem",
     "og_image_url": "/blog/categories/hidratacao.svg",
     "cover_image_url": "/blog/categories/hidratacao.svg"
@@ -1735,11 +1757,11 @@
   },
   {
     "slug": "alongamento-diario",
-    "title": "Alongamento diário",
-    "excerpt": "Rotina de alongamento de 10 minutos para mobilidade, postura e alívio de tensão — segura para iniciantes.",
+    "title": "Alongamento diário para quem tem mais de 50: rotina de 10 minutos",
+    "excerpt": "Uma sequência simples, sentado ou em pé com apoio, para soltar as articulações e manter a mobilidade no dia a dia.",
     "category": "emagrecimento",
     "category_label": "Movimento",
-    "read_time": "7 min",
+    "read_time": "5 min",
     "published_at": "11 Jun 2026",
     "intro": [
       "Alongamento diário melhora amplitude de movimento, alivia tensão de horas sentado e prepara o corpo para atividade. Não exige academia — apenas consistência.",
@@ -1789,109 +1811,139 @@
     "content": [
       {
         "type": "image",
-        "url": "/blog/categories/emagrecimento.svg",
-        "alt": "Capa: Alongamento diário"
+        "url": "https://images.unsplash.com/photo-1702648158754-484755fadf79?auto=format&fit=crop&w=1600&q=80",
+        "alt": "Foto ilustrativa: Alongamento diário para quem tem mais de 50: rotina de 10 minutos (Unsplash)"
+      },
+      {
+        "type": "paragraph",
+        "text": "Calçar o sapato, olhar para trás ao manobrar o carro, pegar algo no alto do armário: tudo isso depende de mobilidade. Com a idade, músculos e articulações ficam mais rígidos, mas alguns minutos de alongamento por dia ajudam a manter os movimentos soltos."
       },
       {
         "type": "heading",
         "level": 2,
-        "text": "Introdução"
-      },
-      {
-        "type": "paragraph",
-        "text": "Alongamento diário melhora amplitude de movimento, alivia tensão de horas sentado e prepara o corpo para atividade. Não exige academia — apenas consistência."
-      },
-      {
-        "type": "paragraph",
-        "text": "Movimentos lentos e respiração consciente aumentam segurança e benefício."
-      },
-      {
-        "type": "heading",
-        "level": 2,
-        "text": "Benefícios"
+        "text": "Regras de ouro"
       },
       {
         "type": "list",
         "items": [
-          "Melhora de postura e conforto nas atividades diárias",
-          "Redução de rigidez muscular",
-          "Preparação para caminhada ou treino",
-          "Momento de pausa mental"
+          "Movimentos lentos, sem balançar.",
+          "Alongue até sentir uma leve tensão, nunca dor.",
+          "Segure cada posição por 20 a 30 segundos, respirando normalmente.",
+          "Use uma cadeira firme, sem rodinhas, encostada na parede.",
+          "Faça com o corpo aquecido: depois de uma caminhada ou do banho é um bom momento."
         ]
       },
       {
         "type": "heading",
         "level": 2,
-        "text": "Como aplicar"
+        "text": "Rotina de 10 minutos"
       },
       {
-        "type": "list",
-        "items": [
-          "Reserve 10 minutos após acordar ou antes de dormir.",
-          "Aqueça com movimento leve por 2 minutos.",
-          "Segure cada alongamento 20–30 segundos sem dor.",
-          "Inclua pescoço, ombros, quadril e posteriores de coxa.",
-          "Respire profundamente — não prenda a respiração."
-        ],
-        "ordered": true
+        "type": "heading",
+        "level": 3,
+        "text": "1. Pescoço"
+      },
+      {
+        "type": "paragraph",
+        "text": "Sentado, com as costas retas, incline a cabeça levando a orelha em direção ao ombro, sem levantar o ombro. Segure e troque de lado. Depois, olhe devagar para um lado e para o outro."
+      },
+      {
+        "type": "heading",
+        "level": 3,
+        "text": "2. Ombros e peito"
+      },
+      {
+        "type": "paragraph",
+        "text": "Sentado, entrelace as mãos atrás das costas, ou segure no encosto da cadeira, e abra o peito levando os ombros para trás. Segure 20 segundos."
+      },
+      {
+        "type": "heading",
+        "level": 3,
+        "text": "3. Braços para o alto"
+      },
+      {
+        "type": "paragraph",
+        "text": "Entrelace os dedos e estique os braços para cima, como se quisesse alcançar o teto. Respire fundo. Depois, incline levemente o tronco para cada lado."
+      },
+      {
+        "type": "heading",
+        "level": 3,
+        "text": "4. Rotação do tronco"
+      },
+      {
+        "type": "paragraph",
+        "text": "Sentado, gire o tronco para a direita segurando no encosto da cadeira com a mão direita. Segure e volte devagar. Repita para a esquerda. Ajuda nos movimentos de virar o corpo."
+      },
+      {
+        "type": "heading",
+        "level": 3,
+        "text": "5. Parte de trás da coxa"
+      },
+      {
+        "type": "paragraph",
+        "text": "Sentado na beirada da cadeira, estique uma perna à frente com o calcanhar no chão e a ponta do pé para cima. Incline o tronco levemente para a frente, com as costas retas, até sentir alongar atrás da coxa. Troque de perna."
+      },
+      {
+        "type": "heading",
+        "level": 3,
+        "text": "6. Panturrilha"
+      },
+      {
+        "type": "paragraph",
+        "text": "Em pé, de frente para a parede, apoie as mãos nela. Leve uma perna para trás, com o calcanhar no chão, e dobre levemente o joelho da frente. Segure e troque."
+      },
+      {
+        "type": "heading",
+        "level": 3,
+        "text": "7. Tornozelos e punhos"
+      },
+      {
+        "type": "paragraph",
+        "text": "Sentado, faça círculos com os pés e com as mãos, 10 vezes para cada lado. Simples e ótimo para a circulação."
+      },
+      {
+        "type": "blockquote",
+        "text": "Quem tem prótese de quadril, osteoporose importante, hérnia de disco ou fez cirurgia recente deve pedir ao médico ou fisioterapeuta quais movimentos evitar."
       },
       {
         "type": "heading",
         "level": 2,
-        "text": "Erros comuns"
+        "text": "Quando sentir dor"
       },
       {
-        "type": "list",
-        "items": [
-          "Alongar até sentir dor aguda",
-          "Movimentos bruscos ou balísticos sem preparo",
-          "Pular dias consecutivos na primeira semana",
-          "Substituir avaliação fisioterapêutica em dor crônica"
-        ]
+        "type": "paragraph",
+        "text": "Alongamento não deve doer. Se sentir dor aguda, formigamento ou tontura, pare. Dor nas articulações que não melhora merece avaliação de um médico ou fisioterapeuta."
       },
       {
-        "type": "heading",
-        "level": 2,
-        "text": "Perguntas frequentes"
+        "type": "paragraph",
+        "text": "",
+        "html": "<p>O alongamento complementa, mas não substitui, os exercícios de força e equilíbrio. Veja a rotina com cadeira em <a href=\"/blog/exercicios-para-iniciantes\">exercícios para iniciantes depois dos 50</a>.</p>"
       },
       {
         "type": "faq",
         "items": [
           {
-            "question": "Alongar antes ou depois do treino?",
-            "answer": "Mobilidade leve antes; alongamento mais longo após atividade ou em momento separado."
+            "question": "Melhor alongar de manhã ou à noite?",
+            "answer": "Os dois funcionam. De manhã, ajuda a soltar o corpo para o dia; à noite, pode fazer parte da rotina para relaxar antes de dormir."
           },
           {
-            "question": "Quantos dias por semana?",
-            "answer": "Diariamente em versão curta já traz benefícios para a maioria."
+            "question": "Alongar antes de caminhar é necessário?",
+            "answer": "Antes da caminhada, o mais indicado é um aquecimento com passos lentos. O alongamento com posições mantidas fica melhor depois, com o corpo aquecido."
           },
           {
-            "question": "Ajuda na dor nas costas?",
-            "answer": "Pode aliviar tensão postural leve. Dor persistente exige avaliação profissional."
+            "question": "Quantas vezes por semana?",
+            "answer": "O ideal é todos os dias, ou pelo menos 2 a 3 vezes por semana. Dez minutos já fazem diferença."
           }
         ]
       },
       {
-        "type": "heading",
-        "level": 2,
-        "text": "Conclusão"
-      },
-      {
         "type": "paragraph",
-        "text": "Dez minutos diários de alongamento são um dos investimentos mais acessíveis em mobilidade e conforto corporal."
-      },
-      {
-        "type": "heading",
-        "level": 2,
-        "text": "Continue no Clube Saúde & Bem"
-      },
-      {
-        "type": "paragraph",
-        "html": "<p>Quer protocolos premium, biblioteca ampliada e acompanhamento contínuo? O <strong>Clube Saúde &amp; Bem</strong> reúne ferramentas avançadas e conteúdo exclusivo para acelerar sua jornada.</p><p><a href=\"/clube\">Conhecer o Clube Premium</a> · <a href=\"/assinar\">Ver planos</a></p>"
+        "text": "",
+        "html": "<p>Conteúdo informativo da Equipe Saúde & Bem, baseado nas diretrizes de atividade física da Organização Mundial da Saúde (2020). Alongamento matinal de 5 minutos no <a href=\"/biblioteca/guia-energia-natural\">Guia Energia Natural</a>.</p>"
       }
     ],
-    "seo_title": "Alongamento diário | Guia Saúde & Bem",
-    "seo_description": "Rotina de alongamento de 10 minutos para mobilidade, postura e alívio de tensão — segura para iniciantes.",
+    "seo_title": "Alongamento diário para quem tem mais de 50: rotina de 10 minutos",
+    "seo_description": "Alongamento diário para idosos e pessoas com mais de 50: rotina de 10 minutos sentado ou com apoio, cuidados e quando evitar.",
     "seo_keywords": "alongamento, diario, emagrecimento, saúde, bem-estar, saúde e bem",
     "og_image_url": "/blog/categories/emagrecimento.svg",
     "cover_image_url": "/blog/categories/emagrecimento.svg"
@@ -2575,11 +2627,11 @@
   },
   {
     "slug": "controle-ansiedade",
-    "title": "Controle da ansiedade",
-    "excerpt": "Ferramentas práticas para ansiedade leve a moderada: respiração, rotina, movimento e quando buscar ajuda profissional.",
+    "title": "Ansiedade depois dos 50: como reconhecer e o que ajuda",
+    "excerpt": "Sinais de ansiedade que passam despercebidos, técnicas simples para o dia a dia e quando buscar ajuda profissional.",
     "category": "longevidade",
     "category_label": "Ansiedade",
-    "read_time": "9 min",
+    "read_time": "5 min",
     "published_at": "16 Jun 2026",
     "intro": [
       "Ansiedade é resposta natural a incerteza — torna-se problema quando frequente, intensa e interfere na vida. Hábitos de estilo de vida e técnicas comportamentais ajudam muitas pessoas.",
@@ -2629,109 +2681,132 @@
     "content": [
       {
         "type": "image",
-        "url": "/blog/categories/longevidade.svg",
-        "alt": "Capa: Controle da ansiedade"
+        "url": "https://images.unsplash.com/photo-1621850204256-a84f9acbc5e9?auto=format&fit=crop&w=1600&q=80",
+        "alt": "Foto ilustrativa: Ansiedade depois dos 50: como reconhecer e o que ajuda (Unsplash)"
+      },
+      {
+        "type": "paragraph",
+        "text": "Sentir preocupação de vez em quando faz parte da vida. A ansiedade passa a ser um problema quando é frequente, desproporcional ao que está acontecendo e começa a atrapalhar o sono, o apetite, as relações e o prazer pelas coisas."
+      },
+      {
+        "type": "paragraph",
+        "text": "Depois dos 50, ela costuma aparecer em momentos de mudança: aposentadoria, saída dos filhos de casa, problemas de saúde, perda de pessoas queridas ou preocupações com dinheiro. E muitas vezes se mostra mais no corpo do que nas palavras."
       },
       {
         "type": "heading",
         "level": 2,
-        "text": "Introdução"
-      },
-      {
-        "type": "paragraph",
-        "text": "Ansiedade é resposta natural a incerteza — torna-se problema quando frequente, intensa e interfere na vida. Hábitos de estilo de vida e técnicas comportamentais ajudam muitas pessoas."
-      },
-      {
-        "type": "paragraph",
-        "text": "Este conteúdo é educativo e não substitui avaliação psicológica ou psiquiátrica quando necessária."
-      },
-      {
-        "type": "heading",
-        "level": 2,
-        "text": "Benefícios"
+        "text": "Sinais que nem sempre parecem ansiedade"
       },
       {
         "type": "list",
         "items": [
-          "Redução de sintomas físicos (tensão, palpitação leve)",
-          "Maior sensação de controle",
-          "Sono menos fragmentado",
-          "Melhor tolerância a situações desafiadoras"
+          "Coração acelerado, aperto no peito ou falta de ar sem esforço.",
+          "Tensão muscular, dor de cabeça e dor nas costas.",
+          "Estômago embrulhado, intestino irregular.",
+          "Dificuldade para pegar no sono ou acordar de madrugada com a cabeça a mil.",
+          "Irritação, impaciência e dificuldade de concentração.",
+          "Preocupação constante com a saúde, a família ou o futuro."
+        ]
+      },
+      {
+        "type": "blockquote",
+        "text": "Dor no peito, falta de ar e palpitação também podem ser sinais de problemas do coração. Na dúvida, procure atendimento: não assuma que é ansiedade."
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "Técnicas que ajudam no dia a dia"
+      },
+      {
+        "type": "heading",
+        "level": 3,
+        "text": "Respiração 4-6"
+      },
+      {
+        "type": "paragraph",
+        "text": "Inspire pelo nariz contando até 4 e solte o ar devagar pela boca contando até 6. Repita por 2 a 3 minutos. Soltar o ar mais devagar do que puxa ajuda o corpo a sair do estado de alerta."
+      },
+      {
+        "type": "heading",
+        "level": 3,
+        "text": "Técnica 5-4-3-2-1"
+      },
+      {
+        "type": "paragraph",
+        "text": "Quando a cabeça disparar, traga a atenção para o presente: repare em 5 coisas que você vê, 4 que pode tocar, 3 sons, 2 cheiros e 1 sabor. É simples e pode ser feita em qualquer lugar."
+      },
+      {
+        "type": "heading",
+        "level": 3,
+        "text": "Hora marcada para se preocupar"
+      },
+      {
+        "type": "paragraph",
+        "text": "Reserve 15 minutos por dia, sempre no mesmo horário, para anotar as preocupações e o que dá para fazer sobre cada uma. Quando a preocupação aparecer fora desse horário, lembre que ela tem hora marcada."
+      },
+      {
+        "type": "paragraph",
+        "text": "",
+        "html": "<p>Mais exercícios de respiração no artigo <a href=\"/blog/tecnicas-respiracao\">técnicas de respiração</a>.</p>"
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "Hábitos que diminuem a ansiedade"
+      },
+      {
+        "type": "list",
+        "items": [
+          "Atividade física regular: uma caminhada diária já reduz a tensão.",
+          "Sono em horários regulares.",
+          "Menos cafeína e álcool, que aumentam a agitação.",
+          "Menos tempo vendo notícias e redes sociais, principalmente à noite.",
+          "Contato com outras pessoas: uma ligação, um café, um grupo de convivência.",
+          "Atividades que dão prazer: jardinagem, música, artesanato, voluntariado."
         ]
       },
       {
         "type": "heading",
         "level": 2,
-        "text": "Como aplicar"
+        "text": "Quando buscar ajuda profissional"
       },
       {
-        "type": "list",
-        "items": [
-          "Pratique respiração lenta 5 minutos ao sentir aceleração.",
-          "Limite cafeína e álcool — ambos amplificam ansiedade.",
-          "Mantenha rotina de sono e exercício regular.",
-          "Nomeie preocupações por escrito e defina uma ação concreta.",
-          "Reduza consumo de notícias alarmistas."
-        ],
-        "ordered": true
+        "type": "paragraph",
+        "text": "Procure o seu médico ou um psicólogo se a ansiedade durar mais de algumas semanas, atrapalhar o sono e as atividades, ou vier junto com tristeza e desânimo. Ansiedade e depressão têm tratamento, com psicoterapia e, quando necessário, medicamentos. No SUS, a porta de entrada é a unidade básica de saúde."
       },
       {
-        "type": "heading",
-        "level": 2,
-        "text": "Erros comuns"
+        "type": "paragraph",
+        "text": "Evite usar calmantes por conta própria ou emprestados de alguém. Alguns aumentam o risco de quedas e de esquecimentos em pessoas mais velhas."
       },
       {
-        "type": "list",
-        "items": [
-          "Evitar todas as situações que geram desconforto",
-          "Automedicação com álcool ou sedativos sem prescrição",
-          "Isolamento social prolongado",
-          "Esperar que ansiedade grave suma só com força de vontade"
-        ]
-      },
-      {
-        "type": "heading",
-        "level": 2,
-        "text": "Perguntas frequentes"
+        "type": "blockquote",
+        "text": "Se estiver em sofrimento intenso ou com pensamentos de tirar a própria vida, ligue para o CVV no 188 (gratuito, 24 horas) ou procure um pronto-atendimento."
       },
       {
         "type": "faq",
         "items": [
           {
-            "question": "Ansiedade e ataque de pânico são iguais?",
-            "answer": "Pânico é episódio intenso e limitado. Ansiedade pode ser mais contínua. Ambos merecem atenção."
+            "question": "Ansiedade aumenta com a idade?",
+            "answer": "Não necessariamente, mas mudanças comuns nessa fase, como problemas de saúde e perdas, podem desencadeá-la. Ela também pode aparecer de forma diferente, mais em sintomas físicos."
           },
           {
-            "question": "Terapia cognitivo-comportamental ajuda?",
-            "answer": "Sim, é uma das abordagens com melhor evidência para transtornos de ansiedade."
+            "question": "Chás calmantes funcionam?",
+            "answer": "Camomila e erva-cidreira podem fazer parte de uma rotina relaxante. Eles não substituem tratamento quando a ansiedade é intensa e também podem interagir com remédios."
           },
           {
-            "question": "Quando ir ao médico?",
-            "answer": "Se sintomas persistem semanas, atrapalham trabalho/sono ou há pensamentos de autolesão."
+            "question": "Exercício físico ajuda mesmo?",
+            "answer": "Sim. A atividade física regular está entre as medidas com melhor efeito para reduzir sintomas de ansiedade, junto com um sono adequado."
           }
         ]
       },
       {
-        "type": "heading",
-        "level": 2,
-        "text": "Conclusão"
-      },
-      {
         "type": "paragraph",
-        "text": "Controle da ansiedade combina ferramentas diárias e suporte profissional quando necessário — pedir ajuda é força, não fraqueza."
-      },
-      {
-        "type": "heading",
-        "level": 2,
-        "text": "Continue no Clube Saúde & Bem"
-      },
-      {
-        "type": "paragraph",
-        "html": "<p>Quer protocolos premium, biblioteca ampliada e acompanhamento contínuo? O <strong>Clube Saúde &amp; Bem</strong> reúne ferramentas avançadas e conteúdo exclusivo para acelerar sua jornada.</p><p><a href=\"/clube\">Conhecer o Clube Premium</a> · <a href=\"/assinar\">Ver planos</a></p>"
+        "text": "",
+        "html": "<p>Conteúdo informativo da Equipe Saúde & Bem. Não substitui avaliação profissional. Para começar uma rotina que ajuda corpo e mente, baixe o <a href=\"/biblioteca/guia-habitos-saudaveis\">Guia Hábitos Saudáveis</a>.</p>"
       }
     ],
-    "seo_title": "Controle da ansiedade | Guia Saúde & Bem",
-    "seo_description": "Ferramentas práticas para ansiedade leve a moderada: respiração, rotina, movimento e quando buscar ajuda profissional.",
+    "seo_title": "Ansiedade depois dos 50: como reconhecer e o que ajuda",
+    "seo_description": "Ansiedade depois dos 50 e 60 anos: sinais físicos e emocionais, técnicas de respiração e rotina que ajudam, e quando procurar ajuda.",
     "seo_keywords": "controle, ansiedade, longevidade, saúde, bem-estar, saúde e bem",
     "og_image_url": "/blog/categories/longevidade.svg",
     "cover_image_url": "/blog/categories/longevidade.svg"
@@ -3105,11 +3180,11 @@
   },
   {
     "slug": "dormir-melhor-sem-medicamentos",
-    "title": "Como dormir melhor sem medicamentos",
-    "excerpt": "Higiene do sono, luz, temperatura e rotina comportamental — estratégias não farmacológicas com evidência.",
+    "title": "Como dormir melhor sem remédios: técnicas que funcionam",
+    "excerpt": "As técnicas usadas no tratamento da insônia sem remédios, explicadas de forma simples para aplicar em casa.",
     "category": "sono",
     "category_label": "Sono",
-    "read_time": "10 min",
+    "read_time": "5 min",
     "published_at": "19 Jun 2026",
     "intro": [
       "Muitas pessoas preferem otimizar sono sem medicamentos como primeira linha — e a medicina do sono recomenda higiene e terapia cognitivo-comportamental antes de fármacos em diversos casos.",
@@ -3159,109 +3234,133 @@
     "content": [
       {
         "type": "image",
-        "url": "/blog/categories/sono.svg",
-        "alt": "Capa: Como dormir melhor sem medicamentos"
+        "url": "https://images.unsplash.com/photo-1594631252845-29fc4cc8cde9?auto=format&fit=crop&w=1600&q=80",
+        "alt": "Foto ilustrativa: Como dormir melhor sem remédios: técnicas que funcionam (Unsplash)"
+      },
+      {
+        "type": "paragraph",
+        "text": "Para a insônia que dura meses, o tratamento recomendado em primeiro lugar pelas diretrizes médicas não é um remédio: é a terapia cognitivo-comportamental para insônia. Ela reúne técnicas que ensinam o corpo e a mente a voltarem a associar a cama ao sono."
+      },
+      {
+        "type": "paragraph",
+        "text": "Algumas dessas técnicas podem ser aplicadas em casa. Outras funcionam melhor com acompanhamento profissional. Veja as principais."
       },
       {
         "type": "heading",
         "level": 2,
-        "text": "Introdução"
+        "text": "1. A cama é só para dormir"
       },
       {
         "type": "paragraph",
-        "text": "Muitas pessoas preferem otimizar sono sem medicamentos como primeira linha — e a medicina do sono recomenda higiene e terapia cognitivo-comportamental antes de fármacos em diversos casos."
-      },
-      {
-        "type": "paragraph",
-        "text": "Mudanças ambientais e comportamentais podem surpreender pela eficácia quando aplicadas com consistência."
-      },
-      {
-        "type": "heading",
-        "level": 2,
-        "text": "Benefícios"
+        "text": "Quando passamos horas na cama rolando, vendo TV ou preocupados, o cérebro aprende que a cama é lugar de ficar acordado. Para desfazer essa associação:"
       },
       {
         "type": "list",
         "items": [
-          "Sono mais natural sem dependência sedativa",
-          "Menos efeitos colaterais diurnos",
-          "Habilidades duradouras para manutenção",
-          "Complemento seguro a tratamentos prescritos"
+          "Deite só quando estiver com sono, e não apenas cansado.",
+          "Use a cama só para dormir e para a intimidade, sem TV, celular ou refeições.",
+          "Se não dormir em cerca de 20 minutos, levante, vá para outro cômodo com luz fraca e faça algo calmo. Volte quando o sono vier.",
+          "Acorde sempre no mesmo horário, mesmo depois de uma noite ruim."
         ]
       },
       {
         "type": "heading",
         "level": 2,
-        "text": "Como aplicar"
+        "text": "2. Não lute contra o sono"
       },
       {
-        "type": "list",
-        "items": [
-          "Terapia de restrição de estímulo: cama só para sono e intimidade.",
-          "Horário fixo de despertar, mesmo após noite ruim.",
-          "Exposição à luz de manhã; escuridão à noite.",
-          "Evitar cochilos longos após 15h.",
-          "Se não dormir em 20 min, levante e faça atividade calma até sonolência."
-        ],
-        "ordered": true
+        "type": "paragraph",
+        "text": "Quanto mais esforço fazemos para dormir, mais alertas ficamos. Tente trocar o objetivo: em vez de \"preciso dormir\", pense \"vou descansar o corpo\". Não fique olhando o relógio; vire-o para a parede."
       },
       {
         "type": "heading",
         "level": 2,
-        "text": "Erros comuns"
+        "text": "3. Desligue a mente antes de deitar"
       },
       {
         "type": "list",
         "items": [
-          "Ficar na cama acordado por horas frustrado",
-          "Usar álcool como indutor de sono",
-          "Relógio visível aumentando ansiedade de performance",
-          "Abandonar hábitos após uma semana sem resultado"
+          "Faça a anotação das preocupações no começo da noite, com o que fará sobre cada uma amanhã.",
+          "Tenha uma rotina de uma hora para desacelerar: luz baixa, sem telas, banho morno, leitura leve.",
+          "Na cama, use a respiração lenta: inspire em 4 tempos, solte em 6.",
+          "Relaxe os músculos por partes: contraia os pés por 5 segundos e solte, depois as pernas, a barriga, as mãos, os ombros e o rosto."
         ]
       },
       {
         "type": "heading",
         "level": 2,
-        "text": "Perguntas frequentes"
+        "text": "4. Ajuste o dia para dormir bem à noite"
+      },
+      {
+        "type": "list",
+        "items": [
+          "Luz natural pela manhã e atividade física durante o dia.",
+          "Cochilo de no máximo 30 minutos, antes das 15h, ou nenhum.",
+          "Cafeína só até o almoço; álcool longe da hora de dormir.",
+          "Jantar leve, 2 a 3 horas antes de deitar."
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": "",
+        "html": "<p>O ambiente do quarto e uma rotina completa estão no artigo <a href=\"/blog/como-melhorar-qualidade-do-sono\">como melhorar a qualidade do sono depois dos 50</a>.</p>"
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "Paciência: as primeiras semanas são as mais difíceis"
+      },
+      {
+        "type": "paragraph",
+        "text": "Ao aplicar essas técnicas, é comum dormir um pouco menos nos primeiros dias, porque você passa menos tempo na cama acordado. Em 2 a 4 semanas, o sono costuma ficar mais profundo e contínuo. Anotar o sono em um diário ajuda a ver a evolução."
+      },
+      {
+        "type": "blockquote",
+        "text": "Uma das técnicas mais eficazes, a restrição do tempo na cama, deve ser feita com orientação profissional, principalmente por quem tem epilepsia, transtorno bipolar, risco de quedas ou dirige profissionalmente."
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "E quem já usa remédio para dormir?"
+      },
+      {
+        "type": "paragraph",
+        "text": "Não pare de uma vez: alguns medicamentos precisam ser retirados aos poucos. Converse com o seu médico sobre um plano de redução, que funciona melhor junto com as técnicas deste artigo."
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "Quando procurar ajuda"
+      },
+      {
+        "type": "paragraph",
+        "text": "Se a insônia acontece 3 ou mais noites por semana, há mais de 3 meses, ou se você ronca alto, tem pausas na respiração ou sente muito sono durante o dia, procure o médico. Pergunte sobre a terapia cognitivo-comportamental para insônia, que pode ser feita com psicólogo, inclusive em formato on-line."
       },
       {
         "type": "faq",
         "items": [
           {
-            "question": "Insônia crônica: higiene basta?",
-            "answer": "Pode ajudar muito, mas TCC para insônia (CBT-I) é padrão-ouro. Médico pode indicar."
+            "question": "Melatonina é um remédio natural para dormir?",
+            "answer": "A melatonina é um hormônio e pode interagir com outros medicamentos. Ela tem indicações específicas e deve ser usada com orientação médica."
           },
           {
-            "question": "Melatonina é medicamento?",
-            "answer": "É hormônio suplementado. Uso pontual pode ajudar jet lag; crônico merece orientação."
+            "question": "Ler na cama atrapalha?",
+            "answer": "Uma leitura leve e curta faz parte de muitas rotinas que funcionam. Se você costuma ficar acordado lendo por horas, prefira ler em outro cômodo e ir para a cama já com sono."
           },
           {
-            "question": "Quando medicamento é indicado?",
-            "answer": "Casos específicos com médico — não é derrota, é ferramenta quando necessária."
+            "question": "Quanto tempo leva para funcionar?",
+            "answer": "A maioria das pessoas percebe melhora em 2 a 4 semanas de prática constante. O mais importante é manter o horário fixo de acordar."
           }
         ]
       },
       {
-        "type": "heading",
-        "level": 2,
-        "text": "Conclusão"
-      },
-      {
         "type": "paragraph",
-        "text": "Dormir melhor sem medicamentos é possível para muitos — exige método e paciência, não sorte."
-      },
-      {
-        "type": "heading",
-        "level": 2,
-        "text": "Continue no Clube Saúde & Bem"
-      },
-      {
-        "type": "paragraph",
-        "html": "<p>Quer protocolos premium, biblioteca ampliada e acompanhamento contínuo? O <strong>Clube Saúde &amp; Bem</strong> reúne ferramentas avançadas e conteúdo exclusivo para acelerar sua jornada.</p><p><a href=\"/clube\">Conhecer o Clube Premium</a> · <a href=\"/assinar\">Ver planos</a></p>"
+        "text": "",
+        "html": "<p>Conteúdo informativo da Equipe Saúde & Bem, baseado na diretriz do American College of Physicians sobre insônia crônica (2016). Plano de 7 dias e diário do sono no <a href=\"/biblioteca/guia-sono-saudavel\">Guia Sono Saudável</a>.</p>"
       }
     ],
-    "seo_title": "Como dormir melhor sem medicamentos | Guia Saúde & Bem",
-    "seo_description": "Higiene do sono, luz, temperatura e rotina comportamental — estratégias não farmacológicas com evidência.",
+    "seo_title": "Como dormir melhor sem remédios: técnicas que funcionam",
+    "seo_description": "Como dormir melhor sem remédios: técnicas da terapia para insônia, rotina, o que fazer quando não pega no sono e quando procurar ajuda.",
     "seo_keywords": "dormir, melhor, sem, medicamentos, sono, saúde, bem-estar, saúde e bem",
     "og_image_url": "/blog/categories/sono.svg",
     "cover_image_url": "/blog/categories/sono.svg"

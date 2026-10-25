@@ -415,11 +415,11 @@
   },
   {
     "slug": "como-reduzir-estresse-naturalmente",
-    "title": "Como reduzir o estresse naturalmente",
-    "excerpt": "Estratégias práticas de respiração, rotina e estilo de vida para diminuir o estresse crônico sem depender apenas de estimulantes.",
+    "title": "Como reduzir o estresse no dia a dia depois dos 50",
+    "excerpt": "Como o estresse afeta o corpo com o passar dos anos e as atitudes simples, com evidência, que ajudam a aliviá-lo.",
     "category": "longevidade",
     "category_label": "Bem-estar",
-    "read_time": "8 min",
+    "read_time": "4 min",
     "published_at": "03 Jun 2026",
     "intro": [
       "Estresse faz parte da vida moderna, mas quando se torna crônico afeta sono, digestão, imunidade e saúde cardiovascular. A boa notícia: hábitos simples reduzem a resposta fisiológica ao estresse.",
@@ -469,109 +469,130 @@
     "content": [
       {
         "type": "image",
-        "url": "/blog/categories/longevidade.svg",
-        "alt": "Capa: Como reduzir o estresse naturalmente"
+        "url": "https://images.unsplash.com/photo-1515413741792-b5900ade941f?auto=format&fit=crop&w=1600&q=80",
+        "alt": "Foto ilustrativa: Como reduzir o estresse no dia a dia depois dos 50 (Unsplash)"
+      },
+      {
+        "type": "paragraph",
+        "text": "Estresse é a reação do corpo a uma situação de pressão. Em doses pequenas e passageiras, ele nos ajuda a agir. O problema é quando ele se torna constante: com o tempo, aumenta a pressão arterial, piora o sono, enfraquece a defesa do organismo e deixa o humor instável."
       },
       {
         "type": "heading",
         "level": 2,
-        "text": "Introdução"
-      },
-      {
-        "type": "paragraph",
-        "text": "Estresse faz parte da vida moderna, mas quando se torna crônico afeta sono, digestão, imunidade e saúde cardiovascular. A boa notícia: hábitos simples reduzem a resposta fisiológica ao estresse."
-      },
-      {
-        "type": "paragraph",
-        "text": "O objetivo não é eliminar desafios — é construir resiliência para responder melhor a eles."
-      },
-      {
-        "type": "heading",
-        "level": 2,
-        "text": "Benefícios"
+        "text": "Sinais de estresse em excesso"
       },
       {
         "type": "list",
         "items": [
-          "Menor tensão muscular e dores relacionadas",
-          "Sono mais reparador e humor equilibrado",
-          "Melhor tomada de decisão sob pressão",
-          "Redução de marcadores inflamatórios associados ao estresse"
+          "Cansaço que não passa com o descanso.",
+          "Irritação e impaciência com pequenas coisas.",
+          "Dificuldade para dormir ou sono agitado.",
+          "Tensão no pescoço e nos ombros, dores de cabeça.",
+          "Comer demais ou perder o apetite."
         ]
       },
       {
         "type": "heading",
         "level": 2,
-        "text": "Como aplicar"
+        "text": "O que ajuda, com evidência"
       },
       {
-        "type": "list",
-        "items": [
-          "Pratique respiração diafragmática 5 minutos, 2x ao dia.",
-          "Reserve blocos sem tela para pausas conscientes.",
-          "Mantenha movimento regular — caminhada já reduz cortisol.",
-          "Organize prioridades com lista simples de três tarefas essenciais/dia.",
-          "Durma 7–8 horas — privação amplifica estresse percebido."
-        ],
-        "ordered": true
+        "type": "heading",
+        "level": 3,
+        "text": "Mexer o corpo"
+      },
+      {
+        "type": "paragraph",
+        "text": "A atividade física é uma das formas mais eficazes de aliviar o estresse. Caminhada, dança, hidroginástica ou jardinagem: vale o que for prazeroso e possível."
+      },
+      {
+        "type": "heading",
+        "level": 3,
+        "text": "Respirar devagar"
+      },
+      {
+        "type": "paragraph",
+        "text": "Soltar o ar mais devagar do que puxa acalma o corpo em poucos minutos. Experimente a respiração 4-6 nos momentos de tensão."
+      },
+      {
+        "type": "heading",
+        "level": 3,
+        "text": "Contato com a natureza"
+      },
+      {
+        "type": "paragraph",
+        "text": "Passar tempo em parques, praças arborizadas ou cuidar de plantas em casa está associado a menos estresse e melhor humor."
+      },
+      {
+        "type": "heading",
+        "level": 3,
+        "text": "Conversar e conviver"
+      },
+      {
+        "type": "paragraph",
+        "text": "Dividir preocupações com alguém de confiança alivia o peso. Grupos de convivência, igrejas, associações e atividades em grupo também ajudam a criar uma rede de apoio."
+      },
+      {
+        "type": "heading",
+        "level": 3,
+        "text": "Dar limites às notícias"
+      },
+      {
+        "type": "paragraph",
+        "text": "Acompanhar notícias o dia inteiro mantém o corpo em alerta. Escolha um ou dois momentos do dia para se informar e evite notícias antes de dormir."
+      },
+      {
+        "type": "heading",
+        "level": 3,
+        "text": "Organizar o que dá para controlar"
+      },
+      {
+        "type": "paragraph",
+        "text": "Anote as preocupações e separe o que está nas suas mãos do que não está. Para o que depende de você, escreva um próximo passo pequeno."
+      },
+      {
+        "type": "paragraph",
+        "text": "",
+        "html": "<p>Exercícios práticos em <a href=\"/blog/tecnicas-respiracao\">técnicas de respiração</a> e em <a href=\"/blog/controle-ansiedade\">ansiedade depois dos 50</a>.</p>"
+      },
+      {
+        "type": "blockquote",
+        "text": "Estresse que vem com tristeza persistente, perda de interesse pelas coisas ou pensamentos de desistir da vida precisa de ajuda profissional. Em crise, ligue para o CVV no 188 (gratuito, 24 horas)."
       },
       {
         "type": "heading",
         "level": 2,
-        "text": "Erros comuns"
+        "text": "Quando buscar ajuda"
       },
       {
-        "type": "list",
-        "items": [
-          "Usar álcool ou excesso de cafeína como válvula de escape",
-          "Trabalhar sem pausas por horas consecutivas",
-          "Ignorar sinais de esgotamento (burnout)",
-          "Buscar perfeição em todas as áreas simultaneamente"
-        ]
-      },
-      {
-        "type": "heading",
-        "level": 2,
-        "text": "Perguntas frequentes"
+        "type": "paragraph",
+        "text": "Se o estresse durar semanas, atrapalhar o sono, o trabalho ou as relações, converse com o seu médico ou procure um psicólogo. No SUS, a unidade básica de saúde é a porta de entrada. Cuidar da saúde emocional é parte de cuidar da saúde."
       },
       {
         "type": "faq",
         "items": [
           {
-            "question": "Meditação é obrigatória?",
-            "answer": "Não. Respiração guiada, caminhada consciente ou journaling já trazem benefícios. Escolha a prática que você consegue manter."
+            "question": "Estresse pode aumentar a pressão?",
+            "answer": "Sim. O estresse eleva a pressão no momento e, quando é constante, contribui para hábitos e alterações que pioram a pressão ao longo do tempo."
           },
           {
-            "question": "Suplementos calmantes funcionam?",
-            "answer": "Alguns podem ajudar pontualmente, mas não substituem sono, movimento e limites saudáveis. Consulte um profissional antes de usar."
+            "question": "Existe remédio natural para o estresse?",
+            "answer": "Hábitos como atividade física, sono regular, respiração lenta e convívio social são as medidas naturais com mais evidência. Chás e suplementos não substituem esses cuidados."
           },
           {
-            "question": "Quando o estresse exige ajuda médica?",
-            "answer": "Ansiedade incapacitante, ataques de pânico ou insônia persistente merecem avaliação com médico ou psicólogo."
+            "question": "Quanto tempo de atividade física ajuda?",
+            "answer": "Mesmo 10 a 15 minutos de caminhada já trazem alívio no momento. A prática regular, na maioria dos dias, tem efeito mais duradouro."
           }
         ]
       },
       {
-        "type": "heading",
-        "level": 2,
-        "text": "Conclusão"
-      },
-      {
         "type": "paragraph",
-        "text": "Reduzir estresse é treino de consistência. Pequenas pausas diárias somam mais que um dia inteiro de spa esporádico."
-      },
-      {
-        "type": "heading",
-        "level": 2,
-        "text": "Continue no Clube Saúde & Bem"
-      },
-      {
-        "type": "paragraph",
-        "html": "<p>Quer protocolos premium, biblioteca ampliada e acompanhamento contínuo? O <strong>Clube Saúde &amp; Bem</strong> reúne ferramentas avançadas e conteúdo exclusivo para acelerar sua jornada.</p><p><a href=\"/clube\">Conhecer o Clube Premium</a> · <a href=\"/assinar\">Ver planos</a></p>"
+        "text": "",
+        "html": "<p>Conteúdo informativo da Equipe Saúde & Bem. Para criar uma rotina que ajuda corpo e mente, baixe o <a href=\"/biblioteca/guia-habitos-saudaveis\">Guia Hábitos Saudáveis</a>.</p>"
       }
     ],
-    "seo_title": "Como reduzir o estresse naturalmente | Guia Saúde & Bem",
-    "seo_description": "Estratégias práticas de respiração, rotina e estilo de vida para diminuir o estresse crônico sem depender apenas de estimulantes.",
+    "seo_title": "Como reduzir o estresse no dia a dia depois dos 50",
+    "seo_description": "Como reduzir o estresse depois dos 50: efeitos no corpo, atividade física, respiração, contato com a natureza, convívio e quando buscar ajuda.",
     "seo_keywords": "como, reduzir, estresse, naturalmente, longevidade, saúde, bem-estar, saúde e bem",
     "og_image_url": "/blog/categories/longevidade.svg",
     "cover_image_url": "/blog/categories/longevidade.svg"
@@ -1431,11 +1452,11 @@
   },
   {
     "slug": "magnesio-qualidade-sono",
-    "title": "Magnésio e qualidade do sono",
-    "excerpt": "O que a ciência diz sobre magnésio, relaxamento muscular e sono — alimentos, suplementação e cautelas.",
+    "title": "Magnésio ajuda a dormir? O que a ciência diz",
+    "excerpt": "O que se sabe sobre magnésio e sono, os alimentos ricos no mineral e os cuidados antes de tomar suplemento depois dos 50.",
     "category": "sono",
     "category_label": "Sono",
-    "read_time": "8 min",
+    "read_time": "4 min",
     "published_at": "09 Jun 2026",
     "intro": [
       "O magnésio participa de centenas de reações no corpo, incluindo relaxamento muscular e regulação do sistema nervoso. Deficiência subclínica é comum e pode afetar qualidade do sono.",
@@ -1485,109 +1506,107 @@
     "content": [
       {
         "type": "image",
-        "url": "/blog/categories/sono.svg",
-        "alt": "Capa: Magnésio e qualidade do sono"
-      },
-      {
-        "type": "heading",
-        "level": 2,
-        "text": "Introdução"
+        "url": "https://images.unsplash.com/photo-1600189020840-e9918c25269d?auto=format&fit=crop&w=1600&q=80",
+        "alt": "Foto ilustrativa: Magnésio ajuda a dormir? O que a ciência diz (Unsplash)"
       },
       {
         "type": "paragraph",
-        "text": "O magnésio participa de centenas de reações no corpo, incluindo relaxamento muscular e regulação do sistema nervoso. Deficiência subclínica é comum e pode afetar qualidade do sono."
+        "text": "O magnésio ganhou fama como \"mineral do sono\". Ele participa de centenas de reações no corpo, inclusive no funcionamento dos músculos e do sistema nervoso. Mas a pergunta que importa é: tomar magnésio faz dormir melhor?"
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "O que os estudos mostram"
       },
       {
         "type": "paragraph",
-        "text": "Antes de suplementar, vale otimizar fontes alimentares e hábitos de higiene do sono."
+        "text": "As pesquisas sobre magnésio e sono ainda são poucas e pequenas. Alguns estudos com pessoas mais velhas sugerem uma melhora modesta, principalmente em quem tinha falta do mineral. Os resultados não são fortes o bastante para recomendar o suplemento a todos com dificuldade para dormir."
+      },
+      {
+        "type": "paragraph",
+        "text": "Em resumo: quem come bem dificilmente terá benefício extra com o suplemento, e a falta de magnésio, quando existe, deve ser identificada e tratada pelo médico."
       },
       {
         "type": "heading",
         "level": 2,
-        "text": "Benefícios"
+        "text": "Onde encontrar magnésio na comida"
       },
       {
         "type": "list",
         "items": [
-          "Suporte ao relaxamento muscular noturno",
-          "Possível redução de despertares noturnos",
-          "Participação na regulação do ritmo circadiano",
-          "Complemento a rotina de descanso — não substituto"
+          "Folhas verde-escuras, como espinafre e couve.",
+          "Feijões, lentilha e grão-de-bico.",
+          "Castanhas, amendoim e sementes de abóbora.",
+          "Aveia, arroz integral e pães integrais.",
+          "Banana e abacate."
         ]
       },
       {
-        "type": "heading",
-        "level": 2,
-        "text": "Como aplicar"
-      },
-      {
-        "type": "list",
-        "items": [
-          "Inclua castanhas, sementes, folhas verdes e leguminosas.",
-          "Mantenha rotina de sono consistente em paralelo.",
-          "Se suplementar, prefira formas bem toleradas e dose orientada.",
-          "Evite dose alta sem avaliação — pode causar desconforto intestinal.",
-          "Revise medicamentos que interagem com magnésio com seu médico."
-        ],
-        "ordered": true
+        "type": "paragraph",
+        "text": "Uma alimentação com esses alimentos no dia a dia costuma garantir o magnésio de que o corpo precisa."
       },
       {
         "type": "heading",
         "level": 2,
-        "text": "Erros comuns"
+        "text": "Quem pode ter falta de magnésio"
       },
       {
         "type": "list",
         "items": [
-          "Esperar que suplemento compense má higiene do sono",
-          "Megadoses sem orientação profissional",
-          "Ignorar diarreia ou cólicas como sinal de excesso",
-          "Substituir investigação de apneia ou insônia clínica"
+          "Pessoas que usam por muito tempo remédios para o estômago do tipo omeprazol.",
+          "Quem usa alguns diuréticos.",
+          "Pessoas com diabetes mal controlado ou diarreia frequente.",
+          "Quem consome álcool em excesso."
         ]
       },
       {
+        "type": "blockquote",
+        "text": "Quem tem doença nos rins não deve tomar suplemento de magnésio sem orientação: o mineral pode se acumular no sangue."
+      },
+      {
         "type": "heading",
         "level": 2,
-        "text": "Perguntas frequentes"
+        "text": "Cuidados com o suplemento"
+      },
+      {
+        "type": "list",
+        "items": [
+          "Converse com o médico antes, principalmente se usa vários remédios.",
+          "O magnésio pode diminuir a absorção de alguns antibióticos e de remédios para osteoporose, por isso os horários precisam ser separados.",
+          "Em doses altas, causa diarreia.",
+          "Não substitui as mudanças de hábito, que são a base do tratamento da insônia."
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": "",
+        "html": "<p>O que de fato funciona para a maioria das pessoas está em <a href=\"/blog/como-melhorar-qualidade-do-sono\">como melhorar a qualidade do sono depois dos 50</a> e no <a href=\"/biblioteca/guia-sono-saudavel\">Guia Sono Saudável</a>.</p>"
       },
       {
         "type": "faq",
         "items": [
           {
-            "question": "Qual melhor horário para tomar magnésio?",
-            "answer": "Muitas pessoas preferem 1–2 horas antes de dormir, mas o mais importante é consistência e tolerância digestiva."
+            "question": "Posso tomar magnésio por conta própria?",
+            "answer": "Não é o ideal. O médico pode avaliar se há falta do mineral e se o suplemento é seguro com os remédios que você usa."
           },
           {
-            "question": "Magnésio é seguro para todos?",
-            "answer": "Pessoas com doença renal ou em uso de certos medicamentos precisam de avaliação médica."
+            "question": "Qual o melhor horário para tomar?",
+            "answer": "Isso depende do motivo e dos outros remédios. Se o médico indicar, ele também vai orientar o horário."
           },
           {
-            "question": "Comida basta?",
-            "answer": "Frequentemente sim. Suplemento entra quando dieta e exames indicam necessidade."
+            "question": "Alimentos ricos em magnésio ajudam o sono?",
+            "answer": "Uma alimentação equilibrada ajuda a saúde como um todo. Para o sono, hábitos como horário fixo, luz da manhã e menos cafeína têm efeito mais claro."
           }
         ]
       },
       {
-        "type": "heading",
-        "level": 2,
-        "text": "Conclusão"
-      },
-      {
         "type": "paragraph",
-        "text": "Magnésio pode apoiar o sono como peça do quebra-cabeça — rotina, ambiente e alimentação continuam centrais."
-      },
-      {
-        "type": "heading",
-        "level": 2,
-        "text": "Continue no Clube Saúde & Bem"
-      },
-      {
-        "type": "paragraph",
-        "html": "<p>Quer protocolos premium, biblioteca ampliada e acompanhamento contínuo? O <strong>Clube Saúde &amp; Bem</strong> reúne ferramentas avançadas e conteúdo exclusivo para acelerar sua jornada.</p><p><a href=\"/clube\">Conhecer o Clube Premium</a> · <a href=\"/assinar\">Ver planos</a></p>"
+        "text": "",
+        "html": "<p>Conteúdo informativo da Equipe Saúde & Bem. Não substitui orientação médica ou nutricional.</p>"
       }
     ],
-    "seo_title": "Magnésio e qualidade do sono | Guia Saúde & Bem",
-    "seo_description": "O que a ciência diz sobre magnésio, relaxamento muscular e sono — alimentos, suplementação e cautelas.",
+    "seo_title": "Magnésio ajuda a dormir? O que a ciência diz",
+    "seo_description": "Magnésio e sono: o que os estudos mostram, alimentos ricos em magnésio, cuidados com suplementos depois dos 50 e interações com remédios.",
     "seo_keywords": "magnesio, qualidade, sono, sono, saúde, bem-estar, saúde e bem",
     "og_image_url": "/blog/categories/sono.svg",
     "cover_image_url": "/blog/categories/sono.svg"
@@ -2113,11 +2132,11 @@
   },
   {
     "slug": "tecnicas-respiracao",
-    "title": "Técnicas de respiração",
-    "excerpt": "Respiração diafragmática, box breathing e pausas conscientes para reduzir estresse e melhorar foco em minutos.",
+    "title": "Técnicas de respiração para acalmar e dormir melhor",
+    "excerpt": "Três exercícios simples, que levam de 2 a 5 minutos, para usar em momentos de tensão, antes de dormir ou ao acordar.",
     "category": "longevidade",
     "category_label": "Respiração",
-    "read_time": "7 min",
+    "read_time": "4 min",
     "published_at": "13 Jun 2026",
     "intro": [
       "A respiração é a ponte mais rápida entre mente e corpo. Padrões lentos e profundos ativam resposta de relaxamento e reduzem frequência cardíaca em minutos.",
@@ -2167,109 +2186,122 @@
     "content": [
       {
         "type": "image",
-        "url": "/blog/categories/longevidade.svg",
-        "alt": "Capa: Técnicas de respiração"
+        "url": "https://images.unsplash.com/photo-1765970333960-9cc0e5d6541b?auto=format&fit=crop&w=1600&q=80",
+        "alt": "Foto ilustrativa: Técnicas de respiração para acalmar e dormir melhor (Unsplash)"
+      },
+      {
+        "type": "paragraph",
+        "text": "Respirar é automático, mas dá para usar a respiração a nosso favor. Quando soltamos o ar mais devagar do que puxamos, o corpo recebe um sinal de que está em segurança: o coração desacelera e os músculos relaxam. É uma ferramenta gratuita, que pode ser usada em qualquer lugar."
       },
       {
         "type": "heading",
         "level": 2,
-        "text": "Introdução"
-      },
-      {
-        "type": "paragraph",
-        "text": "A respiração é a ponte mais rápida entre mente e corpo. Padrões lentos e profundos ativam resposta de relaxamento e reduzem frequência cardíaca em minutos."
-      },
-      {
-        "type": "paragraph",
-        "text": "Técnicas simples podem ser usadas antes de reuniões, ao acordar ou ao deitar."
-      },
-      {
-        "type": "heading",
-        "level": 2,
-        "text": "Benefícios"
+        "text": "Antes de começar"
       },
       {
         "type": "list",
         "items": [
-          "Redução imediata de tensão percebida",
-          "Melhora de foco e clareza",
-          "Suporte ao sono quando praticada à noite",
-          "Ferramenta gratuita e sempre disponível"
+          "Sente-se com as costas apoiadas ou deite de barriga para cima.",
+          "Solte os ombros e apoie as mãos no colo ou na barriga.",
+          "Respire pelo nariz, sem forçar. O ar deve entrar e sair com suavidade.",
+          "Se sentir tontura, volte a respirar normalmente."
         ]
       },
       {
         "type": "heading",
         "level": 2,
-        "text": "Como aplicar"
+        "text": "1. Respiração 4-6"
       },
       {
-        "type": "list",
-        "items": [
-          "Diafragmática: inspire 4s pelo nariz, expanda abdômen; expire 6s pela boca.",
-          "Box breathing: 4s inspirar, 4s segurar, 4s expirar, 4s pausa — repita 4 ciclos.",
-          "Pratique 5 minutos ao acordar ou em pausa do trabalho.",
-          "Use antes de dormir para desacelerar.",
-          "Combine com postura ereta e ombros relaxados."
-        ],
-        "ordered": true
+        "type": "paragraph",
+        "text": "A mais simples e uma das mais eficazes. Inspire pelo nariz contando até 4 e solte o ar devagar, pela boca ou pelo nariz, contando até 6. Repita por 2 a 5 minutos."
+      },
+      {
+        "type": "paragraph",
+        "text": "Quando usar: em momentos de tensão, antes de uma consulta ou conversa difícil, na cama antes de dormir."
       },
       {
         "type": "heading",
         "level": 2,
-        "text": "Erros comuns"
+        "text": "2. Respiração pela barriga"
+      },
+      {
+        "type": "paragraph",
+        "text": "Coloque uma mão no peito e outra na barriga. Ao puxar o ar, deixe a barriga subir, enquanto a mão do peito quase não se mexe. Ao soltar, a barriga desce. Faça 10 respirações."
+      },
+      {
+        "type": "paragraph",
+        "text": "Quando usar: ao acordar ou em qualquer momento do dia, para relaxar os músculos do pescoço e dos ombros, que costumam ficar tensos quando respiramos só pelo peito."
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "3. Respiração quadrada"
+      },
+      {
+        "type": "paragraph",
+        "text": "Inspire contando até 4, segure o ar contando até 4, solte contando até 4 e fique sem ar contando até 4. Repita 4 a 6 vezes. Se segurar o ar for desconfortável, pule as pausas e faça só a respiração 4-6."
+      },
+      {
+        "type": "paragraph",
+        "text": "Quando usar: para recuperar o foco quando a cabeça está acelerada."
+      },
+      {
+        "type": "blockquote",
+        "text": "Quem tem doença pulmonar, como enfisema ou asma, ou doença do coração deve evitar segurar o ar e pode pedir orientação ao médico ou fisioterapeuta sobre os exercícios mais adequados."
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "Como transformar em hábito"
       },
       {
         "type": "list",
         "items": [
-          "Hiperventilar em busca de efeito rápido",
-          "Praticar apenas em crises — consistência importa",
-          "Forçar retenção se sentir tontura",
-          "Substituir tratamento em transtornos de ansiedade grave"
+          "Ligue a respiração a um momento fixo: depois de escovar os dentes à noite, por exemplo.",
+          "Comece com 2 minutos. É melhor pouco todos os dias do que muito de vez em quando.",
+          "Use a respiração também nos momentos de irritação, como no trânsito ou em filas."
         ]
       },
       {
+        "type": "paragraph",
+        "text": "",
+        "html": "<p>A respiração lenta faz parte do tratamento da insônia e da ansiedade. Veja <a href=\"/blog/controle-ansiedade\">ansiedade depois dos 50</a> e <a href=\"/blog/dormir-melhor-sem-medicamentos\">como dormir melhor sem remédios</a>.</p>"
+      },
+      {
         "type": "heading",
         "level": 2,
-        "text": "Perguntas frequentes"
+        "text": "Quando procurar ajuda"
+      },
+      {
+        "type": "paragraph",
+        "text": "Falta de ar que aparece sem motivo, em repouso ou com pequenos esforços, não é caso para exercício de respiração: procure o médico. Se for súbita e intensa, ou vier com dor no peito, ligue para o SAMU (192)."
       },
       {
         "type": "faq",
         "items": [
           {
-            "question": "Quanto tempo até sentir efeito?",
-            "answer": "Muitas pessoas notam calma em 2–5 minutos de prática focada."
+            "question": "Quanto tempo leva para fazer efeito?",
+            "answer": "Muitas pessoas sentem o corpo mais calmo em 1 a 2 minutos. Com a prática diária, fica mais fácil usar a técnica nos momentos difíceis."
           },
           {
-            "question": "Crianças podem praticar?",
-            "answer": "Sim, versões simplificadas e lúdicas funcionam bem."
+            "question": "Posso fazer deitado na cama?",
+            "answer": "Sim. A respiração 4-6 e a respiração pela barriga funcionam bem deitado e ajudam a pegar no sono."
           },
           {
-            "question": "Respiração substitui medicação?",
-            "answer": "Não. É complemento. Decisões sobre medicação são com médico."
+            "question": "Respirar fundo várias vezes pode fazer mal?",
+            "answer": "Respirar muito rápido e fundo pode causar tontura e formigamento. Por isso, o mais importante é soltar o ar devagar, sem exagerar na quantidade."
           }
         ]
       },
       {
-        "type": "heading",
-        "level": 2,
-        "text": "Conclusão"
-      },
-      {
         "type": "paragraph",
-        "text": "Técnicas de respiração são kit de emergência e manutenção diária para equilíbrio nervoso."
-      },
-      {
-        "type": "heading",
-        "level": 2,
-        "text": "Continue no Clube Saúde & Bem"
-      },
-      {
-        "type": "paragraph",
-        "html": "<p>Quer protocolos premium, biblioteca ampliada e acompanhamento contínuo? O <strong>Clube Saúde &amp; Bem</strong> reúne ferramentas avançadas e conteúdo exclusivo para acelerar sua jornada.</p><p><a href=\"/clube\">Conhecer o Clube Premium</a> · <a href=\"/assinar\">Ver planos</a></p>"
+        "text": "",
+        "html": "<p>Conteúdo informativo da Equipe Saúde & Bem. Para incluir a respiração numa rotina diária, baixe o <a href=\"/biblioteca/guia-habitos-saudaveis\">Guia Hábitos Saudáveis</a>.</p>"
       }
     ],
-    "seo_title": "Técnicas de respiração | Guia Saúde & Bem",
-    "seo_description": "Respiração diafragmática, box breathing e pausas conscientes para reduzir estresse e melhorar foco em minutos.",
+    "seo_title": "Técnicas de respiração para acalmar e dormir melhor",
+    "seo_description": "Técnicas de respiração para ansiedade e sono: respiração 4-6, respiração pela barriga e respiração quadrada, passo a passo e com cuidados.",
     "seo_keywords": "tecnicas, respiracao, longevidade, saúde, bem-estar, saúde e bem",
     "og_image_url": "/blog/categories/longevidade.svg",
     "cover_image_url": "/blog/categories/longevidade.svg"
@@ -2464,11 +2496,11 @@
   },
   {
     "slug": "habitos-matinais-saudaveis",
-    "title": "Hábitos matinais saudáveis",
-    "excerpt": "Rotina matinal enxuta: luz natural, hidratação, movimento e café da manhã inteligente para começar o dia com energia.",
+    "title": "Rotina da manhã para ter mais disposição depois dos 50",
+    "excerpt": "Seis passos simples para as primeiras horas do dia, que ajudam a acordar o corpo, regular o sono e dar energia.",
     "category": "longevidade",
     "category_label": "Rotina",
-    "read_time": "8 min",
+    "read_time": "4 min",
     "published_at": "15 Jun 2026",
     "intro": [
       "A manhã define o tom do dia. Hábitos matinais saudáveis não precisam durar duas horas — uma sequência de 20 a 30 minutos já alinha ritmo circadiano e energia.",
@@ -2518,109 +2550,110 @@
     "content": [
       {
         "type": "image",
-        "url": "/blog/categories/longevidade.svg",
-        "alt": "Capa: Hábitos matinais saudáveis"
-      },
-      {
-        "type": "heading",
-        "level": 2,
-        "text": "Introdução"
+        "url": "https://images.unsplash.com/photo-1758874959821-5484186a8d21?auto=format&fit=crop&w=1600&q=80",
+        "alt": "Foto ilustrativa: Rotina da manhã para ter mais disposição depois dos 50 (Unsplash)"
       },
       {
         "type": "paragraph",
-        "text": "A manhã define o tom do dia. Hábitos matinais saudáveis não precisam durar duas horas — uma sequência de 20 a 30 minutos já alinha ritmo circadiano e energia."
+        "text": "O jeito como começamos o dia influencia a disposição, o humor e até o sono da noite seguinte. Uma rotina matinal não precisa ser longa nem complicada: alguns passos repetidos todos os dias já fazem diferença."
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "1. Levante com calma"
       },
       {
         "type": "paragraph",
-        "text": "Previsibilidade reduz fadiga de decisão e facilita consistência."
+        "text": "Ao acordar, sente-se na beirada da cama por alguns segundos antes de ficar em pé. Isso evita tontura, comum em quem usa remédios para pressão. Mexa os pés e as mãos enquanto isso."
       },
       {
         "type": "heading",
         "level": 2,
-        "text": "Benefícios"
+        "text": "2. Um copo de água"
       },
       {
-        "type": "list",
-        "items": [
-          "Melhor humor e alerta nas primeiras horas",
-          "Metabolismo e apetite mais regulados",
-          "Sensação de controle sobre o dia",
-          "Base para noite de sono mais regular"
-        ]
+        "type": "paragraph",
+        "text": "Depois de horas sem beber, um copo de água ao acordar ajuda a repor os líquidos. Água morna ainda pode estimular o intestino."
       },
       {
         "type": "heading",
         "level": 2,
-        "text": "Como aplicar"
+        "text": "3. Luz natural"
       },
       {
-        "type": "list",
-        "items": [
-          "Acorde no mesmo horário ±30 minutos.",
-          "Beba água ao levantar.",
-          "Exponha-se à luz natural por 10 minutos.",
-          "Movimento leve: caminhada, alongamento ou 20 agachamentos.",
-          "Café da manhã com proteína e fibras."
-        ],
-        "ordered": true
+        "type": "paragraph",
+        "text": "Abra as janelas, vá à varanda ou dê uma volta no quarteirão. A luz da manhã é o principal sinal que acerta o relógio biológico: ajuda a despertar agora e a ter sono na hora certa à noite."
       },
       {
         "type": "heading",
         "level": 2,
-        "text": "Erros comuns"
+        "text": "4. Cinco minutos de alongamento"
       },
       {
-        "type": "list",
-        "items": [
-          "Checar celular ainda na cama por 30+ minutos",
-          "Pular café da manhã e compensar com ultraprocessados",
-          "Rotina matinal longa demais para manter",
-          "Cafeína imediata sem hidratação"
-        ]
+        "type": "paragraph",
+        "text": "Movimentos lentos para pescoço, ombros, braços, tronco e tornozelos soltam as articulações, que costumam amanhecer mais rígidas."
+      },
+      {
+        "type": "paragraph",
+        "text": "",
+        "html": "<p>Veja a sequência completa em <a href=\"/blog/alongamento-diario\">alongamento diário para quem tem mais de 50</a>.</p>"
       },
       {
         "type": "heading",
         "level": 2,
-        "text": "Perguntas frequentes"
+        "text": "5. Café da manhã com proteína"
+      },
+      {
+        "type": "paragraph",
+        "text": "Inclua uma fonte de proteína, como ovo, iogurte natural, queijo branco ou leite, junto com uma fruta e um pão integral ou aveia. A proteína ajuda a preservar os músculos e dá saciedade por mais tempo, evitando a fome no meio da manhã."
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "6. Movimento logo cedo"
+      },
+      {
+        "type": "paragraph",
+        "text": "Se possível, faça a caminhada pela manhã: você soma atividade física e luz natural, e foge do calor mais forte do dia."
+      },
+      {
+        "type": "blockquote",
+        "text": "Quem toma remédios em jejum, como os de tireoide, deve manter o intervalo orientado pelo médico antes do café da manhã."
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "Monte a sua rotina"
+      },
+      {
+        "type": "paragraph",
+        "text": "Não precisa fazer todos os passos de uma vez. Comece por dois, por exemplo água e luz natural, e acrescente um novo por semana. A constância vale mais do que a perfeição."
       },
       {
         "type": "faq",
         "items": [
           {
-            "question": "Preciso acordar cedo?",
-            "answer": "Consistência importa mais que horário absoluto. Alinhe à sua realidade de trabalho."
+            "question": "Tomar café logo ao acordar faz mal?",
+            "answer": "Para a maioria das pessoas, não. Só vale lembrar que café não substitui a água e que ele deve ficar concentrado na primeira metade do dia para não atrapalhar o sono."
           },
           {
-            "question": "Jejum matinal é obrigatório?",
-            "answer": "Não. Alguns preferem; outros precisam comer cedo. Escolha o que sustenta energia."
+            "question": "E se eu acordar muito cedo, de madrugada?",
+            "answer": "Mantenha o mesmo horário de levantar todos os dias e prefira a luz natural no fim da tarde, que ajuda a atrasar o sono. Veja também as dicas do artigo sobre sono."
           },
           {
-            "question": "E se tenho filhos pequenos?",
-            "answer": "Versão mínima: água, luz e 5 minutos de movimento já ajudam."
+            "question": "Preciso tomar café da manhã?",
+            "answer": "Não é obrigatório, mas, para muitas pessoas mais velhas, é uma boa oportunidade de incluir proteína, fruta e fibras."
           }
         ]
       },
       {
-        "type": "heading",
-        "level": 2,
-        "text": "Conclusão"
-      },
-      {
         "type": "paragraph",
-        "text": "Manhãs saudáveis são construídas em versão mínima viável — expanda só depois de consolidar o básico."
-      },
-      {
-        "type": "heading",
-        "level": 2,
-        "text": "Continue no Clube Saúde & Bem"
-      },
-      {
-        "type": "paragraph",
-        "html": "<p>Quer protocolos premium, biblioteca ampliada e acompanhamento contínuo? O <strong>Clube Saúde &amp; Bem</strong> reúne ferramentas avançadas e conteúdo exclusivo para acelerar sua jornada.</p><p><a href=\"/clube\">Conhecer o Clube Premium</a> · <a href=\"/assinar\">Ver planos</a></p>"
+        "text": "",
+        "html": "<p>Conteúdo informativo da Equipe Saúde & Bem. Rotina matinal completa e plano de 14 dias no <a href=\"/biblioteca/guia-energia-natural\">Guia Energia Natural</a>, gratuito.</p>"
       }
     ],
-    "seo_title": "Hábitos matinais saudáveis | Guia Saúde & Bem",
-    "seo_description": "Rotina matinal enxuta: luz natural, hidratação, movimento e café da manhã inteligente para começar o dia com energia.",
+    "seo_title": "Rotina da manhã para ter mais disposição depois dos 50",
+    "seo_description": "Rotina matinal saudável depois dos 50: água, luz natural, alongamento, café da manhã com proteína e caminhada, com dicas de segurança.",
     "seo_keywords": "habitos, matinais, saudaveis, longevidade, saúde, bem-estar, saúde e bem",
     "og_image_url": "/blog/categories/longevidade.svg",
     "cover_image_url": "/blog/categories/longevidade.svg"
@@ -3367,11 +3400,11 @@
   },
   {
     "slug": "longevidade-qualidade-vida",
-    "title": "Longevidade e qualidade de vida",
-    "excerpt": "Viver mais com vitalidade: movimento, nutrição, sono, conexões sociais e prevenção — os pilares com maior evidência.",
+    "title": "Longevidade com qualidade de vida: o que a ciência recomenda",
+    "excerpt": "Viver mais e melhor depende de hábitos ao alcance de todos. Veja os pilares com mais evidência e por onde começar.",
     "category": "longevidade",
     "category_label": "Longevidade",
-    "read_time": "10 min",
+    "read_time": "5 min",
     "featured": true,
     "published_at": "20 Jun 2026",
     "intro": [
@@ -3421,109 +3454,129 @@
     "content": [
       {
         "type": "image",
-        "url": "/blog/categories/longevidade.svg",
-        "alt": "Capa: Longevidade e qualidade de vida"
-      },
-      {
-        "type": "heading",
-        "level": 2,
-        "text": "Introdução"
+        "url": "https://images.unsplash.com/photo-1514415008039-efa173293080?auto=format&fit=crop&w=1600&q=80",
+        "alt": "Foto ilustrativa: Longevidade com qualidade de vida: o que a ciência recomenda (Unsplash)"
       },
       {
         "type": "paragraph",
-        "text": "Longevidade não é apenas anos na vida — é vida nos anos. Populações com maior expectativa de vida saudável compartilham hábitos integrados, não segredos isolados."
+        "text": "Envelhecer bem não é questão de sorte nem de fórmulas secretas. Grandes estudos acompanharam milhares de pessoas por décadas e chegaram a conclusões parecidas: um pequeno conjunto de hábitos explica boa parte da diferença entre envelhecer com autonomia ou com limitações."
       },
       {
         "type": "paragraph",
-        "text": "Prevenção começa décadas antes dos sintomas — cada escolha diária conta no acumulado."
+        "text": "E o melhor: nunca é tarde para começar. Mudanças feitas depois dos 60 também trazem ganhos de saúde."
       },
       {
         "type": "heading",
         "level": 2,
-        "text": "Benefícios"
+        "text": "Os pilares com mais evidência"
+      },
+      {
+        "type": "heading",
+        "level": 3,
+        "text": "1. Movimento todos os dias"
+      },
+      {
+        "type": "paragraph",
+        "text": "Atividade física regular é uma das medidas mais poderosas para a longevidade. A recomendação para adultos e idosos é de 150 a 300 minutos de atividade moderada por semana, mais exercícios de força em 2 dias e, para quem tem mais de 65 anos, exercícios de equilíbrio."
+      },
+      {
+        "type": "heading",
+        "level": 3,
+        "text": "2. Comida de verdade"
+      },
+      {
+        "type": "paragraph",
+        "text": "Alimentação baseada em verduras, legumes, frutas, feijões, grãos integrais, peixes e azeite, com pouco ultraprocessado, açúcar e sal, está associada a menos doenças do coração, diabetes e alguns tipos de câncer."
+      },
+      {
+        "type": "heading",
+        "level": 3,
+        "text": "3. Não fumar e moderar o álcool"
+      },
+      {
+        "type": "paragraph",
+        "text": "Parar de fumar traz benefícios em qualquer idade, inclusive depois dos 60. Quanto ao álcool, menos é melhor."
+      },
+      {
+        "type": "heading",
+        "level": 3,
+        "text": "4. Sono suficiente"
+      },
+      {
+        "type": "paragraph",
+        "text": "Dormir bem ajuda a memória, o humor, o controle da glicose e a pressão. Sono ruim e ronco com pausas na respiração merecem atenção."
+      },
+      {
+        "type": "heading",
+        "level": 3,
+        "text": "5. Relações e propósito"
+      },
+      {
+        "type": "paragraph",
+        "text": "Pessoas com boas relações sociais vivem mais. A solidão e o isolamento são considerados fatores de risco para a saúde. Ter atividades com sentido, como cuidar de alguém, trabalhar como voluntário ou aprender algo novo, também faz diferença."
+      },
+      {
+        "type": "heading",
+        "level": 3,
+        "text": "6. Prevenção e acompanhamento"
+      },
+      {
+        "type": "paragraph",
+        "text": "Controlar pressão, glicose e colesterol, manter as vacinas em dia e fazer os exames de rastreamento indicados para a sua idade evita que problemas silenciosos avancem."
+      },
+      {
+        "type": "blockquote",
+        "text": "Nenhum suplemento, vitamina ou produto \"antienvelhecimento\" substitui esses pilares. Desconfie de promessas de rejuvenescimento."
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "Por onde começar"
+      },
+      {
+        "type": "paragraph",
+        "text": "Escolha um único pilar, o que parecer mais fácil para você agora, e um passo pequeno:"
       },
       {
         "type": "list",
         "items": [
-          "Mais anos com independência funcional",
-          "Menor risco de doenças crônicas",
-          "Vitalidade e propósito sustentados",
-          "Melhor qualidade de relações e cognição"
+          "Movimento: caminhar 10 minutos depois do almoço.",
+          "Alimentação: metade do prato com verduras e legumes.",
+          "Sono: acordar no mesmo horário todos os dias.",
+          "Relações: ligar para uma pessoa querida todos os dias.",
+          "Prevenção: levar a caderneta de vacinação à próxima consulta."
         ]
       },
       {
-        "type": "heading",
-        "level": 2,
-        "text": "Como aplicar"
-      },
-      {
-        "type": "list",
-        "items": [
-          "Movimento diário + força 2–3x/semana.",
-          "Dieta rica em vegetais, proteínas magras e gorduras boas.",
-          "Sono regular e gestão de estresse.",
-          "Conexão social ativa e propósito.",
-          "Check-ups preventivos e exames conforme idade."
-        ],
-        "ordered": true
-      },
-      {
-        "type": "heading",
-        "level": 2,
-        "text": "Erros comuns"
-      },
-      {
-        "type": "list",
-        "items": [
-          "Buscar 'hacks' em detrimento dos pilares básicos",
-          "Negligenciar saúde mental na equação",
-          "Sedentarismo compensado só no fim de semana",
-          "Ignorar histórico familiar sem acompanhamento"
-        ]
-      },
-      {
-        "type": "heading",
-        "level": 2,
-        "text": "Perguntas frequentes"
+        "type": "paragraph",
+        "text": "",
+        "html": "<p>Para avaliar seus hábitos e saber por onde começar, faça o <a href=\"/ferramentas/quiz-saude-bem\">quiz Saúde & Bem</a>, gratuito. Leia também <a href=\"/blog/pilares-longevidade-2026\">os pilares da longevidade</a>.</p>"
       },
       {
         "type": "faq",
         "items": [
           {
-            "question": "Genética determina tudo?",
-            "answer": "Influencia, mas estilo de vida modifica expressão de riscos em grande medida."
+            "question": "A genética define quanto vou viver?",
+            "answer": "A genética tem um papel, mas os estudos indicam que hábitos e ambiente explicam a maior parte da diferença na forma como as pessoas envelhecem."
           },
           {
-            "question": "Qual idade começar?",
-            "answer": "Agora. Benefícios existem em qualquer fase da vida."
+            "question": "Vale a pena mudar hábitos depois dos 70?",
+            "answer": "Sim. Começar a se exercitar, parar de fumar e melhorar a alimentação trazem benefícios para a saúde e a autonomia em qualquer idade."
           },
           {
-            "question": "Suplementos anti-aging?",
-            "answer": "Evidência limitada para a maioria. Pilares básicos superam promessas de marketing."
+            "question": "Existe exame que mede a idade biológica?",
+            "answer": "Existem pesquisas sobre o tema, mas nenhum exame substitui o acompanhamento de pressão, glicose, colesterol, peso e força muscular feito na rotina médica."
           }
         ]
       },
       {
-        "type": "heading",
-        "level": 2,
-        "text": "Conclusão"
-      },
-      {
         "type": "paragraph",
-        "text": "Longevidade com qualidade é projeto de décadas feito em escolhas diárias pequenas — comece hoje com um pilar."
-      },
-      {
-        "type": "heading",
-        "level": 2,
-        "text": "Continue no Clube Saúde & Bem"
-      },
-      {
-        "type": "paragraph",
-        "html": "<p>Quer protocolos premium, biblioteca ampliada e acompanhamento contínuo? O <strong>Clube Saúde &amp; Bem</strong> reúne ferramentas avançadas e conteúdo exclusivo para acelerar sua jornada.</p><p><a href=\"/clube\">Conhecer o Clube Premium</a> · <a href=\"/assinar\">Ver planos</a></p>"
+        "text": "",
+        "html": "<p>Conteúdo informativo da Equipe Saúde & Bem, baseado nas diretrizes da Organização Mundial da Saúde e no Guia Alimentar para a População Brasileira. Veja também <a href=\"/blog/biomarcadores-envelhecimento\">biomarcadores do envelhecimento</a>.</p>"
       }
     ],
-    "seo_title": "Longevidade e qualidade de vida | Guia Saúde & Bem",
-    "seo_description": "Viver mais com vitalidade: movimento, nutrição, sono, conexões sociais e prevenção — os pilares com maior evidência.",
+    "seo_title": "Longevidade com qualidade de vida: o que a ciência recomenda",
+    "seo_description": "Longevidade com qualidade de vida: os hábitos com mais evidência científica para envelhecer bem, da atividade física às relações sociais.",
     "seo_keywords": "longevidade, qualidade, vida, longevidade, saúde, bem-estar, saúde e bem",
     "og_image_url": "/blog/categories/longevidade.svg",
     "cover_image_url": "/blog/categories/longevidade.svg"

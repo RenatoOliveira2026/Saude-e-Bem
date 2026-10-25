@@ -90,11 +90,11 @@ export default function RootLayout({
     >
       <head>
         <script dangerouslySetInnerHTML={{ __html: FONT_SCALE_INIT_SCRIPT }} />
+        <AdSenseScript />
       </head>
       <body className="flex min-h-full flex-col bg-off-white font-body text-graphite">
         <GoogleAnalytics />
         <GoogleTagManager />
-        <AdSenseScript />
         <JsonLdScript data={[organizationJsonLd(), websiteJsonLd()]} />
         <PageViewTracker />
         <PwaProvider />

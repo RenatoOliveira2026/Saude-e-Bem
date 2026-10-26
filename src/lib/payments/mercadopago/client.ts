@@ -154,6 +154,9 @@ export async function createMercadoPagoPreference(
     },
     auto_return: "approved",
     notification_url: `${siteUrl}/api/payments/webhook`,
+    // Nome que aparece na fatura do cartão do comprador (até 13 caracteres),
+    // no lugar do nome do titular da conta.
+    statement_descriptor: "SAUDEEBEM",
     payment_methods: paymentMethods,
     metadata: {
       plan: input.plan.id,

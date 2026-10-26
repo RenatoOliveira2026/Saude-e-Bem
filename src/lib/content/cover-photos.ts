@@ -1,5 +1,5 @@
 /**
- * Fotos de capa padrão (Unsplash, licença de uso livre) para protocolos,
+ * Fotos de capa padrão (Unsplash e Pexels, licenças de uso livre) para protocolos,
  * itens da biblioteca e guias em PDF.
  *
  * Só são usadas quando o item não tem capa própria, ou quando a capa é
@@ -10,7 +10,9 @@
 type CoverKind = "protocol" | "library" | "ebook";
 
 const PROTOCOL_PHOTOS: Record<string, string> = {
-  "energia-diaria": "1627622718888-1c8f96aadbbe",
+  // Pexels (licença livre): mulher sorrindo durante alongamento.
+  "energia-diaria":
+    "https://images.pexels.com/photos/7500425/pexels-photo-7500425.jpeg?auto=compress&cs=tinysrgb&fit=crop&w=1200&h=675",
   "sono-reparador": "1732360466799-1a66fa1337dd",
   "saude-intestinal": "1684403620650-81dc661a69db",
   "detox-natural": "1553455860-2fa544e14141",
@@ -53,6 +55,7 @@ const PHOTOS: Record<CoverKind, Record<string, string>> = {
 };
 
 function unsplashUrl(id: string): string {
+  if (id.startsWith("https://")) return id;
   return `https://images.unsplash.com/photo-${id}?auto=format&fit=crop&w=1200&q=80`;
 }
 

@@ -39,6 +39,11 @@ const nextConfig: NextConfig = {
         protocol: "https",
         hostname: "images.unsplash.com",
       },
+      {
+        // Fotos de capa (Pexels, licença de uso livre)
+        protocol: "https",
+        hostname: "images.pexels.com",
+      },
     ],
   },
   experimental: {

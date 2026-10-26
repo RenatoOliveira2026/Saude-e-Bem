@@ -11,9 +11,12 @@ type CoverKind = "protocol" | "library" | "ebook";
 
 const PROTOCOL_PHOTOS: Record<string, string> = {
   // Pexels (licença livre): mulher sorrindo durante alongamento.
+  // As fotos misturam idades de propósito: o portal é para todos os adultos.
   "energia-diaria":
     "https://images.pexels.com/photos/7500425/pexels-photo-7500425.jpeg?auto=compress&cs=tinysrgb&fit=crop&w=1200&h=675",
-  "sono-reparador": "1732360466799-1a66fa1337dd",
+  // Pexels: mulher jovem acordando sorrindo.
+  "sono-reparador":
+    "https://images.pexels.com/photos/6968337/pexels-photo-6968337.jpeg?auto=compress&cs=tinysrgb&fit=crop&w=1200&h=675",
   "saude-intestinal": "1684403620650-81dc661a69db",
   "detox-natural": "1553455860-2fa544e14141",
   "longevidade-saudavel": "1657049010734-d7d7ea43d617",
@@ -23,9 +26,13 @@ const PROTOCOL_PHOTOS: Record<string, string> = {
   "reducao-estresse": "1603710488233-cdd4e1eb9c14",
   "saude-intestinal-premium": "1599184469041-d592691ed302",
   "habitos-saudaveis-30-dias": "1569230919100-d3fd5e1132f4",
-  "hidratacao-inteligente": "1525881157111-2379cbebbf9b",
+  // Pexels: homem sorrindo com copo de água.
+  "hidratacao-inteligente":
+    "https://images.pexels.com/photos/6740572/pexels-photo-6740572.jpeg?auto=compress&cs=tinysrgb&fit=crop&w=1200&h=675",
   "mobilidade-alongamento": "1637157216470-d92cd2edb2e8",
-  "foco-produtividade": "1758691030771-9dadc2a828d4",
+  // Pexels: mulher sorrindo trabalhando no notebook.
+  "foco-produtividade":
+    "https://images.pexels.com/photos/17754402/pexels-photo-17754402.jpeg?auto=compress&cs=tinysrgb&fit=crop&w=1200&h=675",
   "emagrecimento-saudavel": "1543352632-5a4b24e4d2a6",
   "longevidade-premium": "1763697038882-aa77b44e7c68",
 };

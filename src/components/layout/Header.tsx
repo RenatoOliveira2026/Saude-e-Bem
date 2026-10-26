@@ -5,7 +5,7 @@ import { LogoHeader } from "@/components/brand/Logo";
 import { FontSizeControl } from "@/components/layout/FontSizeControl";
 import { Button } from "@/components/ui/Button";
 import { cn } from "@/lib/cn";
-import { authNavLoggedIn, mainNav, routes } from "@/lib/routes";
+import { adminRoutes, authNavLoggedIn, mainNav, routes } from "@/lib/routes";
 import type { User } from "@supabase/supabase-js";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -13,9 +13,10 @@ import { useEffect, useState } from "react";
 
 interface HeaderProps {
   user: User | null;
+  isAdmin?: boolean;
 }
 
-export function Header({ user }: HeaderProps) {
+export function Header({ user, isAdmin = false }: HeaderProps) {
   const pathname = usePathname();
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -108,6 +109,15 @@ export function Header({ user }: HeaderProps) {
                 >
                   Minha área
                 </Link>
+                {isAdmin && (
+                  <Link
+                    href={adminRoutes.root}
+                    title="Ir para o painel administrativo"
+                    className="whitespace-nowrap rounded-full bg-forest px-4 py-2 font-heading text-sm font-semibold text-off-white transition-colors hover:bg-sage"
+                  >
+                    Adm
+                  </Link>
+                )}
                 <LogoutButton variant="outline" size="sm" />
               </>
             ) : (
@@ -219,6 +229,14 @@ export function Header({ user }: HeaderProps) {
                     {item.label}
                   </Link>
                 ))}
+                {isAdmin && (
+                  <Link
+                    href={adminRoutes.root}
+                    className="rounded-xl px-4 py-3.5 font-heading text-base font-semibold text-gold transition-colors hover:bg-off-white/5"
+                  >
+                    Painel administrativo
+                  </Link>
+                )}
                 <div className="mt-2 px-4">
                   <LogoutButton
                     variant="outline"

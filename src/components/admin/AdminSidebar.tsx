@@ -2,7 +2,7 @@
 
 import { LogoHeader } from "@/components/brand/Logo";
 import { Icon } from "@/components/icons";
-import { getAdminNavForRole, isAdminNavItemActive } from "@/lib/admin/nav";
+import { getAdminNavGroupsForRole, isAdminNavItemActive } from "@/lib/admin/nav";
 import { ADMIN_ROLE_LABELS, type AdminRole } from "@/lib/admin/roles";
 import { adminFutureIntegrations } from "@/lib/admin/types";
 import { routes } from "@/lib/routes";
@@ -15,14 +15,15 @@ interface AdminSidebarProps {
 
 export function AdminSidebar({ role }: AdminSidebarProps) {
   const pathname = usePathname();
-  const navItems = getAdminNavForRole(role);
+  const navGroups = getAdminNavGroupsForRole(role);
+  const firstHref = navGroups[0]?.items[0]?.href;
 
   return (
     <aside className="flex w-64 shrink-0 flex-col border-r border-border bg-forest text-off-white">
       <div className="border-b border-white/10 px-5 py-6">
         <LogoHeader
           inverted
-          href={navItems[0]?.href ?? routes.admin}
+          href={firstHref ?? routes.admin}
           className="[&_img]:brightness-110"
         />
         <p className="mt-2 text-xs font-medium uppercase tracking-wider text-gold">
@@ -31,26 +32,35 @@ export function AdminSidebar({ role }: AdminSidebarProps) {
         <p className="mt-1 text-xs text-off-white/70">{ADMIN_ROLE_LABELS[role]}</p>
       </div>
 
-      <nav className="flex-1 space-y-1 px-3 py-4">
-        {navItems.map((item) => {
-          const active = isAdminNavItemActive(pathname, item.href);
+      <nav className="flex-1 space-y-5 overflow-y-auto px-3 py-4">
+        {navGroups.map(({ group, items }) => (
+          <div key={group}>
+            <p className="mb-1 px-3 text-[11px] font-semibold uppercase tracking-wider text-gold/90">
+              {group}
+            </p>
+            <div className="space-y-0.5">
+              {items.map((item) => {
+                const active = isAdminNavItemActive(pathname, item.href);
 
-          return (
-            <Link
-              key={item.href}
-              href={item.href}
-              aria-current={active ? "page" : undefined}
-              className={`flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium transition-colors ${
-                active
-                  ? "bg-sage text-off-white"
-                  : "text-off-white/80 hover:bg-white/10 hover:text-off-white"
-              }`}
-            >
-              <Icon name={item.icon} className="h-4 w-4 shrink-0" aria-hidden />
-              {item.label}
-            </Link>
-          );
-        })}
+                return (
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    aria-current={active ? "page" : undefined}
+                    className={`flex items-center gap-3 rounded-xl px-3 py-2 text-sm font-medium transition-colors ${
+                      active
+                        ? "bg-sage text-off-white"
+                        : "text-off-white/80 hover:bg-white/10 hover:text-off-white"
+                    }`}
+                  >
+                    <Icon name={item.icon} className="h-4 w-4 shrink-0" aria-hidden />
+                    {item.label}
+                  </Link>
+                );
+              })}
+            </div>
+          </div>
+        ))}
       </nav>
 
       <div className="border-t border-white/10 px-4 py-4">

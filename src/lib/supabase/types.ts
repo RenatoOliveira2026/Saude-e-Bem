@@ -817,6 +817,12 @@ export interface Database {
         Update: Partial<UserMembershipRow>;
         Relationships: [];
       };
+      marketing_settings: {
+        Row: { key: string; value: string; updated_at: string };
+        Insert: { key: string; value?: string; updated_at?: string };
+        Update: { key?: string; value?: string; updated_at?: string };
+        Relationships: [];
+      };
       affiliate_clicks: {
         Row: AffiliateClickRow;
         Insert: {

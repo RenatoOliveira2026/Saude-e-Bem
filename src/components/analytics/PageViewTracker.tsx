@@ -9,6 +9,7 @@ import { useEffect, useRef } from "react";
 export function PageViewTracker() {
   const pathname = usePathname();
   const lastPath = useRef<string | null>(null);
+  const isFirstView = useRef(true);
 
   useEffect(() => {
     if (!pathname || pathname.startsWith("/admin")) return;
@@ -16,6 +17,14 @@ export function PageViewTracker() {
     lastPath.current = pathname;
 
     sendGa4PageView(pathname);
+
+    // O Pixel da Meta já conta a primeira página ao carregar; aqui contamos as seguintes.
+    if (isFirstView.current) {
+      isFirstView.current = false;
+    } else {
+      const fbq = (window as unknown as { fbq?: (...args: unknown[]) => void }).fbq;
+      fbq?.("track", "PageView");
+    }
 
     void trackAnalyticsFromClientAction({
       eventType: "page_view",

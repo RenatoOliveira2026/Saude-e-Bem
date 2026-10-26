@@ -1,4 +1,7 @@
 import { LogoFooter } from "@/components/brand/Logo";
+import { BrandIcon } from "@/components/marketing/BrandIcon";
+import { getSocialLinks } from "@/lib/marketing/accounts";
+import { getMarketingSettings } from "@/lib/marketing/settings";
 import { NewsletterFooterCapture } from "@/components/newsletter/NewsletterFooterCapture";
 import { Container } from "@/components/ui/Container";
 import { footerNav, routes } from "@/lib/routes";
@@ -19,7 +22,8 @@ const footerSections = {
   ],
 } as const;
 
-export function Footer() {
+export async function Footer() {
+  const socialLinks = getSocialLinks(await getMarketingSettings());
   const year = new Date().getFullYear();
 
   return (
@@ -34,6 +38,23 @@ export function Footer() {
                 aplicada, protocolos práticos e leitura confortável para a sua
                 vitalidade consciente.
               </p>
+              {socialLinks.length > 0 && (
+                <ul className="mt-6 flex flex-wrap gap-3" aria-label="Redes sociais">
+                  {socialLinks.map(({ network, url }) => (
+                    <li key={network.id}>
+                      <a
+                        href={url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label={`Saúde & Bem no ${network.label}`}
+                        className="flex h-11 w-11 items-center justify-center rounded-full border border-off-white/20 text-off-white/80 transition-colors hover:border-gold hover:text-gold"
+                      >
+                        <BrandIcon id={network.id} />
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              )}
               <div className="mt-8 flex items-center gap-3">
                 <span className="h-px w-12 bg-gold" aria-hidden="true" />
                 <span className="font-heading text-xs uppercase tracking-[0.2em] text-gold">

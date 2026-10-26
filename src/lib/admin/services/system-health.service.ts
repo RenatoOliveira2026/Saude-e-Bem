@@ -153,28 +153,27 @@ export async function getSystemHealthReport(): Promise<SystemHealthReport> {
   const brevoOk = isBrevoConfigured();
   items.push({
     id: "brevo",
-    label: "Brevo",
+    label: "Envio de newsletter (Brevo)",
     status: brevoOk ? "ok" : "pending",
     detail: brevoOk
       ? isEmailAutomationConfigured()
-        ? "BREVO_API_KEY configurada — sync de leads ativo."
-        : "BREVO_API_KEY presente — automação parcial."
-      : "Pendente — configure BREVO_API_KEY para newsletter e leads.",
+        ? "Brevo conectada — inscritos enviados automaticamente."
+        : "Brevo conectada — automação parcial."
+      : "Opcional por enquanto — os inscritos ficam guardados no site e podem ser baixados em Newsletter → Exportar CSV.",
   });
 
-  // SMTP Zoho — não implementado (Fase futura)
-  const zohoConfigured = Boolean(
-    process.env.ZOHO_SMTP_HOST?.trim() &&
-      process.env.ZOHO_SMTP_USER?.trim() &&
-      process.env.ZOHO_SMTP_PASSWORD?.trim(),
-  );
+  // E-mails automáticos (confirmação de cadastro, troca de senha) saem pelo
+  // Supabase Auth. O SMTP do Zoho é configurado lá, fora do site; a variável
+  // AUTH_SMTP_SENDER (e-mail remetente) serve só para o painel saber que foi feito.
+  const smtpSender =
+    process.env.AUTH_SMTP_SENDER?.trim() || process.env.ZOHO_SMTP_USER?.trim() || "";
   items.push({
     id: "zoho_smtp",
-    label: "SMTP Zoho",
-    status: zohoConfigured ? "ok" : "pending",
-    detail: zohoConfigured
-      ? "Credenciais Zoho SMTP detectadas."
-      : "Pendente — e-mail transacional via Supabase; Zoho para suporte ainda não integrado.",
+    label: "E-mails automáticos (Zoho)",
+    status: smtpSender ? "ok" : "pending",
+    detail: smtpSender
+      ? `Confirmações de cadastro e troca de senha enviadas por ${smtpSender}.`
+      : "Pendente — configurar o e-mail do Zoho no Supabase (Authentication → Emails → SMTP Settings).",
   });
 
   return {

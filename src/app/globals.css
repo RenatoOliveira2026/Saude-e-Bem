@@ -138,6 +138,8 @@ body {
   font-family: var(--font-body), system-ui, sans-serif;
   font-size: 1rem;
   line-height: 1.7;
+  /* Endereços e palavras muito longas quebram a linha em vez de alargar a tela no celular. */
+  overflow-wrap: break-word;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }

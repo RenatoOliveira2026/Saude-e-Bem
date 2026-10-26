@@ -22,7 +22,7 @@ const footerSections = {
   ],
 } as const;
 
-export async function Footer() {
+export async function Footer({ showNewsletter = true }: { showNewsletter?: boolean }) {
   const socialLinks = getSocialLinks(await getMarketingSettings());
   const year = new Date().getFullYear();
 
@@ -57,7 +57,7 @@ export async function Footer() {
               )}
               <div className="mt-8 flex items-center gap-3">
                 <span className="h-px w-12 bg-gold" aria-hidden="true" />
-                <span className="font-heading text-xs uppercase tracking-[0.2em] text-gold">
+                <span className="font-heading text-xs uppercase tracking-[0.2em] text-gold-light">
                   Vitalidade consciente
                 </span>
               </div>
@@ -71,9 +71,11 @@ export async function Footer() {
             </div>
           </div>
 
-          <div className="mt-12 lg:col-span-12">
-            <NewsletterFooterCapture />
-          </div>
+          {showNewsletter && (
+            <div className="mt-12 lg:col-span-12">
+              <NewsletterFooterCapture />
+            </div>
+          )}
 
           <div className="mt-16 grid gap-6 rounded-2xl border border-off-white/10 bg-off-white/5 p-6 md:grid-cols-3 md:p-8">
             {[
@@ -91,7 +93,7 @@ export async function Footer() {
               },
             ].map((item) => (
               <div key={item.title}>
-                <h4 className="font-heading text-sm font-semibold text-gold">
+                <h4 className="font-heading text-sm font-semibold text-gold-light">
                   {item.title}
                 </h4>
                 <p className="mt-2 text-sm leading-relaxed text-off-white/60">
@@ -132,7 +134,7 @@ function FooterColumn({
 }) {
   return (
     <div>
-      <h3 className="font-heading text-xs font-semibold uppercase tracking-wider text-gold">
+      <h3 className="font-heading text-xs font-semibold uppercase tracking-wider text-off-white">
         {title}
       </h3>
       <ul className="mt-4 space-y-2.5">

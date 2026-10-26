@@ -1,7 +1,6 @@
-import { Badge } from "@/components/ui/Badge";
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
-import { heroStats, trustSignals } from "@/lib/home-content";
+import { trustSignals } from "@/lib/home-content";
 import { routes } from "@/lib/routes";
 
 export function HeroSection() {
@@ -19,9 +18,13 @@ export function HeroSection() {
       <Container className="relative py-10 md:py-14 lg:py-20">
         <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
           <div className="max-w-xl lg:max-w-none">
-            <Badge variant="gold" className="mb-6">
+            <span className="mb-6 inline-flex items-center gap-2 rounded-full border border-gold/50 bg-gradient-to-r from-gold-muted via-white to-gold-muted whitespace-nowrap px-4 py-2 font-heading text-[11px] font-bold uppercase tracking-[0.08em] text-forest sm:tracking-[0.14em] shadow-[0_0_0_4px_rgba(233,125,75,0.10),0_6px_20px_-6px_rgba(233,125,75,0.45)] sm:text-[13px]">
+              <span className="relative flex h-2.5 w-2.5" aria-hidden="true">
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-gold opacity-60 motion-reduce:animate-none" />
+                <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-gold" />
+              </span>
               Plataforma premium de longevidade
-            </Badge>
+            </span>
 
             <h1 className="font-heading text-4xl leading-[1.1] text-forest text-balance sm:text-5xl lg:text-[3.25rem]">
               Sua jornada para uma vida com{" "}
@@ -73,7 +76,7 @@ export function HeroSection() {
 
           <div className="relative mx-auto w-full max-w-md lg:max-w-none">
             <div className="relative rounded-2xl border border-border bg-surface p-6 shadow-elevated md:p-8">
-              <div className="absolute -right-3 -top-3 rounded-full bg-gold px-4 py-1.5 font-heading text-xs font-semibold text-forest shadow-soft">
+              <div className="absolute right-4 -top-3 rounded-full bg-gold px-4 py-1.5 font-heading text-xs font-semibold text-forest shadow-soft">
                 Avaliação gratuita
               </div>
 
@@ -125,26 +128,7 @@ export function HeroSection() {
                 Iniciar avaliação
               </Button>
             </div>
-
-            <div
-              className="absolute -bottom-4 -left-4 hidden rounded-xl border border-border bg-surface px-4 py-3 shadow-card md:block"
-              aria-hidden="true"
-            >
-              <p className="font-heading text-2xl font-bold text-forest">Grátis</p>
-              <p className="text-xs text-muted">Avaliação inicial de hábitos</p>
-            </div>
           </div>
-        </div>
-
-        <div className="mt-10 grid grid-cols-1 gap-6 border-t border-border pt-8 sm:grid-cols-3 md:mt-12">
-          {heroStats.map((stat) => (
-            <div key={stat.label} className="text-center sm:text-left">
-              <p className="font-heading text-3xl font-bold text-forest md:text-4xl">
-                {stat.value}
-              </p>
-              <p className="mt-1 text-sm text-muted">{stat.label}</p>
-            </div>
-          ))}
         </div>
       </Container>
     </section>

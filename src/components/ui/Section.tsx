@@ -71,6 +71,28 @@ export function SectionHeader({
   );
 }
 
+
+/**
+ * O `cn` do projeto só junta classes; quando duas classes Tailwind mexem na
+ * mesma propriedade, vence a que vier depois no CSS gerado, não a passada por
+ * último. Aqui o padrão de cor e de tamanho só entra se o chamador não mandou o seu.
+ */
+const COLOR_CLASS = /(^|\s)text-(forest|sage|gold|off-white|white|graphite|muted|muted-light|surface)(\/\d+)?(\s|$)/;
+const SIZE_CLASS = /(^|\s)text-(xs|sm|base|lg|xl|[2-9]xl|\[[^\]]+\])(\s|$)/;
+
+function withDefaults(
+  className: string | undefined,
+  defaults: { base: string; color?: string; size?: string },
+): string {
+  const custom = className ?? "";
+  return cn(
+    defaults.base,
+    defaults.size && !SIZE_CLASS.test(custom) ? defaults.size : undefined,
+    defaults.color && !COLOR_CLASS.test(custom) ? defaults.color : undefined,
+    custom,
+  );
+}
+
 export function SectionLabel({
   className,
   children,
@@ -78,10 +100,10 @@ export function SectionLabel({
 }: HTMLAttributes<HTMLSpanElement>) {
   return (
     <span
-      className={cn(
-        "inline-block mb-3 font-heading text-xs font-semibold uppercase tracking-[0.2em] text-sage",
-        className,
-      )}
+      className={withDefaults(className, {
+        base: "inline-block mb-3 font-heading text-xs font-semibold uppercase tracking-[0.2em]",
+        color: "text-sage",
+      })}
       {...props}
     >
       {children}
@@ -96,10 +118,11 @@ export function SectionTitle({
 }: HTMLAttributes<HTMLHeadingElement>) {
   return (
     <h2
-      className={cn(
-        "font-heading text-3xl md:text-4xl lg:text-[2.75rem] text-forest text-balance",
-        className,
-      )}
+      className={withDefaults(className, {
+        base: "font-heading text-balance",
+        size: "text-3xl md:text-4xl lg:text-[2.75rem]",
+        color: "text-forest",
+      })}
       {...props}
     >
       {children}
@@ -114,10 +137,11 @@ export function SectionDescription({
 }: HTMLAttributes<HTMLParagraphElement>) {
   return (
     <p
-      className={cn(
-        "mt-4 text-muted text-lg leading-relaxed text-pretty",
-        className,
-      )}
+      className={withDefaults(className, {
+        base: "mt-4 leading-relaxed text-pretty",
+        size: "text-lg",
+        color: "text-muted",
+      })}
       {...props}
     >
       {children}

@@ -16,7 +16,8 @@ export async function AppShell({ children }: { children: React.ReactNode }) {
     <>
       <HeaderWrapper />
       <main className="flex-1">{children}</main>
-      <Footer />
+      {/* A home já tem a seção de newsletter logo acima do rodapé. */}
+      <Footer showNewsletter={pathname !== "/"} />
       <WhatsAppFloatingButton />
       <NewsletterSmartPopup />
     </>

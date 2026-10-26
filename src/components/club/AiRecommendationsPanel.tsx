@@ -47,7 +47,7 @@ export function AiRecommendationsPanel({
           <Badge variant="gold">IA</Badge>
         </div>
       ) : null}
-      <ul className="grid gap-4 sm:grid-cols-2">
+      <ul className="grid grid-cols-1 gap-4 sm:grid-cols-2">
         {recommendations.map((item) => (
           <li key={`${item.contentType}-${item.id}-${item.kind ?? "rec"}`}>
             <Card className="flex h-full flex-col p-5">

@@ -28,7 +28,7 @@ export function HealthProfileSection() {
         </SectionDescription>
       </SectionHeader>
 
-      <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+      <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
         {healthProfiles.map((profile) => (
           <Card key={profile.id} variant="muted" hover padding="lg" className="flex flex-col">
             <span

@@ -41,7 +41,7 @@ export function BasalMetabolismTool() {
     <div className="space-y-10">
       <form onSubmit={handleSubmit} className="space-y-8" noValidate>
         <ToolFieldset title="Dados para TMB (Mifflin-St Jeor)">
-          <div className="grid gap-5 sm:grid-cols-2">
+          <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
             <Select
               name="sex"
               label="Sexo biológico"
@@ -116,7 +116,7 @@ export function BasalMetabolismTool() {
         >
           <p className="text-muted text-pretty">{result.guidance}</p>
           <p className="mt-3 text-sm text-muted">{result.activityLabel}</p>
-          <dl className="mt-6 grid gap-4 sm:grid-cols-2">
+          <dl className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2">
             <div className="rounded-xl bg-sage-muted/50 px-4 py-3">
               <dt className="text-xs font-medium uppercase tracking-wide text-muted">
                 TMB (basal)

@@ -47,7 +47,7 @@ export function ToolCard({ tool }: { tool: Tool }) {
 export function FeaturedToolBanner({ tool }: { tool: Tool }) {
   return (
     <Card variant="featured" padding="lg">
-      <div className="grid gap-6 md:grid-cols-[auto_1fr_auto] md:items-center">
+      <div className="grid grid-cols-1 gap-6 md:grid-cols-[auto_1fr_auto] md:items-center">
         <IconBox name={tool.icon} size={26} className="bg-gold-muted text-forest" />
         <div>
           <Badge variant="gold" className="mb-3">

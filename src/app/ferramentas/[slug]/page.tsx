@@ -93,7 +93,7 @@ export default async function FerramentaDetailPage({ params }: PageProps) {
             <Section background="default">
               <Container size="md">
                 <h2 className="font-heading text-2xl text-forest">O que você recebe</h2>
-                <ul className="mt-6 grid gap-3 sm:grid-cols-2">
+                <ul className="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-2">
                   {tool.features.slice(0, 4).map((f) => (
                     <li
                       key={f}
@@ -175,7 +175,7 @@ export default async function FerramentaDetailPage({ params }: PageProps) {
       <Section background="default">
         <Container size="md">
           <h2 className="font-heading text-2xl text-forest">O que você recebe</h2>
-          <ul className="mt-6 grid gap-3 sm:grid-cols-2">
+          <ul className="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-2">
             {tool.features.map((f) => (
               <li
                 key={f}

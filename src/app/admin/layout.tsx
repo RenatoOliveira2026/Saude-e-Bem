@@ -15,7 +15,7 @@ export default async function AdminLayout({
   const session = await requireAdmin();
 
   return (
-    <div className="flex min-h-screen bg-off-white">
+    <div className="flex min-h-screen flex-col bg-off-white lg:flex-row">
       <AdminSidebar role={session.role} />
       <div className="flex min-w-0 flex-1 flex-col">{children}</div>
     </div>

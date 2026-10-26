@@ -78,7 +78,7 @@ export default function LancamentoPage() {
               gratuito ao acompanhamento premium.
             </p>
           </div>
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {LAUNCH_BENEFITS.map((item) => (
               <Card key={item.title} variant="default" padding="lg">
                 <IconBox name={item.icon} size={22} className="bg-sage-muted text-forest" />
@@ -105,7 +105,7 @@ export default function LancamentoPage() {
               Baixe guias, checklists e faça sua avaliação de perfil — sem custo.
             </p>
           </div>
-          <div className="grid gap-6 md:grid-cols-3">
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
             {LAUNCH_LEAD_MAGNETS.map((magnet) => (
               <Card key={magnet.title} variant="default" padding="lg" className="flex flex-col">
                 <Icon name={magnet.icon} size={24} className="text-sage" />
@@ -135,7 +135,7 @@ export default function LancamentoPage() {
 
       <Section background="white" spacing="compact">
         <Container>
-          <div className="grid gap-8 lg:grid-cols-2 lg:items-center">
+          <div className="grid grid-cols-1 gap-8 lg:grid-cols-2 lg:items-center">
             <div>
               <Badge variant="gold" className="mb-4">
                 Clube Premium

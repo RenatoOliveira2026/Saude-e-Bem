@@ -91,7 +91,7 @@ export function EbookCmsForm({ ebook }: EbookCmsFormProps) {
       {ebook && <input type="hidden" name="id" value={ebook.id} />}
 
       <div className="mx-auto max-w-3xl space-y-6">
-        <div className="grid gap-6 lg:grid-cols-2">
+        <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
           <Input label="Título" name="title" value={title} onChange={(e) => setTitle(e.target.value)} required />
           <Input label="Slug" name="slug" defaultValue={ebook?.slug} hint="Vazio = automático" />
         </div>
@@ -115,7 +115,7 @@ export function EbookCmsForm({ ebook }: EbookCmsFormProps) {
           imageFolder="biblioteca"
         />
 
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
           <Select label="Categoria" name="category" defaultValue={ebook?.category ?? "Detox"} options={categoryOptions} />
           <Input label="Rótulo categoria" name="category_label" value={categoryLabel} onChange={(e) => setCategoryLabel(e.target.value)} />
           <Select label="Ícone" name="icon" defaultValue={ebook?.icon ?? "leaf"} options={iconOptions} />

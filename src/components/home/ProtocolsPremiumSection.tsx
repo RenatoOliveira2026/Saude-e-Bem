@@ -33,7 +33,7 @@ export function ProtocolsPremiumSection({ protocols }: ProtocolsPremiumSectionPr
       {protocols.length === 0 ? (
         <HomeEmptyNote message="Explore artigos e ferramentas gratuitas enquanto novos protocolos são publicados." />
       ) : (
-        <div className="grid gap-6 md:grid-cols-2">
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
           {protocols.map((protocol) => (
             <Card
               key={protocol.id}

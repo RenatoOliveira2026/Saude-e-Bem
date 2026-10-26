@@ -24,7 +24,7 @@ export default async function AdminMarketplaceEditarPage({ params }: PageProps) 
         description={product.title}
         email={email}
       />
-      <main className="flex-1 p-6 lg:p-8">
+      <main className="flex-1 p-4 sm:p-6 lg:p-8">
         <MarketplaceProductForm product={product} />
       </main>
     </>

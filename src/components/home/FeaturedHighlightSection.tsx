@@ -51,7 +51,7 @@ export function FeaturedHighlightSection({
             <h3 className="mb-6 font-heading text-sm font-semibold uppercase tracking-wider text-sage">
               Artigos
             </h3>
-            <div className="grid gap-6 md:grid-cols-3">
+            <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
               {articles.map((article) => (
                 <Link key={article.id} href={routes.artigo(article.slug)} className="group block">
                   <Card variant="default" hover padding="lg" className="flex h-full flex-col bg-surface">

@@ -26,7 +26,7 @@ export default async function AdminComunicacaoTemplatesPage() {
           </Button>
         }
       />
-      <main className="flex-1 p-6 lg:p-8">
+      <main className="flex-1 p-4 sm:p-6 lg:p-8">
         <p className="mb-6 max-w-3xl text-sm text-muted">
           Crie templates com os mesmos nomes (<code className="text-xs">meta_name</code>)
           no Meta Business Manager antes de enviar em produção. Status{" "}

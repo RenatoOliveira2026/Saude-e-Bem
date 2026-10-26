@@ -17,7 +17,7 @@ export default async function AdminConteudosPage() {
         description="Gestão editorial — blog, protocolos e materiais legacy"
         email={email}
       />
-      <main className="flex-1 space-y-8 p-6 lg:p-8">
+      <main className="flex-1 space-y-8 p-4 sm:p-6 lg:p-8">
         <section className="rounded-2xl border border-border bg-surface p-6 shadow-soft">
           <h2 className="font-heading text-lg font-semibold text-forest">Blog e protocolos</h2>
           <p className="mt-1 text-sm text-muted">

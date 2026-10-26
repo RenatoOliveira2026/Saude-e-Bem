@@ -24,7 +24,7 @@ export function LoyaltyPanel({ loyalty }: LoyaltyPanelProps) {
         </p>
       </div>
 
-      <div className="grid gap-4 sm:grid-cols-3">
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
         <Card className="p-4 text-center">
           <p className="text-3xl font-semibold text-forest">{loyalty.dayStreak}</p>
           <p className="text-sm text-muted">dias de sequência</p>
@@ -39,7 +39,7 @@ export function LoyaltyPanel({ loyalty }: LoyaltyPanelProps) {
         </Card>
       </div>
 
-      <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+      <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4">
         {loyalty.achievements.map((a) => (
           <Card
             key={a.id}

@@ -42,7 +42,7 @@ export function ProtocolsSection({ protocols }: ProtocolsSectionProps) {
         </Button>
       </div>
 
-      <div className="mt-12 grid gap-6 md:grid-cols-2">
+      <div className="mt-12 grid grid-cols-1 gap-6 md:grid-cols-2">
         {protocols.map((protocol) => (
           <Link
             key={protocol.id}

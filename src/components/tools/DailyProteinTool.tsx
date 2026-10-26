@@ -93,7 +93,7 @@ export function DailyProteinTool() {
           saveMessage={message}
         >
           <p className="text-muted text-pretty">{result.guidance}</p>
-          <dl className="mt-6 grid gap-4 sm:grid-cols-2">
+          <dl className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2">
             <div className="rounded-xl bg-sage-muted/50 px-4 py-3">
               <dt className="text-xs font-medium uppercase tracking-wide text-muted">
                 3 refeições

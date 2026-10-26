@@ -109,7 +109,7 @@ export default async function AdminLeadsPage({ searchParams }: AdminLeadsPagePro
           </div>
         }
       />
-      <main className="flex-1 space-y-8 p-6 lg:p-8">
+      <main className="flex-1 space-y-8 p-4 sm:p-6 lg:p-8">
         <div className="flex flex-wrap gap-2">
           {SOURCE_FILTERS.map((filter) => {
             const href =
@@ -156,14 +156,14 @@ export default async function AdminLeadsPage({ searchParams }: AdminLeadsPagePro
           })}
         </div>
 
-        <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4">
           <AdminStatCard label="Total de leads" value={stats.total} icon="users" accent="forest" />
           <AdminStatCard label="Últimos 7 dias" value={stats.last7Days} icon="activity" accent="sage" />
           <AdminStatCard label="Quentes + muito quentes" value={stats.byScore.quente + stats.byScore.muito_quente} icon="star" accent="gold" />
           <AdminStatCard label="Últimos 30 dias" value={stats.last30Days} icon="chart" accent="forest" />
         </div>
 
-        <div className="grid gap-3 sm:grid-cols-4">
+        <div className="grid grid-cols-1 gap-3 sm:grid-cols-4">
           {LEAD_SCORE_ORDER.map((score) => (
             <div
               key={score}

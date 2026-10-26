@@ -33,7 +33,7 @@ export function ClubTrustSection() {
           Premium disponível agora — assinatura clara, sem surpresas.
         </p>
       </div>
-      <div className="mt-10 grid gap-6 md:grid-cols-3">
+      <div className="mt-10 grid grid-cols-1 gap-6 md:grid-cols-3">
         {guarantees.map((item) => (
           <div
             key={item.title}

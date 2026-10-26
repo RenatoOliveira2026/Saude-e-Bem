@@ -66,7 +66,7 @@ export function SubscriptionDashboard({ data }: SubscriptionDashboardProps) {
         </p>
       </section>
 
-      <section className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+      <section className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
         <Card className="p-5">
           <p className="text-xs uppercase tracking-wide text-muted-light">
             Plano atual

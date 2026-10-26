@@ -28,8 +28,8 @@ export default async function AdminConversaoPage() {
           </Button>
         }
       />
-      <main className="flex-1 space-y-8 p-6 lg:p-8">
-        <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-5">
+      <main className="flex-1 space-y-8 p-4 sm:p-6 lg:p-8">
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-5">
           <AdminStatCard label="Total de leads" value={data.totalLeads} icon="users" accent="forest" />
           <AdminStatCard label="Leads quentes" value={data.hotLeads} icon="star" accent="gold" />
           <div className="rounded-2xl border border-border bg-surface p-6 shadow-soft">

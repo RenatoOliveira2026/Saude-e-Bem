@@ -45,7 +45,7 @@ function BenefitSection({
       {items.length === 0 ? (
         <p className="mt-4 text-sm text-muted">{empty}</p>
       ) : (
-        <div className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {items.map((item) => (
             <Link key={item.id} href={item.href} className="group">
               <Card variant="muted" hover padding="lg" className="h-full">

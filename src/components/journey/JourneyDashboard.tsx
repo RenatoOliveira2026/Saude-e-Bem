@@ -140,7 +140,7 @@ export function JourneyDashboard({ data }: JourneyDashboardProps) {
             linkLabel="Ver todos"
           />
           {data.recommendedProtocols.length > 0 ? (
-            <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            <div className="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
               {data.recommendedProtocols.map((protocol) => (
                 <Link
                   key={protocol.id}
@@ -202,7 +202,7 @@ export function JourneyDashboard({ data }: JourneyDashboardProps) {
             linkLabel="Ver biblioteca"
           />
           {data.librarySuggestions.length > 0 ? (
-            <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            <div className="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
               {data.librarySuggestions.map((resource) => (
                 <Link
                   key={resource.id}

@@ -187,7 +187,7 @@ export default async function ProtocoloDetailPage({ params }: PageProps) {
       <Section background="default">
         <Container size="md">
           <h2 className="font-heading text-2xl text-forest">Benefícios</h2>
-          <ul className="mt-6 grid gap-3 sm:grid-cols-2">
+          <ul className="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-2">
             {protocol.benefits.map((b) => (
               <li
                 key={b}

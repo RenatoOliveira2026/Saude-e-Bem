@@ -164,7 +164,7 @@ export function AffiliatePremiumForm({ link }: AffiliatePremiumFormProps) {
       id: "commercial",
       label: "Comercial",
       content: (
-        <div className="grid gap-4 sm:grid-cols-2">
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
           <Input
             label="Preço atual (R$)"
             name="current_price"
@@ -295,7 +295,7 @@ export function AffiliatePremiumForm({ link }: AffiliatePremiumFormProps) {
       label: "Prova social",
       content: (
         <div className="space-y-4">
-          <div className="grid gap-4 sm:grid-cols-2">
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
             <Input
               label="Avaliação (0–5)"
               name="rating"

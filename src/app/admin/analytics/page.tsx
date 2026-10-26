@@ -21,7 +21,7 @@ export default async function AdminAnalyticsPage() {
         email={email}
         role={role}
       />
-      <main className="flex-1 space-y-8 p-6 lg:p-8">
+      <main className="flex-1 space-y-8 p-4 sm:p-6 lg:p-8">
         {isEmpty && (
           <div className="rounded-2xl border border-dashed border-border bg-off-white p-8 text-center">
             <p className="font-heading text-lg font-semibold text-forest">
@@ -34,7 +34,7 @@ export default async function AdminAnalyticsPage() {
           </div>
         )}
 
-        <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4">
           <AdminStatCard
             label="Total de eventos"
             value={data.totalEvents}
@@ -61,7 +61,7 @@ export default async function AdminAnalyticsPage() {
           />
         </div>
 
-        <div className="grid gap-4 sm:grid-cols-2">
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
           <AdminStatCard
             label="Eventos (7 dias)"
             value={data.eventsLast7Days}
@@ -83,7 +83,7 @@ export default async function AdminAnalyticsPage() {
           <p className="mt-1 text-sm text-muted">
             Estrutura preparada — ative via variáveis de ambiente quando for publicar.
           </p>
-          <ul className="mt-4 grid gap-2 sm:grid-cols-2">
+          <ul className="mt-4 grid grid-cols-1 gap-2 sm:grid-cols-2">
             <li className="text-sm text-graphite">
               Google Analytics 4:{" "}
               <span className="font-medium">
@@ -111,7 +111,7 @@ export default async function AdminAnalyticsPage() {
           </ul>
         </section>
 
-        <div className="grid gap-6 lg:grid-cols-3">
+        <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
           <AnalyticsRankList
             title="Artigos mais acessados"
             items={data.topArticles}

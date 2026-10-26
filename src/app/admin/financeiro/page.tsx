@@ -42,7 +42,7 @@ export default async function AdminFinanceiroPage() {
           </Button>
         }
       />
-      <main className="flex-1 space-y-8 p-6 lg:p-8">
+      <main className="flex-1 space-y-8 p-4 sm:p-6 lg:p-8">
         <div className="rounded-2xl border border-border bg-surface p-4 text-sm text-muted shadow-soft">
           <p>
             <span className="font-medium text-forest">Mercado Pago:</span>{" "}
@@ -58,7 +58,7 @@ export default async function AdminFinanceiroPage() {
           </p>
         </div>
 
-        <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4">
           <div className="rounded-2xl border border-border bg-surface p-6 shadow-soft">
             <p className="text-sm font-medium text-muted">Receita total</p>
             <p className="mt-2 font-heading text-3xl font-semibold text-forest">
@@ -85,7 +85,7 @@ export default async function AdminFinanceiroPage() {
           />
         </div>
 
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
           <div className="rounded-xl border border-border bg-surface px-4 py-3 text-center shadow-soft">
             <p className="text-xs uppercase tracking-wide text-muted">MRR estimado</p>
             <p className="mt-1 font-heading text-2xl text-forest">

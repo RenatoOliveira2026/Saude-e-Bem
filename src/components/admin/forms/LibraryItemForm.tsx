@@ -46,7 +46,7 @@ export function LibraryItemForm({ item }: LibraryItemFormProps) {
         rows={6}
         hint="Texto completo exibido na página de detalhe"
       />
-      <div className="grid gap-4 sm:grid-cols-2">
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
         <Input label="Categoria (slug)" name="category" defaultValue={item?.category} required />
         <Input
           label="Categoria (label)"
@@ -55,7 +55,7 @@ export function LibraryItemForm({ item }: LibraryItemFormProps) {
           required
         />
       </div>
-      <div className="grid gap-4 sm:grid-cols-2">
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
         <div>
           <label htmlFor="item_type" className="mb-1.5 block text-sm font-medium text-graphite">
             Tipo

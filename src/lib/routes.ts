@@ -78,6 +78,7 @@ export const adminRoutes = {
   financeiro: "/admin/financeiro",
   memberships: "/admin/memberships",
   financeExport: "/api/admin/finance/export",
+  marketing: "/admin/marketing",
   conversao: "/admin/conversao",
   lancamento: "/admin/lancamento",
   comunicacao: "/admin/comunicacao",

@@ -1,4 +1,4 @@
-import { GoogleAnalytics, GoogleTagManager, PageViewTracker } from "@/components/analytics";
+import { GoogleAnalytics, GoogleTagManager, MetaPixel, PageViewTracker } from "@/components/analytics";
 import { brandIcons } from "@/components/brand/logo-config";
 import { AppShell } from "@/components/layout/AppShell";
 import { PwaProvider } from "@/components/pwa";
@@ -95,6 +95,7 @@ export default function RootLayout({
       <body className="flex min-h-full flex-col bg-off-white font-body text-graphite">
         <GoogleAnalytics />
         <GoogleTagManager />
+        <MetaPixel />
         <JsonLdScript data={[organizationJsonLd(), websiteJsonLd()]} />
         <PageViewTracker />
         <PwaProvider />

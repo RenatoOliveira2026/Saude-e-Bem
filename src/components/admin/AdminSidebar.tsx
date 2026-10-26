@@ -6,6 +6,7 @@ import { getAdminNavGroupsForRole, isAdminNavItemActive } from "@/lib/admin/nav"
 import { ADMIN_ROLE_LABELS, type AdminRole } from "@/lib/admin/roles";
 import { adminFutureIntegrations } from "@/lib/admin/types";
 import { routes } from "@/lib/routes";
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -18,10 +19,13 @@ function SidebarContent({
   role,
   pathname,
   onNavigate,
+  inDrawer = false,
 }: {
   role: AdminRole;
   pathname: string;
   onNavigate?: () => void;
+  /** No menu do celular a gaveta inteira rola; a lista não tem rolagem própria. */
+  inDrawer?: boolean;
 }) {
   const navGroups = getAdminNavGroupsForRole(role);
   const firstHref = navGroups[0]?.items[0]?.href;
@@ -40,7 +44,10 @@ function SidebarContent({
         <p className="mt-1 text-xs text-off-white/70">{ADMIN_ROLE_LABELS[role]}</p>
       </div>
 
-      <nav className="flex-1 space-y-5 overflow-y-auto px-3 py-4" aria-label="Menu do painel">
+      <nav
+        className={`space-y-5 px-3 py-4 ${inDrawer ? "" : "flex-1 overflow-y-auto"}`}
+        aria-label="Menu do painel"
+      >
         {navGroups.map(({ group, items }) => (
           <div key={group}>
             <p className="mb-1 px-3 text-[11px] font-semibold uppercase tracking-wider text-gold/90">
@@ -135,12 +142,18 @@ export function AdminSidebar({ role }: AdminSidebarProps) {
 
       {/* Celular e tablet */}
       <div className="sticky top-0 z-40 flex items-center justify-between gap-3 border-b border-white/10 bg-forest px-4 py-3 text-off-white lg:hidden">
-        <div className="flex min-w-0 items-center gap-3">
-          <LogoHeader inverted href={routes.admin} className="[&_img]:h-10 [&_img]:w-auto" />
-          <span className="truncate text-xs font-semibold uppercase tracking-wider text-gold">
-            Painel Admin
+        <Link href={routes.admin} className="flex min-w-0 items-center gap-3">
+          <Image
+            src="/logo-saude-bem.png"
+            alt="Saúde & Bem"
+            width={40}
+            height={40}
+            className="h-10 w-10 shrink-0 rounded-xl bg-white object-contain p-0.5"
+          />
+          <span className="truncate font-heading text-sm font-semibold text-off-white">
+            Painel
           </span>
-        </div>
+        </Link>
         <button
           type="button"
           onClick={() => setOpen(true)}
@@ -177,7 +190,12 @@ export function AdminSidebar({ role }: AdminSidebarProps) {
             >
               ×
             </button>
-            <SidebarContent role={role} pathname={pathname} onNavigate={() => setOpen(false)} />
+            <SidebarContent
+              role={role}
+              pathname={pathname}
+              onNavigate={() => setOpen(false)}
+              inDrawer
+            />
           </aside>
         </div>
       )}

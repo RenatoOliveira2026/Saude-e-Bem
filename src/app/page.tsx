@@ -8,7 +8,6 @@ import {
   ObjectivesPremiumSection,
   ProtocolsPremiumSection,
 } from "@/components/home";
-import { LaunchFunnelCta } from "@/components/launch";
 import { JsonLdScript } from "@/components/seo/JsonLd";
 import { getHomePageContent } from "@/lib/content/home";
 import { routes } from "@/lib/routes";
@@ -64,7 +63,6 @@ export default async function HomePage() {
       <LibraryPremiumSection resources={freeLibrary} />
       <AffiliatesRecommendedSection affiliates={affiliates} />
       <NewsletterLeadSection />
-      <LaunchFunnelCta background="gold" />
       <ClubPremiumSection />
     </>
   );

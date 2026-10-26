@@ -23,7 +23,7 @@ export function ObjectivesPremiumSection() {
               variant="default"
               hover
               padding="lg"
-              className="h-full border-border/60 bg-off-white/80 transition-all duration-300 group-hover:-translate-y-0.5 group-hover:shadow-card"
+              className="flex h-full flex-col border-border/60 bg-off-white/80 transition-all duration-300 group-hover:-translate-y-0.5 group-hover:shadow-card"
             >
               <IconBox name={objective.icon} size={22} className="mb-5 bg-surface shadow-soft" />
               <CardHeader className="mb-0">
@@ -34,7 +34,7 @@ export function ObjectivesPremiumSection() {
                   {objective.description}
                 </CardDescription>
               </CardHeader>
-              <span className="mt-6 inline-flex items-center gap-1.5 font-heading text-xs font-semibold uppercase tracking-wider text-forest">
+              <span className="mt-auto inline-flex items-center gap-1.5 pt-6 font-heading text-xs font-semibold uppercase tracking-wider text-forest">
                 Explorar conteúdo
                 <Icon name="arrow-right" size={14} className="transition-transform group-hover:translate-x-0.5" aria-hidden />
               </span>

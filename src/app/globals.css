@@ -142,17 +142,22 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-family: var(--font-heading), system-ui, sans-serif;
-  font-weight: 600;
-  line-height: 1.25;
-  letter-spacing: -0.02em;
-  color: var(--color-forest);
+/* Em @layer base para que classes como text-off-white e text-gold possam
+   mudar a cor dos títulos (fora de camada, esta regra vencia sempre e os
+   títulos sobre fundo verde ficavam invisíveis). */
+@layer base {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-heading), system-ui, sans-serif;
+    font-weight: 600;
+    line-height: 1.25;
+    letter-spacing: -0.02em;
+    color: var(--color-forest);
+  }
 }
 
 ::selection {

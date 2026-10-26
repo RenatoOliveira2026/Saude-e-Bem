@@ -75,8 +75,10 @@
   --color-graphite: var(--color-graphite);
   --color-muted: var(--color-muted);
   --color-muted-light: var(--color-muted-light);
-  --color-surface: var(--color-surface);
-  --color-surface-muted: var(--color-surface-muted);
+  /* Antes apontavam para si mesmas e ficavam vazias: bg-surface era transparente
+     (cartões sem fundo próprio e cabeçalho fixo deixando ver o conteúdo por trás). */
+  --color-surface: var(--surface);
+  --color-surface-muted: var(--surface-muted);
   --color-border: var(--color-border);
   --color-border-strong: var(--color-border-strong);
   --color-background: var(--background);

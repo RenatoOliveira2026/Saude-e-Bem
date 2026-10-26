@@ -12,6 +12,7 @@ import { DetailHero, RelatedNav } from "@/components/layout/DetailPage";
 import { RelatedContentLinks } from "@/components/seo/RelatedContentLinks";
 import { JsonLdScript } from "@/components/seo/JsonLd";
 import { ShareButton } from "@/components/share";
+import { ListenButton } from "@/components/listen/ListenButton";
 import { Container } from "@/components/ui/Container";
 import { Section } from "@/components/ui/Section";
 import {
@@ -183,7 +184,10 @@ export default async function ArtigoDetailPage({ params }: PageProps) {
             )}{" "}
             · {article.authorRole} · {article.publishedAt}
           </p>
-          <article className="mt-8">
+          <div className="mt-6">
+            <ListenButton title={article.title} />
+          </div>
+          <article className="mt-8" data-listen-target>
             <PublicArticleBody
               blocks={article.contentBlocks}
               fallbackParagraphs={article.content}

@@ -98,14 +98,14 @@ export default async function AdminNewsletterPage({
 
         <section className="rounded-2xl border border-border bg-surface p-4 text-sm text-muted shadow-soft">
           <p>
-            <span className="font-medium text-forest">E-mail marketing:</span>{" "}
+            <span className="font-medium text-forest">Envio de e-mails:</span>{" "}
             {emailProvider && isEmailProviderConfigured()
-              ? `Provedor ${emailProvider.id} configurado (sync automático)`
-              : "Configure BREVO_API_KEY (provedor principal). MailerLite e ConvertKit são opções futuras."}
+              ? `Inscritos enviados automaticamente para ${emailProvider.id === "brevo" ? "a Brevo" : emailProvider.id}.`
+              : "Os inscritos ficam guardados aqui no site. Use Exportar CSV para baixar a lista. O envio automático da newsletter ainda não está ligado."}
           </p>
-          {stats.pendingSync > 0 && (
+          {stats.pendingSync > 0 && emailProvider && isEmailProviderConfigured() && (
             <p className="mt-2 text-xs text-muted-light">
-              {stats.pendingSync} contato(s) aguardando sync com provedor externo.
+              {stats.pendingSync} contato(s) aguardando envio para o serviço de newsletter.
             </p>
           )}
         </section>

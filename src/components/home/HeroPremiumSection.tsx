@@ -14,7 +14,7 @@ export function HeroPremiumSection() {
       />
 
       <Container className="relative py-16 md:py-24 lg:py-28">
-        <div className="grid items-center gap-14 lg:grid-cols-2 lg:gap-20">
+        <div className="grid grid-cols-1 items-center gap-14 lg:grid-cols-2 lg:gap-20">
           <div className="max-w-xl">
             <Badge variant="gold" className="mb-6">
               Saúde & Bem · Longevidade com propósito

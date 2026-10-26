@@ -33,7 +33,7 @@ export function AffiliateDetailView({
     <>
       <Section background="white">
         <Container size="md">
-          <div className="grid gap-10 lg:grid-cols-2 lg:items-start">
+          <div className="grid grid-cols-1 gap-10 lg:grid-cols-2 lg:items-start">
             <div>
               {videoId ? (
                 <div className="aspect-video overflow-hidden rounded-2xl border border-border bg-forest/5">
@@ -186,7 +186,7 @@ export function AffiliateDetailView({
         <Section background="gold">
           <Container size="md">
             <h2 className="font-heading text-2xl text-forest">Depoimentos</h2>
-            <div className="mt-8 grid gap-4 md:grid-cols-3">
+            <div className="mt-8 grid grid-cols-1 gap-4 md:grid-cols-3">
               {product.testimonials.map((quote) => (
                 <blockquote
                   key={quote}

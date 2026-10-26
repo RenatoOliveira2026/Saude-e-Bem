@@ -57,12 +57,12 @@ export function FeaturedArticleBanner({ article }: { article: BlogArticle }) {
 
   return (
     <Card variant="featured" padding="lg" className="overflow-hidden">
-      <div className="grid gap-8 lg:grid-cols-2">
+      <div className="grid grid-cols-1 gap-8 lg:grid-cols-2">
         <ContentCover
           src={coverSrc}
           alt={article.title}
           aspect="video"
-          className="min-h-[220px] bg-gradient-to-br from-forest/90 to-sage/70"
+          className="w-full bg-gradient-to-br from-forest/90 to-sage/70 sm:min-h-[220px]"
         >
           <IconBox
             name={blogCategoryIcons[article.category]}

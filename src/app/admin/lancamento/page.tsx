@@ -45,7 +45,7 @@ export default async function AdminLancamentoPage() {
           </div>
         }
       />
-      <main className="flex-1 space-y-8 p-6 lg:p-8">
+      <main className="flex-1 space-y-8 p-4 sm:p-6 lg:p-8">
         <LaunchHealthPanel
           checkedAt={health.checkedAt}
           overall={health.overall}
@@ -58,7 +58,7 @@ export default async function AdminLancamentoPage() {
           <h2 className="mb-4 font-heading text-xl font-semibold text-forest">
             Indicadores do lançamento
           </h2>
-          <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4">
             <AdminStatCard
               label="Cadastros totais"
               value={kpis.newSignupsTotal}
@@ -179,7 +179,7 @@ export default async function AdminLancamentoPage() {
           )}
         </section>
 
-        <div className="grid gap-8 lg:grid-cols-2">
+        <div className="grid grid-cols-1 gap-8 lg:grid-cols-2">
           <section>
             <h2 className="mb-4 font-heading text-lg font-semibold text-forest">
               Origem do cadastro (objetivo)
@@ -286,7 +286,7 @@ export default async function AdminLancamentoPage() {
           <p className="mt-1 text-sm text-muted">
             Leads pré-lançamento e sincronização Brevo.
           </p>
-          <div className="mt-4 grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+          <div className="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4">
             <AdminStatCard
               label="Leads VIP"
               value={launch.vipTotal}

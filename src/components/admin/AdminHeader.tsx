@@ -19,10 +19,10 @@ export function AdminHeader({
   action,
 }: AdminHeaderProps) {
   return (
-    <header className="border-b border-border bg-surface px-6 py-5 lg:px-8">
+    <header className="border-b border-border bg-surface px-4 py-4 sm:px-6 sm:py-5 lg:px-8">
       <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <div>
-          <h1 className="font-heading text-2xl font-semibold text-forest">
+          <h1 className="font-heading text-xl font-semibold text-forest sm:text-2xl">
             {title}
           </h1>
           {description && (

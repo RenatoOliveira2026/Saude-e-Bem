@@ -28,7 +28,7 @@ export default async function AdminComunicacaoPage() {
           </Button>
         }
       />
-      <main className="flex-1 space-y-8 p-6 lg:p-8">
+      <main className="flex-1 space-y-8 p-4 sm:p-6 lg:p-8">
         <div className="rounded-2xl border border-border bg-surface p-4 text-sm text-muted shadow-soft">
           <p>
             <span className="font-medium text-forest">WhatsApp API:</span>{" "}
@@ -44,7 +44,7 @@ export default async function AdminComunicacaoPage() {
           </p>
         </div>
 
-        <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3">
           <AdminStatCard
             label="Leads com opt-in"
             value={data.stats.optInLeads}

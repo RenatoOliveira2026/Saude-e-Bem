@@ -131,7 +131,7 @@ export function SubscribeCheckoutForm({
     <div className="space-y-8">
       <div className="space-y-3">
         <p className="text-sm font-medium text-forest">Escolha seu plano</p>
-        <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4">
           {ASSINAR_PLANS.map((plan) => {
             const isPaid = plan.checkoutEnabled;
             const isSelected = isPaid && plan.id === selectedPlan;

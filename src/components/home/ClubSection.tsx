@@ -19,7 +19,7 @@ import { routes } from "@/lib/routes";
 export function ClubSection() {
   return (
     <Section background="forest" id="clube" spacing="spacious">
-      <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
+      <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-2 lg:gap-16">
         <SectionHeader align="left" className="mb-0 max-w-none">
           <SectionLabel className="text-gold/80">Exclusivo</SectionLabel>
           <SectionTitle className="text-off-white">

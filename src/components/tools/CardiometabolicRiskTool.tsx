@@ -110,7 +110,7 @@ function ResultPanel({
         {riskLevelDescriptions[result.level]}
       </p>
 
-      <dl className="mt-6 grid gap-4 sm:grid-cols-2">
+      <dl className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2">
         <div className="rounded-xl bg-sage-muted/50 px-4 py-3">
           <dt className="text-xs font-medium uppercase tracking-wide text-muted">
             IMC estimado
@@ -194,7 +194,7 @@ export function CardiometabolicRiskTool() {
           <legend className="font-heading text-lg font-semibold text-forest px-1">
             Medidas e perfil
           </legend>
-          <div className="grid gap-5 sm:grid-cols-2">
+          <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
             <Input
               name="age"
               type="number"

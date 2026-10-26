@@ -43,7 +43,7 @@ export function FeaturedArticlesSection({ articles }: FeaturedArticlesSectionPro
         </Button>
       </div>
 
-      <div className="mt-12 grid gap-8 md:grid-cols-3">
+      <div className="mt-12 grid grid-cols-1 gap-8 md:grid-cols-3">
         {articles.map((article) => (
           <Link
             key={article.id}

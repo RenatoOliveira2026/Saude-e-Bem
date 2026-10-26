@@ -91,7 +91,7 @@ export function FeaturedIntelligentLibraryBanner({ item }: { item: LibraryItem }
 
   return (
     <Card variant="featured" padding="lg">
-      <div className="grid gap-6 lg:grid-cols-2 lg:items-center">
+      <div className="grid grid-cols-1 gap-6 lg:grid-cols-2 lg:items-center">
         <div>
           <IconBox name={typeIcons[item.type]} size={24} className="mb-4 bg-gold-muted" />
           <div className="mb-3 flex flex-wrap gap-2">

@@ -34,7 +34,7 @@ export default function Guia30DiasPage() {
     <>
       <section className="border-b border-border bg-gradient-to-br from-sage-muted via-off-white to-gold-muted/20 py-14 md:py-20">
         <Container size="md">
-          <div className="grid items-center gap-10 lg:grid-cols-2">
+          <div className="grid grid-cols-1 items-center gap-10 lg:grid-cols-2">
             <div>
               <Badge variant="gold" className="mb-4">
                 Guia gratuito
@@ -96,7 +96,7 @@ export default function Guia30DiasPage() {
           <h2 className="font-heading text-2xl text-forest">
             Os 10 hábitos do guia
           </h2>
-          <ul className="mt-6 grid gap-4 sm:grid-cols-2">
+          <ul className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2">
             {HABITS.map((habit, index) => (
               <li
                 key={habit}

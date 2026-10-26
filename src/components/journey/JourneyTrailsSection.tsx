@@ -25,7 +25,7 @@ export function JourneyTrailsSection({ trails, activeTrail }: JourneyTrailsSecti
         href={routes.clubeTrilhas}
         linkLabel="Ver todas"
       />
-      <div className="mt-8 grid gap-6 lg:grid-cols-3">
+      <div className="mt-8 grid grid-cols-1 gap-6 lg:grid-cols-3">
         {preview.map((trail) => (
           <TrailCard key={trail.id} trail={trail} highlighted={trail.id === activeTrail?.id} />
         ))}

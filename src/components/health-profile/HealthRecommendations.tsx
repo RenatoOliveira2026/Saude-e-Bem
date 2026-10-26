@@ -20,7 +20,7 @@ export function HealthRecommendations({
   }
 
   return (
-    <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+    <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
       {recommendations.map((rec) => (
         <Card key={rec.protocolSlug} variant="outline" padding="md" hover>
           <div className="flex flex-wrap items-start justify-between gap-2">

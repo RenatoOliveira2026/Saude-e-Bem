@@ -76,7 +76,7 @@ export function ArticleCmsForm({ article }: ArticleCmsFormProps) {
       {article && <input type="hidden" name="id" value={article.id} />}
 
       <div className="mx-auto max-w-3xl space-y-6">
-        <div className="grid gap-6 lg:grid-cols-2">
+        <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
           <Input label="Título" name="title" value={title} onChange={(e) => setTitle(e.target.value)} required />
           <Input label="Slug" name="slug" defaultValue={article?.slug} hint="Vazio = automático" />
         </div>
@@ -119,7 +119,7 @@ export function ArticleCmsForm({ article }: ArticleCmsFormProps) {
           />
         </div>
 
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
           <Select
             label="Categoria"
             name="category"

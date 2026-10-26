@@ -32,7 +32,7 @@ export function LibraryPremiumSection({ resources }: LibraryPremiumSectionProps)
       {resources.length === 0 ? (
         <HomeEmptyNote message="Explore artigos no blog ou visite a biblioteca de materiais gratuitos." />
       ) : (
-        <div className="grid gap-5 sm:grid-cols-2">
+        <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
           {resources.map((resource) => (
             <Card
               key={resource.id}

@@ -54,8 +54,8 @@ export default async function AdminLeadDetailPage({ params }: AdminLeadDetailPag
           </Button>
         }
       />
-      <main className="flex-1 space-y-8 p-6 lg:p-8">
-        <div className="grid gap-4 rounded-2xl border border-border bg-surface p-6 shadow-soft md:grid-cols-2 xl:grid-cols-4">
+      <main className="flex-1 space-y-8 p-4 sm:p-6 lg:p-8">
+        <div className="grid grid-cols-1 gap-4 rounded-2xl border border-border bg-surface p-6 shadow-soft md:grid-cols-2 xl:grid-cols-4">
           <div>
             <p className="text-xs uppercase tracking-wide text-muted">E-mail</p>
             <p className="mt-1 font-medium text-forest">{lead.email}</p>

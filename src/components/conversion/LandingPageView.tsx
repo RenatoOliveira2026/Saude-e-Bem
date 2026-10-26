@@ -18,7 +18,7 @@ export function LandingPageView({ config }: LandingPageViewProps) {
     <>
       <section className="border-b border-border bg-gradient-to-br from-sage-muted via-off-white to-gold-muted/20 py-14 md:py-20">
         <Container size="md">
-          <div className="grid items-center gap-10 lg:grid-cols-2">
+          <div className="grid grid-cols-1 items-center gap-10 lg:grid-cols-2">
             <div>
               <Badge variant="gold" className="mb-4">
                 {config.badge}
@@ -69,7 +69,7 @@ export function LandingPageView({ config }: LandingPageViewProps) {
       <Section background="white">
         <Container size="md">
           <h2 className="font-heading text-2xl text-forest">O que você recebe</h2>
-          <ul className="mt-6 grid gap-4 sm:grid-cols-3">
+          <ul className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-3">
             {config.bullets.map((item) => (
               <li
                 key={item}

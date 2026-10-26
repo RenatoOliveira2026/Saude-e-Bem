@@ -12,7 +12,7 @@ export function RelatedContentLinks({ title, links }: RelatedContentLinksProps) 
   return (
     <section className="mt-8">
       <h2 className="font-heading text-xl text-forest">{title}</h2>
-      <ul className="mt-4 grid gap-3 sm:grid-cols-3">
+      <ul className="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-3">
         {links.map((link) => (
           <li key={link.href}>
             <Card className="h-full p-4 transition-shadow hover:shadow-soft">

@@ -5,7 +5,7 @@ export default function RecomendadoDetailLoading() {
   return (
     <Section background="white">
       <Container size="md" className="animate-pulse py-12">
-        <div className="grid gap-10 lg:grid-cols-2">
+        <div className="grid grid-cols-1 gap-10 lg:grid-cols-2">
           <div className="aspect-[4/3] rounded-2xl bg-sage-muted/40" />
           <div className="space-y-4">
             <div className="h-6 w-24 rounded-full bg-sage-muted/50" />

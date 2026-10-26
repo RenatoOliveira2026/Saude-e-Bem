@@ -47,7 +47,7 @@ export function ClubBenefitsGrid() {
           Tudo o que o Clube oferece
         </h2>
       </div>
-      <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {clubBenefits.map((benefit) => (
           <Card key={benefit.title} variant="muted" padding="lg">
             <IconBox name={benefit.icon} size={22} className="bg-surface shadow-soft" />
@@ -79,7 +79,7 @@ export function ClubVipList() {
           fundador e acesso antecipado ao ecossistema premium Saúde & Bem.
         </p>
       </div>
-      <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {clubVipList.map((item) => (
           <Card key={item.title} variant="default" padding="lg">
             <IconBox name={item.icon} size={22} className="bg-gold-muted text-forest" />
@@ -114,7 +114,7 @@ export function ClubPricing() {
           espera.
         </p>
       </div>
-      <div className="mx-auto grid max-w-3xl gap-6 md:grid-cols-2">
+      <div className="mx-auto grid grid-cols-1 max-w-3xl gap-6 md:grid-cols-2">
         {clubPlans.map((plan) => (
           <Card
             key={plan.id}
@@ -181,7 +181,7 @@ export function ClubTestimonials() {
           O que dizem nossos membros
         </h2>
       </div>
-      <div className="grid gap-6 md:grid-cols-3">
+      <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
         {clubTestimonials.map((t) => (
           <Card key={t.name} variant="default" padding="lg">
             <p className="text-sm leading-relaxed text-muted italic">

@@ -16,7 +16,7 @@ export default async function AdminConfiguracoesPage() {
         email={email}
         role={role}
       />
-      <main className="flex-1 p-6 lg:p-8">
+      <main className="flex-1 p-4 sm:p-6 lg:p-8">
         <div className="rounded-2xl border border-dashed border-border bg-surface p-8 text-center shadow-soft">
           <p className="font-heading text-lg font-semibold text-forest">
             Em desenvolvimento
@@ -27,7 +27,7 @@ export default async function AdminConfiguracoesPage() {
           </p>
         </div>
 
-        <div className="mt-8 grid gap-4 sm:grid-cols-2">
+        <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2">
           {adminFutureIntegrations.map((item) => (
             <div
               key={item.id}

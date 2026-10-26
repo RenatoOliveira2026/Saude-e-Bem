@@ -15,7 +15,7 @@ export default async function AdminMarketplaceNovoPage() {
         description="Digital, afiliado, próprio ou assinatura"
         email={email}
       />
-      <main className="flex-1 p-6 lg:p-8">
+      <main className="flex-1 p-4 sm:p-6 lg:p-8">
         <MarketplaceProductForm />
       </main>
     </>

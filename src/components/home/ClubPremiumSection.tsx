@@ -9,7 +9,7 @@ export function ClubPremiumSection() {
   return (
     <Section background="white" id="clube" spacing="spacious">
       <div className="overflow-hidden rounded-3xl border border-border bg-gradient-to-br from-forest via-forest-light to-sage p-8 md:p-12 lg:p-14">
-        <div className="grid gap-10 lg:grid-cols-2 lg:items-center lg:gap-16">
+        <div className="grid grid-cols-1 gap-10 lg:grid-cols-2 lg:items-center lg:gap-16">
           <div>
             <Badge variant="gold" className="mb-5">
               Premium disponível
@@ -36,7 +36,7 @@ export function ClubPremiumSection() {
             </div>
           </div>
 
-          <ul className="grid gap-4 sm:grid-cols-2">
+          <ul className="grid grid-cols-1 gap-4 sm:grid-cols-2">
             {clubPremiumBenefits.map((benefit) => (
               <li
                 key={benefit}

@@ -30,7 +30,7 @@ export async function Footer({ showNewsletter = true }: { showNewsletter?: boole
     <footer className="bg-forest pb-16 text-off-white md:pb-0">
       <div className="border-b border-off-white/10">
         <Container className="py-16 md:py-24">
-          <div className="grid gap-12 lg:grid-cols-12 lg:gap-10">
+          <div className="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:gap-10">
             <div className="lg:col-span-4">
               <LogoFooter />
               <p className="mt-6 max-w-sm text-sm leading-relaxed text-off-white/70">
@@ -77,7 +77,7 @@ export async function Footer({ showNewsletter = true }: { showNewsletter?: boole
             </div>
           )}
 
-          <div className="mt-16 grid gap-6 rounded-2xl border border-off-white/10 bg-off-white/5 p-6 md:grid-cols-3 md:p-8">
+          <div className="mt-16 grid grid-cols-1 gap-6 rounded-2xl border border-off-white/10 bg-off-white/5 p-6 md:grid-cols-3 md:p-8">
             {[
               {
                 title: "Base científica",

@@ -42,7 +42,7 @@ export function MarketplaceProductForm({ product }: MarketplaceProductFormProps)
         rows={4}
         required
       />
-      <div className="grid gap-4 sm:grid-cols-2">
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
         <Input label="Categoria (slug)" name="category" defaultValue={product?.category} required />
         <Input
           label="Categoria (label)"
@@ -51,7 +51,7 @@ export function MarketplaceProductForm({ product }: MarketplaceProductFormProps)
           required
         />
       </div>
-      <div className="grid gap-4 sm:grid-cols-2">
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
         <div>
           <label htmlFor="fulfillment" className="mb-1.5 block text-sm font-medium text-graphite">
             Tipo de produto
@@ -87,7 +87,7 @@ export function MarketplaceProductForm({ product }: MarketplaceProductFormProps)
           </select>
         </div>
       </div>
-      <div className="grid gap-4 sm:grid-cols-2">
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
         <Input
           label="Preço atual (R$)"
           name="current_price"
@@ -104,7 +104,7 @@ export function MarketplaceProductForm({ product }: MarketplaceProductFormProps)
         />
       </div>
       <Input label="Parcelamento" name="installments" defaultValue={product?.installments ?? ""} />
-      <div className="grid gap-4 sm:grid-cols-2">
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
         <Input
           label="Slug biblioteca (digital)"
           name="library_slug"

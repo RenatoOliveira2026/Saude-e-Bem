@@ -20,15 +20,15 @@ export default async function AdminDashboardPage() {
         email={email}
         role={role}
       />
-      <main className="flex-1 space-y-8 p-6 lg:p-8">
-        <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+      <main className="flex-1 space-y-8 p-4 sm:p-6 lg:p-8">
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4">
           <AdminStatCard label="Usuários" value={stats.users} icon="users" accent="forest" />
           <AdminStatCard label="Artigos" value={stats.articles} icon="book" accent="sage" />
           <AdminStatCard label="Protocolos" value={stats.protocols} icon="sparkle" accent="gold" />
           <AdminStatCard label="E-books" value={stats.ebooks} icon="library" accent="sage" />
         </div>
 
-        <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-5">
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-5">
           <AdminStatCard
             label="Afiliados"
             value={stats.affiliatesTotal}
@@ -61,7 +61,7 @@ export default async function AdminDashboardPage() {
           />
         </div>
 
-        <div className="grid gap-4 sm:grid-cols-2">
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
           <AdminStatCard
             label="Leads newsletter"
             value={stats.newsletterSubscribersTotal}
@@ -76,7 +76,7 @@ export default async function AdminDashboardPage() {
           />
         </div>
 
-        <div className="grid gap-4 sm:grid-cols-3">
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
           <AdminStatCard
             label="Publicados"
             value={stats.publishedTotal}
@@ -100,7 +100,7 @@ export default async function AdminDashboardPage() {
         <section className="rounded-2xl border border-border bg-surface p-6 shadow-soft">
           <h2 className="font-heading text-lg font-semibold text-forest">Conteúdos</h2>
           <p className="mt-1 text-sm text-muted">Blog e protocolos editoriais.</p>
-          <div className="mt-4 grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+          <div className="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4">
             <AdminStatCard label="Artigos" value={stats.articles} icon="book" accent="sage" />
             <AdminStatCard label="Protocolos" value={stats.protocols} icon="sparkle" accent="gold" />
           </div>
@@ -120,7 +120,7 @@ export default async function AdminDashboardPage() {
         <section className="rounded-2xl border border-border bg-surface p-6 shadow-soft">
           <h2 className="font-heading text-lg font-semibold text-forest">Biblioteca</h2>
           <p className="mt-1 text-sm text-muted">E-books gratuitos e premium na biblioteca digital.</p>
-          <div className="mt-4 grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+          <div className="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4">
             <AdminStatCard label="Itens digitais" value={stats.libraryItems} icon="library" accent="sage" />
             <AdminStatCard label="E-books legacy" value={stats.ebooks} icon="book" accent="forest" />
           </div>
@@ -140,7 +140,7 @@ export default async function AdminDashboardPage() {
         <section className="rounded-2xl border border-border bg-surface p-6 shadow-soft">
           <h2 className="font-heading text-lg font-semibold text-forest">Marketplace</h2>
           <p className="mt-1 text-sm text-muted">Produtos digitais, afiliados e próprios.</p>
-          <div className="mt-4 grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+          <div className="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4">
             <AdminStatCard label="Produtos" value={stats.marketplaceProducts} icon="star" accent="gold" />
             <AdminStatCard label="Afiliados" value={stats.affiliatesTotal} icon="star" accent="forest" />
           </div>
@@ -197,7 +197,7 @@ export default async function AdminDashboardPage() {
           <p className="mt-1 text-sm text-muted">
             Módulos preparados para as próximas fases do projeto.
           </p>
-          <div className="mt-4 grid gap-4 sm:grid-cols-2">
+          <div className="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2">
             {adminFutureIntegrations.map((item) => (
               <div
                 key={item.id}

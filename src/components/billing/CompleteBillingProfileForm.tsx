@@ -115,7 +115,7 @@ export function CompleteBillingProfileForm({
             placeholder="Como está no seu documento"
             autoComplete="name"
           />
-          <div className="grid gap-4 sm:grid-cols-2">
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
             <Input
               label="CPF"
               name="cpf"
@@ -162,7 +162,7 @@ export function CompleteBillingProfileForm({
             autoComplete="street-address"
           />
 
-          <div className="grid gap-4 sm:grid-cols-2">
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
             <Input
               label="Número"
               name="numero"
@@ -185,7 +185,7 @@ export function CompleteBillingProfileForm({
             required
           />
 
-          <div className="grid gap-4 sm:grid-cols-2">
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
             <Input
               label="Cidade"
               name="cidade"

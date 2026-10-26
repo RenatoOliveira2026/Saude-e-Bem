@@ -16,8 +16,8 @@ export default async function AdminCrescimentoPage() {
         email={email}
         role={role}
       />
-      <main className="flex-1 space-y-8 p-6 lg:p-8">
-        <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
+      <main className="flex-1 space-y-8 p-4 sm:p-6 lg:p-8">
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3">
           {data.kpis.map((kpi) => (
             <AdminStatCard
               key={kpi.label}
@@ -29,7 +29,7 @@ export default async function AdminCrescimentoPage() {
           ))}
         </div>
 
-        <section className="grid gap-6 lg:grid-cols-2">
+        <section className="grid grid-cols-1 gap-6 lg:grid-cols-2">
           <AnalyticsRankList
             title="Protocolos mais acessados"
             items={data.topProtocols}
@@ -73,7 +73,7 @@ export default async function AdminCrescimentoPage() {
           <p className="mt-1 text-sm text-muted">
             Catálogo preparado — sem alterar integrações de pagamento ou Supabase.
           </p>
-          <ul className="mt-4 grid gap-3 sm:grid-cols-2">
+          <ul className="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-2">
             {data.growthEventsCatalog.map((ev) => (
               <li key={ev.event} className="rounded-xl border border-border p-3">
                 <p className="font-mono text-xs text-gold">{ev.event}</p>

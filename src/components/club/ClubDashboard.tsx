@@ -47,7 +47,7 @@ export function ClubDashboard({ data }: ClubDashboardProps) {
         </p>
       </section>
 
-      <section className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+      <section className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4">
         <StatCard
           label="Dias como membro"
           value={String(stats.daysAsMember)}
@@ -73,7 +73,7 @@ export function ClubDashboard({ data }: ClubDashboardProps) {
         />
       </section>
 
-      <section className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+      <section className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
         <StatCard
           label="Plano"
           value={membershipPlanLabels[membership.plan]}
@@ -153,7 +153,7 @@ export function ClubDashboard({ data }: ClubDashboardProps) {
         title="Conteúdos em alta (30 dias)"
       />
 
-      <section className="grid gap-6 lg:grid-cols-2">
+      <section className="grid grid-cols-1 gap-6 lg:grid-cols-2">
         <PreviewList
           title="Favoritos recentes"
           emptyMessage="Você ainda não favoritou conteúdos."

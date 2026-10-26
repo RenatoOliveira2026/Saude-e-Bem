@@ -18,7 +18,7 @@ export function ActiveBenefitsList({ membership }: ActiveBenefitsListProps) {
           ? "Recursos incluídos no seu plano atual."
           : "Recursos disponíveis no plano gratuito. Assine para desbloquear premium."}
       </p>
-      <ul className="mt-6 grid gap-3 sm:grid-cols-2">
+      <ul className="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-2">
         {benefits.map((benefit) => (
           <li
             key={benefit.id}

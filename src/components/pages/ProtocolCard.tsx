@@ -15,7 +15,7 @@ import type { Protocol } from "@/lib/data/types";
 export function FeaturedProtocolBanner({ protocol }: { protocol: Protocol }) {
   return (
     <Card variant="featured" padding="lg" className="overflow-hidden">
-      <div className="grid gap-8 lg:grid-cols-2 lg:items-center">
+      <div className="grid grid-cols-1 gap-8 lg:grid-cols-2 lg:items-center">
         <div>
           <div className="flex flex-wrap gap-2">
             {protocol.tag && <Badge variant="gold">{protocol.tag}</Badge>}

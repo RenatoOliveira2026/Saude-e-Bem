@@ -32,7 +32,7 @@ export function FreeToolsSection() {
         </SectionDescription>
       </SectionHeader>
 
-      <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+      <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
         {freeTools.map((tool) => (
           <Link key={tool.title} href={tool.href} className="group block">
             <Card

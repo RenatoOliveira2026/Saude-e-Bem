@@ -20,7 +20,7 @@ export default async function AdminAdministradoresPage() {
         email={email}
         role={role}
       />
-      <main className="flex-1 space-y-6 p-6 lg:p-8">
+      <main className="flex-1 space-y-6 p-4 sm:p-6 lg:p-8">
         <div className="rounded-2xl border border-border bg-surface p-6 shadow-soft">
           <h2 className="font-heading text-sm font-semibold text-forest">
             Perfis

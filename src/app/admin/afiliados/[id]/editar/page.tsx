@@ -20,7 +20,7 @@ export default async function EditarAfiliadoPage({ params }: PageProps) {
   return (
     <>
       <AdminHeader title={`Editar: ${link.title}`} email={email} />
-      <main className="flex-1 p-6 lg:p-8">
+      <main className="flex-1 p-4 sm:p-6 lg:p-8">
         <AffiliateForm link={link} />
       </main>
     </>

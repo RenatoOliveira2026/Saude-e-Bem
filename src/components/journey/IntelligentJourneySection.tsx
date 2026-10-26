@@ -34,7 +34,7 @@ export function IntelligentJourneySection({ panel }: IntelligentJourneySectionPr
         description="Sugestões personalizadas com base no seu objetivo, histórico e progresso — motor Saúde & Bem (Fase 10.0)."
       />
 
-      <div className="mt-8 grid gap-6 lg:grid-cols-2">
+      <div className="mt-8 grid grid-cols-1 gap-6 lg:grid-cols-2">
         {panel.recommendationOfTheDay && (
           <RecommendationCard
             item={panel.recommendationOfTheDay}
@@ -55,7 +55,7 @@ export function IntelligentJourneySection({ panel }: IntelligentJourneySectionPr
         )}
       </div>
 
-      <div className="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="mt-6 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {panel.recommendedArticle && (
           <RecommendationCard
             item={panel.recommendedArticle}

@@ -16,7 +16,7 @@ export function HeroSection() {
       />
 
       <Container className="relative py-10 md:py-14 lg:py-20">
-        <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
+        <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-2 lg:gap-16">
           <div className="max-w-xl lg:max-w-none">
             <span className="mb-6 inline-flex items-center gap-2 rounded-full border border-gold/50 bg-gradient-to-r from-gold-muted via-white to-gold-muted whitespace-nowrap px-4 py-2 font-heading text-[11px] font-bold uppercase tracking-[0.08em] text-forest sm:tracking-[0.14em] shadow-[0_0_0_4px_rgba(233,125,75,0.10),0_6px_20px_-6px_rgba(233,125,75,0.45)] sm:text-[13px]">
               <span className="relative flex h-2.5 w-2.5" aria-hidden="true">

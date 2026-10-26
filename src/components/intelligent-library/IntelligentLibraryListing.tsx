@@ -65,7 +65,7 @@ export function IntelligentLibraryListing({
             </p>
           </Container>
         ) : (
-          <div className="mx-auto mt-10 grid max-w-[var(--container-max)] gap-6 px-[var(--container-px)] sm:grid-cols-2 lg:grid-cols-3">
+          <div className="mx-auto mt-10 grid grid-cols-1 max-w-[var(--container-max)] gap-6 px-[var(--container-px)] sm:grid-cols-2 lg:grid-cols-3">
             {filtered.map((item) => (
               <IntelligentLibraryCard key={item.id} item={item} />
             ))}

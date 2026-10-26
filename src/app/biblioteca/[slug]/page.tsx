@@ -190,7 +190,7 @@ export default async function BibliotecaDetailPage({ params }: PageProps) {
       <Section background="white" id="download">
         <Container size="md">
           <h2 className="font-heading text-2xl text-forest">Conteúdo incluído</h2>
-          <ul className="mt-6 grid gap-3 sm:grid-cols-2">
+          <ul className="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-2">
             {resource.highlights.map((h) => (
               <li
                 key={h}

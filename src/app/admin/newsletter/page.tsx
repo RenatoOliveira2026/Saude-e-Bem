@@ -68,8 +68,8 @@ export default async function AdminNewsletterPage({
           </Button>
         }
       />
-      <main className="flex-1 space-y-8 p-6 lg:p-8">
-        <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+      <main className="flex-1 space-y-8 p-4 sm:p-6 lg:p-8">
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4">
           <AdminStatCard
             label="Total de inscritos"
             value={stats.total}
@@ -114,7 +114,7 @@ export default async function AdminNewsletterPage({
           <h2 className="mb-4 font-heading text-xl font-semibold text-forest">
             Inscritos por origem
           </h2>
-          <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
             {NEWSLETTER_SOURCES.map((source) => (
               <div
                 key={source}

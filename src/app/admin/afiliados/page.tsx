@@ -49,8 +49,8 @@ export default async function AdminAfiliadosPage() {
           </Button>
         }
       />
-      <main className="flex-1 space-y-8 p-6 lg:p-8">
-        <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-5">
+      <main className="flex-1 space-y-8 p-4 sm:p-6 lg:p-8">
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-5">
           <AdminStatCard
             label="Total de cliques"
             value={report.totalClicks}
@@ -91,7 +91,7 @@ export default async function AdminAfiliadosPage() {
           </p>
         </section>
 
-        <section className="grid gap-8 lg:grid-cols-2">
+        <section className="grid grid-cols-1 gap-8 lg:grid-cols-2">
           <div>
             <h2 className="mb-4 font-heading text-xl font-semibold text-forest">
               Ranking de produtos

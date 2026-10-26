@@ -83,8 +83,8 @@ export default async function AdminMarketingPage() {
         email={email}
         role={role}
       />
-      <main className="flex-1 space-y-8 p-6 lg:p-8">
-        <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+      <main className="flex-1 space-y-8 p-4 sm:p-6 lg:p-8">
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4">
           <AdminStatCard
             label="Inscritos na newsletter"
             value={show(newsletter?.active)}
@@ -119,7 +119,7 @@ export default async function AdminMarketingPage() {
           <h2 className="font-heading text-lg font-semibold text-forest">
             Ferramentas de marketing
           </h2>
-          <div className="mt-4 grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
+          <div className="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3">
             {TOOLS.map((tool) => (
               <Link
                 key={tool.href}

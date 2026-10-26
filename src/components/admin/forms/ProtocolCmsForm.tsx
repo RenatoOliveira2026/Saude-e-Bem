@@ -88,7 +88,7 @@ export function ProtocolCmsForm({ protocol }: ProtocolCmsFormProps) {
       {protocol && <input type="hidden" name="id" value={protocol.id} />}
 
       <div className="mx-auto max-w-3xl space-y-6">
-        <div className="grid gap-6 lg:grid-cols-2">
+        <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
           <Input label="Título" name="title" value={title} onChange={(e) => setTitle(e.target.value)} required />
           <Input label="Slug" name="slug" defaultValue={protocol?.slug} hint="Vazio = automático" />
         </div>
@@ -111,7 +111,7 @@ export function ProtocolCmsForm({ protocol }: ProtocolCmsFormProps) {
           imageFolder="protocolos"
         />
 
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
           <Select label="Categoria" name="category" value={category} onChange={(e) => setCategory(e.target.value)} options={categoryOptions} />
           <Input label="Duração" name="duration" value={duration} onChange={(e) => setDuration(e.target.value)} />
           <Select

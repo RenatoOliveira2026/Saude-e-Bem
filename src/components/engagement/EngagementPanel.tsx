@@ -31,7 +31,7 @@ export function EngagementPanel({ engagement }: EngagementPanelProps) {
       </div>
 
       {engagement.reminders.length > 0 && (
-        <div className="grid gap-3 md:grid-cols-2">
+        <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
           {engagement.reminders.slice(0, 4).map((r) => (
             <Card key={r.id} className="p-4">
               <p className="text-xs font-medium uppercase tracking-wide text-gold">
@@ -56,7 +56,7 @@ export function EngagementPanel({ engagement }: EngagementPanelProps) {
         </div>
       )}
 
-      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
         {engagement.weeklyProgress.map((item) => (
           <Card key={item.label} className="p-4 text-center">
             <p className="text-2xl font-semibold text-forest">

@@ -45,7 +45,7 @@ export function ClubIntroSection() {
 export function ClubBenefitsSplit() {
   return (
     <Section background="default">
-      <div className="grid gap-8 lg:grid-cols-2">
+      <div className="grid grid-cols-1 gap-8 lg:grid-cols-2">
         <Card variant="muted" padding="lg">
           <Badge variant="sage" className="mb-4 w-fit">
             Plano Gratuito
@@ -161,7 +161,7 @@ export function ClubMembershipPlans({ plans }: ClubPublicSectionsProps) {
             : "Estrutura pronta — cobrança será ativada após validação final do pagamento."}
         </p>
       </div>
-      <div className="mx-auto grid max-w-4xl gap-6 md:grid-cols-3">
+      <div className="mx-auto grid grid-cols-1 max-w-4xl gap-6 md:grid-cols-3">
         {plans.map((plan) => {
           const isFree = plan.billingCycle === "free";
           const isAnnual = plan.billingCycle === "annual";

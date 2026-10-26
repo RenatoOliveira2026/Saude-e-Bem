@@ -18,7 +18,7 @@ export function ThankYouRecommendations({ interest }: ThankYouRecommendationsPro
         <p className="mx-auto mt-3 max-w-lg text-center text-sm text-muted">
           Enquanto preparamos seus materiais, explore conteúdos alinhados ao seu interesse.
         </p>
-        <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {items.map((item) => (
             <Link key={item.href} href={item.href} className="group block h-full">
               <Card variant="default" hover padding="lg" className="h-full">

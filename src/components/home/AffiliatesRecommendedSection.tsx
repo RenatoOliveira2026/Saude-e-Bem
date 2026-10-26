@@ -22,7 +22,7 @@ export function AffiliatesRecommendedSection({
         title="Recursos recomendados para sua jornada"
         description="Ferramentas e produtos que complementam hábitos saudáveis — curadoria discreta, sem pressão de compra."
         align="center"
-        className="mb-14"
+        className="mb-8"
       />
 
       <AffiliateCardGrid

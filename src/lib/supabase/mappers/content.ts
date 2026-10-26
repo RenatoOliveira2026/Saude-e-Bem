@@ -1,4 +1,5 @@
 import type { IconName } from "@/components/icons";
+import { resolveCoverPhoto } from "@/lib/content/cover-photos";
 import {
   blocksToPlainParagraphs,
   parseContentBlocks,
@@ -106,7 +107,7 @@ export function mapProtocolRow(row: ProtocolRow): Protocol {
     featured: row.featured,
     tag: row.tag ?? undefined,
     participants: row.participants,
-    coverImageUrl: row.cover_image_url ?? undefined,
+    coverImageUrl: resolveCoverPhoto("protocol", row.slug, row.cover_image_url),
     contentBlocks,
     ...mapSeoFields(row),
   };
@@ -132,7 +133,7 @@ export function mapEbookRow(row: EbookRow): LibraryResource {
     isPremium: row.is_premium,
     downloads: row.downloads,
     featured: row.featured,
-    coverImageUrl: row.cover_image_url ?? undefined,
+    coverImageUrl: resolveCoverPhoto("ebook", row.slug, row.cover_image_url),
     pdfUrl: row.pdf_url ?? undefined,
     contentBlocks,
     ...mapSeoFields(row),

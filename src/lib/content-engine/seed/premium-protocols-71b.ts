@@ -1,4 +1,5 @@
 import { parseContentBlocks } from "@/lib/admin/cms/content-blocks";
+import { resolveCoverPhoto } from "@/lib/content/cover-photos";
 import generated from "./premium-protocols-71b.generated.json";
 import type { ContentCategory, ContentLevel } from "@/lib/data/types";
 
@@ -48,7 +49,7 @@ export function mapPremiumProtocolToMock(protocol: PremiumProtocolSeedRow, index
     featured: protocol.featured,
     tag: protocol.tag,
     participants: protocol.participants,
-    coverImageUrl: protocol.cover_image_url,
+    coverImageUrl: resolveCoverPhoto("protocol", protocol.slug, protocol.cover_image_url),
     contentBlocks: parseContentBlocks(protocol.content),
     seoTitle: protocol.seo_title,
     seoDescription: protocol.seo_description,

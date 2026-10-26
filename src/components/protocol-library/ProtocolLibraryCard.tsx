@@ -39,15 +39,16 @@ export function ProtocolLibraryCard({
       padding={compact ? "md" : "lg"}
       className={`flex h-full flex-col ${!protocol.isPremium ? "ring-1 ring-sage/30" : ""}`}
     >
-      <div className="flex items-start justify-between gap-3">
-        <ContentCover
-          src={protocol.coverImageUrl}
-          alt={protocol.title}
-          className={compact ? "h-12 w-12 shrink-0" : "h-16 w-16 shrink-0"}
-        >
-          <IconBox name={icon} size={compact ? 18 : 20} />
-        </ContentCover>
-        <div className="flex flex-wrap justify-end gap-2">
+      <ContentCover
+        src={protocol.coverImageUrl}
+        alt={protocol.title}
+        aspect="video"
+        className={compact ? "mb-3 w-full" : "mb-4 w-full"}
+      >
+        <IconBox name={icon} size={compact ? 20 : 24} />
+      </ContentCover>
+      <div className="flex items-start gap-3">
+        <div className="flex flex-wrap gap-2">
           {!protocol.isPremium && (
             <Badge variant="forest" className="shrink-0">
               Gratuito

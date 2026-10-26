@@ -1,4 +1,5 @@
 import generated from "./premium-protocols-library-71b.generated.json";
+import { resolveCoverPhoto } from "@/lib/content/cover-photos";
 import type { LibraryItem } from "@/lib/intelligent-library/library.types";
 
 type LibrarySeedRow = (typeof generated)[number];
@@ -16,7 +17,7 @@ export function mapPremiumLibrarySeedToItem(seed: LibrarySeedRow): LibraryItem {
     category: seed.category_label,
     type: "protocolo",
     isPremium: seed.is_premium,
-    image: seed.image_url,
+    image: resolveCoverPhoto("library", seed.slug, seed.image_url),
     estimatedReadTime: seed.estimated_read_time,
     featured: seed.featured,
     seoTitle: seed.seo_title,

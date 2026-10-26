@@ -15,6 +15,10 @@ import { resolveArticleCoverUrl } from "@/lib/blog/resolve-article-cover";
 import { routes } from "@/lib/routes";
 import Link from "next/link";
 
+function gridCols(count: number): string {
+  return count === 2 ? "grid gap-6 md:grid-cols-2" : "grid gap-6 md:grid-cols-3";
+}
+
 interface FeaturedHighlightSectionProps {
   articles: BlogArticle[];
   protocols: Protocol[];
@@ -26,7 +30,8 @@ export function FeaturedHighlightSection({
   protocols,
   ebooks,
 }: FeaturedHighlightSectionProps) {
-  const hasAny = articles.length > 0 || protocols.length > 0 || ebooks.length > 0;
+  // Linhas com um único card deixam dois terços vazios; só mostramos a partir de dois.
+  const hasAny = articles.length > 0 || protocols.length > 1 || ebooks.length > 1;
   if (!hasAny) return null;
 
   return (
@@ -37,10 +42,10 @@ export function FeaturedHighlightSection({
         description="Seleção editorial atualizada pela equipe Saúde & Bem — o que está em evidência agora."
         actionLabel="Ver blog"
         actionHref={routes.blog}
-        className="mb-14"
+        className="mb-8"
       />
 
-      <div className="space-y-14">
+      <div className="space-y-10">
         {articles.length > 0 && (
           <div>
             <h3 className="mb-6 font-heading text-sm font-semibold uppercase tracking-wider text-sage">
@@ -71,13 +76,13 @@ export function FeaturedHighlightSection({
           </div>
         )}
 
-        {protocols.length > 0 && (
+        {protocols.length > 1 && (
           <div>
             <h3 className="mb-6 font-heading text-sm font-semibold uppercase tracking-wider text-sage">
               Protocolos
             </h3>
-            <div className="grid gap-6 md:grid-cols-3">
-              {protocols.map((protocol) => (
+            <div className={gridCols(protocols.length)}>
+              {protocols.slice(0, 3).map((protocol) => (
                 <Link key={protocol.id} href={routes.protocolo(protocol.slug)} className="group block">
                   <Card variant="default" hover padding="lg" className="h-full bg-surface">
                     <ContentCover src={protocol.coverImageUrl} alt={protocol.title} aspect="video" className="mb-4">
@@ -99,20 +104,20 @@ export function FeaturedHighlightSection({
           </div>
         )}
 
-        {ebooks.length > 0 && (
+        {ebooks.length > 1 && (
           <div>
             <h3 className="mb-6 font-heading text-sm font-semibold uppercase tracking-wider text-sage">
               Biblioteca
             </h3>
-            <div className="grid gap-6 md:grid-cols-3">
-              {ebooks.map((resource) => (
+            <div className={gridCols(ebooks.length)}>
+              {ebooks.slice(0, 3).map((resource) => (
                 <Link
                   key={resource.id}
                   href={routes.bibliotecaItem(resource.slug)}
                   className="group block"
                 >
                   <Card variant="default" hover padding="lg" className="h-full bg-surface">
-                    <ContentCover src={resource.coverImageUrl} alt={resource.title} className="mb-4 h-36">
+                    <ContentCover src={resource.coverImageUrl} alt={resource.title} aspect="video" className="mb-4">
                       <IconBox name={resource.icon} size={24} className="bg-surface shadow-soft" />
                     </ContentCover>
                     <Badge variant="gold" className="mb-2 w-fit text-[10px]">

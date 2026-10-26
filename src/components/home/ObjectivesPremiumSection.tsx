@@ -13,7 +13,7 @@ export function ObjectivesPremiumSection() {
         title="Escolha seu objetivo"
         description="Cada meta conecta você a protocolos, artigos e materiais selecionados para a sua jornada."
         align="center"
-        className="mb-14"
+        className="mb-8"
       />
 
       <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">

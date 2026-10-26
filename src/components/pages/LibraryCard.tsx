@@ -15,7 +15,7 @@ import type { LibraryResource } from "@/lib/data/types";
 export function LibraryCard({ resource }: { resource: LibraryResource }) {
   return (
     <Card variant="default" hover padding="lg" className="flex h-full flex-col">
-      <ContentCover src={resource.coverImageUrl} alt={resource.title} className="mb-4 h-20">
+      <ContentCover src={resource.coverImageUrl} alt={resource.title} aspect="video" className="mb-4 w-full">
         <IconBox name={resource.icon} size={22} />
       </ContentCover>
       <div className="flex flex-wrap items-center gap-2">

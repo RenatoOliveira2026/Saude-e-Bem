@@ -27,7 +27,7 @@ export function ProtocolsPremiumSection({ protocols }: ProtocolsPremiumSectionPr
         description="Planos estruturados, passo a passo, com base científica — do iniciante ao avançado."
         actionLabel="Ver todos"
         actionHref={routes.protocolos}
-        className="mb-14"
+        className="mb-8"
       />
 
       {protocols.length === 0 ? (

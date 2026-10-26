@@ -1,4 +1,5 @@
 import type { LibraryItem } from "@/lib/intelligent-library/library.types";
+import { resolveCoverPhoto } from "@/lib/content/cover-photos";
 import type { MarketplaceItem } from "@/lib/marketplace/marketplace.types";
 import type { ScoreCriterionId } from "@/lib/recommendations/recommendation-types";
 import type { ContentEngineMarketplaceFulfillment } from "./constants";
@@ -22,7 +23,7 @@ export function mapSeedToLibraryItem(seed: LibrarySeed): LibraryItem {
     category: seed.category_label,
     type: seed.item_type as LibraryItem["type"],
     isPremium: seed.is_premium,
-    image: seed.image_url,
+    image: resolveCoverPhoto("library", seed.slug, seed.image_url),
     estimatedReadTime: seed.estimated_read_time,
     featured: seed.featured,
     seoTitle: seed.seo_title,

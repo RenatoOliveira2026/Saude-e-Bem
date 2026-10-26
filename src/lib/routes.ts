@@ -125,7 +125,7 @@ export const authNavLoggedOut = [
 export const authNavLoggedIn = [
   { label: "Minha Jornada", href: routes.minhaJornada },
   { label: "Minha Saúde", href: routes.minhaSaude },
-  { label: "Clube", href: routes.clubeDashboard },
+  { label: "Meu Clube", href: routes.clubeDashboard },
   { label: "Perfil", href: routes.perfil },
 ] as const;
 

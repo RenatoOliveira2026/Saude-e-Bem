@@ -16,7 +16,7 @@ export function HeroSection() {
         aria-hidden="true"
       />
 
-      <Container className="relative py-16 md:py-24 lg:py-32">
+      <Container className="relative py-10 md:py-14 lg:py-20">
         <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
           <div className="max-w-xl lg:max-w-none">
             <Badge variant="gold" className="mb-6">
@@ -25,14 +25,17 @@ export function HeroSection() {
 
             <h1 className="font-heading text-4xl leading-[1.1] text-forest text-balance sm:text-5xl lg:text-[3.25rem]">
               Sua jornada para uma vida com{" "}
-              <span className="relative inline-block text-sage">
-                saúde
-                <span
-                  className="absolute -bottom-1 left-0 h-1 w-full rounded-full bg-gold/70"
-                  aria-hidden="true"
-                />
-              </span>
-              , vitalidade e longevidade
+              <span className="whitespace-nowrap">
+                <span className="relative inline-block text-sage">
+                  saúde
+                  <span
+                    className="absolute -bottom-1 left-0 h-1 w-full rounded-full bg-gold/70"
+                    aria-hidden="true"
+                  />
+                </span>
+                ,
+              </span>{" "}
+              vitalidade e longevidade
             </h1>
 
             <p className="mt-6 text-lg leading-relaxed text-muted text-pretty md:text-xl">
@@ -133,7 +136,7 @@ export function HeroSection() {
           </div>
         </div>
 
-        <div className="mt-16 grid grid-cols-1 gap-8 border-t border-border pt-12 sm:grid-cols-3 md:mt-20">
+        <div className="mt-10 grid grid-cols-1 gap-6 border-t border-border pt-8 sm:grid-cols-3 md:mt-12">
           {heroStats.map((stat) => (
             <div key={stat.label} className="text-center sm:text-left">
               <p className="font-heading text-3xl font-bold text-forest md:text-4xl">

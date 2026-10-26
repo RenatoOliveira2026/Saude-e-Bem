@@ -137,10 +137,6 @@ export default async function ProtocoloDetailPage({ params }: PageProps) {
             : [
                 { icon: "clock", label: protocol.duration },
                 { icon: "activity", label: protocol.level },
-                {
-                  icon: "users",
-                  label: `${protocol.participants.toLocaleString("pt-BR")} participantes`,
-                },
               ]
         }
         cta={

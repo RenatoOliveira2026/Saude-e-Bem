@@ -35,11 +35,10 @@ export function FeaturedProtocolBanner({ protocol }: { protocol: Protocol }) {
             </Button>
           </div>
         </div>
-        <div className="grid grid-cols-3 gap-4 rounded-xl bg-sage-muted/50 p-6 md:p-8">
+        <div className="grid grid-cols-2 gap-4 rounded-xl bg-sage-muted/50 p-6 md:p-8">
           {[
             { icon: "clock" as const, value: protocol.duration, label: "Tempo" },
             { icon: "activity" as const, value: protocol.level, label: "Nível" },
-            { icon: "users" as const, value: protocol.participants.toLocaleString("pt-BR"), label: "Participantes" },
           ].map((stat) => (
             <div key={stat.label} className="text-center">
               <Icon name={stat.icon} size={20} className="mx-auto text-sage" />
@@ -65,17 +64,16 @@ export function ProtocolCard({ protocol }: { protocol: Protocol }) {
 
   return (
     <Card variant="default" hover padding="lg" className="flex h-full flex-col">
-      <div className="flex items-start justify-between gap-3">
-        <ContentCover
-          src={protocol.coverImageUrl}
-          alt={protocol.title}
-          className="h-16 w-16 shrink-0"
-        >
-          <IconBox name={icon} size={20} />
-        </ContentCover>
-        <div className="flex flex-wrap justify-end gap-2">
-          <ContentBadge variant={protocol.isPremium ? "premium" : "free"} />
-        </div>
+      <ContentCover
+        src={protocol.coverImageUrl}
+        alt={protocol.title}
+        aspect="video"
+        className="mb-4 w-full"
+      >
+        <IconBox name={icon} size={24} />
+      </ContentCover>
+      <div className="flex flex-wrap gap-2">
+        <ContentBadge variant={protocol.isPremium ? "premium" : "free"} />
       </div>
       <CardHeader className="mb-0 mt-4 flex-1">
         <CardTitle className="text-lg">{protocol.title}</CardTitle>

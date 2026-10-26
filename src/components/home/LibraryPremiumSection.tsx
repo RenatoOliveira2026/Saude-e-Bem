@@ -26,7 +26,7 @@ export function LibraryPremiumSection({ resources }: LibraryPremiumSectionProps)
         description="Guias, checklists e materiais curados para você começar hoje — sem custo."
         actionLabel="Explorar biblioteca"
         actionHref={routes.biblioteca}
-        className="mb-14"
+        className="mb-8"
       />
 
       {resources.length === 0 ? (

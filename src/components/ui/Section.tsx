@@ -26,9 +26,9 @@ export function Section({
   ...props
 }: SectionProps) {
   const spacingStyles = {
-    compact: "py-12 md:py-16",
+    compact: "py-8 md:py-10",
     default: "py-[var(--section-py)]",
-    spacious: "py-24 md:py-32",
+    spacious: "py-12 md:py-16",
   };
 
   return (
@@ -60,7 +60,7 @@ export function SectionHeader({
   return (
     <div
       className={cn(
-        "mb-12 md:mb-16 max-w-2xl",
+        "mb-8 md:mb-10 max-w-2xl",
         align === "center" && "mx-auto text-center",
         className,
       )}

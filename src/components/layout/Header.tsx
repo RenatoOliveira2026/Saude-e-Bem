@@ -95,20 +95,19 @@ export function Header({ user }: HeaderProps) {
           <div className="hidden items-center gap-2 xl:flex">
             {isLoggedIn ? (
               <>
-                {authNavLoggedIn.map((item) => (
-                  <Link
-                    key={item.href}
-                    href={item.href}
-                    className={cn(
-                      "rounded-full px-3 py-2 font-heading text-sm font-medium transition-colors",
-                      isActive(item.href)
-                        ? "bg-sage-muted text-forest"
-                        : "text-graphite hover:bg-sage-muted/60 hover:text-forest",
-                    )}
-                  >
-                    {item.label}
-                  </Link>
-                ))}
+                {/* No desktop, as páginas da conta ficam reunidas em "Minha área"
+                    para o menu caber em uma linha. A lista completa está no menu mobile. */}
+                <Link
+                  href={routes.minhaJornada}
+                  className={cn(
+                    "whitespace-nowrap rounded-full px-3 py-2 font-heading text-sm font-medium transition-colors",
+                    authNavLoggedIn.some((item) => isActive(item.href))
+                      ? "bg-sage-muted text-forest"
+                      : "text-graphite hover:bg-sage-muted/60 hover:text-forest",
+                  )}
+                >
+                  Minha área
+                </Link>
                 <LogoutButton variant="outline" size="sm" />
               </>
             ) : (

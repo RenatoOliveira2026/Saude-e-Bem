@@ -1,4 +1,5 @@
 import type { LibraryItem } from "@/lib/intelligent-library/library.types";
+import { resolveCoverPhoto } from "@/lib/content/cover-photos";
 import type { LibraryItemRow } from "@/lib/supabase/types";
 
 export function mapLibraryItemRow(row: LibraryItemRow): LibraryItem {
@@ -16,7 +17,7 @@ export function mapLibraryItemRow(row: LibraryItemRow): LibraryItem {
     category: row.category_label,
     type: row.item_type as LibraryItem["type"],
     isPremium: row.is_premium,
-    image: row.image_url ?? row.og_image_url ?? undefined,
+    image: resolveCoverPhoto("library", row.slug, row.image_url ?? row.og_image_url),
     estimatedReadTime: row.estimated_read_time,
     featured: row.featured,
     seoTitle: row.seo_title ?? undefined,

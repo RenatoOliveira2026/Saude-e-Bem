@@ -6,6 +6,8 @@ export type AuthErrorCode =
   | "weak_password"
   | "invalid_email"
   | "network"
+  | "email_send_failed"
+  | "rate_limit"
   | "unknown";
 
 export type TranslatedAuthError = {
@@ -60,6 +62,30 @@ export function translateAuthError(error: AuthErrorLike | string): TranslatedAut
     return {
       code: "user_not_found",
       message: "Não encontramos uma conta com este e-mail. Cadastre-se ou verifique o endereço digitado.",
+    };
+  }
+
+  if (
+    lower.includes("error sending") ||
+    lower.includes("sending recovery email") ||
+    lower.includes("sending confirmation email") ||
+    lower.includes("sending magic link")
+  ) {
+    return {
+      code: "email_send_failed",
+      message:
+        "Não conseguimos enviar o e-mail agora. Tente novamente em alguns minutos ou fale com a gente pelo WhatsApp.",
+    };
+  }
+
+  if (
+    code === "over_email_send_rate_limit" ||
+    lower.includes("email rate limit") ||
+    lower.includes("for security purposes, you can only request")
+  ) {
+    return {
+      code: "rate_limit",
+      message: "Muitas tentativas seguidas. Aguarde um minuto e tente de novo.",
     };
   }
 

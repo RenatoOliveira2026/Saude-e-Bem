@@ -134,6 +134,11 @@ html[data-font-scale="xlarge"] {
   }
 }
 
+/* Links para âncoras (#etapas) param abaixo do cabeçalho fixo. */
+html {
+  scroll-padding-top: 6.5rem;
+}
+
 body {
   background-color: var(--background);
   color: var(--foreground);

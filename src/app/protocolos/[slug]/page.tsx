@@ -142,7 +142,8 @@ export default async function ProtocoloDetailPage({ params }: PageProps) {
         cta={
           protocol.isPremium
             ? undefined
-            : { label: "Iniciar protocolo", href: routes.protocolo(slug) }
+            : // Leva às etapas logo abaixo (antes apontava para a própria página e parecia não fazer nada).
+              { label: "Iniciar protocolo", href: `${routes.protocolo(slug)}#etapas` }
         }
       />
 
@@ -201,7 +202,7 @@ export default async function ProtocoloDetailPage({ params }: PageProps) {
         </Container>
       </Section>
 
-      <Section background="white">
+      <Section background="white" id="etapas">
         <Container size="md">
           <h2 className="font-heading text-2xl text-forest">Etapas do protocolo</h2>
           <div className="mt-8 space-y-4">

@@ -2,6 +2,7 @@
 
 import { LogoutButton } from "@/components/auth/LogoutButton";
 import { LogoHeader } from "@/components/brand/Logo";
+import { AccountMenu } from "./AccountMenu";
 import { FontSizeControl } from "@/components/layout/FontSizeControl";
 import { Button } from "@/components/ui/Button";
 import { cn } from "@/lib/cn";
@@ -96,19 +97,8 @@ export function Header({ user, isAdmin = false }: HeaderProps) {
           <div className="hidden items-center gap-2 xl:flex">
             {isLoggedIn ? (
               <>
-                {/* No desktop, as páginas da conta ficam reunidas em "Minha área"
-                    para o menu caber em uma linha. A lista completa está no menu mobile. */}
-                <Link
-                  href={routes.minhaJornada}
-                  className={cn(
-                    "whitespace-nowrap rounded-full px-3 py-2 font-heading text-sm font-medium transition-colors",
-                    authNavLoggedIn.some((item) => isActive(item.href))
-                      ? "bg-sage-muted text-forest"
-                      : "text-graphite hover:bg-sage-muted/60 hover:text-forest",
-                  )}
-                >
-                  Minha área
-                </Link>
+                {/* No desktop, as páginas da conta ficam numa lista que abre em "Minha área". */}
+                <AccountMenu />
                 {isAdmin && (
                   <Link
                     href={adminRoutes.root}

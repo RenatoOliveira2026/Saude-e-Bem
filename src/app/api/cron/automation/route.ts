@@ -1,24 +1,15 @@
 import { processPendingAutomationSteps } from "@/lib/email-automation";
+import { isCronAuthorized } from "@/lib/cron/auth";
 import { NextResponse } from "next/server";
 
 function getAutomationCronSecret(): string | null {
   return process.env.LEAD_AUTOMATION_CRON_SECRET?.trim() || null;
 }
 
-export async function POST(request: Request) {
-  const secret = getAutomationCronSecret();
-  const authHeader = request.headers.get("authorization");
-  const bearer = authHeader?.startsWith("Bearer ") ? authHeader.slice(7) : null;
-  const querySecret = new URL(request.url).searchParams.get("secret");
+export const dynamic = "force-dynamic";
 
-  if (!secret) {
-    return NextResponse.json(
-      { error: "LEAD_AUTOMATION_CRON_SECRET não configurado." },
-      { status: 503 },
-    );
-  }
-
-  if (bearer !== secret && querySecret !== secret) {
+async function handle(request: Request) {
+  if (!isCronAuthorized(request, { extraSecrets: [getAutomationCronSecret()] })) {
     return NextResponse.json({ error: "Não autorizado." }, { status: 401 });
   }
 
@@ -31,9 +22,5 @@ export async function POST(request: Request) {
   }
 }
 
-export async function GET() {
-  return NextResponse.json({
-    ok: true,
-    message: "Cron de automação — use POST com LEAD_AUTOMATION_CRON_SECRET.",
-  });
-}
+export const GET = handle;
+export const POST = handle;

@@ -59,6 +59,10 @@ export async function assertUserCanSubscribe(
   userId: string,
   billingPlanId: CheckoutPlanId,
 ): Promise<void> {
+  // Libera nova compra de quem tinha plano vencido (ex.: Pix de 30 dias).
+  const { expireDueSubscriptionsSafely } = await import("./services/subscription-lifecycle.service");
+  await expireDueSubscriptionsSafely();
+
   if (await userHasActiveMembershipForPlan(admin, userId, billingPlanId)) {
     throw new Error(ACTIVE_MEMBERSHIP_PLAN_CONFLICT_MESSAGE);
   }

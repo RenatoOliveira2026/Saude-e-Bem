@@ -91,7 +91,7 @@ export function SubscriptionDashboard({ data }: SubscriptionDashboardProps) {
         </Card>
         <Card className="p-5">
           <p className="text-xs uppercase tracking-wide text-muted-light">
-            Próxima renovação
+            {membership.subscription?.autoRenew ? "Próxima renovação" : "Válido até"}
           </p>
           <p className="mt-1 font-heading text-2xl text-forest">
             {data.nextRenewal

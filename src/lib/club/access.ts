@@ -4,6 +4,7 @@ import { routes } from "@/lib/routes";
 import { createClient } from "@/lib/supabase/server";
 import { isSupabaseConfigured } from "@/lib/supabase/config";
 import type { SubscriptionRow } from "@/lib/supabase/types";
+import { expireDueSubscriptionsSafely } from "@/lib/payments/services/subscription-lifecycle.service";
 import {
   isPremiumPlan,
   isPremiumUser,
@@ -67,10 +68,12 @@ function buildMembership(
     (!subscription.currentPeriodEnd ||
       new Date(subscription.currentPeriodEnd) > new Date());
 
-  const isPremium =
-    Boolean(activeFromSubscription) ||
-    isPremiumPlan(profilePlan) ||
-    profile?.membership_tier === "premium";
+  // Com assinatura registrada, quem manda é o período pago dela: o perfil pode
+  // ainda dizer "premium" se a expiração não rodou. Sem assinatura (acesso dado
+  // manualmente ou administrador), vale o perfil.
+  const isPremium = subscription
+    ? Boolean(activeFromSubscription) || profilePlan === "admin"
+    : isPremiumPlan(profilePlan) || profile?.membership_tier === "premium";
 
   return {
     plan: isPremium ? "premium" : "free",
@@ -78,7 +81,14 @@ function buildMembership(
     isPremium,
     subscription,
     expiresAt: subscription?.currentPeriodEnd ?? null,
-    status: subscription?.status ?? (isPremium ? "active" : "none"),
+    status: subscription
+      ? (subscription.status === "active" || subscription.status === "trialing") &&
+        !activeFromSubscription
+        ? "expired"
+        : subscription.status
+      : isPremium
+        ? "active"
+        : "none",
     provider: subscription?.provider ?? null,
   };
 }
@@ -117,6 +127,8 @@ export async function getClubMembership(userId: string): Promise<ClubMembership>
       provider: null,
     };
   }
+
+  await expireDueSubscriptionsSafely();
 
   const supabase = await createClient();
   const [subscriptionResult, profileResult] = await Promise.all([

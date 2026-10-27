@@ -1,34 +1,18 @@
 import { reconcilePendingPayments } from "@/lib/payments/mercadopago/reconcile";
-import { getPaymentsCronSecret } from "@/lib/payments/config";
+import { isCronAuthorized } from "@/lib/cron/auth";
 import { NextResponse } from "next/server";
 
-function isAuthorized(request: Request): boolean {
-  const secret = getPaymentsCronSecret();
-  const serviceRole = process.env.SUPABASE_SERVICE_ROLE_KEY?.trim();
-  const authHeader = request.headers.get("authorization");
-  const bearer = authHeader?.startsWith("Bearer ")
-    ? authHeader.slice(7)
-    : null;
-  const querySecret = new URL(request.url).searchParams.get("secret");
-
-  if (secret && (bearer === secret || querySecret === secret)) {
-    return true;
-  }
-  if (serviceRole && bearer === serviceRole) {
-    return true;
-  }
-  return false;
-}
-
 /** Cron — reconcilia pagamentos pending com PIX aprovado no MP (Fase 8.5). */
-export async function POST(request: Request) {
-  if (!isAuthorized(request)) {
+export const dynamic = "force-dynamic";
+
+async function handle(request: Request) {
+  if (!isCronAuthorized(request, { allowServiceRole: true })) {
     return NextResponse.json({ error: "Não autorizado." }, { status: 401 });
   }
 
   let limit = 25;
   try {
-    const body = await request.json();
+    const body = request.method === "POST" ? await request.json() : null;
     if (typeof body?.limit === "number") limit = body.limit;
   } catch {
     // corpo vazio
@@ -51,10 +35,5 @@ export async function POST(request: Request) {
   }
 }
 
-export async function GET() {
-  return NextResponse.json({
-    ok: true,
-    message:
-      "Cron reconcile pending — POST com PAYMENTS_CRON_SECRET ou SUPABASE_SERVICE_ROLE_KEY.",
-  });
-}
+export const GET = handle;
+export const POST = handle;

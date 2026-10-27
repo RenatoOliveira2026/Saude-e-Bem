@@ -111,7 +111,8 @@ export function ClubDashboard({ data }: ClubDashboardProps) {
             </p>
             {membership.isPremium && data.nextRenewal && (
               <p className="mt-1 text-sm text-muted">
-                Próxima renovação: {formatSubscriptionDate(data.nextRenewal)}
+                {membership.subscription?.autoRenew ? "Próxima renovação" : "Válido até"}:{" "}
+                {formatSubscriptionDate(data.nextRenewal)}
               </p>
             )}
           </div>

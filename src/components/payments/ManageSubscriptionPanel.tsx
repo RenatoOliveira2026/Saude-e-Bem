@@ -91,7 +91,7 @@ export function ManageSubscriptionPanel({ membership, activePlan }: ManageSubscr
           <p className="mt-1 text-sm text-muted">
             {isAnnual
               ? `Plano mensal por ${formatPlanPriceLabel(otherPlan)}. O novo período começa quando o atual terminar.`
-              : `${formatPlanPriceLabel(otherPlan)}${otherPlan.savingsLabel ? ` — ${otherPlan.savingsLabel.toLowerCase()}` : ""}. Os dias que você já pagou continuam valendo.`}
+              : `${formatPlanPriceLabel(otherPlan)}${otherPlan.savingsLabel ? ` — ${otherPlan.savingsLabel.charAt(0).toLowerCase()}${otherPlan.savingsLabel.slice(1)}` : ""}. Os dias que você já pagou continuam valendo.`}
           </p>
           <Button href={checkoutHref(otherPlan)} variant="outline" size="sm" className="mt-3">
             {isAnnual ? "Trocar para o mensal" : "Mudar para o anual"}
@@ -99,20 +99,13 @@ export function ManageSubscriptionPanel({ membership, activePlan }: ManageSubscr
         </div>
       </div>
 
-      {subscription.autoRenew || subscription.cancelAtPeriodEnd ? (
-        <div className="mt-4">
-          <CancelSubscriptionButton
-            cancelAtPeriodEnd={subscription.cancelAtPeriodEnd}
-            expiresAt={membership.expiresAt}
-            autoRenew={subscription.autoRenew}
-          />
-        </div>
-      ) : (
-        <p className="mt-4 text-xs text-muted">
-          Não há cobrança automática neste plano, então não é preciso cancelar: o acesso
-          termina {until ? `em ${until}` : "no fim do período"} se você não renovar.
-        </p>
-      )}
+      <div className="mt-4">
+        <CancelSubscriptionButton
+          cancelAtPeriodEnd={subscription.cancelAtPeriodEnd}
+          expiresAt={membership.expiresAt}
+          autoRenew={subscription.autoRenew}
+        />
+      </div>
     </Card>
   );
 }

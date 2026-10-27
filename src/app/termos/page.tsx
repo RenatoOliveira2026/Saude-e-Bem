@@ -11,7 +11,7 @@ export const metadata: Metadata = buildContentMetadata({
   path: routes.termos,
 });
 
-const UPDATED_AT = "1 de junho de 2026";
+const UPDATED_AT = "27 de outubro de 2026";
 const CONTACT_EMAIL = "contato@saudeebem.com.br";
 
 export default function TermosPage() {
@@ -49,9 +49,9 @@ export default function TermosPage() {
 
       <LegalSection title="3. Assinatura Premium">
         <p>
-          Planos pagos (mensal, trimestral ou anual) concedem acesso a conteúdos e funcionalidades
-          marcados como Premium, conforme descrito em{" "}
-          <Link href={routes.assinar}>/assinar</Link>.
+          Planos pagos (mensal ou anual) concedem acesso a conteúdos e funcionalidades marcados
+          como Premium, conforme descrito na{" "}
+          <Link href={routes.assinar}>página de assinatura</Link>.
         </p>
         <ul>
           <li>
@@ -59,8 +59,8 @@ export default function TermosPage() {
             aplica-se aos planos com renovação automática (ex.: mensal com cartão).
           </li>
           <li>
-            Planos via PIX ou boleto podem exigir renovação manual no fim de cada período, conforme
-            indicado no checkout.
+            Planos pagos via PIX ou boleto não têm cobrança automática: valem pelo período pago
+            (30 dias no mensal, 365 dias no anual) e podem ser renovados em Minha assinatura.
           </li>
           <li>
             O acesso Premium é liberado após confirmação do pagamento pelo provedor; eventuais
@@ -73,11 +73,32 @@ export default function TermosPage() {
         </ul>
       </LegalSection>
 
-      <LegalSection title="4. Política de cancelamento">
+      <LegalSection title="4. Direito de arrependimento (7 dias)">
         <p>
-          Você pode cancelar a renovação automática da assinatura a qualquer momento, conforme as
-          opções disponíveis em <Link href={routes.minhaAssinatura}>Minha assinatura</Link> ou
-          entrando em contato conosco.
+          Conforme o artigo 49 do Código de Defesa do Consumidor, você pode desistir da
+          assinatura em até <strong>7 (sete) dias</strong> contados da contratação, ou seja, da
+          confirmação do pagamento, sem precisar justificar o motivo.
+        </p>
+        <ul>
+          <li>
+            Para desistir, envie um e-mail para{" "}
+            <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a> com o e-mail da sua conta, ou
+            fale com a gente pelo WhatsApp do site.
+          </li>
+          <li>
+            Devolvemos <strong>integralmente</strong> o valor pago, pelo mesmo meio de pagamento,
+            por meio do Mercado Pago. No cartão de crédito, o estorno pode aparecer na fatura
+            atual ou na seguinte, conforme o banco emissor.
+          </li>
+          <li>O acesso Premium é encerrado quando o reembolso é feito.</li>
+        </ul>
+      </LegalSection>
+
+      <LegalSection title="5. Política de cancelamento">
+        <p>
+          Você pode cancelar a assinatura a qualquer momento em{" "}
+          <Link href={routes.minhaAssinatura}>Minha assinatura</Link> (botão “Cancelar
+          assinatura”) ou entrando em contato conosco.
         </p>
         <ul>
           <li>
@@ -85,8 +106,8 @@ export default function TermosPage() {
             fim do período já pago.
           </li>
           <li>
-            Não há reembolso proporcional de períodos já utilizados, salvo disposição legal
-            imperativa ou política específica divulgada no momento da compra.
+            Após o prazo de 7 dias do direito de arrependimento, não há reembolso proporcional de
+            períodos já pagos, salvo disposição legal em contrário.
           </li>
           <li>
             Disputas de pagamento devem ser tratadas também junto ao Mercado Pago, quando
@@ -99,7 +120,7 @@ export default function TermosPage() {
         </p>
       </LegalSection>
 
-      <LegalSection title="5. Isenção de responsabilidade médica">
+      <LegalSection title="6. Isenção de responsabilidade médica">
         <p>
           O Saúde & Bem <strong>não substitui</strong> consulta, diagnóstico ou tratamento
           médico, nutricional ou psicológico profissional. Todo conteúdo tem caráter
@@ -124,7 +145,7 @@ export default function TermosPage() {
         </p>
       </LegalSection>
 
-      <LegalSection title="6. Uso adequado da plataforma">
+      <LegalSection title="7. Uso adequado da plataforma">
         <p>Você concorda em não:</p>
         <ul>
           <li>Publicar ou transmitir conteúdo ilegal, ofensivo ou que viole direitos de terceiros.</li>
@@ -138,7 +159,7 @@ export default function TermosPage() {
         </p>
       </LegalSection>
 
-      <LegalSection title="7. Direitos autorais do conteúdo">
+      <LegalSection title="8. Direitos autorais do conteúdo">
         <p>
           Textos, protocolos, artigos, materiais da biblioteca, identidade visual, marcas e
           demais conteúdos do Saúde & Bem são protegidos por direitos autorais e propriedade
@@ -159,7 +180,7 @@ export default function TermosPage() {
         </ul>
       </LegalSection>
 
-      <LegalSection title="8. Alterações e legislação aplicável">
+      <LegalSection title="9. Alterações e legislação aplicável">
         <p>
           Podemos atualizar estes Termos periodicamente. A data da última revisão consta no topo
           desta página. O uso continuado após alterações constitui aceitação das novas condições.
@@ -170,7 +191,7 @@ export default function TermosPage() {
         </p>
       </LegalSection>
 
-      <LegalSection title="9. Contato">
+      <LegalSection title="10. Contato">
         <p>
           Para questões sobre estes Termos:{" "}
           <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>.

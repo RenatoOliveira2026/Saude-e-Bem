@@ -3,13 +3,15 @@ import {
   processRenewalReminders,
 } from "@/lib/whatsapp/automation.service";
 import { getWhatsAppConfig } from "@/lib/whatsapp/config";
+import { isCronAuthorized } from "@/lib/cron/auth";
 import { NextResponse } from "next/server";
 
-export async function POST(request: Request) {
-  const auth = request.headers.get("authorization");
+export const dynamic = "force-dynamic";
+
+async function handle(request: Request) {
   const { cronSecret } = getWhatsAppConfig();
 
-  if (!cronSecret || auth !== `Bearer ${cronSecret}`) {
+  if (!isCronAuthorized(request, { extraSecrets: [cronSecret] })) {
     return NextResponse.json({ error: "Não autorizado." }, { status: 401 });
   }
 
@@ -29,3 +31,6 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: message }, { status: 500 });
   }
 }
+
+export const GET = handle;
+export const POST = handle;

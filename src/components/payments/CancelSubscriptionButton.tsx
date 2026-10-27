@@ -9,13 +9,14 @@ import { useState } from "react";
 interface CancelSubscriptionButtonProps {
   cancelAtPeriodEnd: boolean;
   expiresAt: string | null;
-  /** Mantido por compatibilidade; o cancelamento é sempre ao fim do período. */
+  /** Cartão com cobrança automática (muda só o texto; o cancelamento é sempre ao fim do período). */
   autoRenew?: boolean;
 }
 
 export function CancelSubscriptionButton({
   cancelAtPeriodEnd,
   expiresAt,
+  autoRenew = false,
 }: CancelSubscriptionButtonProps) {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
@@ -30,7 +31,7 @@ export function CancelSubscriptionButton({
           {expiresAt
             ? ` para ${formatSubscriptionDate(expiresAt)}`
             : " ao fim do período atual"}
-          . Você mantém acesso premium até lá.
+          . Você mantém o acesso ao Clube até lá.
         </p>
       </Card>
     );
@@ -65,9 +66,12 @@ export function CancelSubscriptionButton({
 
   return (
     <Card className="p-5">
-      <h3 className="font-heading text-lg text-forest">Cancelar a renovação</h3>
+      <h3 className="font-heading text-lg text-forest">Cancelar assinatura</h3>
       <p className="mt-2 text-sm text-muted">
-        Paramos as próximas cobranças no cartão. Você continua com acesso ao Clube
+        {autoRenew
+          ? "Paramos as próximas cobranças no cartão."
+          : "Este plano não tem cobrança automática; ao cancelar, ele apenas não será renovado."}{" "}
+        Você continua com acesso ao Clube
         {expiresAt ? ` até ${formatSubscriptionDate(expiresAt)}` : " até o fim do período já pago"}.
       </p>
       {message && (
@@ -87,12 +91,12 @@ export function CancelSubscriptionButton({
           size="sm"
           disabled={loading}
           onClick={() => {
-            if (window.confirm("Cancelar a renovação automática? Você mantém o acesso até o fim do período pago.")) {
+            if (window.confirm("Cancelar a assinatura? Você mantém o acesso até o fim do período já pago.")) {
               void handleCancel(false);
             }
           }}
         >
-          {loading ? "Processando..." : "Cancelar renovação"}
+          {loading ? "Processando..." : "Cancelar assinatura"}
         </Button>
       </div>
     </Card>

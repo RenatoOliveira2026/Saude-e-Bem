@@ -80,17 +80,28 @@ export async function assertUserCanSubscribe(
     throw new Error(ACTIVE_SUBSCRIPTION_CONFLICT_MESSAGE);
   }
 
-  const { data: pendingPayment } = await admin
+  // Tentativas anteriores que ficaram pela metade (a pessoa voltou do Mercado
+  // Pago sem pagar, ou trocou de Pix para cartão) não bloqueiam uma nova.
+  // Se a antiga for paga depois, o aviso do Mercado Pago ainda a aprova normalmente.
+  const { data: pendingRows } = await admin
     .from("payments")
-    .select("id")
+    .select("id, metadata")
     .eq("user_id", userId)
-    .eq("status", "pending")
-    .gte("created_at", new Date(Date.now() - 60 * 60 * 1000).toISOString())
-    .limit(1)
-    .maybeSingle();
+    .in("status", ["pending", "in_process"]);
 
-  if (pendingPayment) {
-    throw new Error(PENDING_PAYMENT_CONFLICT_MESSAGE);
+  const cancelledAt = new Date().toISOString();
+  for (const row of pendingRows ?? []) {
+    await admin
+      .from("payments")
+      .update({
+        status: "cancelled",
+        metadata: {
+          ...((row.metadata as Record<string, unknown> | null) ?? {}),
+          cancelled_reason: "superseded_by_new_checkout",
+          cancelled_at: cancelledAt,
+        },
+      })
+      .eq("id", row.id);
   }
 }
 

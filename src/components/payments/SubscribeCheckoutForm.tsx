@@ -220,8 +220,9 @@ export function SubscribeCheckoutForm({
             {selectedMethod === "pix" ? (
               <>
                 <strong className="font-semibold">Pagamento único via PIX.</strong>{" "}
-                O acesso Premium é liberado após a confirmação. Para renovação
-                automática, utilize cartão de crédito.
+                Depois de pagar, pode fechar a tela do Mercado Pago e voltar ao
+                site: a liberação do Premium é automática, em até 1 minuto. Para
+                renovação automática todo mês, use cartão de crédito.
               </>
             ) : (
               "Boleto libera acesso após a compensação, pelo mesmo período do plano escolhido. Para renovação automática, use cartão."

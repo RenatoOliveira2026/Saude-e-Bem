@@ -18,7 +18,12 @@ export const assinarCheckoutFaqs = [
   {
     question: "Preciso renovar manualmente no PIX?",
     answer:
-      "Sim. PIX e boleto não renovam automaticamente. Você recebe o aviso antes do fim do período e pode renovar com um novo pagamento.",
+      "Sim. PIX e boleto não renovam automaticamente. Quando quiser, é só clicar em “Renovar agora” em Minha Assinatura: os dias novos são somados ao período que você já tem.",
+  },
+  {
+    question: "Posso cancelar? E se eu me arrepender?",
+    answer:
+      "Pode cancelar quando quiser em Minha Assinatura, e o acesso continua até o fim do período pago. Se desistir em até 7 dias da compra, devolvemos o valor integral, conforme o Código de Defesa do Consumidor: é só escrever para contato@saudeebem.com.br.",
   },
   {
     question: "O que acontece após o pagamento?",

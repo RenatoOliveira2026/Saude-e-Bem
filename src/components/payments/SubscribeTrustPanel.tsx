@@ -22,7 +22,8 @@ const trustItems = [
   "Pagamento processado pelo Mercado Pago",
   "Dados protegidos — sem armazenar cartão",
   "Premium ativo logo após aprovação (PIX em minutos)",
-  "Cancele o mensal quando quiser",
+  "Cancele quando quiser",
+  "7 dias para desistir com reembolso integral",
 ] as const;
 
 export function SubscribeTrustPanel() {

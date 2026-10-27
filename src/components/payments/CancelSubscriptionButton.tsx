@@ -74,6 +74,17 @@ export function CancelSubscriptionButton({
         Você continua com acesso ao Clube
         {expiresAt ? ` até ${formatSubscriptionDate(expiresAt)}` : " até o fim do período já pago"}.
       </p>
+      <p className="mt-2 text-xs text-muted">
+        Assinou há até 7 dias? Você pode desistir e receber o valor de volta: escreva para{" "}
+        <a href="mailto:contato@saudeebem.com.br" className="underline underline-offset-2">
+          contato@saudeebem.com.br
+        </a>
+        . Veja os{" "}
+        <a href="/termos" className="underline underline-offset-2">
+          Termos de Uso
+        </a>
+        .
+      </p>
       {message && (
         <p className="mt-3 rounded-lg bg-sage-muted/40 px-4 py-3 text-sm text-forest">
           {message}

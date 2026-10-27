@@ -63,13 +63,9 @@ export async function assertUserCanSubscribe(
   const { expireDueSubscriptionsSafely } = await import("./services/subscription-lifecycle.service");
   await expireDueSubscriptionsSafely();
 
-  if (await userHasActiveMembershipForPlan(admin, userId, billingPlanId)) {
-    throw new Error(ACTIVE_MEMBERSHIP_PLAN_CONFLICT_MESSAGE);
-  }
-
   const { data: subscription } = await admin
     .from("subscriptions")
-    .select("id, status, billing_plan_id")
+    .select("id, status, billing_plan_id, auto_renew")
     .eq("user_id", userId)
     .in("status", [...ACTIVE_SUBSCRIPTION_STATUSES])
     .order("created_at", { ascending: false })
@@ -77,7 +73,14 @@ export async function assertUserCanSubscribe(
     .maybeSingle();
 
   if (subscription) {
-    throw new Error(ACTIVE_SUBSCRIPTION_CONFLICT_MESSAGE);
+    // Com assinatura ativa, só bloqueamos repetir o mesmo plano que já renova
+    // sozinho no cartão. Renovar Pix/boleto antes de vencer e trocar entre
+    // mensal e anual são permitidos (os dias novos somam ao fim do período).
+    if (subscription.billing_plan_id === billingPlanId && subscription.auto_renew) {
+      throw new Error(ACTIVE_MEMBERSHIP_PLAN_CONFLICT_MESSAGE);
+    }
+  } else if (await userHasActiveMembershipForPlan(admin, userId, billingPlanId)) {
+    throw new Error(ACTIVE_MEMBERSHIP_PLAN_CONFLICT_MESSAGE);
   }
 
   // Tentativas anteriores que ficaram pela metade (a pessoa voltou do Mercado

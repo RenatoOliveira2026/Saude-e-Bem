@@ -72,7 +72,7 @@ export async function activateSubscriptionFromPayment(
   const { data: existing } = await admin
     .from("subscriptions")
     .select(
-      "id, current_period_end, status, mercadopago_preapproval_id, auto_renew",
+      "id, current_period_end, status, mercadopago_preapproval_id, auto_renew, billing_plan_id",
     )
     .eq("user_id", payment.userId)
     .order("created_at", { ascending: false })
@@ -86,6 +86,16 @@ export async function activateSubscriptionFromPayment(
     plan.billingInterval === "month" &&
     payment.paymentMethod === "credit_card";
 
+  // Troca de plano (ex.: mensal no cartão → anual): encerra a cobrança
+  // recorrente antiga para o assinante não pagar os dois.
+  const changedPlan = Boolean(existing?.billing_plan_id && existing.billing_plan_id !== plan.id);
+  const paidByThatPreapproval =
+    payment.metadata?.preapproval_id &&
+    payment.metadata.preapproval_id === existing?.mercadopago_preapproval_id;
+  if (changedPlan && existing?.mercadopago_preapproval_id && !paidByThatPreapproval) {
+    await cancelMercadoPagoPreapproval(existing.mercadopago_preapproval_id);
+  }
+
   const subscriptionPayload = {
     plan: "premium" as const,
     status: "active" as const,
@@ -96,6 +106,7 @@ export async function activateSubscriptionFromPayment(
     current_period_start: periodStart.toISOString(),
     current_period_end: periodEnd.toISOString(),
     canceled_at: null,
+    ...(changedPlan && !paidByThatPreapproval ? { mercadopago_preapproval_id: null } : {}),
     metadata: {
       last_payment_id: payment.id,
       last_external_reference: payment.externalReference,

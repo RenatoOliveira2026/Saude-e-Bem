@@ -9,13 +9,13 @@ import { useState } from "react";
 interface CancelSubscriptionButtonProps {
   cancelAtPeriodEnd: boolean;
   expiresAt: string | null;
-  autoRenew: boolean;
+  /** Mantido por compatibilidade; o cancelamento é sempre ao fim do período. */
+  autoRenew?: boolean;
 }
 
 export function CancelSubscriptionButton({
   cancelAtPeriodEnd,
   expiresAt,
-  autoRenew,
 }: CancelSubscriptionButtonProps) {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
@@ -65,11 +65,10 @@ export function CancelSubscriptionButton({
 
   return (
     <Card className="p-5">
-      <h3 className="font-heading text-lg text-forest">Gerenciar assinatura</h3>
+      <h3 className="font-heading text-lg text-forest">Cancelar a renovação</h3>
       <p className="mt-2 text-sm text-muted">
-        {autoRenew
-          ? "Renovação automática ativa. Você pode cancelar ao fim do período ou imediatamente."
-          : "Cancele sua assinatura premium quando quiser."}
+        Paramos as próximas cobranças no cartão. Você continua com acesso ao Clube
+        {expiresAt ? ` até ${formatSubscriptionDate(expiresAt)}` : " até o fim do período já pago"}.
       </p>
       {message && (
         <p className="mt-3 rounded-lg bg-sage-muted/40 px-4 py-3 text-sm text-forest">
@@ -87,18 +86,13 @@ export function CancelSubscriptionButton({
           variant="outline"
           size="sm"
           disabled={loading}
-          onClick={() => handleCancel(false)}
+          onClick={() => {
+            if (window.confirm("Cancelar a renovação automática? Você mantém o acesso até o fim do período pago.")) {
+              void handleCancel(false);
+            }
+          }}
         >
-          {loading ? "Processando..." : "Cancelar ao fim do período"}
-        </Button>
-        <Button
-          type="button"
-          variant="ghost"
-          size="sm"
-          disabled={loading}
-          onClick={() => handleCancel(true)}
-        >
-          Cancelar agora
+          {loading ? "Processando..." : "Cancelar renovação"}
         </Button>
       </div>
     </Card>

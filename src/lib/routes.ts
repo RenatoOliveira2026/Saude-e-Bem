@@ -127,6 +127,7 @@ export const authNavLoggedIn = [
   { label: "Minha Jornada", href: routes.minhaJornada },
   { label: "Minha Saúde", href: routes.minhaSaude },
   { label: "Meu Clube", href: routes.clubeDashboard },
+  { label: "Minha assinatura", href: routes.minhaAssinatura },
   { label: "Perfil", href: routes.perfil },
 ] as const;
 

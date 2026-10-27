@@ -19,7 +19,7 @@ import type { SubscriptionBillingData } from "@/lib/payments/types";
 import { routes } from "@/lib/routes";
 import { PaymentHistoryList } from "./PaymentHistoryList";
 import { FinancialHistoryList } from "./FinancialHistoryList";
-import { CancelSubscriptionButton } from "./CancelSubscriptionButton";
+import { ManageSubscriptionPanel } from "./ManageSubscriptionPanel";
 
 interface SubscriptionDashboardProps {
   data: SubscriptionBillingData;
@@ -133,18 +133,9 @@ export function SubscriptionDashboard({ data }: SubscriptionDashboardProps) {
         </div>
       </Card>
 
-      <ActiveBenefitsList membership={membership} />
+      <ManageSubscriptionPanel membership={membership} activePlan={activeBillingPlan} />
 
-      {membership.isPremium &&
-        subscription &&
-        (subscription.status === "active" ||
-          subscription.status === "trialing") && (
-          <CancelSubscriptionButton
-            cancelAtPeriodEnd={subscription.cancelAtPeriodEnd}
-            expiresAt={membership.expiresAt}
-            autoRenew={subscription.autoRenew}
-          />
-        )}
+      <ActiveBenefitsList membership={membership} />
 
       <section>
         <h2 className="font-heading text-xl text-forest">

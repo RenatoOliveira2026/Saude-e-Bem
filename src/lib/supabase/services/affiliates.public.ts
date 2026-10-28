@@ -108,18 +108,26 @@ export async function fetchAffiliatesForContentCategory(
   contentCategoryLabel: string,
   kind: "blog" | "protocol",
   limit = 3,
+  /** Slugs escolhidos para este conteúdo, em ordem; completados pela categoria. */
+  picks: string[] = [],
 ): Promise<PublicAffiliateSummary[]> {
   const all = await fetchAllActiveAffiliateLinks();
-  return all
-    .filter((link) =>
+  const bySlug = new Map(all.map((link) => [link.slug, link]));
+  const chosen = picks
+    .map((slug) => bySlug.get(slug))
+    .filter((link): link is PublicAffiliateSummary => Boolean(link));
+  const chosenSlugs = new Set(chosen.map((link) => link.slug));
+  const byCategory = all.filter(
+    (link) =>
+      !chosenSlugs.has(link.slug) &&
       affiliateMatchesContentCategory(
         link.category,
         contentCategory,
         contentCategoryLabel,
         kind,
       ),
-    )
-    .slice(0, limit);
+  );
+  return [...chosen, ...byCategory].slice(0, limit);
 }
 
 export async function fetchRelatedAffiliateProducts(

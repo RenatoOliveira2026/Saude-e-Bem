@@ -1,3 +1,4 @@
+import { BLOG_CATEGORY_AFFILIATE_PICKS } from "@/lib/affiliates/editorial-picks";
 import { AdPlacement } from "@/components/ads/AdPlacement";
 import { ArticleReadTracker } from "@/components/analytics/ArticleReadTracker";
 import { RelatedAffiliatesSection } from "@/components/affiliates";
@@ -94,6 +95,7 @@ export default async function ArtigoDetailPage({ params }: PageProps) {
       article.categoryLabel,
       "blog",
       3,
+      BLOG_CATEGORY_AFFILIATE_PICKS[article.category],
     ),
   ]);
   const related = all

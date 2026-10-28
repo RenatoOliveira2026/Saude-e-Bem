@@ -1,3 +1,4 @@
+import { PROTOCOL_AFFILIATE_PICKS } from "@/lib/affiliates/editorial-picks";
 import { ContentBlockRenderer } from "@/components/content/ContentBlockRenderer";
 import { RelatedAffiliatesSection } from "@/components/affiliates";
 import { ContentMemberActions } from "@/components/club/ContentMemberActions";
@@ -119,6 +120,7 @@ export default async function ProtocoloDetailPage({ params }: PageProps) {
       protocol.categoryLabel,
       "protocol",
       3,
+      PROTOCOL_AFFILIATE_PICKS[slug],
     ),
   ]);
   const related = all

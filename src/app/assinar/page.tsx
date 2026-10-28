@@ -1,5 +1,6 @@
 import { CheckoutStartTracker } from "@/components/analytics/CheckoutStartTracker";
 import { BillingProfileStatus } from "@/components/billing/BillingProfileStatus";
+import { FounderCampaignCard } from "@/components/campaign/FounderCampaign";
 import { PageHero } from "@/components/layout/PageHero";
 import { SubscribeCheckoutForm } from "@/components/payments";
 import { SubscribeTrustPanel } from "@/components/payments/SubscribeTrustPanel";
@@ -80,6 +81,9 @@ export default async function AssinarPage({ searchParams }: PageProps) {
       />
       <Section background="white" spacing="compact">
         <Container size="sm" className="min-w-0">
+          <div className="mb-6">
+            <FounderCampaignCard showButtons={false} />
+          </div>
           <SubscribeTrustPanel />
           <BillingProfileStatus
             isLoggedIn={Boolean(user)}

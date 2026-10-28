@@ -1,5 +1,6 @@
 import { randomUUID } from "crypto";
 import { createPaymentsAdminClient } from "../admin-client";
+import { withFounderPrice } from "../founder";
 import { getCheckoutPlan } from "../plans";
 import {
   getSiteUrl,
@@ -55,7 +56,7 @@ export async function createPremiumCheckout(input: {
 
   const externalReference = buildExternalReference(input.userId);
   const paymentMethod = input.request.paymentMethod;
-  const plan = getCheckoutPlan(input.request.plan);
+  const plan = await withFounderPrice(admin, input.userId, getCheckoutPlan(input.request.plan));
   const usePreapproval =
     isMercadoPagoConfigured() && shouldUseRecurringCheckout(paymentMethod, plan);
   const checkoutMode: CheckoutMode = usePreapproval

@@ -651,7 +651,7 @@ export const PROTOCOL_GUIDES: Record<string, ProtocolGuide> = {
 
   // ---------------------------------------------------------------- MOVIMENTO / FOCO / PESO
   "mobilidade-alongamento": {
-    cover: { url: photo("1785301329245-21b8c344f20b"), alt: "Pessoa de cabelos grisalhos fazendo exercício de ponte sobre o tapete" },
+    cover: { url: photo("1775338782892-315ab263fab9"), alt: "Pessoas praticando tai chi num espaço amplo" },
     dailyTime: "15 a 20 minutos por dia",
     bestStart: "Comece em qualquer dia. Faça sempre no mesmo horário, de preferência de manhã ou no fim da tarde.",
     prepare: [

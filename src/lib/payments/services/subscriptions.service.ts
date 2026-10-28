@@ -387,6 +387,22 @@ export async function cancelUserSubscription(
     })
     .eq("id", subscription.id);
 
+  await recordFinancialEvent(admin, {
+    userId,
+    subscriptionId: subscription.id,
+    eventType: "subscription_canceled",
+    title: "Renovação cancelada",
+    description: subscription.current_period_end
+      ? `Acesso mantido até ${new Date(subscription.current_period_end).toLocaleDateString("pt-BR", {
+          day: "numeric",
+          month: "long",
+          year: "numeric",
+          timeZone: "America/Sao_Paulo",
+        })}`
+      : "Acesso mantido até o fim do período atual",
+    metadata: { reason: "user_requested", at_period_end: true },
+  });
+
   return {
     ok: true,
     message: "Cancelamento agendado para o fim do período atual.",

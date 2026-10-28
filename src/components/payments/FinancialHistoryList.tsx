@@ -1,6 +1,11 @@
 import { Badge } from "@/components/ui/Badge";
 import { Card } from "@/components/ui/Card";
-import { formatPaymentAmount } from "@/lib/payments/constants";
+import {
+  formatPaymentAmount,
+  paymentMethodLabels,
+  paymentStatusLabels,
+} from "@/lib/payments/constants";
+import type { PaymentMethod, PaymentStatus } from "@/lib/payments/types";
 import type { FinancialEvent } from "@/lib/payments/services/financial-events.service";
 import { formatSubscriptionDate } from "@/lib/club/constants";
 
@@ -32,6 +37,25 @@ const EVENT_LABELS: Record<string, string> = {
   preapproval_authorized: "Cartão autorizado",
 };
 
+/**
+ * Textos técnicos gravados pelo webhook ("Status: pending", "(ticket)")
+ * viram português: "Aguardando pagamento", "(boleto)".
+ */
+function humanizeTechnical(text: string): string {
+  return text
+    .replace(/Status: ([a-z_]+)/g, (match, status: string) => {
+      if (status === "pending" || status === "in_process") {
+        return "Aguardando a confirmação do pagamento. Boleto compensa em até 3 dias úteis";
+      }
+      const label = paymentStatusLabels[status as PaymentStatus];
+      return label ? `Situação: ${label.toLowerCase()}` : match;
+    })
+    .replace(/\((pix|credit_card|debit_card|ticket|account_money)\)/g, (match, method: string) => {
+      const label = paymentMethodLabels[method as PaymentMethod];
+      return label ? `(${label.toLowerCase()})` : match;
+    });
+}
+
 /** Datas gravadas no formato técnico (2026-11-26T18:26:55.260Z) viram "26 de novembro de 2026". */
 function humanizeDates(text: string): string {
   return text.replace(/\d{4}-\d{2}-\d{2}T[\d:.]+Z/g, (iso) => formatSubscriptionDate(iso));
@@ -55,7 +79,7 @@ export function FinancialHistoryList({ events }: FinancialHistoryListProps) {
               <div>
                 <p className="font-heading font-semibold text-forest">{event.title}</p>
                 {event.description && (
-                  <p className="mt-1 text-sm text-muted">{humanizeDates(event.description)}</p>
+                  <p className="mt-1 text-sm text-muted">{humanizeDates(humanizeTechnical(event.description))}</p>
                 )}
                 {event.amountCents != null && (
                   <p className="mt-1 text-sm text-muted">

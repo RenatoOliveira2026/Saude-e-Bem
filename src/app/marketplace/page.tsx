@@ -21,6 +21,15 @@ export const metadata = buildContentMetadata({
 export default async function MarketplacePage() {
   const items = await fetchMarketplaceItems();
   const stats = computeMarketplaceStats(items);
+  const statsSummary = [
+    [stats.digital, "digitais"],
+    [stats.affiliate, "afiliados"],
+    [stats.own, "próprios"],
+    [stats.premium, "premium"],
+  ]
+    .filter(([count]) => Number(count) > 0)
+    .map(([count, label]) => `${count} ${label}`)
+    .join(" · ");
 
   return (
     <>
@@ -32,7 +41,7 @@ export default async function MarketplacePage() {
       <MarketplaceListing items={items} />
       <PageCta
         title="Personalizado para você"
-        description={`${stats.digital} digitais · ${stats.affiliate} afiliados · ${stats.own} próprios · ${stats.premium} premium — recomendações inteligentes no seu perfil em Minha Saúde.`}
+        description={`${statsSummary} — recomendações inteligentes no seu perfil em Minha Saúde.`}
         primaryLabel="Ver Minha Saúde"
         primaryHref={routes.minhaSaude}
         secondaryLabel="Biblioteca gratuita"

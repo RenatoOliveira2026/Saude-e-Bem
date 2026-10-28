@@ -3,7 +3,7 @@
  * Arquivo sem dependências de servidor: usado no painel e no site.
  */
 
-export type SocialNetwork = "instagram" | "facebook" | "linkedin" | "youtube" | "tiktok";
+export type SocialNetwork = "instagram" | "facebook" | "whatsapp" | "linkedin" | "youtube" | "tiktok";
 
 export type MarketingSettingKey = "meta_pixel_id" | `social_${SocialNetwork}`;
 
@@ -32,6 +32,13 @@ export const SOCIAL_NETWORKS: readonly SocialNetworkInfo[] = [
     hosts: ["facebook.com", "fb.com"],
     example: "https://www.facebook.com/saudeebem",
     description: "Página do Facebook exibida no rodapé do site.",
+  },
+  {
+    id: "whatsapp",
+    label: "WhatsApp",
+    hosts: ["whatsapp.com"],
+    example: "https://whatsapp.com/channel/0029Va...",
+    description: "Canal do WhatsApp: aparece no rodapé e no convite ao fim dos artigos.",
   },
   {
     id: "linkedin",

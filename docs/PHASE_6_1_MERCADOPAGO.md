@@ -2,7 +2,7 @@
 
 ## Objetivo
 
-Ativar cobrança real dos planos **Premium Mensal (R$ 19,90)** e **Premium Anual (R$ 197,00)** do Clube Saúde & Bem, sincronizando `subscriptions` + `user_memberships` via webhook.
+Ativar cobrança real dos planos **Premium Mensal (R$ 19,90)** e **Premium Anual (R$ 149,00)** do Clube Saúde & Bem, sincronizando `subscriptions` + `user_memberships` via webhook.
 
 ---
 
@@ -13,7 +13,7 @@ Arquivo: `src/lib/payments/pricing.ts`
 | Plano | Preço | ID checkout |
 |-------|-------|-------------|
 | Premium Mensal | R$ 19,90/mês | `premium_monthly` |
-| Premium Anual | R$ 197,00/ano | `premium_annual` |
+| Premium Anual | R$ 149,00/ano | `premium_annual` |
 
 Migration `037_phase_6_1_pricing.sql` atualiza `membership_plans` no Supabase.
 

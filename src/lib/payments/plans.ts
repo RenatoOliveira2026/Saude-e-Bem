@@ -27,10 +27,8 @@ export interface BillingPlan {
 
 /** Fase 6.1 — preços oficiais (fonte: pricing.ts) */
 export const PREMIUM_MONTHLY_PRICE_LABEL = CLUB_PRICING.premiumMonthly.label;
-export const PREMIUM_QUARTERLY_PRICE_LABEL = "R$ 79,90";
 export const PREMIUM_ANNUAL_PRICE_LABEL = CLUB_PRICING.premiumAnnual.label;
 export const PREMIUM_ANNUAL_BADGE = CLUB_PRICING.premiumAnnual.badge;
-export const PREMIUM_QUARTERLY_SAVINGS_LABEL = "Economize R$ 9,80 vs. 3× mensal";
 export const PREMIUM_ANNUAL_SAVINGS_LABEL = CLUB_PRICING.premiumAnnual.savingsLabel;
 
 export const FREE_PLAN: BillingPlan = {
@@ -60,14 +58,13 @@ export const PREMIUM_MONTHLY_PLAN: BillingPlan = {
 export const PREMIUM_QUARTERLY_PLAN: BillingPlan = {
   id: "premium_quarterly",
   name: "Premium Trimestral",
-  description: "Três meses de acesso premium com desconto sobre o mensal.",
+  description: "Plano antigo, fora de venda. Mantido só para assinaturas já existentes.",
   amountCents: 7990,
   currency: "BRL",
   periodDays: 90,
   periodLabel: "trimestre",
   billingInterval: "quarter",
   checkoutEnabled: false,
-  savingsLabel: PREMIUM_QUARTERLY_SAVINGS_LABEL,
 };
 
 export const PREMIUM_ANNUAL_PLAN: BillingPlan = {
@@ -109,12 +106,12 @@ export function getCheckoutPlan(id: string): BillingPlan {
   return plan;
 }
 
+/**
+ * Planos que podem ser comprados hoje. O trimestral existe só para
+ * assinaturas antigas: não está à venda (checkoutEnabled: false).
+ */
 export function isCheckoutPlanId(id: string): id is CheckoutPlanId {
-  return (
-    id === "premium_monthly" ||
-    id === "premium_quarterly" ||
-    id === "premium_annual"
-  );
+  return id === "premium_monthly" || id === "premium_annual";
 }
 
 export function formatPlanAmount(plan: BillingPlan): string {

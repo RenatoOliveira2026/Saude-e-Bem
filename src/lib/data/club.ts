@@ -1,4 +1,5 @@
 import type { IconName } from "@/components/icons";
+import { CLUB_PRICING } from "@/lib/payments/pricing";
 import type { ClubPlan } from "./types";
 
 export const clubBenefits = [
@@ -28,7 +29,7 @@ export const clubPlans: ClubPlan[] = [
   {
     id: "mensal",
     name: "Plano Mensal",
-    price: "R$ 19,90",
+    price: CLUB_PRICING.premiumMonthly.label,
     period: "/mês",
     description: "Flexibilidade total para experimentar a experiência premium.",
     features: [
@@ -41,7 +42,7 @@ export const clubPlans: ClubPlan[] = [
   {
     id: "anual",
     name: "Plano Anual",
-    price: "R$ 197,00",
+    price: CLUB_PRICING.premiumAnnual.label,
     period: "/ano",
     description: "Melhor custo-benefício para quem leva longevidade a sério.",
     features: [
@@ -50,7 +51,7 @@ export const clubPlans: ClubPlan[] = [
     ],
     highlighted: true,
     badge: "Mais Escolhido",
-    savingsLabel: "Economize R$ 41,80 por ano vs. mensal",
+    savingsLabel: CLUB_PRICING.premiumAnnual.savingsLabel,
   },
 ];
 

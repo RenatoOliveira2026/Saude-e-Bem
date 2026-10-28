@@ -22,8 +22,7 @@ function resolvePlanFromSearchParams(
 ): CheckoutPlanId {
   if (
     planFromUrl === "premium_annual" ||
-    planFromUrl === "premium_monthly" ||
-    planFromUrl === "premium_quarterly"
+    planFromUrl === "premium_monthly"
   ) {
     return planFromUrl;
   }
@@ -291,7 +290,6 @@ export function SubscribeCheckoutForm({
           <>Renovação automática mensal no cartão. </>
         )}
         {(selectedPlan === "premium_annual" ||
-          selectedPlan === "premium_quarterly" ||
           selectedMethod === "pix" ||
           selectedMethod === "ticket") && (
           <>Pagamento único — renove manualmente ao fim do período. </>

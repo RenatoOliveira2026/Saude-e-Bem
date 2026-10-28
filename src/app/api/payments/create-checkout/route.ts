@@ -40,7 +40,7 @@ export async function POST(request: Request) {
     return NextResponse.json(
       {
         error:
-          "Plano inválido. Use premium_monthly, premium_quarterly ou premium_annual.",
+          "Plano inválido. Use premium_monthly ou premium_annual.",
       },
       { status: 400 },
     );

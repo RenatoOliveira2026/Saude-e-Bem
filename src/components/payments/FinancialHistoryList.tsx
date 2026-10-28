@@ -45,7 +45,7 @@ function humanizeTechnical(text: string): string {
   return text
     .replace(/Status: ([a-z_]+)/g, (match, status: string) => {
       if (status === "pending" || status === "in_process") {
-        return "Aguardando a confirmação do pagamento. Boleto compensa em até 3 dias úteis";
+        return "Aguardando a confirmação do pagamento";
       }
       const label = paymentStatusLabels[status as PaymentStatus];
       return label ? `Situação: ${label.toLowerCase()}` : match;

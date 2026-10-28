@@ -9,11 +9,11 @@ export const CLUB_PRICING = {
     periodLabel: "mês",
   },
   premiumAnnual: {
-    amountCents: 19700,
-    label: "R$ 197,00",
+    amountCents: 14900,
+    label: "R$ 149,00",
     periodLabel: "ano",
     badge: "Mais Escolhido",
-    savingsLabel: "Economize R$ 41,80 por ano vs. mensal",
+    savingsLabel: "Economize R$ 89,80 por ano vs. mensal",
   },
 } as const;
 

@@ -1,7 +1,19 @@
 import { FALLBACK_MEMBERSHIP_PLANS } from "@/lib/membership/constants";
 import { mapMembershipPlanRow } from "@/lib/membership/mappers";
 import type { MembershipPlanRecord } from "@/lib/membership/types";
+import { CLUB_PRICING } from "@/lib/payments/pricing";
 import { createClient } from "@/lib/supabase/server";
+
+/** O preço cobrado vem do código (pricing.ts); o banco só guarda textos. */
+const CODE_PRICES: Record<string, number> = {
+  "premium-mensal": CLUB_PRICING.premiumMonthly.amountCents / 100,
+  "premium-anual": CLUB_PRICING.premiumAnnual.amountCents / 100,
+};
+
+function withCodePrice(plan: MembershipPlanRecord): MembershipPlanRecord {
+  const price = CODE_PRICES[plan.slug];
+  return price === undefined ? plan : { ...plan, price };
+}
 
 export async function fetchActiveMembershipPlans(): Promise<MembershipPlanRecord[]> {
   try {
@@ -19,7 +31,7 @@ export async function fetchActiveMembershipPlans(): Promise<MembershipPlanRecord
       return FALLBACK_MEMBERSHIP_PLANS;
     }
 
-    return data.map((row) => mapMembershipPlanRow(row));
+    return data.map((row) => withCodePrice(mapMembershipPlanRow(row)));
   } catch {
     return FALLBACK_MEMBERSHIP_PLANS;
   }

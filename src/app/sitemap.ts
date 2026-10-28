@@ -5,10 +5,9 @@ import { getBlogSlugs } from "@/lib/data/repositories/blog.repository";
 import { getProtocolSlugs } from "@/lib/data/repositories/protocols.repository";
 import { getToolSlugs } from "@/lib/data/repositories/tools.repository";
 import { fetchLibraryItemSlugsFromDb } from "@/lib/supabase/services/library-items.public";
-import { fetchMarketplaceProductSlugsFromDb } from "@/lib/supabase/services/marketplace-products.public";
+import { fetchMarketplaceSlugs } from "@/lib/marketplace/marketplace.service";
 import { fetchActiveAffiliateSlugs } from "@/lib/supabase/services/affiliates.public";
 import { getContentEngineLibraryCatalog } from "@/lib/content-engine/mappers";
-import { getContentEngineMarketplaceCatalog } from "@/lib/content-engine/mappers";
 import type { MetadataRoute } from "next";
 
 const STATIC_SITEMAP_PATHS = [
@@ -60,9 +59,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       fetchLibraryItemSlugsFromDb().catch(() =>
         getContentEngineLibraryCatalog().map((i) => i.slug),
       ),
-      fetchMarketplaceProductSlugsFromDb().catch(() =>
-        getContentEngineMarketplaceCatalog().map((i) => i.slug),
-      ),
+      fetchMarketplaceSlugs(),
       getProtocolSlugs().catch(() => [] as string[]),
       getToolSlugs().catch(() => [] as string[]),
       fetchActiveAffiliateSlugs().catch(() => [] as string[]),

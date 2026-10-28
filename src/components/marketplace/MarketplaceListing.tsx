@@ -29,12 +29,20 @@ export function MarketplaceListing({ items }: MarketplaceListingProps) {
     [active, items],
   );
   const hasAffiliateItems = items.some((item) => item.fulfillment === "affiliate");
+  // Só mostra os filtros que têm algum produto (ex.: "Afiliados" some enquanto não houver ofertas).
+  const filters = useMemo(
+    () =>
+      MARKETPLACE_FILTERS.filter(
+        (filter) => filter.id === "todos" || filterMarketplaceItems(items, filter.id).length > 0,
+      ),
+    [items],
+  );
 
   return (
     <Section background="white" container={false} spacing="compact">
       <Container className="space-y-4">
         <CategoryFilter
-          categories={MARKETPLACE_FILTERS}
+          categories={filters}
           active={active}
           onChange={(id) => setActive(id as MarketplaceFilterId)}
           ariaLabel="Filtrar marketplace"

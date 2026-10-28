@@ -1,8 +1,7 @@
 import { fetchAllActiveAffiliateLinks } from "@/lib/supabase/services/affiliates.public";
 import { fetchPublishedMarketplaceProductsWithFallback } from "@/lib/supabase/services/marketplace-products.public";
-import { fetchMarketplaceProductSlugsFromDb } from "@/lib/supabase/services/marketplace-products.public";
 import { getContentEngineMarketplaceCatalog } from "@/lib/content-engine/mappers";
-import { getCatalogItemBySlug } from "./marketplace-catalog";
+import { CLUB_PRICING } from "@/lib/payments/pricing";
 import { filterMarketplaceItems } from "./marketplace-filters";
 import {
   affiliateToMarketplaceItem,
@@ -16,9 +15,32 @@ import type {
 } from "./marketplace.types";
 
 /**
- * Ponto único de leitura do marketplace.
- * Futuro: tabela `marketplace_products` + merge com afiliados e biblioteca.
+ * Só entra no marketplace o que o visitante consegue de fato acessar ou comprar:
+ * - afiliado: precisa de um link real e ativo em affiliate_links
+ *   (os exemplos dos seeds não levam a loja nenhuma);
+ * - produto próprio: fica de fora até existir checkout próprio para ele
+ *   (hoje o botão "Comprar" levaria à assinatura do Clube).
  */
+function isPublishable(item: MarketplaceItem, realAffiliateSlugs: Set<string>): boolean {
+  if (item.fulfillment === "affiliate") {
+    return Boolean(item.affiliateSlug && realAffiliateSlugs.has(item.affiliateSlug));
+  }
+  if (item.fulfillment === "own") return false;
+  return true;
+}
+
+/** O preço do Clube vem da tabela oficial (pricing.ts), não do seed do banco. */
+function withCurrentClubPrice(item: MarketplaceItem): MarketplaceItem {
+  if (item.fulfillment !== "subscription") return item;
+  return {
+    ...item,
+    currentPrice: CLUB_PRICING.premiumMonthly.amountCents / 100,
+    oldPrice: null,
+    installments: null,
+  };
+}
+
+/** Ponto único de leitura do marketplace (banco + afiliados ativos). */
 export async function fetchMarketplaceItems(): Promise<MarketplaceItem[]> {
   const [catalog, affiliates] = await Promise.all([
     fetchPublishedMarketplaceProductsWithFallback(async () =>
@@ -27,24 +49,28 @@ export async function fetchMarketplaceItems(): Promise<MarketplaceItem[]> {
     fetchAllActiveAffiliateLinks(),
   ]);
   const affiliateItems = affiliates.map(affiliateToMarketplaceItem);
-  return mergeMarketplaceCatalog(catalog, affiliateItems);
+  const realAffiliateSlugs = new Set(affiliates.map((affiliate) => affiliate.slug));
+
+  return mergeMarketplaceCatalog(catalog, affiliateItems)
+    .filter((item) => isPublishable(item, realAffiliateSlugs))
+    .map(withCurrentClubPrice);
 }
 
 export async function fetchMarketplaceItemBySlug(
   slug: string,
 ): Promise<MarketplaceItem | undefined> {
   const items = await fetchMarketplaceItems();
-  return items.find((item) => item.slug === slug) ?? getCatalogItemBySlug(slug);
+  return items.find((item) => item.slug === slug);
 }
 
+/** Slugs com página própria: os mesmos itens que aparecem na listagem. */
 export async function fetchMarketplaceSlugs(): Promise<string[]> {
   try {
-    const fromDb = await fetchMarketplaceProductSlugsFromDb();
-    if (fromDb.length > 0) return fromDb;
+    const items = await fetchMarketplaceItems();
+    return items.map((item) => item.slug);
   } catch {
-    /* fallback */
+    return [];
   }
-  return getContentEngineMarketplaceCatalog().map((item) => item.slug);
 }
 
 export function filterMarketplaceCatalog(

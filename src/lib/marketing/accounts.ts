@@ -3,7 +3,7 @@
  * Arquivo sem dependências de servidor: usado no painel e no site.
  */
 
-export type SocialNetwork = "instagram" | "facebook" | "whatsapp" | "linkedin" | "youtube" | "tiktok";
+export type SocialNetwork = "instagram" | "facebook" | "whatsapp" | "linkedin" | "pinterest" | "youtube" | "tiktok";
 
 export type MarketingSettingKey = "meta_pixel_id" | `social_${SocialNetwork}`;
 
@@ -46,6 +46,13 @@ export const SOCIAL_NETWORKS: readonly SocialNetworkInfo[] = [
     hosts: ["linkedin.com"],
     example: "https://www.linkedin.com/company/saudeebem",
     description: "Página da empresa no LinkedIn exibida no rodapé do site.",
+  },
+  {
+    id: "pinterest",
+    label: "Pinterest",
+    hosts: ["pinterest.com", "pinterest.com.br", "pin.it"],
+    example: "https://br.pinterest.com/saudeebem",
+    description: "Perfil do Pinterest exibido no rodapé do site.",
   },
   {
     id: "youtube",

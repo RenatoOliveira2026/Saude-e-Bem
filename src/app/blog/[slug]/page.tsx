@@ -13,6 +13,7 @@ import { RelatedContentLinks } from "@/components/seo/RelatedContentLinks";
 import { JsonLdScript } from "@/components/seo/JsonLd";
 import { ShareButton } from "@/components/share";
 import { ListenButton } from "@/components/listen/ListenButton";
+import { WhatsAppChannelCta } from "@/components/marketing/WhatsAppChannelCta";
 import { Container } from "@/components/ui/Container";
 import { Section } from "@/components/ui/Section";
 import {
@@ -193,6 +194,7 @@ export default async function ArtigoDetailPage({ params }: PageProps) {
               fallbackParagraphs={article.content}
             />
           </article>
+          <WhatsAppChannelCta className="mt-10" />
           <aside
             className="mt-10 rounded-xl border border-border bg-sage-muted/40 p-4 text-sm leading-relaxed text-muted"
             aria-label="Aviso sobre o conteúdo"

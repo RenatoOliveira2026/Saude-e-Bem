@@ -14,6 +14,15 @@ import { Container } from "@/components/ui/Container";
 import { Section } from "@/components/ui/Section";
 import { Icon } from "@/components/icons";
 import {
+  ProtocolCover,
+  ProtocolPrepSection,
+  ProtocolWeeksSection,
+} from "@/components/protocols/ProtocolGuideSections";
+import { ProtocolPlanner } from "@/components/protocols/ProtocolPlanner";
+import type { ContentBlock } from "@/lib/admin/cms/content-blocks";
+import { getProtocolGuide, protocolDurationDays } from "@/lib/data/protocol-guides";
+import { getSiteUrl } from "@/lib/seo/site-url";
+import {
   getProtocolBySlug,
   getProtocolSlugs,
   getProtocols,
@@ -36,6 +45,31 @@ interface PageProps {
 
 export const revalidate = 3600;
 
+/**
+ * Seções do texto livre que a página já mostra em blocos próprios
+ * (ou que não fazem sentido para quem já é membro).
+ */
+const SECTIONS_SHOWN_ELSEWHERE = new Set([
+  "objetivo",
+  "duração",
+  "benefícios",
+  "benefícios esperados",
+  "continue no clube premium",
+]);
+
+function withoutRepeatedSections(blocks: ContentBlock[]): ContentBlock[] {
+  const kept: ContentBlock[] = [];
+  let skipping = false;
+  for (const block of blocks) {
+    if (block.type === "heading" && block.level <= 2) {
+      skipping = SECTIONS_SHOWN_ELSEWHERE.has(block.text.trim().toLowerCase());
+    }
+    if (skipping || block.type === "image") continue;
+    kept.push(block);
+  }
+  return kept;
+}
+
 export async function generateStaticParams() {
   const slugs = await getProtocolSlugs();
   return slugs.map((slug) => ({ slug }));
@@ -50,7 +84,8 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     title: protocol.seoTitle ?? protocol.title,
     description: protocol.seoDescription ?? protocol.description,
     path: routes.protocolo(slug),
-    imageUrl: protocol.ogImageUrl ?? protocol.coverImageUrl,
+    imageUrl:
+      getProtocolGuide(slug)?.cover.url ?? protocol.ogImageUrl ?? protocol.coverImageUrl,
   });
 }
 
@@ -89,10 +124,12 @@ export default async function ProtocoloDetailPage({ params }: PageProps) {
   const related = all
     .filter((p) => p.slug !== slug && p.category === protocol.category)
     .slice(0, 3);
-  const richBlocks =
+  const guide = getProtocolGuide(slug);
+  const richBlocks = withoutRepeatedSections(
     protocol.contentBlocks?.filter(
       (b) => b.type !== "paragraph" || b.text.trim().length > 0 || Boolean(b.html?.trim()),
-    ) ?? [];
+    ) ?? [],
+  );
   const hasRichContent = richBlocks.length > 0;
   const internalLinks = getInternalLinksForContent("protocol", slug, protocol.category);
 
@@ -146,6 +183,8 @@ export default async function ProtocoloDetailPage({ params }: PageProps) {
               { label: "Iniciar protocolo", href: `${routes.protocolo(slug)}#etapas` }
         }
       />
+
+      {guide && <ProtocolCover guide={guide} />}
 
       <Section background="sage" spacing="compact">
         <Container size="md">
@@ -202,39 +241,62 @@ export default async function ProtocoloDetailPage({ params }: PageProps) {
         </Container>
       </Section>
 
-      <Section background="white" id="etapas">
-        <Container size="md">
-          <h2 className="font-heading text-2xl text-forest">Etapas do protocolo</h2>
-          <div className="mt-8 space-y-4">
-            {protocol.steps.map((step, i) => (
-              <div
-                key={step.title}
-                className="flex gap-5 rounded-xl border border-border bg-surface p-6"
-              >
-                <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-forest font-heading text-sm font-bold text-off-white">
-                  {i + 1}
-                </span>
-                <div>
-                  <h3 className="font-heading font-semibold text-forest">
-                    {step.title}
-                  </h3>
-                  <p className="mt-2 text-sm text-muted leading-relaxed">
-                    {step.description}
-                  </p>
+      {guide ? (
+        <>
+          <ProtocolPrepSection guide={guide} />
+          <ProtocolWeeksSection guide={guide} />
+        </>
+      ) : (
+        <Section background="white" id="etapas">
+          <Container size="md">
+            <h2 className="font-heading text-2xl text-forest">Etapas do protocolo</h2>
+            <div className="mt-8 space-y-4">
+              {protocol.steps.map((step, i) => (
+                <div
+                  key={step.title}
+                  className="flex gap-5 rounded-xl border border-border bg-surface p-6"
+                >
+                  <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-forest font-heading text-sm font-bold text-off-white">
+                    {i + 1}
+                  </span>
+                  <div>
+                    <h3 className="font-heading font-semibold text-forest">
+                      {step.title}
+                    </h3>
+                    <p className="mt-2 text-sm text-muted leading-relaxed">
+                      {step.description}
+                    </p>
+                  </div>
                 </div>
-              </div>
-            ))}
-          </div>
-        </Container>
-      </Section>
+              ))}
+            </div>
+          </Container>
+        </Section>
+      )}
 
       {hasRichContent && (
         <Section background="default">
           <Container size="md">
-            <h2 className="font-heading text-2xl text-forest">Guia completo</h2>
+            <h2 className="font-heading text-2xl text-forest">
+              {guide ? "Rotina diária" : "Guia completo"}
+            </h2>
             <div className="prose-content mt-8">
               <ContentBlockRenderer blocks={richBlocks} />
             </div>
+          </Container>
+        </Section>
+      )}
+
+      {guide && (
+        <Section background="white" id="programar">
+          <Container size="md">
+            <ProtocolPlanner
+              slug={slug}
+              title={protocol.title}
+              url={`${getSiteUrl()}${routes.protocolo(slug)}`}
+              durationDays={protocolDurationDays(protocol.duration, guide)}
+              guide={guide}
+            />
           </Container>
         </Section>
       )}

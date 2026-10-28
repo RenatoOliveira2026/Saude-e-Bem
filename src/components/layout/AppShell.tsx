@@ -1,3 +1,4 @@
+import { FounderBanner } from "@/components/campaign/FounderCampaign";
 import { Footer } from "@/components/layout/Footer";
 import { HeaderWrapper } from "@/components/layout/HeaderWrapper";
 import { NewsletterSmartPopup } from "@/components/newsletter/NewsletterSmartPopup";
@@ -14,6 +15,7 @@ export async function AppShell({ children }: { children: React.ReactNode }) {
 
   return (
     <>
+      <FounderBanner />
       <HeaderWrapper />
       <main className="flex-1">{children}</main>
       {/* A home já tem a seção de newsletter logo acima do rodapé. */}

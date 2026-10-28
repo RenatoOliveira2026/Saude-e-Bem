@@ -14,7 +14,10 @@ import {
 } from "@/components/club/ClubPublicSections";
 import { ClubPremiumProtocolsSection } from "@/components/club/ClubPremiumProtocolsSection";
 import { ClubTrustSection } from "@/components/club/ClubTrustSection";
+import { FounderCampaignCard } from "@/components/campaign/FounderCampaign";
 import { PageHero } from "@/components/layout/PageHero";
+import { Container } from "@/components/ui/Container";
+import { Section } from "@/components/ui/Section";
 import { JsonLdScript } from "@/components/seo/JsonLd";
 import { clubFaqs } from "@/lib/data/club";
 import { fetchActiveMembershipPlans } from "@/lib/membership";
@@ -53,6 +56,11 @@ export default async function ClubePage() {
         title="Clube Saúde & Bem"
         description="Assinatura ativa — protocolos avançados, ferramentas exclusivas, biblioteca ampliada e área de membros com checkout seguro via Mercado Pago."
       />
+      <Section background="white" spacing="compact">
+        <Container size="md">
+          <FounderCampaignCard />
+        </Container>
+      </Section>
       <ClubIntroSection />
       <ClubStats />
       <ClubBenefitsSplit />

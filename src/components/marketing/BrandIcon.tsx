@@ -24,6 +24,12 @@ const PATHS: Record<BrandId, React.ReactNode> = {
       <path d="M7.5 10.5V17M7.5 7.2v.1M11 17v-6.5M11 13.5c0-2 1.2-3 2.8-3S16.5 11.5 16.5 13.5V17" />
     </>
   ),
+  pinterest: (
+    <>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M10.6 20.5l1.7-7.8M9 13.6c-.6-.6-.9-1.4-.9-2.3 0-2.4 2-4.3 4.6-4.3 2.4 0 4.2 1.6 4.2 3.8 0 2.6-1.4 4.6-3.4 4.6-1 0-1.8-.6-1.6-1.6" />
+    </>
+  ),
   youtube: (
     <>
       <rect x="2.5" y="5.5" width="19" height="13" rx="4" />
@@ -52,6 +58,7 @@ const COLORS: Record<BrandId, string> = {
   facebook: "#1877F2",
   whatsapp: "#25D366",
   linkedin: "#0A66C2",
+  pinterest: "#E60023",
   youtube: "#FF0000",
   tiktok: "#111111",
   ga4: "#E37400",

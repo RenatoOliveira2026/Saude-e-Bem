@@ -46,6 +46,13 @@ export function SubscriptionDashboard({ data }: SubscriptionDashboardProps) {
     getPlanById(billingPlanId) ??
     (membership.isPremium ? PREMIUM_MONTHLY_PLAN : null);
 
+  const isAdmin = membership.profilePlan === "admin";
+  // Renovação só vale para assinatura em vigor (registro antigo pode ficar com o
+  // campo ligado depois de expirar).
+  const renewsAutomatically =
+    Boolean(subscription?.autoRenew) &&
+    (subscription?.status === "active" || subscription?.status === "trialing");
+
   const planSummary = membership.isPremium
     ? activeBillingPlan
       ? `${activeBillingPlan.name} · ${formatPlanPriceLabel(activeBillingPlan)}`
@@ -83,7 +90,7 @@ export function SubscriptionDashboard({ data }: SubscriptionDashboardProps) {
             Status
           </p>
           <p className="mt-1 font-heading text-2xl text-forest">
-            {subscriptionStatusLabels[membership.status]}
+            {isAdmin ? "Acesso total" : subscriptionStatusLabels[membership.status]}
           </p>
           <p className="mt-1 text-xs text-muted">
             {profilePlanStatusLabels[membership.profilePlan]}
@@ -91,12 +98,14 @@ export function SubscriptionDashboard({ data }: SubscriptionDashboardProps) {
         </Card>
         <Card className="p-5">
           <p className="text-xs uppercase tracking-wide text-muted-light">
-            {membership.subscription?.autoRenew ? "Próxima renovação" : "Válido até"}
+            {renewsAutomatically ? "Próxima renovação" : "Válido até"}
           </p>
           <p className="mt-1 font-heading text-2xl text-forest">
-            {data.nextRenewal
-              ? formatSubscriptionDate(data.nextRenewal)
-              : "—"}
+            {isAdmin
+              ? "Sem prazo"
+              : data.nextRenewal
+                ? formatSubscriptionDate(data.nextRenewal)
+                : "—"}
           </p>
         </Card>
         <Card className="p-5">
@@ -104,7 +113,7 @@ export function SubscriptionDashboard({ data }: SubscriptionDashboardProps) {
             Provedor
           </p>
           <p className="mt-1 font-heading text-2xl text-forest">
-            {providerLabel(membership.provider)}
+            {isAdmin ? "Sem cobrança" : providerLabel(membership.provider)}
           </p>
         </Card>
       </section>
@@ -113,19 +122,23 @@ export function SubscriptionDashboard({ data }: SubscriptionDashboardProps) {
         <div className="flex flex-wrap items-start justify-between gap-4">
           <div>
             <h2 className="font-heading text-xl text-forest">Detalhes do plano</h2>
-            <p className="mt-2 text-sm text-muted">{planSummary}</p>
-            {membership.isPremium && membership.expiresAt && (
+            <p className="mt-2 text-sm text-muted">
+              {isAdmin
+                ? "Conta de administrador: acesso a todo o conteúdo do Clube, sem assinatura."
+                : planSummary}
+            </p>
+            {!isAdmin && membership.isPremium && membership.expiresAt && (
               <p className="mt-1 text-sm text-muted">
                 Válido até {formatSubscriptionDate(membership.expiresAt)}
               </p>
             )}
-            {membership.isPremium && subscription?.autoRenew && (
+            {!isAdmin && membership.isPremium && renewsAutomatically && (
               <p className="mt-1 text-sm text-muted">
                 Renovação automática ativa
               </p>
             )}
           </div>
-          {!membership.isPremium && (
+          {!isAdmin && !membership.isPremium && (
             <Button href={routes.assinar} variant="gold" size="sm">
               Assinar agora
             </Button>
@@ -133,7 +146,9 @@ export function SubscriptionDashboard({ data }: SubscriptionDashboardProps) {
         </div>
       </Card>
 
-      <ManageSubscriptionPanel membership={membership} activePlan={activeBillingPlan} />
+      {!isAdmin && (
+        <ManageSubscriptionPanel membership={membership} activePlan={activeBillingPlan} />
+      )}
 
       <ActiveBenefitsList membership={membership} />
 

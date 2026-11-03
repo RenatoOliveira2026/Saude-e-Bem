@@ -55,8 +55,8 @@ T-05 ─┘
 | Correção proposta | `next` e `eslint-config-next` para `16.4.5` (ou mais recente estável da linha 16); `npm audit fix` para as transitivas; ler as notas de versão em `node_modules/next/dist/docs/` |
 | Critérios de conclusão | `npm audit --omit=dev` sem críticas nem altas; build ok; navegação principal ok |
 | Testes | `tsc`, lint, build; no preview: home, login, `/admin`, um protocolo premium, `/assinar` (sem pagar), imagens carregando |
-| Situação | Pendente |
-| Próxima ação | PR de atualização |
+| Situação | **Concluída no código** (03/11/2026): `next` e `eslint-config-next` em 16.4.5 + `npm audit fix`; `npm audit --omit=dev` → 0 vulnerabilidades; `tsc` ok; lint sem erros novos (os 4 já existentes seguem); build ok; `next start` local respondeu 200 em `/`, `/clube`, `/blog`, `/protocolos`, `/marketplace`, `/sitemap.xml` e 307 em `/admin` |
+| Próxima ação | Merge; conferir no ar home, `/entrar`, `/admin`, um protocolo premium e imagens |
 
 ### T-04 — Proteger a Server Action de simulação de pagamento · **P1**
 
@@ -223,8 +223,8 @@ T-05 ─┘
 | Correção proposta | `next/font/local` com arquivos woff2 (subconjunto latin, pesos usados) em [`src/app/fonts/`](../src/app/fonts/), licença SIL OFL junto |
 | Critérios de conclusão | Build sem acesso ao Google; visual idêntico |
 | Testes | `next build` sem stub de fontes (passou); página `/clube` renderizada com Montserrat 400–700 e Open Sans 400–600 carregadas e acentos corretos |
-| Situação | **Concluída no código** (03/11/2026); confirmar deploy de produção após o merge |
-| Próxima ação | Merge e acompanhar o deploy |
+| Situação | **Concluída** (03/11/2026): PR #51, deploy de produção com sucesso (publicou também #49 e #50) |
+| Próxima ação | — |
 
 ## Melhorias opcionais (não bloqueiam)
 

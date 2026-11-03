@@ -30,7 +30,8 @@
 - **Agravante (painel):** a organização Supabase tem um único projeto "Saude-e-Bem", o que indica que o desenvolvimento usa o banco de produção.
 - **Mitigação existente:** `/dev-login` é bloqueado em produção (`proxy.ts` e `isDevLoginAllowed()`).
 - **Não verificado:** se a senha atual da conta em produção é essa. Não foi testado, de propósito.
-- **Ação imediata (dono):** trocar a senha da conta pelo próprio site e ativar MFA quando disponível (S-09). **Correção no código:** WORK_PLAN **T-01**.
+- **Ação imediata (dono):** trocar a senha da conta pelo próprio site e ativar MFA quando disponível (T-12). **Correção no código:** WORK_PLAN **T-01**.
+- **Situação (03/11/2026):** correção de código feita na T-01 (credenciais só em variáveis locais, sem redefinir senha de contas reais ou de admins). **Risco residual:** o valor antigo segue no histórico público do Git até o dono confirmar a troca de senha; avaliar tornar o repositório privado.
 
 <a id="s-02"></a>
 ### S-02 — Usuário pode se promover a Premium alterando o próprio perfil · **ALTO**
@@ -97,7 +98,7 @@
 | Recuperação de senha | ✅ Verificado (código) | `resetPasswordForEmail` + `/redefinir-senha`; não testado |
 | Cookies de sessão | ✅ Verificado (código) | `@supabase/ssr` com `SameSite=Lax` |
 | MFA | 🟡 Parcial | TOTP **habilitado no projeto** (painel), mas o app **não tem tela de cadastro de fator nem exige AAL2** para `/admin` |
-| Credenciais fixas no código | ❌ Problema | S-01 |
+| Credenciais fixas no código | 🟡 Parcial | Removidas na T-01; valor antigo ainda no histórico do Git (S-01). Scripts de teste usam senhas fixas só para contas descartáveis com e-mail aleatório |
 
 ### Master, perfis e permissões
 

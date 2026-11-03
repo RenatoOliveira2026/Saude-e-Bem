@@ -41,8 +41,8 @@ T-05 ─┘
 | Correção proposta | Migração `052`: trigger `BEFORE UPDATE` em `profiles` que rejeita mudança de `plan`, `membership_tier` e `club_joined_at` quando quem altera não é `service_role` nem admin (ou `REVOKE UPDATE` + `GRANT UPDATE (colunas editáveis)` para `authenticated`). Ajustar a política para `to authenticated`. Revisar `club/access.ts` para não aceitar `profilePlan === 'admin'` como premium sem conferir `admin_users` |
 | Critérios de conclusão | Usuário comum não altera `plan`/`membership_tier` pela API (erro); continua editando nome, objetivo e dados de cobrança; webhook e admin continuam ativando premium |
 | Testes | Em ambiente de teste (ou conta de teste): PATCH via REST com JWT de usuário comum → negado; fluxo de pagamento stub → premium ativado; edição de perfil → ok |
-| Situação | **Migração pronta, não aplicada.** Vulnerabilidade confirmada em produção por teste desfeito (03/11/2026). [`052_protect_profile_plan.sql`](../supabase/migrations/052_protect_profile_plan.sql): trigger `profiles_protect_privileged_columns` (SECURITY INVOKER, bloqueia `plan`/`membership_tier`/`club_joined_at`/`id` para `authenticated`/`anon` não admin) + políticas de `profiles` alinhadas a `authenticated`. Teste: [`test-t02-profile-plan.sql`](../supabase/scripts/test-t02-profile-plan.sql) |
-| Próxima ação | Dono aprova e aplica a 052 no SQL Editor (ou autoriza explicitamente a aplicação); rodar o teste e esperar `usuario->plan: bloqueado`, `usuario->tier: bloqueado`, `usuario->nome: permitido`, `sistema->plan: permitido` |
+| Situação | **Concluída** em 03/11/2026: migração 052 aplicada em produção pelo dono (SQL Editor) e conferida — trigger presente; políticas de `profiles` agora `authenticated`. Teste desfeito retornou `usuario->plan: bloqueado \| usuario->tier: bloqueado \| usuario->nome: permitido \| sistema->plan: permitido` (PR #49) |
+| Próxima ação | Acompanhar o próximo pagamento real: assinatura deve ativar normalmente (o trigger permite service role e funções do sistema) |
 
 ### T-03 — Atualizar Next.js e dependências vulneráveis · **P0**
 

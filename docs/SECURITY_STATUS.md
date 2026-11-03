@@ -34,12 +34,12 @@
 - **Situação (03/11/2026):** correção de código feita na T-01 (credenciais só em variáveis locais, sem redefinir senha de contas reais ou de admins). **Risco residual:** o valor antigo segue no histórico público do Git até o dono confirmar a troca de senha; avaliar tornar o repositório privado.
 
 <a id="s-02"></a>
-### S-02 — Usuário pode se promover a Premium alterando o próprio perfil · **ALTO**
+### S-02 — Usuário pode se promover a Premium alterando o próprio perfil · **ALTO → RESOLVIDO (03/11/2026)**
 
 - **Evidência (painel + código):** no banco de produção existe a política `Users can update own profile` (UPDATE em `profiles`, sem restrição de colunas) e **não há trigger** em `profiles` além de `profiles_updated_at`. `profiles.plan` aceita `premium_monthly`, `premium_annual` e `admin` ([`030_phase_5_5_monetization.sql`](../supabase/migrations/030_phase_5_5_monetization.sql)). Em [`src/lib/club/access.ts`](../src/lib/club/access.ts), quem **não tem linha em `subscriptions`** é premium se `profiles.plan`/`membership_tier` disser isso. A função SQL `user_has_active_premium` também confia em `profiles.plan`.
 - **Consequência provável:** qualquer usuário logado, chamando a API REST do Supabase com a chave pública (anon) e a própria sessão, pode gravar `plan = 'premium_annual'` e liberar o Clube sem pagar.
 - **Confirmado em 03/11/2026 (produção, somente leitura + teste desfeito):** o papel `authenticated` tem `UPDATE` em todas as colunas de `profiles`, inclusive `plan` e `membership_tier`. Um teste em bloco que termina com erro proposital (nada gravado) mostrou `usuario->plan: PERMITIDO` e `usuario->tier: PERMITIDO`. Script: [`supabase/scripts/test-t02-profile-plan.sql`](../supabase/scripts/test-t02-profile-plan.sql).
-- **Correção:** WORK_PLAN **T-02** — migração [`052_protect_profile_plan.sql`](../supabase/migrations/052_protect_profile_plan.sql) criada; **aplicação em produção pendente de aprovação do dono**.
+- **Correção aplicada:** migração [`052_protect_profile_plan.sql`](../supabase/migrations/052_protect_profile_plan.sql) aplicada em produção em 03/11/2026. Reteste (desfeito): `usuario->plan: bloqueado`, `usuario->tier: bloqueado`, `usuario->nome: permitido`, `sistema->plan: permitido`.
 
 <a id="s-03"></a>
 ### S-03 — Server Action de simulação de pagamento sem autenticação · **MÉDIO**
@@ -86,7 +86,7 @@
 | Sessão validada no servidor | ✅ Verificado (código) | `supabase.auth.getUser()` em [`middleware.ts`](../src/lib/supabase/middleware.ts) e [`session.ts`](../src/lib/auth/session.ts) |
 | Rotas privadas exigem login | ✅ Verificado (código) | [`proxy.ts`](../src/proxy.ts) + [`auth/routes.ts`](../src/lib/auth/routes.ts) |
 | Autorização de admin no servidor | ✅ Verificado (código) | `requireAdmin*` em todas as páginas `/admin` e Server Actions de admin; exports com `getAdminSession()`; RLS com `is_admin()` |
-| Autorização de escrita de usuário | 🟡 Parcial | RLS por `auth.uid()` nas tabelas de usuário; **exceção grave em `profiles`** (S-02) |
+| Autorização de escrita de usuário | ✅ Verificado (produção, teste desfeito) | RLS por `auth.uid()` nas tabelas de usuário; colunas de plano de `profiles` protegidas por trigger desde a 052 (S-02 resolvido) |
 | Server Actions sem guarda | 🟡 Parcial | `simulatePaymentApprovalAction` (S-03). Públicas por design: newsletter, leads, analytics, salvar ferramenta |
 | Redirecionamento seguro após login | ✅ Verificado (código) | [`safe-redirect.ts`](../src/lib/auth/safe-redirect.ts) recusa `//` e caminhos externos |
 
@@ -107,7 +107,7 @@
 | Papéis definidos | ✅ Verificado (código) | `super_admin`/`admin` em [`roles.ts`](../src/lib/admin/roles.ts) e enum `admin_role` |
 | Gestão de admins restrita | ✅ Verificado (código) | `requireSuperAdmin()`; política `Super admins manage admin users` |
 | Bootstrap de admin por e-mail fixo | 🟡 Parcial | `ensure_bootstrap_admin()` concede `super_admin` ao e-mail do dono ([`006`](../supabase/migrations/006_admin_roles.sql)); seguro enquanto essa conta existir e estiver protegida |
-| Escalada via `profiles.plan = 'admin'` | ❌ Problema | Dá premium (não dá painel admin); ver S-02 |
+| Escalada via `profiles.plan = 'admin'` | ✅ Verificado (produção) | Bloqueada pelo trigger da 052 para não admins |
 
 ### Isolamento e RLS
 

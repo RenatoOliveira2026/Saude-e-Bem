@@ -145,15 +145,21 @@ export default async function ProtocoloDetailPage({ params }: PageProps) {
             { name: "Protocolos", path: routes.protocolos },
             { name: protocol.title },
           ]),
-          howToJsonLd({
-            title: protocol.title,
-            description: protocol.seoDescription ?? protocol.description,
-            path: routes.protocolo(slug),
-            steps: protocol.steps.map((step) => ({
-              title: step.title,
-              description: step.description,
-            })),
-          }),
+          // T-05: protocolo premium chega sem passos para quem não assina;
+          // nesse caso não há HowTo (os passos não vão para o código da página).
+          ...(protocol.steps.length > 0
+            ? [
+                howToJsonLd({
+                  title: protocol.title,
+                  description: protocol.seoDescription ?? protocol.description,
+                  path: routes.protocolo(slug),
+                  steps: protocol.steps.map((step) => ({
+                    title: step.title,
+                    description: step.description,
+                  })),
+                }),
+              ]
+            : []),
         ]}
       />
       <Breadcrumbs

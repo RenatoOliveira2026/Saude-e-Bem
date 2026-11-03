@@ -52,8 +52,9 @@
 ### S-04 — Conteúdo premium legível pela API pública · **ALTO (receita)**
 
 - **Evidência (migrações):** as políticas de leitura de `articles`, `protocols` e `ebooks` ([`002_content_and_favorites.sql`](../supabase/migrations/002_content_and_favorites.sql)) liberam a `anon` toda linha com `status = 'published'`, **inclusive `is_premium = true`**. O bloqueio premium existe só na página ([`PremiumContentGuard`](../src/components/club/PremiumContentGuard.tsx)).
-- **Não verificado:** se as políticas em produção continuam iguais às da migração; não houve chamada à API.
-- **Correção:** WORK_PLAN **T-05**.
+- **Confirmado em produção (03/11/2026, consulta somente leitura):** políticas iguais às da migração; 12 de 16 protocolos e 2 de 30 artigos premium publicados legíveis por `anon`. Além da API, a página do protocolo publicava os passos premium no JSON-LD (HowTo) e a do artigo, o FAQ extraído do corpo.
+- **Correção:** WORK_PLAN **T-05** — migrações 053 (views de catálogo) e 054 (políticas), código lendo as views. **Resolvido depois de aplicar a 054 e rodar o teste.**
+- **Observação (não corrigida):** `user_has_active_premium(p_user_id)` aceita qualquer id e é executável por `anon`, então permite consultar se um id de usuário é assinante; e, se o perfil existe com `plan = 'free'`, a função devolve falso sem olhar `subscriptions` (o app depende da sincronização do perfil). Avaliar em tarefa própria.
 
 <a id="s-05"></a>
 ### S-05 — Next.js com vulnerabilidades críticas conhecidas · **ALTO**

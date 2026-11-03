@@ -61,7 +61,7 @@ src/
 ├── proxy.ts        # Middleware: sessão + guarda de rotas
 └── instrumentation.ts  # Ajuste de TLS só em desenvolvimento
 supabase/
-├── migrations/     # 001…051 — SQL aplicado manualmente (ver §4)
+├── migrations/     # 001…054 — SQL aplicado manualmente (ver §4)
 └── scripts/        # grant-admin.sql
 scripts/            # Seeds, auditorias e verificações (Node) — vários tocam produção
 public/             # Estáticos, manifest, service worker
@@ -138,7 +138,7 @@ Identificadores estáveis. Não renomeie; ao criar módulo novo, use o próximo 
 |---|---|
 | Rotas | Público: `/blog`, `/blog/[slug]`. Admin: `/admin/artigos`, `/novo`, `/[id]/editar`, `/admin/conteudos` |
 | Arquivos | [`src/lib/data/repositories/blog.repository.ts`](../src/lib/data/repositories/blog.repository.ts), [`src/lib/supabase/services/articles.service.ts`](../src/lib/supabase/services/articles.service.ts), [`src/lib/admin/actions/articles.actions.ts`](../src/lib/admin/actions/articles.actions.ts), [`src/lib/admin/services/articles.service.ts`](../src/lib/admin/services/articles.service.ts), [`src/components/content/ContentBlockRenderer.tsx`](../src/components/content/ContentBlockRenderer.tsx), [`src/lib/blog/`](../src/lib/blog/) |
-| Tabelas | `articles` (RLS: público lê `published`; admin escreve) |
+| Tabelas | `articles` (RLS: público lê `published` gratuito; premium só assinante/admin após a 054; admin escreve) e view `articles_public` (catálogo, corpo vazio nas premium — migração 053, T-05) |
 | Permissões | Leitura pública; premium via CLUBE-002; edição `manage_content` |
 | Depende de | CLUBE-002, AFILIADOS-001 (produtos no fim), SEO-001, ANALYTICS-001 |
 
@@ -340,14 +340,14 @@ Server Actions (`"use server"`): admin em [`src/lib/admin/actions/`](../src/lib/
 
 ## 4. Banco de dados (Supabase / PostgreSQL)
 
-**Origem:** migrações em [`supabase/migrations/`](../supabase/migrations/) (001–051; há dois arquivos com prefixo `037`). **Não há controle automático de migrações**: não existe `supabase/config.toml` nem histórico da CLI, e as migrações vêm sendo aplicadas manualmente pelo SQL Editor. Portanto, **o código das migrações não prova o estado do banco**. Divergência já observada: as políticas `Users can update own profile`/`Users can view own profile` estão no banco aplicadas ao papel `public`, enquanto a migração 001 usa `authenticated` (a 052 corrigiu em 03/11/2026).
+**Origem:** migrações em [`supabase/migrations/`](../supabase/migrations/) (001–054; há dois arquivos com prefixo `037`). **Não há controle automático de migrações**: não existe `supabase/config.toml` nem histórico da CLI, e as migrações vêm sendo aplicadas manualmente pelo SQL Editor. Portanto, **o código das migrações não prova o estado do banco**. Divergência já observada: as políticas `Users can update own profile`/`Users can view own profile` estão no banco aplicadas ao papel `public`, enquanto a migração 001 usa `authenticated` (a 052 corrigiu em 03/11/2026).
 
 ### Tabelas (36 nas migrações; todas com RLS habilitada no SQL)
 
 | Grupo | Tabelas | Migração de origem |
 |---|---|---|
 | Usuários | `profiles`, `user_preferences`, `favorites`, `admin_users` | 001, 002, 004 |
-| Conteúdo | `articles`, `protocols`, `ebooks`, `library_items`, `protocol_categories`, `content_rankings` | 002, 018, 019, 024 |
+| Conteúdo | `articles`, `protocols`, `ebooks`, `library_items`, `protocol_categories`, `content_rankings`; views de catálogo `articles_public`, `protocols_public`, `ebooks_public` | 002, 018, 019, 024, 053 |
 | Atividade do usuário | `user_downloads`, `user_saved_protocols`, `user_content_access`, `user_content_history`, `user_protocol_history`, `user_tool_results` | 014, 017–020 |
 | Pagamentos/assinatura | `subscriptions`, `payments`, `payment_webhook_events`, `financial_events`, `discount_coupons`, `discount_coupon_redemptions`, `membership_plans`, `user_memberships` | 014–016, 029, 030, 036 |
 | Leads/CRM | `newsletter_leads`, `newsletter_subscribers`, `lead_interactions`, `lead_automation_runs` | 009, 012, 028 |
@@ -399,6 +399,7 @@ Não há testes automatizados (unitários, integração ou E2E).
 
 ## 7. Sugestões de padronização (não aplicadas)
 
-- Há dois arquivos de migração com prefixo `037` (`037_phase_6_1_pricing.sql` e `037_seed_seo_articles_71a.sql`). Manter; numerar as próximas a partir de `052`.
+- **Conteúdo premium (T-05):** listagens, cards, favoritos, histórico e sitemap leem as views `*_public` (corpo vazio nas linhas premium). Só a página de detalhe de um item premium lê a tabela, e o banco só devolve a linha para assinante ou admin. Nova consulta pública de conteúdo deve usar a view; ler a tabela só quando precisar do corpo.
+- Há dois arquivos de migração com prefixo `037` (`037_phase_6_1_pricing.sql` e `037_seed_seo_articles_71a.sql`). Manter; numerar as próximas a partir de `055`.
 - `README.md` e `docs/PROJECT_STATUS.md` descrevem `middleware.ts`; no Next 16 o arquivo é [`src/proxy.ts`](../src/proxy.ts).
 - Diretórios com nomes próximos (`recommendations` × `recommendation-engine`, `protocols` × `protocol-library` × `intelligent-protocols`, `email` × `email-automation` × `brevo`) poderiam ser consolidados no futuro, sem urgência.

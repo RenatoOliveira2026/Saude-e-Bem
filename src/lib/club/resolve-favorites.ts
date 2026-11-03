@@ -18,7 +18,7 @@ export async function resolveFavorites(
   const [articles, protocols, ebooks] = await Promise.all([
     byType.article.length > 0
       ? supabase
-          .from("articles")
+          .from("articles_public")
           .select("id, slug, title, category_label, is_premium")
           .in(
             "id",
@@ -27,7 +27,7 @@ export async function resolveFavorites(
       : Promise.resolve({ data: [], error: null }),
     byType.protocol.length > 0
       ? supabase
-          .from("protocols")
+          .from("protocols_public")
           .select("id, slug, title, category_label, is_premium")
           .in(
             "id",
@@ -36,7 +36,7 @@ export async function resolveFavorites(
       : Promise.resolve({ data: [], error: null }),
     byType.ebook.length > 0
       ? supabase
-          .from("ebooks")
+          .from("ebooks_public")
           .select("id, slug, title, category_label, is_premium")
           .in(
             "id",

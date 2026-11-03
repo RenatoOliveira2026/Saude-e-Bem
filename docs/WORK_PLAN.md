@@ -83,8 +83,8 @@ T-05 ─┘
 | Correção proposta | Opção A: política de SELECT com `is_premium = false OR user_has_active_premium(auth.uid()) OR is_admin()`, mantendo listagens por uma view ou colunas públicas (título, resumo, capa). Opção B: separar o corpo premium em tabela própria com RLS. Ajustar repositórios que listam conteúdo premium para não depender do corpo |
 | Critérios de conclusão | Visitante e free veem título e resumo, mas não o corpo premium via REST; premium e admin veem tudo; páginas e sitemap continuam funcionando |
 | Testes | REST com anon e com JWT free/premium em ambiente de teste; navegação nas páginas premium |
-| Situação | Pendente |
-| Próxima ação | Levantar políticas atuais de `articles`, `protocols`, `ebooks` no painel |
+| Situação | **Concluída no código** (03/11/2026). Produção conferida (somente leitura): 12 de 16 protocolos e 2 de 30 artigos premium publicados, todos legíveis por `anon`; nenhum e-book premium. Opção A com views: [`053`](../supabase/migrations/053_premium_content_catalog.sql) cria `articles_public`, `protocols_public`, `ebooks_public` (corpo vazio nas premium, só SELECT); [`054`](../supabase/migrations/054_premium_content_rls.sql) restringe as tabelas. App: listagens, favoritos, histórico e sitemap leem as views; o detalhe premium lê a tabela. A página do protocolo deixou de publicar os passos premium no JSON-LD (HowTo) para quem não assina. Teste em Postgres local (PGlite) com o script [`test-t05-premium-content.sql`](../supabase/scripts/test-t05-premium-content.sql): antes da 054 visitante via 12 protocolos premium na tabela; depois, visitante/free 0, assinante 12, admin 12 + rascunho; view sem corpo premium; escrita pela view bloqueada |
+| Próxima ação | Ordem: (1) aplicar **053** no SQL Editor; (2) merge do PR e deploy; (3) aplicar **054**; (4) rodar o script de teste; (5) abrir um protocolo premium deslogado (convite para assinar) e logado como admin (conteúdo completo) |
 
 ### T-06 — Tornar privados os PDFs premium · **P1**
 

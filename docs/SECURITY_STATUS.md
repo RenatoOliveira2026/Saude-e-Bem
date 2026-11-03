@@ -170,9 +170,9 @@
 | Dependências atualizadas | ✅ Ok (03/11/2026, após T-03) | S-05 |
 | Separação de ambientes | ❌ Não encontrado | Um único projeto Supabase; segredos (service role, Mercado Pago) disponíveis em **Preview** |
 | Proteção do branch de produção | ❌ Não encontrado | `master` sem proteção; push publica direto |
-| CI (lint, build, testes) | ❌ Não encontrado | Sem GitHub Actions; a Vercel só faz o build |
+| CI (lint, build, testes) | 🟡 Parcial | GitHub Actions com `tsc`, lint, build e `npm audit` (T-07); sem testes automatizados |
 | Testes automatizados | ❌ Não encontrado | Nenhum |
-| Lint | 🟡 Parcial | 4 erros e 31 avisos (`react-hooks`) |
+| Lint | ✅ Ok | 0 erros (T-07); 31 avisos |
 
 ### Privacidade, retenção e exclusão
 

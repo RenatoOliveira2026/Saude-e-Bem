@@ -11,14 +11,14 @@ Vale para qualquer pessoa ou IA que alterar o projeto:
 1. **Consultar o mapa e conferir o código atual.** Abra o [PROJECT_MAP](PROJECT_MAP.md), localize o módulo e leia os arquivos citados **na versão atual**. O mapa é referência, não garantia. Se divergir, investigue e corrija o mapa na mesma tarefa.
 2. **Identificar o módulo e as dependências afetadas.** Use a tabela abaixo e a coluna "Depende de" do mapa. Inclua banco (migrações, RLS, funções), integrações externas e telas que leem o mesmo dado.
 3. **Reutilizar soluções existentes** quando adequadas: guardas (`requireUser`, `requireAdmin*`, `isCronAuthorized`), clientes Supabase (`server.ts`, `service-role.ts`), preços (`src/lib/payments/pricing.ts`), redirecionamento seguro (`safe-redirect.ts`), validadores existentes, `routes.ts`.
-4. **Implementar dentro do escopo pedido.** Não renomear arquivos, tabelas ou funções só para padronizar. Mudança de banco = nova migração numerada (próxima: `052_...sql`), nunca editar migração antiga.
+4. **Implementar dentro do escopo pedido.** Não renomear arquivos, tabelas ou funções só para padronizar. Mudança de banco = nova migração numerada (próxima: `056_...sql`), nunca editar migração antiga.
 5. **Executar as verificações pertinentes** (seção "Validações padrão"). Não rodar scripts que alteram dados ou chamam produção como se fossem testes.
 6. **Atualizar a documentação afetada:** mapa (arquivos, rotas, tabelas), [SECURITY_STATUS](SECURITY_STATUS.md) se mudar algum requisito, [WORK_PLAN](WORK_PLAN.md) (situação da tarefa).
 7. **Informar** o que mudou, como foi validado e o que ficou pendente (incluindo o que não pôde ser verificado).
 
 ### Regras permanentes
 
-- Trabalhar em branch e abrir Pull Request; nunca fazer push direto em `master` (publica em produção).
+- Trabalhar em branch e abrir Pull Request; nunca fazer push direto em `master` (publica em produção). Desde a T-07 o `master` exige PR com a checagem **CI / Verificar** verde (`tsc`, lint, build, `npm audit`).
 - Migração SQL: aplicar primeiro em ambiente de teste quando existir (T-08); registrar no PR **como e quando** foi aplicada em produção.
 - Nunca colocar senha, token ou chave em código, documentação, commit ou mensagem.
 - Toda rota de API ou Server Action nova precisa de guarda explícita (ou comentário explicando por que é pública).

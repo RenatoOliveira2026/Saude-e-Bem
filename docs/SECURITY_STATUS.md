@@ -42,26 +42,26 @@
 - **Correção aplicada:** migração [`052_protect_profile_plan.sql`](../supabase/migrations/052_protect_profile_plan.sql) aplicada em produção em 03/11/2026. Reteste (desfeito): `usuario->plan: bloqueado`, `usuario->tier: bloqueado`, `usuario->nome: permitido`, `sistema->plan: permitido`.
 
 <a id="s-03"></a>
-### S-03 — Server Action de simulação de pagamento sem autenticação · **MÉDIO**
+### S-03 — Server Action de simulação de pagamento sem autenticação · **MÉDIO → RESOLVIDO (03/11/2026)**
 
 - **Evidência (código):** [`simulate.actions.ts`](../src/lib/payments/actions/simulate.actions.ts) não verifica usuário. [`simulatePaymentApproval`](../src/lib/payments/mercadopago/webhook.ts) só bloqueia quando **não** está em modo stub **e** o Mercado Pago está configurado. Se `MERCADOPAGO_ACCESS_TOKEN` faltar em algum ambiente, qualquer pessoa que conheça uma `external_reference` aprova o pagamento e ativa a assinatura.
 - **Hoje:** em produção o token existe (nome visto na Vercel), então o caminho está bloqueado; a proteção depende de configuração.
-- **Correção:** WORK_PLAN **T-04** (03/11/2026) — a action recusa sempre fora do stub (que só liga com `NODE_ENV !== "production"`), exige usuário logado e só aceita o dono do pagamento ou admin; `simulatePaymentApproval` também deixou de depender do token do Mercado Pago. **Resolvido após o deploy do PR de T-04.**
+- **Correção:** WORK_PLAN **T-04** (03/11/2026) — a action recusa sempre fora do stub (que só liga com `NODE_ENV !== "production"`), exige usuário logado e só aceita o dono do pagamento ou admin; `simulatePaymentApproval` também deixou de depender do token do Mercado Pago. **Resolvido** (PR #53 em produção).
 
 <a id="s-04"></a>
-### S-04 — Conteúdo premium legível pela API pública · **ALTO (receita)**
+### S-04 — Conteúdo premium legível pela API pública · **ALTO (receita) → RESOLVIDO (03/11/2026)**
 
 - **Evidência (migrações):** as políticas de leitura de `articles`, `protocols` e `ebooks` ([`002_content_and_favorites.sql`](../supabase/migrations/002_content_and_favorites.sql)) liberam a `anon` toda linha com `status = 'published'`, **inclusive `is_premium = true`**. O bloqueio premium existe só na página ([`PremiumContentGuard`](../src/components/club/PremiumContentGuard.tsx)).
 - **Confirmado em produção (03/11/2026, consulta somente leitura):** políticas iguais às da migração; 12 de 16 protocolos e 2 de 30 artigos premium publicados legíveis por `anon`. Além da API, a página do protocolo publicava os passos premium no JSON-LD (HowTo) e a do artigo, o FAQ extraído do corpo.
-- **Correção:** WORK_PLAN **T-05** — migrações 053 (views de catálogo) e 054 (políticas), código lendo as views. **Resolvido depois de aplicar a 054 e rodar o teste.**
+- **Correção:** WORK_PLAN **T-05** — migrações 053 (views de catálogo) e 054 (políticas), código lendo as views. **Resolvido em 03/11/2026** (053 e 054 aplicadas; teste em produção: visitante e free leem 0 protocolos premium na tabela, assinante e admin 12; view sem corpo premium).
 - **Observação (não corrigida):** `user_has_active_premium(p_user_id)` aceita qualquer id e é executável por `anon`, então permite consultar se um id de usuário é assinante; e, se o perfil existe com `plan = 'free'`, a função devolve falso sem olhar `subscriptions` (o app depende da sincronização do perfil). Avaliar em tarefa própria.
 
 <a id="s-05"></a>
-### S-05 — Next.js com vulnerabilidades críticas conhecidas · **ALTO**
+### S-05 — Next.js com vulnerabilidades críticas conhecidas · **ALTO → RESOLVIDO (03/11/2026)**
 
 - **Evidência (`npm audit`, 03/11/2026):** `next@16.2.6` tem avisos **críticos** (ex.: execução remota de código na otimização de imagens com SVG/AVIF — GHSA-2464-fhr4-w9xw, GHSA-2xp9-vwfh-vxw4; RCE em `next/og` — GHSA-vcvr-r3jv-pc5j) e altos (bypass de proxy, SSRF, DoS em Server Actions). O site usa `next/image` com hosts remotos. Correção disponível em `next@16.4.5` (sem mudança de versão maior). Também há avisos em `postcss`, `nanoid`, `sharp`, `source-map-js` e `baseline-browser-mapping`.
 - **Não verificado:** se a infraestrutura da Vercel já mitiga algum desses casos.
-- **Correção:** WORK_PLAN **T-03** — `next@16.4.5` e `npm audit fix` (03/11/2026); `npm audit --omit=dev` sem vulnerabilidades. **Resolvido após o deploy do PR de T-03.**
+- **Correção:** WORK_PLAN **T-03** — `next@16.4.5` e `npm audit fix` (03/11/2026); `npm audit --omit=dev` sem vulnerabilidades. **Resolvido** (PR #52 em produção).
 
 <a id="s-06"></a>
 ### S-06 — Webhook do Mercado Pago aceita notificação sem assinatura · **BAIXO/MÉDIO**
@@ -88,7 +88,7 @@
 | Rotas privadas exigem login | ✅ Verificado (código) | [`proxy.ts`](../src/proxy.ts) + [`auth/routes.ts`](../src/lib/auth/routes.ts) |
 | Autorização de admin no servidor | ✅ Verificado (código) | `requireAdmin*` em todas as páginas `/admin` e Server Actions de admin; exports com `getAdminSession()`; RLS com `is_admin()` |
 | Autorização de escrita de usuário | ✅ Verificado (produção, teste desfeito) | RLS por `auth.uid()` nas tabelas de usuário; colunas de plano de `profiles` protegidas por trigger desde a 052 (S-02 resolvido) |
-| Server Actions sem guarda | 🟡 Parcial | `simulatePaymentApprovalAction` (S-03). Públicas por design: newsletter, leads, analytics, salvar ferramenta |
+| Server Actions sem guarda | ✅ Ok | `simulatePaymentApprovalAction` corrigida na T-04 (S-03). Públicas por design: newsletter, leads, analytics, salvar ferramenta |
 | Redirecionamento seguro após login | ✅ Verificado (código) | [`safe-redirect.ts`](../src/lib/auth/safe-redirect.ts) recusa `//` e caminhos externos |
 
 ### Senhas, sessões, recuperação e MFA
@@ -117,7 +117,7 @@
 | Multiempresa | ➖ Não aplicável | Não há tenants; isolamento é por usuário |
 | RLS habilitada | ✅ Verificado (migrações) | As 36 tabelas têm `enable row level security`. **Estado do banco conferido só para `profiles`** |
 | Políticas por usuário | ✅ Verificado (migrações) | `auth.uid() = user_id` em favoritos, histórico, downloads, resultados, pagamentos (leitura) |
-| Conteúdo premium | ❌ Problema | S-04 |
+| Conteúdo premium | ✅ Verificado (produção, teste desfeito) | S-04: tabelas só devolvem premium para assinante/admin; catálogo `*_public` sem corpo premium (053/054) |
 | Funções `SECURITY DEFINER` | 🟡 Parcial | Funções de painel checam `is_admin()`. `expire_due_subscriptions` e `refresh_content_rankings` podem ser chamadas por qualquer logado (efeito limitado, consome recurso). `user_has_active_premium(uuid)` está liberada para `anon` (permite saber se um id é premium). Sem `REVOKE ... FROM PUBLIC` na maioria |
 | Migrações = banco | ❔ Não verificado | Sem controle de migrações; divergência já observada em `profiles` |
 

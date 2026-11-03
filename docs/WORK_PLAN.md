@@ -55,8 +55,8 @@ T-05 ─┘
 | Correção proposta | `next` e `eslint-config-next` para `16.4.5` (ou mais recente estável da linha 16); `npm audit fix` para as transitivas; ler as notas de versão em `node_modules/next/dist/docs/` |
 | Critérios de conclusão | `npm audit --omit=dev` sem críticas nem altas; build ok; navegação principal ok |
 | Testes | `tsc`, lint, build; no preview: home, login, `/admin`, um protocolo premium, `/assinar` (sem pagar), imagens carregando |
-| Situação | **Concluída no código** (03/11/2026): `next` e `eslint-config-next` em 16.4.5 + `npm audit fix`; `npm audit --omit=dev` → 0 vulnerabilidades; `tsc` ok; lint sem erros novos (os 4 já existentes seguem); build ok; `next start` local respondeu 200 em `/`, `/clube`, `/blog`, `/protocolos`, `/marketplace`, `/sitemap.xml` e 307 em `/admin` |
-| Próxima ação | Merge; conferir no ar home, `/entrar`, `/admin`, um protocolo premium e imagens |
+| Situação | **Concluída** (03/11/2026, PR #52 em produção; site conferido no ar): `next` e `eslint-config-next` em 16.4.5 + `npm audit fix`; `npm audit --omit=dev` → 0 vulnerabilidades; `tsc` ok; lint sem erros novos (os 4 já existentes seguem); build ok; `next start` local respondeu 200 em `/`, `/clube`, `/blog`, `/protocolos`, `/marketplace`, `/sitemap.xml` e 307 em `/admin` |
+| Próxima ação | — |
 
 ### T-04 — Proteger a Server Action de simulação de pagamento · **P1**
 
@@ -69,8 +69,8 @@ T-05 ─┘
 | Correção proposta | Exigir `NODE_ENV !== 'production'` **e** stub ativo, independentemente do token; exigir usuário logado dono do pagamento (ou admin) |
 | Critérios de conclusão | Em produção a action sempre recusa; em dev stub funciona só para o dono |
 | Testes | Build; em dev com stub: pagamento próprio aprova, de outro usuário recusa |
-| Situação | **Concluída no código** (03/11/2026). Teste da action com dependências simuladas: produção (mesmo com stub=1) recusa; sem stub (inclusive sem token do MP) recusa; anônimo recusa; outro usuário recusa; referência inexistente recusa; dono e admin aprovam com stub em dev |
-| Próxima ação | Merge |
+| Situação | **Concluída** (03/11/2026, PR #53 em produção). Teste da action com dependências simuladas: produção (mesmo com stub=1) recusa; sem stub (inclusive sem token do MP) recusa; anônimo recusa; outro usuário recusa; referência inexistente recusa; dono e admin aprovam com stub em dev |
+| Próxima ação | — |
 
 ### T-05 — Restringir conteúdo premium na API pública · **P1**
 
@@ -83,8 +83,8 @@ T-05 ─┘
 | Correção proposta | Opção A: política de SELECT com `is_premium = false OR user_has_active_premium(auth.uid()) OR is_admin()`, mantendo listagens por uma view ou colunas públicas (título, resumo, capa). Opção B: separar o corpo premium em tabela própria com RLS. Ajustar repositórios que listam conteúdo premium para não depender do corpo |
 | Critérios de conclusão | Visitante e free veem título e resumo, mas não o corpo premium via REST; premium e admin veem tudo; páginas e sitemap continuam funcionando |
 | Testes | REST com anon e com JWT free/premium em ambiente de teste; navegação nas páginas premium |
-| Situação | **Concluída no código** (03/11/2026). Produção conferida (somente leitura): 12 de 16 protocolos e 2 de 30 artigos premium publicados, todos legíveis por `anon`; nenhum e-book premium. Opção A com views: [`053`](../supabase/migrations/053_premium_content_catalog.sql) cria `articles_public`, `protocols_public`, `ebooks_public` (corpo vazio nas premium, só SELECT); [`054`](../supabase/migrations/054_premium_content_rls.sql) restringe as tabelas. App: listagens, favoritos, histórico e sitemap leem as views; o detalhe premium lê a tabela. A página do protocolo deixou de publicar os passos premium no JSON-LD (HowTo) para quem não assina. Teste em Postgres local (PGlite) com o script [`test-t05-premium-content.sql`](../supabase/scripts/test-t05-premium-content.sql): antes da 054 visitante via 12 protocolos premium na tabela; depois, visitante/free 0, assinante 12, admin 12 + rascunho; view sem corpo premium; escrita pela view bloqueada |
-| Próxima ação | Ordem: (1) aplicar **053** no SQL Editor; (2) merge do PR e deploy; (3) aplicar **054**; (4) rodar o script de teste; (5) abrir um protocolo premium deslogado (convite para assinar) e logado como admin (conteúdo completo) |
+| Situação | **Concluída** (03/11/2026): PR #54 em produção, 053 e 054 aplicadas pelo Renato. Teste em produção (desfeito no fim): `P=12 | visitante: tabela premium=0, view premium=12, corpo premium na view=0, corpo artigo premium na view=0, gratis na tabela=4, escrever na view=bloqueado | free: tabela premium=0, view premium=12 | assinante: tabela premium=12 | admin: tabela premium=12`. Página premium logado como admin mostra o conteúdo completo. Antes: Produção conferida (somente leitura): 12 de 16 protocolos e 2 de 30 artigos premium publicados, todos legíveis por `anon`; nenhum e-book premium. Opção A com views: [`053`](../supabase/migrations/053_premium_content_catalog.sql) cria `articles_public`, `protocols_public`, `ebooks_public` (corpo vazio nas premium, só SELECT); [`054`](../supabase/migrations/054_premium_content_rls.sql) restringe as tabelas. App: listagens, favoritos, histórico e sitemap leem as views; o detalhe premium lê a tabela. A página do protocolo deixou de publicar os passos premium no JSON-LD (HowTo) para quem não assina. Teste em Postgres local (PGlite) com o script [`test-t05-premium-content.sql`](../supabase/scripts/test-t05-premium-content.sql): antes da 054 visitante via 12 protocolos premium na tabela; depois, visitante/free 0, assinante 12, admin 12 + rascunho; view sem corpo premium; escrita pela view bloqueada |
+| Próxima ação | — |
 
 ### T-06 — Tornar privados os PDFs premium · **P1**
 

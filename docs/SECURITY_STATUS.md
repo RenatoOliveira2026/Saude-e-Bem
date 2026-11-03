@@ -169,8 +169,8 @@
 |---|---|---|
 | Dependências atualizadas | ✅ Ok (03/11/2026, após T-03) | S-05 |
 | Separação de ambientes | ❌ Não encontrado | Um único projeto Supabase; segredos (service role, Mercado Pago) disponíveis em **Preview** |
-| Proteção do branch de produção | ❌ Não encontrado | `master` sem proteção; push publica direto |
-| CI (lint, build, testes) | 🟡 Parcial | GitHub Actions com `tsc`, lint, build e `npm audit` (T-07); sem testes automatizados |
+| Proteção do branch de produção | ✅ Verificado (03/11/2026) | Ruleset `master`: PR obrigatório, checagem **Verificar** obrigatória, sem force push nem exclusão, sem exceções (T-07) |
+| CI (lint, build, testes) | 🟡 Parcial | GitHub Actions com `tsc`, lint, build e `npm audit`, obrigatória para o `master` (ruleset, T-07; testado: push direto recusado, PR com erro bloqueado); sem testes automatizados |
 | Testes automatizados | ❌ Não encontrado | Nenhum |
 | Lint | ✅ Ok | 0 erros (T-07); 31 avisos |
 

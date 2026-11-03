@@ -276,10 +276,13 @@ export async function processMercadoPagoWebhook(input: {
 export async function simulatePaymentApproval(
   externalReference: string,
 ): Promise<{ ok: boolean; message: string }> {
-  if (!isStubModeEnabled() && isMercadoPagoConfigured()) {
+  // T-04 / S-03: a simulação só existe com o stub ligado (que já exige
+  // NODE_ENV !== "production"). Não depende mais de o token do Mercado Pago
+  // estar presente: sem stub, recusa sempre.
+  if (!isStubModeEnabled()) {
     return {
       ok: false,
-      message: "Simulação disponível apenas com MERCADOPAGO_STUB_MODE=1.",
+      message: "Simulação disponível apenas com MERCADOPAGO_STUB_MODE=1 fora de produção.",
     };
   }
 

@@ -46,7 +46,7 @@
 
 - **Evidência (código):** [`simulate.actions.ts`](../src/lib/payments/actions/simulate.actions.ts) não verifica usuário. [`simulatePaymentApproval`](../src/lib/payments/mercadopago/webhook.ts) só bloqueia quando **não** está em modo stub **e** o Mercado Pago está configurado. Se `MERCADOPAGO_ACCESS_TOKEN` faltar em algum ambiente, qualquer pessoa que conheça uma `external_reference` aprova o pagamento e ativa a assinatura.
 - **Hoje:** em produção o token existe (nome visto na Vercel), então o caminho está bloqueado; a proteção depende de configuração.
-- **Correção:** WORK_PLAN **T-04**.
+- **Correção:** WORK_PLAN **T-04** (03/11/2026) — a action recusa sempre fora do stub (que só liga com `NODE_ENV !== "production"`), exige usuário logado e só aceita o dono do pagamento ou admin; `simulatePaymentApproval` também deixou de depender do token do Mercado Pago. **Resolvido após o deploy do PR de T-04.**
 
 <a id="s-04"></a>
 ### S-04 — Conteúdo premium legível pela API pública · **ALTO (receita)**

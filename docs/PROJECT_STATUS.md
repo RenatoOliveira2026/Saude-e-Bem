@@ -1,5 +1,8 @@
 # Saúde & Bem — Status do Projeto
 
+> **Documento histórico (checkpoint v0.3.3).** A referência atual é [PROJECT_MAP.md](PROJECT_MAP.md).
+
+
 > **Checkpoint de referência:** [Fase 3.3](https://github.com/RenatoOliveira2026/Saude-e-Bem)  
 > **Tag:** `v0.3.3` — *Fase 3.3 concluída*  
 > **Repositório:** [github.com/RenatoOliveira2026/Saude-e-Bem](https://github.com/RenatoOliveira2026/Saude-e-Bem)  

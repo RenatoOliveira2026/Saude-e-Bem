@@ -74,7 +74,9 @@
 ### S-07 — Arquivos privados em bucket público · **MÉDIO**
 
 - **Evidência (painel):** `cms-pdfs` é **público** (50 MB) e guarda e-books, inclusive os premium. Quem tiver a URL baixa sem login. `cms-images` aceita `image/svg+xml` em bucket público; o SVG roda no domínio do Supabase, não no do site, então o risco é baixo.
-- **Correção:** WORK_PLAN **T-06**.
+- **Inventário (03/11/2026, somente leitura):** nenhum e-book premium; os PDFs gratuitos são servidos de `/materiais/`; `cms-pdfs` tem 1 arquivo sem referência. Ou seja, nada pago estava exposto.
+- **Correção:** WORK_PLAN **T-06** — migração 055 (bucket privado `cms-pdfs-premium`, SVG fora de `cms-images`) e link assinado de 10 min para assinante/admin. **Resolvido depois de aplicar a 055.**
+- **Observação:** os PDFs em `public/materiais/` são sempre públicos; servem só para material gratuito.
 
 ---
 

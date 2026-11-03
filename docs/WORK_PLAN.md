@@ -97,8 +97,8 @@ T-05 ─┘
 | Correção proposta | Novo bucket privado para PDFs premium com download por URL assinada de curta duração gerada no servidor após checar premium (`download.actions.ts`); manter PDFs gratuitos públicos. Remover `image/svg+xml` de `cms-images` |
 | Critérios de conclusão | PDF premium sem login retorna 400/403; assinante baixa normalmente |
 | Testes | Download como visitante, free e premium |
-| Situação | Pendente |
-| Próxima ação | Listar arquivos do `cms-pdfs` e marcar quais são premium |
+| Situação | **Concluída no código** (03/11/2026). Inventário em produção (somente leitura): nenhum e-book premium; os 5 e-books gratuitos usam `/materiais/*.pdf`; `cms-pdfs` tem 1 arquivo (`biblioteca/…-capa.pdf`, 1 MB) sem referência. [`055`](../supabase/migrations/055_premium_pdfs_bucket.sql) cria o bucket privado `cms-pdfs-premium` (leitura só assinante/admin, escrita só admin) e tira SVG de `cms-images`. App: com Premium marcado, o upload vai para o bucket privado e grava `premium-pdf:<caminho>`; o admin não consegue salvar e-book premium com PDF público (nem PDF privado em e-book gratuito); a página gera link assinado de 10 min só para quem tem acesso ([`premium-pdf.ts`](../src/lib/storage/premium-pdf.ts)). Teste em Postgres local com [`test-t06-premium-pdfs.sql`](../supabase/scripts/test-t06-premium-pdfs.sql): visitante 0, free 0, assinante 1, admin 1, free não envia |
+| Próxima ação | Aplicar **055** no SQL Editor, merge, rodar o script de teste. Decidir se o arquivo solto `biblioteca/…-capa.pdf` em `cms-pdfs` deve ser apagado (pelo painel, pelo dono) |
 
 ### T-07 — CI mínima e proteção do branch `master` · **P1**
 

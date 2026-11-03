@@ -3,6 +3,11 @@ import { CrossLinks, LibraryDownloadPanel } from "@/components/pages";
 import { IntelligentLibraryDetail } from "@/components/intelligent-library";
 import { ContentMemberActions } from "@/components/club/ContentMemberActions";
 import { PremiumContentGuard } from "@/components/club/PremiumContentGuard";
+import { resolvePremiumAccess } from "@/lib/club/access";
+import {
+  createPremiumPdfDownloadUrl,
+  isPremiumPdfRef,
+} from "@/lib/storage/premium-pdf";
 import { recordContentViewForUser } from "@/lib/club/record-content-view";
 import { Breadcrumbs } from "@/components/layout/Breadcrumbs";
 import { DetailHero, RelatedNav } from "@/components/layout/DetailPage";
@@ -109,7 +114,19 @@ export default async function BibliotecaDetailPage({ params }: PageProps) {
     .filter((r) => r.slug !== slug && r.category === resource.category)
     .slice(0, 3);
 
-  const downloadHref = resource.pdfUrl ?? "#download";
+  const downloadHref =
+    resource.pdfUrl && !isPremiumPdfRef(resource.pdfUrl) ? resource.pdfUrl : "#download";
+
+  // T-06: PDF premium fica no bucket privado; o link é assinado e temporário,
+  // gerado só para quem tem acesso (a política do Storage confere de novo).
+  const premiumAccess = isPremiumPdfRef(resource.pdfUrl)
+    ? await resolvePremiumAccess(true)
+    : null;
+  const panelPdfUrl = isPremiumPdfRef(resource.pdfUrl)
+    ? premiumAccess?.canAccess
+      ? ((await createPremiumPdfDownloadUrl(resource.pdfUrl)) ?? undefined)
+      : undefined
+    : resource.pdfUrl;
 
   void recordContentViewForUser({
     contentType: "ebook",
@@ -202,7 +219,7 @@ export default async function BibliotecaDetailPage({ params }: PageProps) {
             ))}
           </ul>
           <LibraryDownloadPanel
-            pdfUrl={resource.pdfUrl}
+            pdfUrl={panelPdfUrl}
             title={resource.title}
             slug={slug}
             contentId={resource.id}

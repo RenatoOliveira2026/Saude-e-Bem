@@ -7,6 +7,7 @@ import {
   type UploadResult,
 } from "@/lib/admin/actions/upload.actions";
 import { validatePdfFileSize } from "@/lib/admin/cms/upload-limits";
+import { isPremiumPdfRef } from "@/lib/storage/premium-pdf-ref";
 import { useActionState, useEffect, useRef, useState, startTransition } from "react";
 
 function formatBytes(bytes: number): string {
@@ -20,6 +21,8 @@ interface PdfUploadFieldProps {
   folder?: string;
   defaultUrl?: string;
   onUrlChange?: (url: string) => void;
+  /** T-06: envia para o bucket privado (e-book premium). */
+  premium?: boolean;
 }
 
 export function PdfUploadField({
@@ -27,6 +30,7 @@ export function PdfUploadField({
   folder = "biblioteca",
   defaultUrl = "",
   onUrlChange,
+  premium = false,
 }: PdfUploadFieldProps) {
   const [url, setUrl] = useState(defaultUrl);
   const [localError, setLocalError] = useState<string | null>(null);
@@ -61,7 +65,11 @@ export function PdfUploadField({
     <div className="space-y-3 rounded-xl border border-border bg-off-white p-4">
       <input type="hidden" name={name} value={url} />
       <p className="font-heading text-sm font-medium text-forest">Upload PDF</p>
-      <p className="text-xs text-muted">Bucket: cms-pdfs</p>
+      <p className="text-xs text-muted">
+        {premium
+          ? "E-book premium: o arquivo vai para o bucket privado cms-pdfs-premium e só assinantes baixam (link temporário)."
+          : "Bucket público: cms-pdfs (qualquer pessoa com o link baixa)."}
+      </p>
       <Input
         label="URL do PDF"
         name={`${name}_display`}
@@ -83,14 +91,20 @@ export function PdfUploadField({
               {new Date(meta.uploadedAt).toLocaleString("pt-BR")}
             </p>
           )}
-          <a
-            href={url}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="mt-2 inline-block text-sage hover:underline"
-          >
-            Abrir PDF
-          </a>
+          {isPremiumPdfRef(url) ? (
+            <p className="mt-2 text-muted">
+              Arquivo privado. Para conferir, abra a página do e-book logado como admin.
+            </p>
+          ) : (
+            <a
+              href={url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-2 inline-block text-sage hover:underline"
+            >
+              Abrir PDF
+            </a>
+          )}
         </div>
       )}
       <div className="flex flex-wrap items-center gap-2">
@@ -112,6 +126,7 @@ export function PdfUploadField({
             const fd = new FormData();
             fd.set("file", file);
             fd.set("folder", folder);
+            if (premium) fd.set("premium", "1");
             startTransition(() => {
               uploadAction(fd);
             });

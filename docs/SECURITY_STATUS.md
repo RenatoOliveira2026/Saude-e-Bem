@@ -60,7 +60,7 @@
 
 - **Evidência (`npm audit`, 03/11/2026):** `next@16.2.6` tem avisos **críticos** (ex.: execução remota de código na otimização de imagens com SVG/AVIF — GHSA-2464-fhr4-w9xw, GHSA-2xp9-vwfh-vxw4; RCE em `next/og` — GHSA-vcvr-r3jv-pc5j) e altos (bypass de proxy, SSRF, DoS em Server Actions). O site usa `next/image` com hosts remotos. Correção disponível em `next@16.4.5` (sem mudança de versão maior). Também há avisos em `postcss`, `nanoid`, `sharp`, `source-map-js` e `baseline-browser-mapping`.
 - **Não verificado:** se a infraestrutura da Vercel já mitiga algum desses casos.
-- **Correção:** WORK_PLAN **T-03**.
+- **Correção:** WORK_PLAN **T-03** — `next@16.4.5` e `npm audit fix` (03/11/2026); `npm audit --omit=dev` sem vulnerabilidades. **Resolvido após o deploy do PR de T-03.**
 
 <a id="s-06"></a>
 ### S-06 — Webhook do Mercado Pago aceita notificação sem assinatura · **BAIXO/MÉDIO**
@@ -164,7 +164,7 @@
 
 | Requisito | Situação | Evidência |
 |---|---|---|
-| Dependências atualizadas | ❌ Problema | S-05 |
+| Dependências atualizadas | ✅ Ok (03/11/2026, após T-03) | S-05 |
 | Separação de ambientes | ❌ Não encontrado | Um único projeto Supabase; segredos (service role, Mercado Pago) disponíveis em **Preview** |
 | Proteção do branch de produção | ❌ Não encontrado | `master` sem proteção; push publica direto |
 | CI (lint, build, testes) | ❌ Não encontrado | Sem GitHub Actions; a Vercel só faz o build |

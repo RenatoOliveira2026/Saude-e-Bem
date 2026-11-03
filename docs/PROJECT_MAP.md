@@ -29,7 +29,7 @@ Instruções para agentes de IA: [`AGENTS.md`](../AGENTS.md) (o `CLAUDE.md` apen
 
 | Camada | Tecnologia | Versão | Onde está confirmado |
 |---|---|---|---|
-| Framework | Next.js (App Router, Turbopack) | 16.2.6 | [`package.json`](../package.json) |
+| Framework | Next.js (App Router, Turbopack) | 16.4.5 | [`package.json`](../package.json) |
 | UI | React / React DOM | 19.2.4 | `package.json` |
 | Estilo | Tailwind CSS v4 + `@tailwindcss/postcss` | ^4 | `package.json`, [`postcss.config.mjs`](../postcss.config.mjs) |
 | Linguagem | TypeScript | ^5 | [`tsconfig.json`](../tsconfig.json) |

@@ -71,11 +71,11 @@
 - **Correção:** endurecer após confirmar o formato das notificações reais (WORK_PLAN **T-10**).
 
 <a id="s-07"></a>
-### S-07 — Arquivos privados em bucket público · **MÉDIO**
+### S-07 — Arquivos privados em bucket público · **MÉDIO → RESOLVIDO (03/11/2026)**
 
 - **Evidência (painel):** `cms-pdfs` é **público** (50 MB) e guarda e-books, inclusive os premium. Quem tiver a URL baixa sem login. `cms-images` aceita `image/svg+xml` em bucket público; o SVG roda no domínio do Supabase, não no do site, então o risco é baixo.
 - **Inventário (03/11/2026, somente leitura):** nenhum e-book premium; os PDFs gratuitos são servidos de `/materiais/`; `cms-pdfs` tem 1 arquivo sem referência. Ou seja, nada pago estava exposto.
-- **Correção:** WORK_PLAN **T-06** — migração 055 (bucket privado `cms-pdfs-premium`, SVG fora de `cms-images`) e link assinado de 10 min para assinante/admin. **Resolvido depois de aplicar a 055.**
+- **Correção:** WORK_PLAN **T-06** — migração 055 (bucket privado `cms-pdfs-premium`, SVG fora de `cms-images`) e link assinado de 10 min para assinante/admin. **Resolvido** (055 aplicada; teste em produção: visitante e free não veem o arquivo privado, assinante e admin veem; free não envia).
 - **Observação:** os PDFs em `public/materiais/` são sempre públicos; servem só para material gratuito.
 
 ---
@@ -142,7 +142,7 @@
 | Segredo de cron por query string | 🟡 Parcial | [`cron/auth.ts`](../src/lib/cron/auth.ts) aceita `?secret=` (vaza em logs) e aceita a **service role** como bearer em alguns crons |
 | Criptografia em trânsito | ✅ Verificado | HTTPS (Vercel/Supabase) |
 | Criptografia de dados sensíveis | ❌ Não encontrado | CPF, celular e endereço em texto puro em `profiles`; dados de saúde em `user_tool_results` (dado sensível na LGPD) protegidos só por RLS |
-| Arquivos privados | ❌ Problema | S-07 |
+| Arquivos privados | ✅ Verificado (produção, teste desfeito) | S-07: PDFs premium no bucket privado `cms-pdfs-premium` com link assinado |
 
 ### Limites de login, consumo e custos
 

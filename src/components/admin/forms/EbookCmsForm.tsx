@@ -57,6 +57,7 @@ export function EbookCmsForm({ ebook }: EbookCmsFormProps) {
   );
   const [coverImageUrl, setCoverImageUrl] = useState(ebook?.coverImageUrl ?? "");
   const [pdfUrl, setPdfUrl] = useState(ebook?.pdfUrl ?? "");
+  const [isPremium, setIsPremium] = useState(ebook?.isPremium ?? false);
 
   const categoryOptions = libraryCategories
     .filter((c) => c.id !== "todos")
@@ -106,7 +107,12 @@ export function EbookCmsForm({ ebook }: EbookCmsFormProps) {
           onUrlChange={setCoverImageUrl}
         />
 
-        <PdfUploadField name="pdf_url" defaultUrl={ebook?.pdfUrl} onUrlChange={setPdfUrl} />
+        <PdfUploadField
+          name="pdf_url"
+          defaultUrl={ebook?.pdfUrl}
+          onUrlChange={setPdfUrl}
+          premium={isPremium}
+        />
 
         <RichContentEditor
           label="Conteúdo do material"
@@ -127,8 +133,14 @@ export function EbookCmsForm({ ebook }: EbookCmsFormProps) {
         <Textarea label="Destaques" name="highlights" value={highlightsText} onChange={(e) => setHighlightsText(e.target.value)} hint="Um por linha" rows={4} />
 
         <label className="flex items-center gap-2 text-sm">
-          <input type="checkbox" name="is_premium" defaultChecked={ebook?.isPremium} className="h-4 w-4 rounded" />
-          Premium
+          <input
+            type="checkbox"
+            name="is_premium"
+            checked={isPremium}
+            onChange={(e) => setIsPremium(e.target.checked)}
+            className="h-4 w-4 rounded"
+          />
+          Premium (marque antes de enviar o PDF: o arquivo vai para o bucket privado)
         </label>
 
         <CmsFeaturedSwitch defaultChecked={ebook?.featured} />

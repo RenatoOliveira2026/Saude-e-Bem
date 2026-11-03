@@ -61,7 +61,7 @@ src/
 ├── proxy.ts        # Middleware: sessão + guarda de rotas
 └── instrumentation.ts  # Ajuste de TLS só em desenvolvimento
 supabase/
-├── migrations/     # 001…054 — SQL aplicado manualmente (ver §4)
+├── migrations/     # 001…055 — SQL aplicado manualmente (ver §4)
 └── scripts/        # grant-admin.sql
 scripts/            # Seeds, auditorias e verificações (Node) — vários tocam produção
 public/             # Estáticos, manifest, service worker
@@ -340,7 +340,7 @@ Server Actions (`"use server"`): admin em [`src/lib/admin/actions/`](../src/lib/
 
 ## 4. Banco de dados (Supabase / PostgreSQL)
 
-**Origem:** migrações em [`supabase/migrations/`](../supabase/migrations/) (001–054; há dois arquivos com prefixo `037`). **Não há controle automático de migrações**: não existe `supabase/config.toml` nem histórico da CLI, e as migrações vêm sendo aplicadas manualmente pelo SQL Editor. Portanto, **o código das migrações não prova o estado do banco**. Divergência já observada: as políticas `Users can update own profile`/`Users can view own profile` estão no banco aplicadas ao papel `public`, enquanto a migração 001 usa `authenticated` (a 052 corrigiu em 03/11/2026).
+**Origem:** migrações em [`supabase/migrations/`](../supabase/migrations/) (001–055; há dois arquivos com prefixo `037`). **Não há controle automático de migrações**: não existe `supabase/config.toml` nem histórico da CLI, e as migrações vêm sendo aplicadas manualmente pelo SQL Editor. Portanto, **o código das migrações não prova o estado do banco**. Divergência já observada: as políticas `Users can update own profile`/`Users can view own profile` estão no banco aplicadas ao papel `public`, enquanto a migração 001 usa `authenticated` (a 052 corrigiu em 03/11/2026).
 
 ### Tabelas (36 nas migrações; todas com RLS habilitada no SQL)
 
@@ -399,7 +399,8 @@ Não há testes automatizados (unitários, integração ou E2E).
 
 ## 7. Sugestões de padronização (não aplicadas)
 
+- **PDF premium (T-06):** bucket privado `cms-pdfs-premium`; `ebooks.pdf_url` guarda `premium-pdf:<caminho>`; o link é assinado no servidor ([`src/lib/storage/premium-pdf.ts`](../src/lib/storage/premium-pdf.ts)). PDFs gratuitos: `cms-pdfs` (público) ou `public/materiais/`.
 - **Conteúdo premium (T-05):** listagens, cards, favoritos, histórico e sitemap leem as views `*_public` (corpo vazio nas linhas premium). Só a página de detalhe de um item premium lê a tabela, e o banco só devolve a linha para assinante ou admin. Nova consulta pública de conteúdo deve usar a view; ler a tabela só quando precisar do corpo.
-- Há dois arquivos de migração com prefixo `037` (`037_phase_6_1_pricing.sql` e `037_seed_seo_articles_71a.sql`). Manter; numerar as próximas a partir de `055`.
+- Há dois arquivos de migração com prefixo `037` (`037_phase_6_1_pricing.sql` e `037_seed_seo_articles_71a.sql`). Manter; numerar as próximas a partir de `056`.
 - `README.md` e `docs/PROJECT_STATUS.md` descrevem `middleware.ts`; no Next 16 o arquivo é [`src/proxy.ts`](../src/proxy.ts).
 - Diretórios com nomes próximos (`recommendations` × `recommendation-engine`, `protocols` × `protocol-library` × `intelligent-protocols`, `email` × `email-automation` × `brevo`) poderiam ser consolidados no futuro, sem urgência.

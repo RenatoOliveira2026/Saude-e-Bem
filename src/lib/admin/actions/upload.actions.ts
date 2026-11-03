@@ -10,6 +10,7 @@ import {
   IMAGE_BUCKET,
   PDF_BUCKET,
   uploadCmsFile,
+  PREMIUM_PDF_BUCKET,
 } from "@/lib/admin/services/storage.service";
 
 export type UploadResult = {
@@ -77,7 +78,9 @@ export async function uploadCmsPdfAction(
     }
 
     const folder = formData.get("folder")?.toString() || "biblioteca";
-    const url = await uploadCmsFile(PDF_BUCKET, folder, file);
+    // T-06: e-book premium vai para o bucket privado (devolve referência).
+    const bucket = formData.get("premium") === "1" ? PREMIUM_PDF_BUCKET : PDF_BUCKET;
+    const url = await uploadCmsFile(bucket, folder, file);
     return {
       url,
       fileName: file.name,

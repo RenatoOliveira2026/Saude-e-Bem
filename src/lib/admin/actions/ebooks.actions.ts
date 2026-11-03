@@ -1,6 +1,7 @@
 "use server";
 
 import { requireAdminPermission } from "@/lib/admin/session";
+import { isPremiumPdfRef } from "@/lib/storage/premium-pdf-ref";
 import {
   adminDeleteEbook,
   adminInsertEbook,
@@ -66,6 +67,22 @@ function parseEbookForm(formData: FormData) {
   };
 }
 
+/**
+ * T-06 / S-07: e-book premium só aceita PDF do bucket privado (referência
+ * `premium-pdf:`); PDF privado só faz sentido em e-book premium.
+ */
+function validateEbookPdf(input: { is_premium: boolean; pdf_url: string | null }): string | null {
+  if (!input.pdf_url) return null;
+  const isPrivate = isPremiumPdfRef(input.pdf_url);
+  if (input.is_premium && !isPrivate) {
+    return "E-book premium: envie o PDF pelo botão \"Enviar PDF\" com a opção Premium marcada (o arquivo vai para o bucket privado). Links públicos não são aceitos.";
+  }
+  if (!input.is_premium && isPrivate) {
+    return "Este PDF está no bucket privado e só assinantes conseguem baixar. Marque o e-book como Premium ou envie o PDF de novo com a opção Premium desmarcada.";
+  }
+  return null;
+}
+
 export async function createEbookAction(
   _prev: AdminActionState,
   formData: FormData,
@@ -77,6 +94,9 @@ export async function createEbookAction(
     if (!input.title || !input.description) {
       return { error: "Título e descrição são obrigatórios." };
     }
+
+    const pdfError = validateEbookPdf(input);
+    if (pdfError) return { error: pdfError };
 
     const id = await adminInsertEbook(input);
     revalidatePath(adminRoutes.biblioteca);
@@ -100,6 +120,9 @@ export async function updateEbookAction(
     if (!id) return { error: "Material inválido." };
 
     const input = parseEbookForm(formData);
+    const pdfError = validateEbookPdf(input);
+    if (pdfError) return { error: pdfError };
+
     await adminUpdateEbook(id, input);
 
     revalidatePath(adminRoutes.biblioteca);

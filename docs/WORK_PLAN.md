@@ -69,8 +69,8 @@ T-05 ─┘
 | Correção proposta | Exigir `NODE_ENV !== 'production'` **e** stub ativo, independentemente do token; exigir usuário logado dono do pagamento (ou admin) |
 | Critérios de conclusão | Em produção a action sempre recusa; em dev stub funciona só para o dono |
 | Testes | Build; em dev com stub: pagamento próprio aprova, de outro usuário recusa |
-| Situação | Pendente |
-| Próxima ação | PR pequeno junto com T-01 |
+| Situação | **Concluída no código** (03/11/2026). Teste da action com dependências simuladas: produção (mesmo com stub=1) recusa; sem stub (inclusive sem token do MP) recusa; anônimo recusa; outro usuário recusa; referência inexistente recusa; dono e admin aprovam com stub em dev |
+| Próxima ação | Merge |
 
 ### T-05 — Restringir conteúdo premium na API pública · **P1**
 

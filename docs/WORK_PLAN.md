@@ -212,6 +212,20 @@ T-05 ─┘
 | Situação | Pendente |
 | Próxima ação | Após T-03 |
 
+### T-15 — Fontes locais (deploy não depende do Google) · **P0 (operacional)**
+
+| Campo | Conteúdo |
+|---|---|
+| Módulo | Plataforma (`src/app/layout.tsx`) |
+| Problema e evidência | `next/font/google` baixava Montserrat e Open Sans do Google a cada build; o download falhou em 28/10 e em todas as publicações de 03/11 (PRs #49 e #50), travando o deploy |
+| Prioridade | Bloqueava qualquer publicação, inclusive T-03 |
+| Dependências | Nenhuma |
+| Correção proposta | `next/font/local` com arquivos woff2 (subconjunto latin, pesos usados) em [`src/app/fonts/`](../src/app/fonts/), licença SIL OFL junto |
+| Critérios de conclusão | Build sem acesso ao Google; visual idêntico |
+| Testes | `next build` sem stub de fontes (passou); página `/clube` renderizada com Montserrat 400–700 e Open Sans 400–600 carregadas e acentos corretos |
+| Situação | **Concluída no código** (03/11/2026); confirmar deploy de produção após o merge |
+| Próxima ação | Merge e acompanhar o deploy |
+
 ## Melhorias opcionais (não bloqueiam)
 
 | ID | Melhoria | Módulo | Benefício |

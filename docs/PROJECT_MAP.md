@@ -194,6 +194,7 @@ Identificadores estáveis. Não renomeie; ao criar módulo novo, use o próximo 
 | Arquivos | [`src/lib/club/access.ts`](../src/lib/club/access.ts), [`src/components/club/PremiumContentGuard.tsx`](../src/components/club/PremiumContentGuard.tsx), [`src/lib/subscription/`](../src/lib/subscription/), [`src/lib/payments/guards.ts`](../src/lib/payments/guards.ts) |
 | Regra | Com linha em `subscriptions`, vale o período pago; sem assinatura, vale `profiles.plan`/`membership_tier` (inclui `admin`) |
 | Tabelas/funções | `subscriptions`, `profiles`, `user_has_active_premium()`, `sync_profile_membership_tier()` (trigger), `expire_due_subscriptions()` |
+| Proteção | Migração [`052`](../supabase/migrations/052_protect_profile_plan.sql): trigger `profiles_protect_privileged_columns` impede o usuário de alterar o próprio plano (**aplicação em produção pendente**, ver T-02) |
 | Riscos | Ver [S-02](SECURITY_STATUS.md#s-02) e [S-04](SECURITY_STATUS.md#s-04) |
 
 ### PAGAMENTOS — Mercado Pago
@@ -339,7 +340,7 @@ Server Actions (`"use server"`): admin em [`src/lib/admin/actions/`](../src/lib/
 
 ## 4. Banco de dados (Supabase / PostgreSQL)
 
-**Origem:** migrações em [`supabase/migrations/`](../supabase/migrations/) (001–051; há dois arquivos com prefixo `037`). **Não há controle automático de migrações**: não existe `supabase/config.toml` nem histórico da CLI, e as migrações vêm sendo aplicadas manualmente pelo SQL Editor. Portanto, **o código das migrações não prova o estado do banco**. Divergência já observada: a política `Users can update own profile` está no banco aplicada ao papel `public`, enquanto a migração 001 usa `authenticated`.
+**Origem:** migrações em [`supabase/migrations/`](../supabase/migrations/) (001–051; há dois arquivos com prefixo `037`). **Não há controle automático de migrações**: não existe `supabase/config.toml` nem histórico da CLI, e as migrações vêm sendo aplicadas manualmente pelo SQL Editor. Portanto, **o código das migrações não prova o estado do banco**. Divergência já observada: as políticas `Users can update own profile`/`Users can view own profile` estão no banco aplicadas ao papel `public`, enquanto a migração 001 usa `authenticated` (a 052 corrige).
 
 ### Tabelas (36 nas migrações; todas com RLS habilitada no SQL)
 

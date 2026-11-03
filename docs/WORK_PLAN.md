@@ -27,8 +27,8 @@ T-05 ─┘
 | Correção proposta | (1) Dono troca a senha da conta e revoga sessões (Supabase → Authentication → Users). (2) Ler e-mail e senha do dev-login de variáveis só locais (`DEV_LOGIN_EMAIL`, `DEV_LOGIN_PASSWORD`) e recusar se ausentes; nunca usar o e-mail do super admin real. (3) Remover o SQL que promove a `super_admin`. (4) Avaliar tornar o repositório privado; o histórico continua com o valor antigo, por isso a troca de senha é obrigatória |
 | Critérios de conclusão | Nenhuma senha no código (`git grep` limpo); `/dev-login` continua bloqueado em produção; login do dono funciona com a senha nova |
 | Testes | `tsc`, lint, build; abrir `/dev-login` no preview (deve redirecionar); dev local com variáveis definidas |
-| Situação | **Pendente** — dono avisado em 03/11/2026 para trocar a senha |
-| Próxima ação | Confirmar troca de senha; abrir PR da correção |
+| Situação | **Código corrigido** (PR da T-01, 03/11/2026): sem senha no código, dev login exige `DEV_LOGIN_EMAIL`/`DEV_LOGIN_PASSWORD` locais e não altera contas reais nem admins. **Falta:** dono confirmar a troca de senha e o encerramento de sessões; decidir sobre repositório privado |
+| Próxima ação | Após a confirmação do dono, marcar como concluída e seguir para T-02 |
 
 ### T-02 — Impedir que o usuário altere o próprio plano · **P0**
 

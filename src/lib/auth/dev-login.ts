@@ -1,11 +1,32 @@
 import { getSiteUrl } from "@/lib/seo/site-url";
 
-/** Credenciais de desenvolvimento local — nunca use em produção */
-export const DEV_LOGIN_EMAIL = "renatoao2013@gmail.com";
-export const DEV_LOGIN_PASSWORD = "SaudeBem@2026";
+/**
+ * Dev login — atalho de login para desenvolvimento local.
+ *
+ * As credenciais vêm SOMENTE de variáveis locais (`.env.local`, nunca da Vercel):
+ *   DEV_LOGIN_EMAIL=usuario-de-teste@exemplo.com
+ *   DEV_LOGIN_PASSWORD=<senha só deste usuário de teste>
+ *
+ * Use um usuário de teste dedicado, nunca a conta real de um administrador.
+ * Sem as duas variáveis, o dev login fica desativado.
+ */
+export type DevLoginCredentials = {
+  email: string;
+  password: string;
+};
+
+/** Marca gravada no usuário criado pelo dev login (user_metadata). */
+export const DEV_LOGIN_USER_FLAG = "dev_login";
+
+export function getDevLoginCredentials(): DevLoginCredentials | null {
+  const email = process.env.DEV_LOGIN_EMAIL?.trim();
+  const password = process.env.DEV_LOGIN_PASSWORD;
+  if (!email || !password) return null;
+  return { email, password };
+}
 
 /**
- * Libera /dev-login apenas em desenvolvimento local.
+ * Libera /dev-login apenas em desenvolvimento local e com credenciais configuradas.
  * Produção e previews públicos ficam bloqueados.
  */
 export function isDevLoginAllowed(): boolean {
@@ -14,6 +35,10 @@ export function isDevLoginAllowed(): boolean {
   }
 
   if (process.env.DEV_LOGIN_ENABLED === "0") {
+    return false;
+  }
+
+  if (!getDevLoginCredentials()) {
     return false;
   }
 
@@ -38,9 +63,7 @@ export function isDevLoginAllowed(): boolean {
   return process.env.NODE_ENV === "development";
 }
 
-export const DEV_LOGIN_MANUAL_SQL = `-- Executar no SQL Editor do Supabase (após usuário existir em auth.users)
-insert into public.admin_users (user_id, email, role)
-select id, email, 'super_admin'::public.admin_role
-from auth.users where email = '${DEV_LOGIN_EMAIL}'
-on conflict (user_id) do update
-  set email = excluded.email, role = 'super_admin'::public.admin_role;`;
+export const DEV_LOGIN_SETUP_HINT = `Configure no .env.local um usuário de TESTE (nunca uma conta real de administrador):
+DEV_LOGIN_EMAIL=usuario-de-teste@exemplo.com
+DEV_LOGIN_PASSWORD=<senha só deste usuário>
+Para testar o painel, conceda admin a esse usuário de teste com supabase/scripts/grant-admin.sql.`;

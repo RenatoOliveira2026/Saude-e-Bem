@@ -1,5 +1,5 @@
 import { DevLoginForm } from "@/components/auth/DevLoginForm";
-import { isDevLoginAllowed } from "@/lib/auth/dev-login";
+import { getDevLoginCredentials, isDevLoginAllowed } from "@/lib/auth/dev-login";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { Suspense } from "react";
@@ -10,13 +10,14 @@ export const metadata: Metadata = {
 };
 
 export default function DevLoginPage() {
-  if (!isDevLoginAllowed()) {
+  const credentials = getDevLoginCredentials();
+  if (!isDevLoginAllowed() || !credentials) {
     notFound();
   }
 
   return (
     <Suspense fallback={null}>
-      <DevLoginForm />
+      <DevLoginForm email={credentials.email} />
     </Suspense>
   );
 }

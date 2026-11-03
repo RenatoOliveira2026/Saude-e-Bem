@@ -6,14 +6,13 @@ import {
   devLoginAsRenato,
   type DevLoginState,
 } from "@/lib/auth/dev-login.actions";
-import { DEV_LOGIN_EMAIL, DEV_LOGIN_MANUAL_SQL } from "@/lib/auth/dev-login";
 import { routes } from "@/lib/routes";
 import { useActionState } from "react";
 import { useSearchParams } from "next/navigation";
 
 const initialState: DevLoginState = {};
 
-export function DevLoginForm() {
+export function DevLoginForm({ email }: { email: string }) {
   const searchParams = useSearchParams();
   const redirect = searchParams.get("redirect") ?? routes.minhaJornada;
   const [state, formAction, pending] = useActionState(devLoginAsRenato, initialState);
@@ -33,14 +32,14 @@ export function DevLoginForm() {
       <p className="rounded-lg border border-dashed border-gold/40 bg-gold/10 px-4 py-3 text-sm text-forest">
         <strong>Ambiente local.</strong> Sessão via Supabase Auth, sem confirmação de e-mail.
         <br />
-        E-mail: <code className="text-xs">{DEV_LOGIN_EMAIL}</code>
+        Usuário de teste: <code className="text-xs">{email}</code>
       </p>
 
       {state.error && <AuthMessage type="error" message={state.error} />}
 
       {state.hint && (
         <pre className="max-h-40 overflow-auto rounded-lg border border-border bg-off-white p-3 text-xs text-muted">
-          {state.hint ?? DEV_LOGIN_MANUAL_SQL}
+          {state.hint}
         </pre>
       )}
 
@@ -53,12 +52,12 @@ export function DevLoginForm() {
           className="w-full justify-center"
           disabled={pending}
         >
-          {pending ? "Entrando..." : "Entrar como Renato"}
+          {pending ? "Entrando..." : "Entrar com o usuário de teste"}
         </Button>
       </form>
 
       <p className="text-center text-xs text-muted-light">
-        Admin: use{" "}
+        Para o painel, o usuário de teste precisa ser admin; depois use{" "}
         <code className="text-forest">?redirect=/admin</code> na URL desta página.
       </p>
     </AuthLayout>

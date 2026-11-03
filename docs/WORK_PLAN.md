@@ -27,8 +27,8 @@ T-05 ─┘
 | Correção proposta | (1) Dono troca a senha da conta e revoga sessões (Supabase → Authentication → Users). (2) Ler e-mail e senha do dev-login de variáveis só locais (`DEV_LOGIN_EMAIL`, `DEV_LOGIN_PASSWORD`) e recusar se ausentes; nunca usar o e-mail do super admin real. (3) Remover o SQL que promove a `super_admin`. (4) Avaliar tornar o repositório privado; o histórico continua com o valor antigo, por isso a troca de senha é obrigatória |
 | Critérios de conclusão | Nenhuma senha no código (`git grep` limpo); `/dev-login` continua bloqueado em produção; login do dono funciona com a senha nova |
 | Testes | `tsc`, lint, build; abrir `/dev-login` no preview (deve redirecionar); dev local com variáveis definidas |
-| Situação | **Código corrigido** (PR da T-01, 03/11/2026): sem senha no código, dev login exige `DEV_LOGIN_EMAIL`/`DEV_LOGIN_PASSWORD` locais e não altera contas reais nem admins. **Falta:** dono confirmar a troca de senha e o encerramento de sessões; decidir sobre repositório privado |
-| Próxima ação | Após a confirmação do dono, marcar como concluída e seguir para T-02 |
+| Situação | **Concluída** (PR #48, 03/11/2026; dono trocou a senha antes do merge): sem senha no código, dev login exige `DEV_LOGIN_EMAIL`/`DEV_LOGIN_PASSWORD` locais e não altera contas reais nem admins. **Opcional:** encerrar sessões antigas e decidir sobre repositório privado |
+| Próxima ação | — |
 
 ### T-02 — Impedir que o usuário altere o próprio plano · **P0**
 
@@ -41,8 +41,8 @@ T-05 ─┘
 | Correção proposta | Migração `052`: trigger `BEFORE UPDATE` em `profiles` que rejeita mudança de `plan`, `membership_tier` e `club_joined_at` quando quem altera não é `service_role` nem admin (ou `REVOKE UPDATE` + `GRANT UPDATE (colunas editáveis)` para `authenticated`). Ajustar a política para `to authenticated`. Revisar `club/access.ts` para não aceitar `profilePlan === 'admin'` como premium sem conferir `admin_users` |
 | Critérios de conclusão | Usuário comum não altera `plan`/`membership_tier` pela API (erro); continua editando nome, objetivo e dados de cobrança; webhook e admin continuam ativando premium |
 | Testes | Em ambiente de teste (ou conta de teste): PATCH via REST com JWT de usuário comum → negado; fluxo de pagamento stub → premium ativado; edição de perfil → ok |
-| Situação | Pendente |
-| Próxima ação | Consultar `information_schema.column_privileges` para `profiles` |
+| Situação | **Migração pronta, não aplicada.** Vulnerabilidade confirmada em produção por teste desfeito (03/11/2026). [`052_protect_profile_plan.sql`](../supabase/migrations/052_protect_profile_plan.sql): trigger `profiles_protect_privileged_columns` (SECURITY INVOKER, bloqueia `plan`/`membership_tier`/`club_joined_at`/`id` para `authenticated`/`anon` não admin) + políticas de `profiles` alinhadas a `authenticated`. Teste: [`test-t02-profile-plan.sql`](../supabase/scripts/test-t02-profile-plan.sql) |
+| Próxima ação | Dono aprova e aplica a 052 no SQL Editor (ou autoriza explicitamente a aplicação); rodar o teste e esperar `usuario->plan: bloqueado`, `usuario->tier: bloqueado`, `usuario->nome: permitido`, `sistema->plan: permitido` |
 
 ### T-03 — Atualizar Next.js e dependências vulneráveis · **P0**
 

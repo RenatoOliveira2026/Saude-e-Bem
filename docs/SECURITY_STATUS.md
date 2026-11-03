@@ -38,8 +38,8 @@
 
 - **Evidência (painel + código):** no banco de produção existe a política `Users can update own profile` (UPDATE em `profiles`, sem restrição de colunas) e **não há trigger** em `profiles` além de `profiles_updated_at`. `profiles.plan` aceita `premium_monthly`, `premium_annual` e `admin` ([`030_phase_5_5_monetization.sql`](../supabase/migrations/030_phase_5_5_monetization.sql)). Em [`src/lib/club/access.ts`](../src/lib/club/access.ts), quem **não tem linha em `subscriptions`** é premium se `profiles.plan`/`membership_tier` disser isso. A função SQL `user_has_active_premium` também confia em `profiles.plan`.
 - **Consequência provável:** qualquer usuário logado, chamando a API REST do Supabase com a chave pública (anon) e a própria sessão, pode gravar `plan = 'premium_annual'` e liberar o Clube sem pagar.
-- **Não verificado:** privilégios por coluna (`GRANT UPDATE (coluna)`) no banco. Não foi executado teste, porque alteraria dados.
-- **Correção:** WORK_PLAN **T-02**.
+- **Confirmado em 03/11/2026 (produção, somente leitura + teste desfeito):** o papel `authenticated` tem `UPDATE` em todas as colunas de `profiles`, inclusive `plan` e `membership_tier`. Um teste em bloco que termina com erro proposital (nada gravado) mostrou `usuario->plan: PERMITIDO` e `usuario->tier: PERMITIDO`. Script: [`supabase/scripts/test-t02-profile-plan.sql`](../supabase/scripts/test-t02-profile-plan.sql).
+- **Correção:** WORK_PLAN **T-02** — migração [`052_protect_profile_plan.sql`](../supabase/migrations/052_protect_profile_plan.sql) criada; **aplicação em produção pendente de aprovação do dono**.
 
 <a id="s-03"></a>
 ### S-03 — Server Action de simulação de pagamento sem autenticação · **MÉDIO**

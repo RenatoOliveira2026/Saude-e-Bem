@@ -163,3 +163,6 @@ export const crossNav = [
   { label: "Blog", href: routes.blog, icon: "book" as const },
   { label: "Clube", href: routes.clube, icon: "star" as const },
 ] as const;
+
+// TESTE T-07: erro de tipo proposital. PR será fechado sem merge.
+export const testeT07: number = "não é número";

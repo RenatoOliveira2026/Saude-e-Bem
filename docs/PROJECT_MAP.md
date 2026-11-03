@@ -390,7 +390,7 @@ Variáveis usadas no código (somente nomes): `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_
 |---|---|---|
 | `npx tsc --noEmit -p .` | Checagem de tipos | Sim. Passou em 03/11/2026 |
 | `npm run lint` | ESLint | Sim. **4 erros e 31 avisos** em 03/11/2026 (regras `react-hooks`, ver WORK_PLAN) |
-| `npm run build` | Build de produção (precisa acessar Google Fonts) | Sim |
+| `npm run build` | Build de produção (fontes locais em `src/app/fonts/`, sem depender do Google) | Sim |
 | `npm audit --omit=dev` | Vulnerabilidades de dependências | Sim. 1 crítica (next), 4 altas, 1 moderada |
 | `npm run audit:seo`, `audit:go-live`, `validate:supabase`, `validate:billing` | Auditorias por script | Leitura, mas **acessam serviços reais**; revisar antes de rodar |
 | `npm run test:signup`, `check:auth-user`, `seed:*`, `reconcile:payments`, scripts `smoke-*`/`run-production-*` | Scripts operacionais | **Alteram dados ou chamam produção** — não usar como teste |

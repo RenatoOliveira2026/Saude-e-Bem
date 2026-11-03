@@ -13,23 +13,35 @@ import {
 import { organizationJsonLd, websiteJsonLd } from "@/lib/seo/json-ld";
 import { getMetadataBaseUrl } from "@/lib/seo/site-url";
 import type { Metadata, Viewport } from "next";
-import { Montserrat, Open_Sans } from "next/font/google";
+import localFont from "next/font/local";
 import "./globals.css";
 import { FONT_SCALE_INIT_SCRIPT } from "@/components/layout/FontSizeControl";
 import { AdSenseScript } from "@/components/ads/AdSenseScript";
 
-const montserrat = Montserrat({
+/**
+ * Fontes servidas pelo próprio projeto (src/app/fonts, licença SIL OFL 1.1,
+ * arquivos do Fontsource). Antes vinham de next/font/google, que baixava do
+ * Google a cada build e derrubava o deploy quando o download falhava.
+ */
+const montserrat = localFont({
   variable: "--font-montserrat",
-  subsets: ["latin"],
   display: "swap",
-  weight: ["400", "500", "600", "700"],
+  src: [
+    { path: "./fonts/montserrat-latin-400-normal.woff2", weight: "400", style: "normal" },
+    { path: "./fonts/montserrat-latin-500-normal.woff2", weight: "500", style: "normal" },
+    { path: "./fonts/montserrat-latin-600-normal.woff2", weight: "600", style: "normal" },
+    { path: "./fonts/montserrat-latin-700-normal.woff2", weight: "700", style: "normal" },
+  ],
 });
 
-const openSans = Open_Sans({
+const openSans = localFont({
   variable: "--font-open-sans",
-  subsets: ["latin"],
   display: "swap",
-  weight: ["400", "500", "600"],
+  src: [
+    { path: "./fonts/open-sans-latin-400-normal.woff2", weight: "400", style: "normal" },
+    { path: "./fonts/open-sans-latin-500-normal.woff2", weight: "500", style: "normal" },
+    { path: "./fonts/open-sans-latin-600-normal.woff2", weight: "600", style: "normal" },
+  ],
 });
 
 export const viewport: Viewport = {

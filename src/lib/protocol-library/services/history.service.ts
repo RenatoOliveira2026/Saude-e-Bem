@@ -28,19 +28,7 @@ export async function fetchUserProtocolHistory(
 
   const { data, error } = await supabase
     .from("user_protocol_history")
-    .select(
-      `
-      id,
-      protocol_id,
-      view_count,
-      last_viewed_at,
-      protocols:protocol_id (
-        slug,
-        title,
-        is_premium
-      )
-    `,
-    )
+    .select("id, protocol_id, view_count, last_viewed_at")
     .eq("user_id", userId)
     .order("last_viewed_at", { ascending: false })
     .limit(limit);
@@ -49,22 +37,28 @@ export async function fetchUserProtocolHistory(
     return fetchProtocolHistoryFromContentHistory(userId, limit);
   }
 
-  type HistoryRow = {
-    id: string;
-    protocol_id: string;
-    view_count: number;
-    last_viewed_at: string;
-    protocols:
-      | { slug: string; title: string; is_premium: boolean }
-      | { slug: string; title: string; is_premium: boolean }[]
-      | null;
-  };
+  const rows = data ?? [];
+  if (rows.length === 0) return [];
 
-  return ((data ?? []) as HistoryRow[])
+  // T-05: título e slug vêm do catálogo público (protocolos premium não
+  // aparecem na tabela para quem não é assinante).
+  const { data: protocols, error: protocolsError } = await supabase
+    .from("protocols_public")
+    .select("id, slug, title, is_premium")
+    .in(
+      "id",
+      rows.map((row) => row.protocol_id),
+    );
+
+  if (protocolsError) {
+    return fetchProtocolHistoryFromContentHistory(userId, limit);
+  }
+
+  const byId = new Map((protocols ?? []).map((p) => [p.id, p]));
+
+  return rows
     .map((row) => {
-      const protocol = Array.isArray(row.protocols)
-        ? row.protocols[0]
-        : row.protocols;
+      const protocol = byId.get(row.protocol_id);
       if (!protocol?.slug) return null;
       return {
         id: row.id,

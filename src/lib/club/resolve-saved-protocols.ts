@@ -9,7 +9,7 @@ export async function resolveSavedProtocols(
 
   const supabase = await createClient();
   const { data, error } = await supabase
-    .from("protocols")
+    .from("protocols_public")
     .select("id, slug, title, category_label, is_premium")
     .in(
       "id",

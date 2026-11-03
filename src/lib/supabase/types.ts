@@ -1141,7 +1141,12 @@ export interface Database {
         Relationships: [];
       };
     };
-    Views: Record<string, never>;
+    /** T-05: catálogos públicos (corpo vazio nas linhas premium). Migração 053. */
+    Views: {
+      articles_public: { Row: ArticleRow; Relationships: [] };
+      protocols_public: { Row: ProtocolRow; Relationships: [] };
+      ebooks_public: { Row: EbookRow; Relationships: [] };
+    };
     Functions: {
       is_admin: { Args: Record<string, never>; Returns: boolean };
       is_super_admin: { Args: Record<string, never>; Returns: boolean };

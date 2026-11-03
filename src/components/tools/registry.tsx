@@ -1,4 +1,4 @@
-import type { ComponentType } from "react";
+import { createElement, type ComponentType, type ReactNode } from "react";
 import { BasalMetabolismTool } from "./BasalMetabolismTool";
 import { BmiCalculatorTool } from "./BmiCalculatorTool";
 import { CardiometabolicRiskTool } from "./CardiometabolicRiskTool";
@@ -17,6 +17,12 @@ const toolComponents: Record<string, ComponentType> = {
 
 export function getToolComponent(slug: string): ComponentType | null {
   return toolComponents[slug] ?? null;
+}
+
+/** Elemento da ferramenta interativa (ou `null`), sem criar componente no render. */
+export function renderToolComponent(slug: string): ReactNode {
+  const Component = toolComponents[slug];
+  return Component ? createElement(Component) : null;
 }
 
 export const interactiveToolSlugs = Object.keys(toolComponents);

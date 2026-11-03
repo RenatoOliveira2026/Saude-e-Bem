@@ -35,13 +35,13 @@ Instruções para agentes de IA: [`AGENTS.md`](../AGENTS.md) (o `CLAUDE.md` apen
 | Linguagem | TypeScript | ^5 | [`tsconfig.json`](../tsconfig.json) |
 | Banco, Auth, Storage | Supabase (`@supabase/ssr` ^0.10.3, `@supabase/supabase-js` ^2.106.2) | — | `package.json`; projeto **Saude-e-Bem** (região us-east-2, plano Pro) visto no painel Supabase |
 | Hospedagem | Vercel (projeto `quim-link/saude-e-bem`) | — | [`vercel.json`](../vercel.json); painel Vercel; deployments `Production` e `Preview` vistos via API do GitHub |
-| Repositório | GitHub `RenatoOliveira2026/Saude-e-Bem` | — | **Público**, branch padrão `master`, **sem proteção de branch**, **sem GitHub Actions** (confirmado via API) |
+| Repositório | GitHub `RenatoOliveira2026/Saude-e-Bem` | — | **Público**, branch padrão `master`, proteção de branch e CI em GitHub Actions ([`ci.yml`](../.github/workflows/ci.yml): `tsc`, lint, build, `npm audit`) desde a T-07 |
 | Pagamentos | Mercado Pago (Checkout Pro + Preapproval) | API REST | [`src/lib/payments/mercadopago/`](../src/lib/payments/mercadopago/) |
 | E-mail marketing | Brevo (ativo); MailerLite e ConvertKit como alternativas | API REST | [`src/lib/brevo/`](../src/lib/brevo/), [`src/lib/email/providers/`](../src/lib/email/providers/) |
 | WhatsApp | WhatsApp Cloud API (Meta) | API REST | [`src/lib/whatsapp/`](../src/lib/whatsapp/) |
 | Analytics/Ads | GA4, GTM, Meta Pixel, Google AdSense | scripts | [`src/lib/analytics/`](../src/lib/analytics/), [`src/lib/ads/config.ts`](../src/lib/ads/config.ts) |
 
-**Não existem:** Edge Functions do Supabase (não há `supabase/functions/`), suíte de testes automatizados (não há Jest/Vitest/Playwright), pipeline de CI no GitHub. A publicação acontece pela integração Git da Vercel: **push em `master` → deploy de produção**; outros branches → deploy de preview.
+**Não existem:** Edge Functions do Supabase (não há `supabase/functions/`), suíte de testes automatizados (não há Jest/Vitest/Playwright). Há CI mínima no GitHub (T-07), sem testes. A publicação acontece pela integração Git da Vercel: **push em `master` → deploy de produção**; outros branches → deploy de preview.
 
 ### Fluxo de uma requisição
 
@@ -389,7 +389,7 @@ Variáveis usadas no código (somente nomes): `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_
 | Comando | O que faz | Seguro? |
 |---|---|---|
 | `npx tsc --noEmit -p .` | Checagem de tipos | Sim. Passou em 03/11/2026 |
-| `npm run lint` | ESLint | Sim. **4 erros e 31 avisos** em 03/11/2026 (regras `react-hooks`, ver WORK_PLAN) |
+| `npm run lint` | ESLint | Sim. **0 erros** e 31 avisos desde a T-07 (03/11/2026); a CI falha se surgir erro |
 | `npm run build` | Build de produção (fontes locais em `src/app/fonts/`, sem depender do Google) | Sim |
 | `npm audit --omit=dev` | Vulnerabilidades de dependências | Sim. 1 crítica (next), 4 altas, 1 moderada |
 | `npm run audit:seo`, `audit:go-live`, `validate:supabase`, `validate:billing` | Auditorias por script | Leitura, mas **acessam serviços reais**; revisar antes de rodar |

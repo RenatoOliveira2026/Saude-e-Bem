@@ -1,6 +1,6 @@
 import { CrossLinks, PageCta, ToolsExploreSection } from "@/components/pages";
 import { PremiumContentGuard } from "@/components/club/PremiumContentGuard";
-import { getToolComponent } from "@/components/tools";
+import { renderToolComponent } from "@/components/tools";
 import { Breadcrumbs } from "@/components/layout/Breadcrumbs";
 import {
   DetailHero,
@@ -50,8 +50,8 @@ export default async function FerramentaDetailPage({ params }: PageProps) {
 
   const all = await getTools();
   const otherTools = all.filter((t) => t.slug !== slug);
-  const ToolInteractive = getToolComponent(slug);
-  if (!ToolInteractive && !tool.isPremium) {
+  const toolInteractive = renderToolComponent(slug);
+  if (!toolInteractive && !tool.isPremium) {
     console.warn(`[ferramentas] Sem componente interativo para slug: ${slug}`);
   }
 
@@ -110,7 +110,7 @@ export default async function FerramentaDetailPage({ params }: PageProps) {
         >
           <Section background="white" id="inicio">
             <Container size="md">
-              {ToolInteractive ? <ToolInteractive /> : null}
+              {toolInteractive}
             </Container>
           </Section>
         </PremiumContentGuard>
@@ -154,9 +154,9 @@ export default async function FerramentaDetailPage({ params }: PageProps) {
       />
 
       <Section background="white" id="inicio">
-        <Container size={ToolInteractive ? "md" : "sm"}>
-          {ToolInteractive ? (
-            <ToolInteractive />
+        <Container size={toolInteractive ? "md" : "sm"}>
+          {toolInteractive ? (
+            toolInteractive
           ) : (
             <div className="rounded-xl border border-dashed border-border-strong bg-sage-muted/40 px-8 py-12 text-center">
               <IconBox name={tool.icon} size={32} className="mx-auto bg-surface" />

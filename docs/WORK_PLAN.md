@@ -111,8 +111,8 @@ T-05 ─┘
 | Correção proposta | Workflow com `npm ci`, `tsc --noEmit`, `eslint`, `next build`, `npm audit --omit=dev --audit-level=high`; exigir PR e checagem verde para `master` |
 | Critérios de conclusão | PR com erro de tipo fica bloqueado; `master` não aceita push direto |
 | Testes | PR de teste com erro proposital (fechado sem merge) |
-| Situação | Pendente |
-| Próxima ação | Corrigir os erros de lint |
+| Situação | **Em andamento** (03/11/2026): 4 erros de lint corrigidos sem mudar comportamento (`renderToolComponent` no registro de ferramentas; upload de imagem/PDF aplica o resultado no render em vez de `setState` em efeito); [`ci.yml`](../.github/workflows/ci.yml) com `npm ci`, `tsc`, lint, build e `npm audit --omit=dev --audit-level=high`, sem segredos |
+| Próxima ação | Merge; depois ativar a proteção do `master` (PR obrigatório + checagem verde) e testar com um PR de erro proposital |
 
 ### T-08 — Separar ambientes (teste × produção) · **P1**
 

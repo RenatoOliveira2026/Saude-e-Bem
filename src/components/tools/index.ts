@@ -4,4 +4,4 @@ export { CardiometabolicRiskTool } from "./CardiometabolicRiskTool";
 export { DailyProteinTool } from "./DailyProteinTool";
 export { HealthQuizTool } from "./HealthQuizTool";
 export { WaterIntakeTool } from "./WaterIntakeTool";
-export { getToolComponent, interactiveToolSlugs } from "./registry";
+export { getToolComponent, renderToolComponent, interactiveToolSlugs } from "./registry";

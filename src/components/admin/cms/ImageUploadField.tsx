@@ -35,12 +35,13 @@ export function ImageUploadField({
     {} as UploadResult,
   );
 
-  useEffect(() => {
-    if (uploadState.url) {
-      setUrl(uploadState.url);
-      onUrlChange?.(uploadState.url);
-    }
-  }, [uploadState.url, onUrlChange]);
+  // Aplica o resultado do upload durante o render (padrão do React para
+  // ajustar estado a partir de outro valor); o efeito abaixo avisa o pai.
+  const [handledUpload, setHandledUpload] = useState(uploadState);
+  if (uploadState !== handledUpload) {
+    setHandledUpload(uploadState);
+    if (uploadState.url) setUrl(uploadState.url);
+  }
 
   useEffect(() => {
     onUrlChange?.(url);

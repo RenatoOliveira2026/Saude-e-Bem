@@ -35,7 +35,7 @@ Instruções para agentes de IA: [`AGENTS.md`](../AGENTS.md) (o `CLAUDE.md` apen
 | Linguagem | TypeScript | ^5 | [`tsconfig.json`](../tsconfig.json) |
 | Banco, Auth, Storage | Supabase (`@supabase/ssr` ^0.10.3, `@supabase/supabase-js` ^2.106.2) | — | `package.json`; projeto **Saude-e-Bem** (região us-east-2, plano Pro) visto no painel Supabase |
 | Hospedagem | Vercel (projeto `quim-link/saude-e-bem`) | — | [`vercel.json`](../vercel.json); painel Vercel; deployments `Production` e `Preview` vistos via API do GitHub |
-| Repositório | GitHub `RenatoOliveira2026/Saude-e-Bem` | — | **Público**, branch padrão `master`, proteção de branch e CI em GitHub Actions ([`ci.yml`](../.github/workflows/ci.yml): `tsc`, lint, build, `npm audit`) desde a T-07 |
+| Repositório | GitHub `RenatoOliveira2026/Saude-e-Bem` | — | **Público**, branch padrão `master`, ruleset no `master` (PR obrigatório, checagem **Verificar** verde, sem force push/exclusão) e CI em GitHub Actions ([`ci.yml`](../.github/workflows/ci.yml): `tsc`, lint, build, `npm audit`) desde a T-07 |
 | Pagamentos | Mercado Pago (Checkout Pro + Preapproval) | API REST | [`src/lib/payments/mercadopago/`](../src/lib/payments/mercadopago/) |
 | E-mail marketing | Brevo (ativo); MailerLite e ConvertKit como alternativas | API REST | [`src/lib/brevo/`](../src/lib/brevo/), [`src/lib/email/providers/`](../src/lib/email/providers/) |
 | WhatsApp | WhatsApp Cloud API (Meta) | API REST | [`src/lib/whatsapp/`](../src/lib/whatsapp/) |
